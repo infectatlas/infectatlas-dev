@@ -1,0 +1,44 @@
+{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "${title}",
+      "horizontalAlignment": "Center",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "${description}",
+      "wrap": true
+    },
+    {
+      "type": "FactSet",
+      "facts": [
+        {
+          "title": "Study Mode:",
+          "value": "${mode}"
+        },
+        {
+          "title": "Your Streak:",
+          "value": "${streak} Days 🔥"
+        },
+        {
+          "title": "Unlocks:",
+          "value": "${unlockedCount}/15 Organisms"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Launch Recall Board 🚀",
+      "url": "https://infectatlas.app"
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5"
+}
