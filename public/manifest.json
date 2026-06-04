@@ -24,7 +24,9 @@
   "iarc_rating_id": "e967a57c-fb8b-4a69-8e47-49d60ebd93bc",
   "scope_extensions": [
     { "type": "origin", "origin": "https://infectatlas.app" },
-    { "type": "origin", "origin": "https://*.infectatlas.app" }
+    { "type": "origin", "origin": "https://*.infectatlas.app" },
+    { "type": "origin", "origin": "https://infectatlas.com" },
+    { "type": "origin", "origin": "https://*.infectatlas.com" }
   ],
   "icons": [
     {
