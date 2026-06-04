@@ -23,8 +23,8 @@
   ],
   "iarc_rating_id": "e967a57c-fb8b-4a69-8e47-49d60ebd93bc",
   "scope_extensions": [
-    { "origin": "https://infectatlas.app" },
-    { "origin": "https://*.infectatlas.app" }
+    { "type": "origin", "origin": "https://infectatlas.app" },
+    { "type": "origin", "origin": "https://*.infectatlas.app" }
   ],
   "icons": [
     {
@@ -137,6 +137,7 @@
   "share_target": {
     "action": "/",
     "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
     "params": {
       "title": "title",
       "text": "text",

@@ -36,10 +36,6 @@ export default function Flashcards({
   // Analytics states to track cards reviewed in current session
   const [viewedCardIds, setViewedCardIds] = useState<Set<string>>(new Set());
 
-  // Mnemonic Loader
-  const [coachMnemonic, setCoachMnemonic] = useState<{ keyMnemonic?: string; explanation?: string } | null>(null);
-  const [coachLoading, setCoachLoading] = useState(false);
-
   // Filtered Deck
   const deck = useMemo(() => {
     let listPathogens = microorganismsData;
@@ -100,7 +96,6 @@ export default function Flashcards({
 
   const handleNextCard = () => {
     setIsFlipped(false);
-    setCoachMnemonic(null);
     if (currentIndex < deck.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
@@ -110,7 +105,6 @@ export default function Flashcards({
 
   const handlePrevCard = () => {
     setIsFlipped(false);
-    setCoachMnemonic(null);
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
     } else {
@@ -133,34 +127,6 @@ export default function Flashcards({
     }
   };
 
-  // Fetch coach advice from server
-  const handleFetchFlashMnemonic = async (microbe: Microorganism) => {
-    setCoachLoading(true);
-    setCoachMnemonic(null);
-    try {
-      const response = await fetch("/api/gemini/mnemonic", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          pathogenName: microbe.name,
-          characteristics: microbe.characteristics,
-          diseases: microbe.diseases
-        })
-      });
-
-      if (!response.ok) throw new Error();
-      const result = await response.json();
-      setCoachMnemonic(result);
-    } catch {
-      setCoachMnemonic({
-        keyMnemonic: "Rely on key visual shapes (like lancets for strep) to categorize.",
-        explanation: "Strep chain formations are distinct from staph clusters."
-      });
-    } finally {
-      setCoachLoading(false);
-    }
-  };
-
   return (
     <div className="space-y-6" id="flashcards-root">
       {/* Filters Toolbar */}
@@ -176,7 +142,6 @@ export default function Flashcards({
               setSelectedListId(e.target.value);
               setCurrentIndex(0);
               setIsFlipped(false);
-              setCoachMnemonic(null);
             }}
           >
             <option value="All">All Registered Organisms ({microorganismsData.length})</option>
@@ -199,7 +164,6 @@ export default function Flashcards({
               setSelectedGramFilter(e.target.value);
               setCurrentIndex(0);
               setIsFlipped(false);
-              setCoachMnemonic(null);
             }}
           >
             <option value="All">All stain Reactions & Shapes</option>
@@ -222,7 +186,6 @@ export default function Flashcards({
             onChange={(e) => {
               setCardTypeMode(e.target.value as ModeFilter);
               setIsFlipped(false);
-              setCoachMnemonic(null);
             }}
           >
             <option value="NameToDescription">1. Front: Pathogen &bull; Back: Description</option>
@@ -254,7 +217,7 @@ export default function Flashcards({
               </span>
               <h2 className="text-xl font-bold text-slate-900">👑 Active Recall Flashcards Locked</h2>
               <p className="text-xs text-slate-500 leading-relaxed max-w-sm mx-auto">
-                Review cards using any of the 6 display options, bookmark specific focus areas, register cards to your spaced intervals review deck, and query the dynamic AI Study Coach.
+                Review cards using any of the 6 display options, bookmark specific focus areas, and register cards to your spaced intervals review deck.
               </p>
             </div>
 
@@ -264,9 +227,6 @@ export default function Flashcards({
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-indigo-600 font-extrabold">✓</span> Standard spaced repetition interval logs
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-indigo-600 font-extrabold">✓</span> Automatic dynamic AI memory mnemonic prompts
               </div>
             </div>
 
@@ -507,46 +467,6 @@ export default function Flashcards({
               Next Microbe <ArrowRight className="h-3.5 w-3.5" />
             </button>
           </div>
-
-          {/* AI study hook visible specifically on Back of Card */}
-          {isFlipped && currentMicrobe && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="bg-slate-900/5 p-4 rounded-2xl border border-slate-200 flex flex-col gap-3"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1.5 ">
-                  <BrainCircuit className="h-4.5 w-4.5 text-indigo-600" />
-                  <span className="font-semibold text-xs text-slate-700">AI Memory Mnemonic for {currentMicrobe.name}</span>
-                </div>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleFetchFlashMnemonic(currentMicrobe);
-                  }}
-                  disabled={coachLoading}
-                  className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-3 py-1 rounded-lg text-xs transition-colors disabled:opacity-50"
-                >
-                  {coachLoading ? "Analyzing..." : "Ask Coach"}
-                </button>
-              </div>
-
-              {coachMnemonic && (
-                <div className="bg-white p-3.5 rounded-xl border border-indigo-100 space-y-2 text-xs">
-                  {coachMnemonic.keyMnemonic && (
-                    <div>
-                      <span className="text-[10px] font-bold text-indigo-900 uppercase">Mnemonic phrase</span>
-                      <p className="font-semibold text-slate-800 bg-indigo-50/10 p-2 rounded-lg border border-indigo-50 mt-0.5">{coachMnemonic.keyMnemonic}</p>
-                    </div>
-                  )}
-                  {coachMnemonic.explanation && (
-                    <p className="text-slate-500 text-[11px] leading-relaxed mt-1">{coachMnemonic.explanation}</p>
-                  )}
-                </div>
-              )}
-            </motion.div>
-          )}
         </div>
       )}
     </div>

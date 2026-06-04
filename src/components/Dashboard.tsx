@@ -92,83 +92,82 @@ export default function Dashboard({
   };
 
   return (
-    <div className="space-y-8" id="dashboard-root">
+    <div className="space-y-6" id="dashboard-root">
       {/* Redesigned Brand Hero Section focused on Adaptive Recall */}
-      <div className="relative bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 rounded-2xl p-4 sm:p-6 md:p-10 text-white shadow-lg overflow-hidden border border-slate-800">
+      <div className="relative bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 rounded-xl p-4 sm:py-4.5 sm:px-6 md:py-5 md:px-7 text-white shadow-md overflow-hidden border border-slate-800">
         <div className="absolute right-0 bottom-0 top-0 w-1/2 opacity-15 bg-[radial-gradient(circle_at_bottom_right,var(--color-indigo-500),transparent)] pointer-events-none" />
         <div className="absolute left-12 top-0 w-64 h-64 opacity-5 bg-[radial-gradient(circle_at_top_left,var(--color-violet-500),transparent)] pointer-events-none" />
         
-        <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-8">
-          <div className="w-full md:max-w-3xl space-y-2.5 sm:space-y-4">
-            <span className="inline-flex items-center gap-1.5 text-indigo-300 text-[10px] md:text-xs font-bold uppercase tracking-wider bg-indigo-500/10 border border-indigo-400/20 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full shrink-0">
-              <Sparkles className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-indigo-400 animate-pulse" />
+        <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-3.5 md:gap-6">
+          <div className="w-full md:max-w-lg lg:max-w-xl space-y-1.5 sm:space-y-2">
+            <span className="inline-flex items-center gap-1 text-[9px] md:text-[10px] font-bold uppercase tracking-wider bg-indigo-500/10 border border-indigo-400/20 px-2 py-0.5 rounded-full shrink-0">
+              <Sparkles className="h-2.5 w-2.5 text-indigo-400 animate-pulse" />
               Empiric Medicine Study Engine
             </span>
-            <h1 className="text-xl sm:text-2xl md:text-4xl font-extrabold tracking-tight text-white leading-tight">
-              Master Infectious Diseases <br className="hidden sm:inline" />
-              Through <span className="text-indigo-400 bg-linear-to-r from-indigo-300 to-violet-300 bg-clip-text text-transparent">Adaptive Recall</span>
+            <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl font-extrabold tracking-tight text-white leading-snug">
+              Master Infectious Diseases Through <span className="text-indigo-400 bg-linear-to-r from-indigo-300 to-violet-300 bg-clip-text text-transparent">Adaptive Recall</span>
             </h1>
-            <p className="text-[11px] sm:text-xs md:text-sm text-slate-300 leading-relaxed max-w-2xl font-normal line-clamp-3 md:line-clamp-none">
+            <p className="text-[11px] sm:text-xs text-slate-300 leading-relaxed max-w-lg font-normal line-clamp-2">
               Track weak pathogens, reinforce forgotten treatments, and build long-term retention with a personalized learning engine. Designed specifically for medical board exams and pharmacy rotations.
             </p>
 
-            <div className="flex flex-row flex-wrap gap-2.5 pt-1">
+            <div className="flex flex-row flex-wrap gap-2 pt-1">
               <button
                 type="button"
                 onClick={() => setActiveTab?.("search")}
-                className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold bg-indigo-600 hover:bg-indigo-505 text-white px-4 py-2 sm:px-5 sm:py-3 rounded-xl transition-all shadow-md shadow-indigo-950/40 transform hover:scale-102 cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-bold bg-indigo-600 hover:bg-indigo-550 text-white px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-md transition-all shadow-md shadow-indigo-950/40 transform hover:scale-101 cursor-pointer"
               >
-                <PlayCircle className="h-3.5 w-3.5" />
+                <PlayCircle className="h-3 w-3" />
                 Start Learning
               </button>
               <button
                 type="button"
                 onClick={() => setActiveTab?.("quiz")}
-                className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold bg-white/10 hover:bg-white/15 text-white px-4 py-2 sm:px-5 sm:py-3 rounded-xl transition-all border border-white/10 cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-bold bg-white/10 hover:bg-white/15 text-white px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-md transition-all border border-white/10 cursor-pointer"
               >
-                <Zap className="h-3.5 w-3.5 text-amber-400" />
+                <Zap className="h-3 w-3 text-amber-400" />
                 Take a Quiz
               </button>
             </div>
           </div>
 
           {/* Combined compact metrics shown side-by-side or stacked on desktop; hidden on mobile since they are visual duplicates of the dashboard cards immediately below */}
-          <div className="hidden md:flex flex-col gap-3 w-full md:w-auto shrink-0 self-stretch md:self-auto justify-center bg-slate-900/40 backdrop-blur-md rounded-2xl p-5 border border-white/5 md:min-w-[180px]">
-            <div className="text-center">
-              <span className="text-indigo-300 font-bold block text-2xl md:text-3xl">{analytics.currentStreak} 🔥</span>
-              <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Study Streak</span>
+          <div className="hidden md:flex items-center gap-4 bg-slate-900/40 backdrop-blur-md rounded-lg p-3 border border-white/5 shrink-0 select-none">
+            <div className="text-center px-1.5">
+              <span className="text-indigo-300 font-extrabold block text-lg transform hover:scale-110 transition-transform">{analytics.currentStreak} 🔥</span>
+              <span className="text-[8px] text-slate-400 uppercase tracking-widest font-semibold">Streak</span>
             </div>
-            <div className="border-t border-white/5 my-1" />
-            <div className="text-center">
-              <span className="text-emerald-400 font-bold block text-2xl md:text-3xl">{accuracy}%</span>
-              <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Mastery Accuracy</span>
+            <div className="h-6 w-px bg-white/10" />
+            <div className="text-center px-1.5">
+              <span className="text-emerald-400 font-extrabold block text-lg transform hover:scale-110 transition-transform">{accuracy}%</span>
+              <span className="text-[8px] text-slate-400 uppercase tracking-widest font-semibold">Accuracy</span>
             </div>
           </div>
         </div>
 
         {/* Horizontal Trust Indicators Row - Hidden on mobile to maximize vertical space density */}
-        <div className="hidden sm:grid mt-8 pt-6 border-t border-white/5 grid-cols-2 md:grid-cols-4 gap-4 text-xs">
-          <div className="flex items-center gap-2 text-slate-300">
-            <div className="p-1.5 bg-indigo-500/10 rounded-lg text-indigo-400">
-              <Calendar className="h-4 w-4" />
+        <div className="hidden sm:grid mt-4 pt-3.5 border-t border-white/5 grid-cols-2 md:grid-cols-4 gap-3 text-[10px]">
+          <div className="flex items-center gap-1.5 text-slate-300">
+            <div className="p-0.5 bg-indigo-500/10 rounded-sm text-indigo-400">
+              <Calendar className="h-3 w-3" />
             </div>
             <span className="font-semibold tracking-tight">Personalized Review Scheduling</span>
           </div>
-          <div className="flex items-center gap-2 text-slate-300">
-            <div className="p-1.5 bg-indigo-500/10 rounded-lg text-indigo-400">
-              <Target className="h-4 w-4" />
+          <div className="flex items-center gap-1.5 text-slate-300">
+            <div className="p-0.5 bg-indigo-500/10 rounded-sm text-indigo-400">
+              <Target className="h-3 w-3" />
             </div>
             <span className="font-semibold tracking-tight">Pathogen Mastery Tracking</span>
           </div>
-          <div className="flex items-center gap-2 text-slate-300">
-            <div className="p-1.5 bg-indigo-500/10 rounded-lg text-indigo-400">
-              <Award className="h-4 w-4" />
+          <div className="flex items-center gap-1.5 text-slate-300">
+            <div className="p-0.5 bg-indigo-500/10 rounded-sm text-indigo-400">
+              <Award className="h-3 w-3" />
             </div>
             <span className="font-semibold tracking-tight font-sans">Clinical Quiz Engine</span>
           </div>
-          <div className="flex items-center gap-2 text-slate-300">
-            <div className="p-1.5 bg-indigo-500/10 rounded-lg text-indigo-400">
-              <History className="h-4 w-4" />
+          <div className="flex items-center gap-1.5 text-slate-300">
+            <div className="p-0.5 bg-indigo-500/10 rounded-sm text-indigo-400">
+              <History className="h-3 w-3" />
             </div>
             <span className="font-semibold tracking-tight">Progress History Logs</span>
           </div>

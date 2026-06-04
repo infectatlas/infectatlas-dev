@@ -10,6 +10,8 @@ const ASSETS_TO_CACHE = [
   "/index.html",
   "/offline.html",
   "/app_icon.png",
+  "/app_icon_192.png",
+  "/app_icon_512.png",
   "/screenshot_mobile.png",
   "/screenshot_desktop.png",
   "/manifest.json"

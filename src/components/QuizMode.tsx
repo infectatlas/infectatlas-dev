@@ -163,7 +163,7 @@ export default function QuizMode({
       });
 
       if (!response.ok) {
-        throw new Error("Failed to generate clinical vignette from Gemini Coach");
+        throw new Error("Failed to generate clinical vignette from Gemini AI Engine");
       }
 
       const result = await response.json();
@@ -425,7 +425,7 @@ export default function QuizMode({
                   AI Boards-Style Clinical Vignettes
                 </h3>
                 <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">
-                  Call on the server-side Gemini Study Coach to draft random, highly realistic patient admission stories with lab diagnostic findings and test yourself on medical outcomes.
+                  Call on the server-side Gemini AI engine to draft random, highly realistic patient admission stories with lab diagnostic findings and test yourself on medical outcomes.
                 </p>
               </div>
               <span className="text-[10px] font-semibold text-indigo-300 mt-4 flex items-center gap-1 relative z-10">

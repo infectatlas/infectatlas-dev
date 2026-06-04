@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { Microorganism, microorganismsData } from "../data/microorganisms";
-import { Search, Info, Award, ShieldAlert, Sparkles, Plus, Check } from "lucide-react";
+import { Search, Info, Award, ShieldAlert, Plus, Check } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface SearchEngineProps {
@@ -14,14 +14,6 @@ interface MicrobeDetailsProps {
   microbe: Microorganism;
   isPremium?: boolean;
   onUnlockPremium?: () => void;
-  mnemonicLoading: boolean;
-  mnemonicData: {
-    keyMnemonic?: string;
-    explanation?: string;
-    vividStory?: string;
-    error?: string;
-  } | null;
-  onGenerateMnemonic: (microbe: Microorganism) => void;
   isMobile?: boolean;
 }
 
@@ -29,9 +21,6 @@ function MicrobeDetails({
   microbe,
   isPremium = true,
   onUnlockPremium,
-  mnemonicLoading,
-  mnemonicData,
-  onGenerateMnemonic,
   isMobile = false,
 }: MicrobeDetailsProps) {
   return (
@@ -95,7 +84,7 @@ function MicrobeDetails({
                     <Info className="h-3.5 w-3.5 text-slate-400 shrink-0" />
                     <span className="font-semibold text-xs text-slate-850">{dis.name}</span>
                   </div>
-                  <p className="text-xs text-slate-600 font-mono pl-5 leading-tight">{dis.treatment}</p>
+                  <p className="text-xs text-slate-605 font-mono pl-5 leading-tight">{dis.treatment}</p>
                 </div>
                 
                 <div className="sm:self-start pl-5 sm:pl-0 shrink-0">
@@ -128,67 +117,6 @@ function MicrobeDetails({
             </div>
           </div>
         )}
-
-        {/* Gemini AI Mnemonic Generator Section */}
-        <div className="border-t border-slate-150 pt-4 space-y-3">
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-1.5">
-              <Sparkles className="h-4 w-4 text-indigo-600 shrink-0" />
-              <span className="font-bold text-[10px] text-slate-400 uppercase tracking-wider">AI Study Coach</span>
-            </div>
-            {isPremium ? (
-              <button
-                onClick={() => onGenerateMnemonic(microbe)}
-                disabled={mnemonicLoading}
-                className="text-[11px] bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-2.5 py-1 rounded-md transition-colors flex items-center justify-center gap-1 disabled:opacity-50 cursor-pointer"
-              >
-                {mnemonicLoading ? "Analyzing..." : "Generate Memory Hook"}
-              </button>
-            ) : (
-              <button
-                onClick={onUnlockPremium}
-                className="text-[11px] bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold px-2.5 py-1 rounded-md shadow-3xs transition-all flex items-center justify-center gap-1 cursor-pointer"
-              >
-                <span>👑 Unlock Mnemonics</span>
-              </button>
-            )}
-          </div>
-
-          {/* Mnemonic output container */}
-          <AnimatePresence>
-            {mnemonicData && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                className="bg-indigo-50/30 p-3.5 rounded-xl border border-indigo-100/50 space-y-2.5 overflow-hidden"
-              >
-                {mnemonicData.error ? (
-                  <p className="text-xs text-rose-600">{mnemonicData.error}</p>
-                ) : (
-                  <div className="space-y-2 text-xs text-slate-700">
-                    <div>
-                      <span className="font-bold text-indigo-900 uppercase tracking-wider text-[9px] block">Mnemonic Hook</span>
-                      <p className="font-medium text-slate-900 mt-0.5 bg-white p-2 rounded-lg border border-indigo-100/30 shadow-3xs">
-                        {mnemonicData.keyMnemonic}
-                      </p>
-                    </div>
-                    <div className="grid grid-cols-1 gap-2 pt-1 border-t border-indigo-100/20">
-                      <div>
-                        <span className="font-bold text-indigo-950 uppercase tracking-wider text-[9px] block">Explanation</span>
-                        <p className="text-slate-650 leading-normal mt-0.5 text-[11px]">{mnemonicData.explanation}</p>
-                      </div>
-                      <div>
-                        <span className="font-bold text-indigo-950 uppercase tracking-wider text-[9px] block">Clinical Context</span>
-                        <p className="text-slate-650 italic leading-normal mt-0.5 font-serif text-[11px]">"{mnemonicData.vividStory}"</p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
       </div>
     </div>
   );
@@ -204,15 +132,6 @@ export default function SearchEngine({
   const [selectedGram, setSelectedGram] = useState<string>("All");
   const [selectedShape, setSelectedShape] = useState<string>("All");
   const [selectedMicrobe, setSelectedMicrobe] = useState<Microorganism | null>(null);
-
-  // Mnemonic Generation State
-  const [mnemonicLoading, setMnemonicLoading] = useState(false);
-  const [mnemonicData, setMnemonicData] = useState<{
-    keyMnemonic?: string;
-    explanation?: string;
-    vividStory?: string;
-    error?: string;
-  } | null>(null);
 
   // List management drop-down trigger
   const [showListSelectorFor, setShowListSelectorFor] = useState<string | null>(null);
@@ -237,37 +156,6 @@ export default function SearchEngine({
       return matchesSearch && matchesGram && matchesShape;
     });
   }, [searchTerm, selectedGram, selectedShape]);
-
-  // Request high-yield mnemonic from server-side Gemini endpoint
-  const handleGenerateMnemonic = async (microbe: Microorganism) => {
-    setMnemonicLoading(true);
-    setMnemonicData(null);
-    try {
-      const response = await fetch("/api/gemini/mnemonic", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          pathogenName: microbe.name,
-          characteristics: microbe.characteristics,
-          diseases: microbe.diseases
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to reach Gemini Study Coach");
-      }
-
-      const result = await response.json();
-      setMnemonicData(result);
-    } catch (err: any) {
-      console.error(err);
-      setMnemonicData({
-        error: "Study Coach is busy. Here is a baseline recommendation: Study standard morphology (Gram stain & Shape) and test yourself on drug-route selection."
-      });
-    } finally {
-      setMnemonicLoading(false);
-    }
-  };
 
   return (
     <div className="space-y-6" id="search-engine-root">
@@ -350,7 +238,6 @@ export default function SearchEngine({
                     } else {
                       setSelectedMicrobe(microbe);
                     }
-                    setMnemonicData(null);
                   }}
                   className={`p-3.5 rounded-xl border transition-all cursor-pointer flex flex-col justify-between ${
                     isSelected
@@ -441,9 +328,6 @@ export default function SearchEngine({
                           microbe={microbe}
                           isPremium={isPremium}
                           onUnlockPremium={onUnlockPremium}
-                          mnemonicLoading={mnemonicLoading}
-                          mnemonicData={mnemonicData}
-                          onGenerateMnemonic={handleGenerateMnemonic}
                           isMobile={true}
                         />
                       </motion.div>
@@ -469,9 +353,6 @@ export default function SearchEngine({
                   microbe={selectedMicrobe}
                   isPremium={isPremium}
                   onUnlockPremium={onUnlockPremium}
-                  mnemonicLoading={mnemonicLoading}
-                  mnemonicData={mnemonicData}
-                  onGenerateMnemonic={handleGenerateMnemonic}
                   isMobile={false}
                 />
               </motion.div>

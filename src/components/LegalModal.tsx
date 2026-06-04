@@ -106,13 +106,13 @@ export default function LegalModal({ isOpen, onClose, initialTab = "privacy" }: 
               </div>
 
               <div>
-                <h3 className="text-sm font-bold text-slate-900 mb-1">2. AI Tutor & Third-Party Service Integrations</h3>
+                <h3 className="text-sm font-bold text-slate-900 mb-1">2. AI Diagnosis Quiz & Vignettes Integrations</h3>
                 <p className="mb-2">
-                  Our interactive Gemini AI Memory Tutor allows medical scholars to instantly generate micro-mnemonics, clinically formatted summaries, and diagnostic memory patterns.
+                  Our interactive Gemini AI Clinical Quiz Cases allow medical scholars to instantly generate board-style diagnostic questions, case vignettes, and treatment route verification drills.
                 </p>
                 <ul className="list-disc pl-5 mb-3 space-y-1">
-                  <li><strong>Limited Scope:</strong> Only study material attributes (pathogen names, treatment profiles, user question tokens) are shared with the server-side API.</li>
-                  <li><strong>No PII Transfer:</strong> No personal identity variables are sent to the AI service. Prompts are packaged cleanly on our proxy system strictly to return high-yield memory tags.</li>
+                  <li><strong>Limited Scope:</strong> Only study material attributes (pathogen names, treatment profiles, user response choices) are shared with the server-side API.</li>
+                  <li><strong>No PII Transfer:</strong> No personal identity variables are sent to the AI service. Prompts are packaged cleanly on our proxy system strictly to return high-yield practice scenarios.</li>
                   <li><strong>Security:</strong> All communication protocols are strictly routed via HTTPS and transport layer secure pipelines.</li>
                 </ul>
               </div>

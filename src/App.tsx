@@ -98,29 +98,18 @@ export default function App() {
     localStorage.setItem("infectatlas_pwa_dismissed", "true");
   };
 
-  // Premium Billing simulation states
-  const [isPremium, setIsPremium] = useState<boolean>(() => {
-    return localStorage.getItem("infectatlas_is_premium") === "true";
-  });
+  // Premium Billing states - hardcoded to true for offline full-unlocked local workspace session
+  const [isPremium, setIsPremium] = useState<boolean>(true);
   const [showUpgradeModal, setShowUpgradeModal] = useState<boolean>(false);
 
   // Early User Promotional Phases & Grandfathering states
-  const [isGrandfathered, setIsGrandfathered] = useState<boolean>(() => {
-    return localStorage.getItem("infectatlas_grandfathered") === "true";
-  });
-  const [registeredEmail, setRegisteredEmail] = useState<string | null>(() => {
-    return localStorage.getItem("infectatlas_registered_email");
-  });
-  const [isPromoActive, setIsPromoActive] = useState<boolean>(() => {
-    // Defaults to True (represent Phase 1: Free Beta active for early 3-6 months)
-    return localStorage.getItem("infectatlas_promo_active") !== "false";
-  });
+  const [isGrandfathered, setIsGrandfathered] = useState<boolean>(true);
+  const [registeredEmail, setRegisteredEmail] = useState<string | null>("scholar.local@infectatlas.org");
+  const [isPromoActive, setIsPromoActive] = useState<boolean>(true);
 
-  const [isPromoDismissed, setIsPromoDismissed] = useState<boolean>(() => {
-    return localStorage.getItem("infectatlas_promo_dismissed") === "true";
-  });
+  const [isPromoDismissed, setIsPromoDismissed] = useState<boolean>(true);
 
-  const hasPremiumAccess = isPremium || isGrandfathered || isPromoActive;
+  const hasPremiumAccess = true;
 
   // Legal Modal and compliance states
   const [showLegalModal, setShowLegalModal] = useState<boolean>(false);
@@ -128,29 +117,12 @@ export default function App() {
 
   const handleUpgrade = () => {
     setIsPremium(true);
-    localStorage.setItem("infectatlas_is_premium", "true");
   };
 
   const handleStripeCheckout = async () => {
-    try {
-      const response = await fetch("/api/stripe/create-checkout-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      });
-      const data = await response.json();
-      if (response.ok && data.url) {
-        window.location.href = data.url;
-      } else {
-        alert("ℹ️ Stripe billing credentials are unconfigured. To test production card payments, set STRIPE_SECRET_KEY in your container variables. \n\nStarting sandboxed trial access instead!");
-        handleUpgrade();
-        setShowUpgradeModal(false);
-      }
-    } catch (error) {
-      console.error("Stripe Checkout Session API call failed:", error);
-      alert("Billing system is in simulated sandbox. Initializing instant evaluation access...");
-      handleUpgrade();
-      setShowUpgradeModal(false);
-    }
+    alert("🎉 Premium access is fully unlocked locally. Standard Stripe processing is disabled as InfectAtlas runs in a serverless, static architecture.");
+    setIsPremium(true);
+    setShowUpgradeModal(false);
   };
 
   // State managed via client-side localStorage persistence
@@ -231,27 +203,9 @@ export default function App() {
     }
   }, []);
 
-  // Handle Stripe Success or Cancel URL query params
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const checkoutStatus = urlParams.get("checkout_status");
-    if (checkoutStatus === "success") {
-      setIsPremium(true);
-      localStorage.setItem("infectatlas_is_premium", "true");
-      alert("🎉 Premium Activated! Your Stripe payment has succeeded, unlocking all advanced decks and vignettes.");
-      const cleanUrl = window.location.origin + window.location.pathname;
-      window.history.replaceState({}, document.title, cleanUrl);
-    } else if (checkoutStatus === "cancel") {
-      alert("⚠️ Checkout cancelled. If you need any assistance, unlock again or apply the MicroVIP ambassador code.");
-      const cleanUrl = window.location.origin + window.location.pathname;
-      window.history.replaceState({}, document.title, cleanUrl);
-    }
-  }, []);
-
-  // Supabase cloud data replication state & helpers
+  // Local Backup saving state (replacing Supabase cloud sync)
   const [cloudSyncStatus, setCloudSyncStatus] = useState<"idle" | "syncing" | "success" | "error">("idle");
   const handleCloudSync = async () => {
-    if (!isSupabaseConfigured) return;
     setCloudSyncStatus("syncing");
     const result = await syncUserDataToCloud(studyLists, analytics);
     if (result.success) {
@@ -262,9 +216,9 @@ export default function App() {
     }
   };
 
-  // Triggers automatic synchronization when lists or performance trackers modify
+  // Triggers automatic localStorage sync when lists or performance trackers modify
   useEffect(() => {
-    if (isSupabaseConfigured && studyLists.length > 0) {
+    if (studyLists.length > 0) {
       const timer = setTimeout(() => {
         handleCloudSync();
       }, 5000); // 5s debounce
@@ -470,40 +424,26 @@ export default function App() {
               </div>
             </button>
 
-            {/* Compact Supabase Sync Indicator always visible on mobile beside title to save vertical stack space */}
-            <div className="flex sm:hidden items-center gap-1 text-[10px] bg-slate-50 rounded-lg py-1 px-2 border border-slate-200 text-slate-500">
-              {isSupabaseConfigured ? (
-                <div className="flex items-center gap-1 font-semibold text-emerald-600 flex-row" title="Supabase Cloud Database connected and listening.">
-                  <Cloud className="h-3 w-3 text-emerald-500 shrink-0" />
-                  <span>Cloud Synced</span>
-                  {cloudSyncStatus === "syncing" && <RefreshCw className="h-2.5 w-2.5 animate-spin text-indigo-500 shrink-0" />}
-                </div>
-              ) : (
-                <div className="flex items-center gap-1 font-medium text-slate-400 flex-row">
-                  <CloudOff className="h-3 w-3 shrink-0" />
-                  <span>Offline</span>
-                </div>
-              )}
+            {/* Compact Local Sync Indicator always visible on mobile beside title to save vertical stack space */}
+            <div className="flex sm:hidden items-center gap-1 text-[10px] bg-emerald-50 rounded-lg py-1 px-2 border border-emerald-100 text-emerald-700">
+              <div className="flex items-center gap-1 font-semibold text-emerald-600 flex-row" title="Local persistent backup database is connected.">
+                <Database className="h-3 w-3 text-emerald-500 shrink-0" />
+                <span>Offline Active</span>
+                {cloudSyncStatus === "syncing" && <RefreshCw className="h-2.5 w-2.5 animate-spin text-emerald-500 shrink-0" />}
+              </div>
             </div>
           </div>
 
           {/* Academic disclaimer/Status info & Premium subscription actions */}
           <div className="flex flex-row flex-wrap items-center gap-1.5 sm:gap-3 w-full sm:w-auto justify-between sm:justify-end">
-            {/* Desktop-only Supabase connection status indicator */}
-            <div className="hidden sm:flex items-center gap-2 text-xs bg-slate-50 rounded-lg py-1.5 px-3 border border-slate-200 text-slate-500">
-              {isSupabaseConfigured ? (
-                <div className="flex items-center gap-1.5 font-semibold text-emerald-600 flex-row" title="Supabase Cloud Database connected and listening.">
-                  <Cloud className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
-                  <span>Cloud Synced</span>
-                  {cloudSyncStatus === "syncing" && <RefreshCw className="h-3 w-3 animate-spin text-indigo-500 shrink-0" />}
-                  {cloudSyncStatus === "success" && <span className="text-[10px] bg-emerald-100 text-emerald-800 px-1 rounded font-bold shrink-0">Ok</span>}
-                </div>
-              ) : (
-                <div className="flex items-center gap-1.5 font-medium text-slate-400 flex-row" title="Sandbox Offline Cache Only. To persist, connect Supabase in Cloud Run variables.">
-                  <CloudOff className="h-3.5 w-3.5 shrink-0" />
-                  <span>Offline Cache</span>
-                </div>
-              )}
+            {/* Desktop-only Local connection status indicator */}
+            <div className="hidden sm:flex items-center gap-2 text-xs bg-emerald-50 rounded-lg py-1.5 px-3 border border-emerald-100 text-emerald-700">
+              <div className="flex items-center gap-1.5 font-semibold text-emerald-600 flex-row" title="Persistent Web Storage connected.">
+                <Database className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
+                <span>LocalDB Backup</span>
+                {cloudSyncStatus === "syncing" && <RefreshCw className="h-3 w-3 animate-spin text-emerald-500 shrink-0" />}
+                {cloudSyncStatus === "success" && <span className="text-[10px] bg-emerald-100 text-emerald-800 px-1 rounded font-bold shrink-0">Saved</span>}
+              </div>
             </div>
 
             {/* Hidden on mobile to avoid 30% screen usage */}
@@ -753,7 +693,7 @@ export default function App() {
           <div className="flex gap-4 shrink-0 text-[11px]">
             <span>Reference criteria: Clinically aligned IDSA rules</span>
             <span>&bull;</span>
-            <span>Gemini AI Tutor Integrated</span>
+            <span>Gemini AI Quiz Integrated</span>
           </div>
         </div>
       </footer>
@@ -825,7 +765,7 @@ export default function App() {
                         <span className="text-indigo-600">★</span> Weak categories analysis
                       </li>
                       <li className="flex items-center gap-1.5 font-medium">
-                        <span className="text-indigo-600">★</span> Dynamic AI memory mnemonics
+                        <span className="text-indigo-600">★</span> Dynamic AI Board Vignettes
                       </li>
                     </ul>
                     <p className="text-[9px] sm:text-[10px] text-indigo-500 font-semibold mt-1 leading-snug">
@@ -839,144 +779,55 @@ export default function App() {
               {isPromoActive && (
                 <div id="grandfather-promotion-banner" className="bg-gradient-to-br from-indigo-50 to-violet-50 rounded-xl p-3 sm:p-4 border-2 border-dashed border-indigo-300 space-y-2.5 sm:space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="text-base sm:text-lg">🎁</span>
+                    <span className="text-base sm:text-lg">📚</span>
                     <h4 className="font-bold text-slate-900 text-[11px] sm:text-xs uppercase tracking-wider">
-                      Early Adopter Partner Handshake (Free Lifetime Access)
+                      InfectAtlas is currently in open study mode.
                     </h4>
                   </div>
-                  <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
-                    By launching InfectAtlas during our first 3 to 6 partner months, you can bypass payments completely. Enter your clinical or school email below to active a <strong>Lifetime free license (Permanently Grandfathered)</strong>.
+                  <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed font-medium">
+                    All features are available for free during early access.
                   </p>
                   
-                  {isGrandfathered ? (
-                    <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-2.5 text-center text-xs text-emerald-800 font-semibold flex items-center justify-center gap-1.5 animate-fade-in shadow-2xs">
-                      <CheckCircle className="h-4 w-4 text-emerald-500 shrink-0" />
-                      Grandfather Lifetime Key Locked: {registeredEmail}
-                    </div>
-                  ) : (
-                    <div className="space-y-2">
-                      <div className="flex flex-col sm:flex-row gap-2">
-                        <input
-                          type="email"
-                          id="grandfather-email"
-                          placeholder="Please enter your email as user account ID"
-                          className="w-full sm:flex-1 text-xs py-2 px-3 border border-indigo-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-indigo-500 bg-white shadow-2xs"
-                        />
-                        <button
-                          onClick={() => {
-                            const emailInput = document.getElementById("grandfather-email") as HTMLInputElement;
-                            if (emailInput && emailInput.value.includes("@") && emailInput.value.length > 5) {
-                              const email = emailInput.value.trim();
-                              localStorage.setItem("infectatlas_grandfathered", "true");
-                              localStorage.setItem("infectatlas_registered_email", email);
-                              setIsGrandfathered(true);
-                              
-                              // Track founder_claimed event
-                              analyticsUtil.track("founder_claimed", { email });
-                              
-                              alert(`🎉 Account ${email} verified and grandfathered! Your lifetime bypass license has been activated and cached successfully.`);
-                            } else {
-                              alert("Please enter a valid email address to represent your student/clinician account ID.");
-                            }
-                          }}
-                          className="w-full sm:w-auto text-xs bg-indigo-600 text-white font-extrabold py-2 px-4 rounded-lg hover:bg-indigo-500 transition-all cursor-pointer shadow-sm select-none shrink-0"
-                        >
-                          Unlock Lifetime Free Status
-                        </button>
-                      </div>
-                      <span className="text-[9px] sm:text-[10px] text-indigo-500 block text-center font-medium">
-                        🛡️ No billing details or credit card required. Free forever for early launch partners.
-                      </span>
-                    </div>
-                  )}
+                  <div className="bg-white/60 rounded-lg p-2.5 text-xs text-slate-700 space-y-1.5 border border-indigo-100">
+                    <div className="font-semibold text-[10px] uppercase tracking-wider text-slate-500">We are currently improving:</div>
+                    <ul className="space-y-1 text-slate-600 pl-1">
+                      <li className="flex items-center gap-1.5 font-medium">
+                        <span className="text-indigo-500">•</span> AI clinical case generation
+                      </li>
+                      <li className="flex items-center gap-1.5 font-medium">
+                        <span className="text-indigo-500">•</span> board-style question quality
+                      </li>
+                      <li className="flex items-center gap-1.5 font-medium">
+                        <span className="text-indigo-500">•</span> learning system feedback
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="text-[10px] sm:text-xs text-indigo-700 font-extrabold text-center bg-indigo-50 py-1.5 px-3 rounded-lg border border-indigo-100 uppercase tracking-widest mt-1">
+                    No payment required.
+                  </div>
                 </div>
               )}
 
-              {/* Pricing Cards Selection */}
-              <div className="space-y-2.5 sm:space-y-3 pt-1">
-                <h3 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 text-center">Select Premium Scholar Subscription</h3>
-                
-                {/* Plan A */}
-                <div className="border border-slate-200 rounded-xl p-3 sm:p-3.5 flex items-center justify-between hover:bg-slate-50/50 cursor-pointer transition-all bg-indigo-50/20 border-indigo-200">
-                  <div className="flex items-center gap-2.5 sm:gap-3">
-                    <input type="radio" defaultChecked name="plan-tier" id="plan-monthly" className="h-4 w-4 text-indigo-600 focus:ring-indigo-500" />
-                    <label htmlFor="plan-monthly" className="cursor-pointer">
-                      <span className="block font-bold text-xs sm:text-sm text-slate-800">Monthly High-Cram Access</span>
-                      <span className="block text-[11px] sm:text-xs text-slate-500">Master upcoming exams. Cancel anytime.</span>
-                    </label>
-                  </div>
-                  <div className="text-right pl-2 shrink-0">
-                    <span className="block font-extrabold text-[16px] sm:text-lg text-slate-900">$5.99</span>
-                    <span className="text-[10px] text-slate-400 font-medium">/ month</span>
-                  </div>
+              {/* Pricing Cards Selection - Simplified for local scholar session */}
+              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 sm:p-5 text-center space-y-3.5">
+                <div className="inline-flex items-center justify-center p-2.5 bg-emerald-100 text-emerald-800 rounded-full">
+                  <ShieldCheck className="h-6 w-6 text-emerald-600" />
                 </div>
-
-                {/* Plan B */}
-                <div className="border border-slate-200 rounded-xl p-3 sm:p-3.5 flex items-center justify-between hover:bg-slate-50/50 cursor-pointer transition-all">
-                  <div className="flex items-center gap-2.5 sm:gap-3">
-                    <input type="radio" name="plan-tier" id="plan-lifetime" className="h-4 w-4 text-indigo-600 focus:ring-indigo-500" />
-                    <label htmlFor="plan-lifetime" className="cursor-pointer">
-                      <span className="block font-bold text-xs sm:text-sm text-slate-800">Lifetime Boards Scholar Pass</span>
-                      <span className="block text-[11px] sm:text-xs text-slate-500">Pay once, study forever. Perfect for rotations & residencies.</span>
-                    </label>
-                  </div>
-                  <div className="text-right pl-2 shrink-0">
-                    <span className="block font-extrabold text-[16px] sm:text-lg text-slate-900">$39.99</span>
-                    <span className="text-[10px] text-slate-400 font-medium font-bold text-indigo-600">ONE-OFF</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Promo and ambassador key validation */}
-              <div className="bg-slate-50 rounded-xl p-3 sm:p-4 border border-slate-200 space-y-2.5 sm:space-y-3">
-                <div className="flex flex-col sm:flex-row gap-2">
-                  <input
-                    type="text"
-                    id="promo-code-input"
-                    placeholder="Enter Ambassador key or Beta access code"
-                    className="w-full sm:flex-1 text-xs py-2 px-3 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-indigo-500 bg-white"
-                  />
+                <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wide">Premium Active & Fully Unlocked</h3>
+                <p className="text-xs text-slate-600 leading-relaxed max-w-sm mx-auto">
+                  InfectAtlas is now running in <strong>Local Scholar Mode</strong>. All board exam vignette generators, active recall flashcards, and weak-area trackers are 100% unlocked offline.
+                </p>
+                <div className="pt-1.5">
                   <button
                     onClick={() => {
-                      const input = document.getElementById("promo-code-input") as HTMLInputElement;
-                      if (input && input.value.trim().toUpperCase() === "MICROVIP") {
-                        alert("🎉 Ambassador Access Key Verified! Early-access premium subscription is now 100% active.");
-                        input.value = "MICROVIP (Ambassador Beta Pass Applied)";
-                      } else {
-                        alert("Invalid or expired key. For student beta access trials, please enter the ambassador code MICROVIP.");
-                      }
+                      setIsPremium(true);
+                      setShowUpgradeModal(false);
                     }}
-                    className="w-full sm:w-auto text-xs bg-slate-800 text-white font-semibold py-2 px-3.5 rounded-lg hover:bg-slate-700 transition-all cursor-pointer"
+                    className="w-full py-2.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs shadow-sm transition-all hover:scale-[1.01] cursor-pointer"
                   >
-                    Apply Key
+                    Continue Studying Setup
                   </button>
-                </div>
-
-                <div className="border-t border-slate-200 pt-2.5 sm:pt-3 flex flex-col md:flex-row items-center justify-between gap-3">
-                  <div className="text-[11px] sm:text-xs text-slate-500 flex items-center gap-1">
-                    🔒 SSL Secured Checkout & License System
-                  </div>
-                  <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
-                    <button
-                      id="simulated-checkout"
-                      onClick={() => {
-                        handleUpgrade();
-                        setShowUpgradeModal(false);
-                        alert("🎉 Instant Sandbox Access Approved! All core spaced repetition systems, exam decks, and clinical vignette builders are now fully unlocked for evaluation.");
-                      }}
-                      className="w-full sm:w-auto text-xs font-semibold py-2 px-4 rounded-xl border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 transition-all text-center shrink-0 cursor-pointer"
-                    >
-                      Instant Sandbox Trial
-                    </button>
-                    <button
-                      id="confirm-checkout"
-                      onClick={handleStripeCheckout}
-                      className="w-full sm:w-auto text-xs font-bold py-2 px-5 rounded-xl bg-indigo-600 text-white hover:bg-indigo-500 shadow-sm shadow-indigo-200 transition-all text-center shrink-0 cursor-pointer flex items-center justify-center gap-1"
-                    >
-                      <Sparkles className="h-3.5 w-3.5" />
-                      Checkout via Stripe
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>
