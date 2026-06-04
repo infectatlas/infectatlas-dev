@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 
 // Self-contained high-performance PWA Service Worker for InfectAtlas
-const CACHE_NAME = "infectatlas-pwa-cache-v3";
+const CACHE_NAME = "infectatlas-pwa-cache-v4";
 const OFFLINE_URL = "/offline.html";
 
 // Assets to cache on install for perfect offline experience
@@ -9,12 +9,12 @@ const ASSETS_TO_CACHE = [
   "/",
   "/index.html",
   "/offline.html",
-  "/favicon.ico",
-  "/app_icon_192.png",
-  "/app_icon_512.png",
+  "/favicon.ico?v=4",
+  "/app_icon_192.png?v=4",
+  "/app_icon_512.png?v=4",
   "/screenshot_mobile.png",
   "/screenshot_desktop.png",
-  "/manifest.json"
+  "/manifest.json?v=4"
 ];
 
 // Skip waiting message handler
@@ -77,7 +77,7 @@ self.addEventListener("fetch", (event) => {
         console.log("[InfectAtlas SW] Fetch failed, serving from cache or offline page", error);
         
         // Try to match the exact request from the cache first
-        return caches.match(event.request).then((cachedResponse) => {
+        return caches.match(event.request, { ignoreSearch: true }).then((cachedResponse) => {
           if (cachedResponse) {
             return cachedResponse;
           }
