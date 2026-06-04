@@ -36,7 +36,7 @@
     {
       "type": "Action.OpenUrl",
       "title": "Launch Recall Board 🚀",
-      "url": "https://infectatlas.app"
+      "url": "https://infectatlas.com"
     }
   ],
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",

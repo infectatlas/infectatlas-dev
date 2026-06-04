@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 
 // Self-contained high-performance PWA Service Worker for InfectAtlas
-const CACHE_NAME = "infectatlas-pwa-cache-v1";
+const CACHE_NAME = "infectatlas-pwa-cache-v2";
 const OFFLINE_URL = "/offline.html";
 
 // Assets to cache on install for perfect offline experience
