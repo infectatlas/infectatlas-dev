@@ -7,9 +7,12 @@ import Flashcards from "./components/Flashcards";
 import QuizMode from "./components/QuizMode";
 import AntimicrobialGrid from "./components/AntimicrobialGrid";
 import LegalModal from "./components/LegalModal";
+import LandingPage from "./components/LandingPage";
+import MarketingLandingPage from "./components/MarketingLandingPage";
 import { isSupabaseConfigured, syncUserDataToCloud } from "./lib/supabase";
 import { Search, BrainCircuit, Activity, BookOpen, Layers, Award, Grid, Sparkles, ShieldCheck, CheckCircle, Database, Cloud, CloudOff, RefreshCw, X } from "lucide-react";
 import { analytics as analyticsUtil } from "./utils/analytics";
+import { BrowserRouter, useNavigate, useLocation } from "react-router-dom";
 
 // Initial system list presets for healthcare students (InfectAtlas rev)
 const PRESET_LISTS: StudyList[] = [
@@ -37,7 +40,50 @@ const PRESET_LISTS: StudyList[] = [
 ];
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<"dashboard" | "search" | "flashcards" | "quiz" | "grid">("dashboard");
+  return (
+    <BrowserRouter>
+      <InnerApp />
+    </BrowserRouter>
+  );
+}
+
+function InnerApp() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const getActiveTab = () => {
+    const path = location.pathname;
+    if (path.startsWith("/app/guide")) return "landing";
+    if (path.startsWith("/app/dashboard")) return "dashboard";
+    if (path.startsWith("/app/search")) return "search";
+    if (path.startsWith("/app/grid")) return "grid";
+    if (path.startsWith("/app/flashcards")) return "flashcards";
+    if (path.startsWith("/app/quiz")) return "quiz";
+    return "dashboard"; // default for /app or anything else in /app/*
+  };
+
+  const activeTab = getActiveTab();
+
+  const handleTabChange = (tab: "landing" | "dashboard" | "search" | "flashcards" | "quiz" | "grid") => {
+    if (tab === "landing") {
+      navigate("/app/guide");
+    } else {
+      navigate(`/app/${tab}`);
+    }
+  };
+
+  const handleStartStudying = (tab: "dashboard" | "search" | "flashcards" | "quiz" | "grid") => {
+    navigate(`/app/${tab}`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Redirect invalid paths to root /
+  useEffect(() => {
+    const path = location.pathname;
+    if (path !== "/" && !path.startsWith("/app")) {
+      navigate("/", { replace: true });
+    }
+  }, [location.pathname, navigate]);
 
   // Track app opened log on initial load
   useEffect(() => {
@@ -409,6 +455,10 @@ export default function App() {
     });
   };
 
+  if (location.pathname === "/") {
+    return <MarketingLandingPage />;
+  }
+
   return (
     <div className="min-h-screen bg-[#f8fafc] text-[#0f172a] flex flex-col font-sans" id="app-viewport">
       {/* Principal Academic Header */}
@@ -416,7 +466,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-3 py-2.5 sm:px-4 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-4">
           <div className="flex items-center justify-between w-full sm:w-auto gap-3">
             <button
-              onClick={() => setActiveTab("dashboard")}
+              onClick={() => handleTabChange("dashboard")}
               className="flex items-center gap-2 group text-left cursor-pointer focus:outline-hidden"
               title="Go to Progress Dashboard"
             >
@@ -530,11 +580,24 @@ export default function App() {
       <div className="bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-2 flex justify-start space-x-1 py-1 overflow-x-auto scrollbar-none">
           <button
+            id="tab-landing"
+            onClick={() => handleTabChange("landing")}
+            className={`flex items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs font-semibold rounded-lg transition-all shrink-0 ${
+              activeTab === "landing"
+                ? "bg-indigo-50 text-indigo-700 font-bold"
+                : "text-slate-500 hover:text-slate-800 hover:bg-slate-50"
+            }`}
+          >
+            <Sparkles className="h-4 w-4 text-indigo-500" />
+            Guide & Overview
+          </button>
+
+          <button
             id="tab-dashboard"
-            onClick={() => setActiveTab("dashboard")}
+            onClick={() => handleTabChange("dashboard")}
             className={`flex items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs font-semibold rounded-lg transition-all shrink-0 ${
               activeTab === "dashboard"
-                ? "bg-indigo-50 text-indigo-700"
+                ? "bg-indigo-50 text-indigo-700 font-bold"
                 : "text-slate-500 hover:text-slate-800 hover:bg-slate-50"
             }`}
           >
@@ -544,10 +607,10 @@ export default function App() {
 
           <button
             id="tab-search"
-            onClick={() => setActiveTab("search")}
+            onClick={() => handleTabChange("search")}
             className={`flex items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs font-semibold rounded-lg transition-all shrink-0 ${
               activeTab === "search"
-                ? "bg-indigo-50 text-indigo-700"
+                ? "bg-indigo-50 text-indigo-700 font-bold"
                 : "text-slate-500 hover:text-slate-800 hover:bg-slate-50"
             }`}
           >
@@ -557,10 +620,10 @@ export default function App() {
 
           <button
             id="tab-grid"
-            onClick={() => setActiveTab("grid")}
+            onClick={() => handleTabChange("grid")}
             className={`flex items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs font-semibold rounded-lg transition-all shrink-0 ${
               activeTab === "grid"
-                ? "bg-indigo-55 text-indigo-700 bg-indigo-50"
+                ? "bg-indigo-55 text-indigo-700 bg-indigo-55 font-bold"
                 : "text-slate-500 hover:text-slate-800 hover:bg-slate-50"
             }`}
           >
@@ -570,10 +633,10 @@ export default function App() {
 
           <button
             id="tab-flashcards"
-            onClick={() => setActiveTab("flashcards")}
+            onClick={() => handleTabChange("flashcards")}
             className={`flex items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs font-semibold rounded-lg transition-all shrink-0 ${
               activeTab === "flashcards"
-                ? "bg-indigo-50 text-indigo-700"
+                ? "bg-indigo-50 text-indigo-700 font-bold"
                 : "text-slate-500 hover:text-slate-800 hover:bg-slate-50"
             }`}
           >
@@ -583,10 +646,10 @@ export default function App() {
 
           <button
             id="tab-quiz"
-            onClick={() => setActiveTab("quiz")}
+            onClick={() => handleTabChange("quiz")}
             className={`flex items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs font-semibold rounded-lg transition-all shrink-0 ${
               activeTab === "quiz"
-                ? "bg-indigo-50 text-indigo-700"
+                ? "bg-indigo-50 text-indigo-700 font-bold"
                 : "text-slate-500 hover:text-slate-800 hover:bg-slate-50"
             }`}
           >
@@ -599,6 +662,10 @@ export default function App() {
       {/* Main Focus Screen Layout */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
         <div>
+          {activeTab === "landing" && (
+            <LandingPage onStartStudying={handleStartStudying} />
+          )}
+
           {activeTab === "dashboard" && (
             <Dashboard
               studyLists={studyLists}
@@ -613,7 +680,7 @@ export default function App() {
               isPromoActive={isPromoActive}
               registeredEmail={registeredEmail}
               onUnlockPremium={() => setShowUpgradeModal(true)}
-              setActiveTab={setActiveTab}
+              setActiveTab={handleTabChange}
               onGrandfatherUser={(email) => {
                 localStorage.setItem("infectatlas_grandfathered", "true");
                 localStorage.setItem("infectatlas_registered_email", email);
