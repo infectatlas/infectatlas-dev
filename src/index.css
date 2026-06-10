@@ -29,3 +29,19 @@
 .animate-slow-blink-white {
   animation: slow-blink-white 2.5s ease-in-out infinite;
 }
+
+@keyframes pulse-glow-rose {
+  0%, 100% {
+    box-shadow: 0 0 4px 0px rgba(244, 63, 94, 0.25);
+    border-color: rgba(244, 63, 94, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 12px 1px rgba(244, 63, 94, 0.5);
+    border-color: rgba(244, 63, 94, 0.45);
+  }
+}
+
+.animate-glow-rose {
+  animation: pulse-glow-rose 3s ease-in-out infinite;
+}
+

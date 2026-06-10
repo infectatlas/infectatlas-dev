@@ -4,12 +4,13 @@ import {
   CheckCircle2, 
   XCircle, 
   AlertCircle, 
-  Search, 
   RotateCcw, 
   Award,
   BookOpen,
   Filter,
-  ArrowRight
+  ArrowRight,
+  Bug,
+  GraduationCap
 } from "lucide-react";
 
 // Types
@@ -497,101 +498,38 @@ export default function AntimicrobialGrid() {
   return (
     <div id="antimicrobial-grid-wrapper" className="space-y-8">
       {/* Intro Header Card */}
-      <div className="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl p-5 md:p-6 text-white shadow-xs">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          <div className="w-full md:max-w-2xl">
-            <div className="flex items-center gap-1.5 xs:gap-2 flex-nowrap overflow-x-auto no-scrollbar">
-              <span className="bg-emerald-400/30 text-emerald-100 text-[9px] xs:text-[10px] md:text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full shrink-0 whitespace-nowrap">
-                Pharmacology Engine
-              </span>
-              <button
-                type="button"
-                onClick={handleToggleBanner}
-                className="text-emerald-100 hover:text-white text-[9px] xs:text-[10px] md:text-xs font-medium bg-white/5 hover:bg-white/10 px-2 py-0.5 rounded-full border border-white/5 transition-all flex items-center gap-1 cursor-pointer select-none shrink-0 whitespace-nowrap"
-                title={isBannerCollapsed ? "Show details" : "Collapse details"}
-              >
-                {isBannerCollapsed ? "ℹ️ Expand Info" : "Collapse Info"}
-              </button>
-            </div>
-            <h2 className="text-xl md:text-2xl font-bold tracking-tight mt-3 text-white">
-              Interactive Empiric Antimicrobial Grid
-            </h2>
-            <AnimatePresence initial={false}>
-              {!isBannerCollapsed && (
-                <motion.p
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1, marginTop: 8 }}
-                  exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="text-xs md:text-sm text-emerald-50 leading-relaxed overflow-hidden"
-                >
-                  Bridge the knowledge gap between bacterial identification and clinical pharmacology. 
-                  Click cells in the matrix to view detailed clinical justifications, or test your 
-                  empirical coverage intuition in the board review widget.
-                </motion.p>
-              )}
-            </AnimatePresence>
-          </div>
+      <div className="relative bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl pt-3.5 pb-3 px-3.5 sm:pt-4 sm:pb-3.5 sm:px-5 md:pt-4.5 md:pb-4 md:px-6 text-white shadow-xs overflow-hidden">
+        <div className="relative z-10 flex flex-col gap-1 sm:gap-1.5">
+          <div className="relative flex flex-col md:flex-row md:items-start md:justify-between gap-3">
+            <div className="space-y-1 flex-1 min-w-0">
+              <h2 className="text-base sm:text-lg md:text-xl font-black tracking-tight text-white leading-tight sm:leading-snug pr-[105px] xs:pr-[125px] sm:pr-[145px] md:pr-0 whitespace-normal">
+                Interactive Empiric Antimicrobial Grid
+              </h2>
 
-          <div className="flex gap-4 bg-emerald-700/20 rounded-xl p-3 border border-emerald-400/20 text-xs text-emerald-100 w-full md:w-auto md:justify-end shrink-0">
-            <div className="text-center flex-1 md:flex-none min-w-[70px]">
-              <span className="block font-bold text-white text-sm md:text-base text-center">12</span>
-              <span className="text-[10px] text-emerald-200">Classes</span>
+              <p className="text-[9px] sm:text-xs text-emerald-100/90 font-semibold leading-normal pr-[105px] xs:pr-[125px] sm:pr-[145px] md:pr-0 whitespace-normal block mt-1">
+                Interactive susceptibility and coverage matrix. Click cells for clinical justifications, or practice patient board cases below.
+              </p>
             </div>
-            <div className="border-r border-emerald-400/20" />
-            <div className="text-center flex-1 md:flex-none min-w-[70px]">
-              <span className="block font-bold text-white text-sm md:text-base text-center">12</span>
-              <span className="text-[10px] text-emerald-200">Pathogens</span>
-            </div>
-            <div className="border-r border-emerald-400/20" />
-            <div className="text-center flex-1 md:flex-none min-w-[70px]">
-              <span className="block font-bold text-white text-sm md:text-base text-center">5</span>
-              <span className="text-[10px] text-emerald-200">Boards</span>
+
+            {/* Stats HUD section placed absolutely on mobile top-right, aligned inline on desktop */}
+            <div className="absolute top-0 right-0 md:relative md:top-auto md:right-auto flex flex-col items-end md:flex-row md:items-center gap-1.5 sm:gap-2 md:gap-3 shrink-0 md:mt-0.5">
+              {/* Pathogens Card */}
+              <div className="text-[9px] sm:text-[10px] md:text-[11px] font-medium px-2 py-1 sm:py-1.5 md:px-3 md:py-1.5 rounded-md uppercase tracking-wider select-none bg-emerald-400/20 backdrop-blur-xs border border-emerald-400/30 shrink-0 inline-flex items-center justify-center gap-1.5">
+                <Bug className="h-3 w-3 text-emerald-100 shrink-0" />
+                <span className="text-emerald-100 font-normal">Pathogens •</span>
+                <span className="font-extrabold text-white font-mono">12</span>
+              </div>
+
+              {/* Cases Card */}
+              <div className="text-[9px] sm:text-[10px] md:text-[11px] font-medium px-2 py-1 sm:py-1.5 md:px-3 md:py-1.5 rounded-md uppercase tracking-wider select-none bg-emerald-400/20 backdrop-blur-xs border border-emerald-400/30 shrink-0 inline-flex items-center justify-center gap-1.5">
+                <GraduationCap className="h-3 w-3 text-emerald-100 shrink-0" />
+                <span className="text-emerald-100 font-normal">Cases •</span>
+                <span className="font-extrabold text-white font-mono">5</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Grid Filter Actions */}
-      <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="flex items-center gap-2 text-xs font-semibold text-slate-700">
-          <Filter className="h-4 w-4 text-slate-400" />
-          <span>Pathogen Gram Lens:</span>
-          <div className="flex flex-wrap gap-1 ml-2">
-            {[
-              { id: "all", label: "All Biological Groups" },
-              { id: "gram-positive", label: "Gram-Positive" },
-              { id: "gram-negative", label: "Gram-Negative" },
-              { id: "anaerobe", label: "Anaerobe" },
-              { id: "atypical", label: "Atypical" }
-            ].map((btn) => (
-              <button
-                key={btn.id}
-                onClick={() => setGramFilter(btn.id)}
-                className={`py-1 px-3 rounded-md border text-[11px] font-medium transition-all ${
-                  gramFilter === btn.id
-                    ? "bg-slate-900 border-slate-900 text-white"
-                    : "border-slate-200 hover:bg-slate-50 text-slate-600"
-                }`}
-              >
-                {btn.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="relative w-full md:w-64">
-          <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-slate-400" />
-          <input
-            type="text"
-            placeholder="Search grid pathogens..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full text-xs py-2 pl-9 pr-4 rounded-lg border border-slate-200 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-slate-50"
-          />
-        </div>
-      </div>
-
       {/* Master Layout Grid */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         

@@ -11,7 +11,7 @@ import { isSupabaseConfigured, syncUserDataToCloud } from "./lib/supabase";
 import { Search, BrainCircuit, Activity, BookOpen, Layers, Award, Grid, Sparkles, ShieldCheck, CheckCircle, Database, Cloud, CloudOff, RefreshCw, X } from "lucide-react";
 import { analytics as analyticsUtil } from "./utils/analytics";
 
-// Initial system list presets for healthcare students
+// Initial system list presets for healthcare students (InfectAtlas rev)
 const PRESET_LISTS: StudyList[] = [
   {
     id: "preset-gpos",
@@ -274,9 +274,11 @@ export default function App() {
     saveStudyLists(filtered);
   };
 
-  // Update spaced repetition score rating
-  const handleReviewSpacedRepetition = (pathogenId: string, gotEasy: boolean) => {
+  // Update spaced repetition score rating with optional 3-tier clinical grades
+  const handleReviewSpacedRepetition = (pathogenId: string, gotEasy: boolean, grade?: "forgot" | "partial" | "mastered") => {
     const today = new Date();
+    const resolvedGrade = grade || (gotEasy ? "mastered" : "forgot");
+
     const updated = spacedRepetitionItems.map((item) => {
       if (item.pathogenId !== pathogenId) return item;
 
@@ -284,15 +286,20 @@ export default function App() {
       let nextRepetitions = item.repetitions;
       let nextEF = item.easinessFactor;
 
-      if (gotEasy) {
+      if (resolvedGrade === "mastered") {
         nextRepetitions += 1;
         if (nextRepetitions === 1) nextInterval = 1;
         else if (nextRepetitions === 2) nextInterval = 3;
         else {
           nextInterval = Math.round(nextInterval * nextEF);
         }
-        nextEF = Math.max(1.3, nextEF + 0.1);
+        nextEF = Math.min(3.0, nextEF + 0.15);
+      } else if (resolvedGrade === "partial") {
+        nextRepetitions = Math.max(1, nextRepetitions);
+        nextInterval = 2; // Scheduled very close
+        nextEF = Math.max(1.3, nextEF - 0.05);
       } else {
+        // Forgot
         nextRepetitions = 0;
         nextInterval = 1; // Restart intervals
         nextEF = Math.max(1.3, nextEF - 0.2);
@@ -600,6 +607,7 @@ export default function App() {
               analytics={analytics}
               spacedRepetitionItems={spacedRepetitionItems}
               onReviewSpacedRepetition={handleReviewSpacedRepetition}
+              onAddSpacedRepetition={handleAddSpacedRepetition}
               isPremium={hasPremiumAccess}
               isGrandfathered={isGrandfathered}
               isPromoActive={isPromoActive}
