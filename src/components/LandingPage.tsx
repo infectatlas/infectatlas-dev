@@ -274,14 +274,14 @@ export default function LandingPage({ onStartStudying }: LandingPageProps) {
               </div>
 
               {/* Treatment and clinical indicators breakdown */}
-              <div className="grid grid-cols-2 gap-3">
-                <div className="bg-slate-950 rounded-lg p-2 px-3 border border-slate-850">
-                  <div className="text-[9px] font-mono text-slate-500 uppercase">Primary Therapy</div>
-                  <div className="text-[11px] font-bold text-emerald-300 mt-0.5">Piperacillin/Tazobactam</div>
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                <div className="bg-slate-950 rounded-lg p-2.5 border border-slate-855 flex flex-col justify-between min-h-[58px] sm:min-h-[54px]">
+                  <div className="text-[8px] sm:text-[9px] font-mono text-slate-500 uppercase tracking-wider">Primary Therapy</div>
+                  <div className="text-[10px] sm:text-[11px] font-bold text-emerald-300 mt-0.5 leading-tight break-words">Piperacillin/Tazobactam</div>
                 </div>
-                <div className="bg-slate-950 rounded-lg p-2 px-3 border border-slate-850">
-                  <div className="text-[9px] font-mono text-slate-500 uppercase">Alternative</div>
-                  <div className="text-[11px] font-bold text-indigo-300 mt-0.5">Cefepime / Meropenem</div>
+                <div className="bg-slate-950 rounded-lg p-2.5 border border-slate-855 flex flex-col justify-between min-h-[58px] sm:min-h-[54px]">
+                  <div className="text-[8px] sm:text-[9px] font-mono text-slate-500 uppercase tracking-wider">Alternative</div>
+                  <div className="text-[10px] sm:text-[11px] font-bold text-indigo-300 mt-0.5 leading-tight break-words">Cefepime / Meropenem</div>
                 </div>
               </div>
 
