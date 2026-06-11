@@ -250,22 +250,26 @@ export default function LandingPage({ onStartStudying }: LandingPageProps) {
           </div>
 
           {/* Interactive Mockup Container */}
-          <div className="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-xl p-4 sm:p-6 shadow-2xl relative">
-            <div className="flex items-center justify-between pb-3.5 border-b border-slate-800">
-              <div className="flex items-center gap-2">
-                <span className="h-3 w-3 rounded-full bg-red-550" />
-                <span className="h-3 w-3 rounded-full bg-amber-500" />
-                <span className="h-3 w-3 rounded-full bg-emerald-500" />
-                <span className="text-[11px] font-mono text-slate-500 ml-1">infectatlas.org/practice</span>
+          <div className="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-xl p-4 sm:p-6 shadow-2xl relative min-w-0">
+            <div className="flex items-center justify-between pb-3.5 border-b border-slate-800 gap-2 min-w-0">
+              <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+                <div className="hidden sm:flex items-center gap-1 shrink-0">
+                  <span className="h-2.5 w-2.5 rounded-full bg-red-550" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-amber-500" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                </div>
+                <span className="text-[10px] sm:text-[11px] font-mono text-slate-500 truncate">infectatlas.org/practice</span>
               </div>
-              <span className="text-[10px] font-extrabold uppercase text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-2 rounded py-0.5">Practice View</span>
+              <span className="text-[9px] sm:text-[10px] font-extrabold uppercase text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-1.5 sm:px-2 rounded py-0.5 shrink-0">
+                Practice View
+              </span>
             </div>
 
             <div className="pt-4 space-y-4">
               <div className="bg-slate-950 rounded-lg p-3 border border-slate-800">
                 <div className="flex justify-between items-start text-[10px]">
                   <span className="font-mono text-slate-500">MOCKUP PATHOGEN</span>
-                  <span className="bg-red-400/15 text-red-300 font-extrabold tracking-wider px-1.5 py-0.5 rounded uppercase">Gram-Negative Rod</span>
+                  <span className="bg-red-400/15 text-red-300 font-extrabold tracking-wider px-1.5 py-0.5 rounded uppercase font-sans">Gram-Negative Rod</span>
                 </div>
                 <h4 className="font-black text-sm text-white mt-1">Pseudomonas aeruginosa</h4>
                 <p className="text-[11px] text-slate-450 mt-1 leading-normal">
@@ -277,7 +281,7 @@ export default function LandingPage({ onStartStudying }: LandingPageProps) {
               <div className="grid grid-cols-2 gap-2 sm:gap-3">
                 <div className="bg-slate-950 rounded-lg p-2.5 border border-slate-855 flex flex-col justify-between min-h-[58px] sm:min-h-[54px]">
                   <div className="text-[8px] sm:text-[9px] font-mono text-slate-500 uppercase tracking-wider">Primary Therapy</div>
-                  <div className="text-[10px] sm:text-[11px] font-bold text-emerald-300 mt-0.5 leading-tight break-words">Piperacillin/Tazobactam</div>
+                  <div className="text-[10px] sm:text-[11px] font-bold text-emerald-300 mt-0.5 leading-tight break-words">Piperacillin / Tazobactam</div>
                 </div>
                 <div className="bg-slate-950 rounded-lg p-2.5 border border-slate-855 flex flex-col justify-between min-h-[58px] sm:min-h-[54px]">
                   <div className="text-[8px] sm:text-[9px] font-mono text-slate-500 uppercase tracking-wider">Alternative</div>
