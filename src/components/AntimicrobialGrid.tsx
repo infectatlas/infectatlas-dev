@@ -512,17 +512,17 @@ export default function AntimicrobialGrid() {
             </div>
 
             {/* Stats HUD section placed absolutely on mobile top-right, aligned inline on desktop */}
-            <div className="absolute top-0 right-0 md:relative md:top-auto md:right-auto flex flex-col items-end md:flex-row md:items-center gap-1.5 sm:gap-2 md:gap-3 shrink-0 md:mt-0.5">
+            <div className="absolute top-0 right-0 md:relative md:top-auto md:right-auto flex flex-col items-end md:flex-row md:items-center gap-1 sm:gap-1.5 md:gap-3 shrink-0 md:mt-0.5">
               {/* Pathogens Card */}
-              <div className="text-[9px] sm:text-[10px] md:text-[11px] font-medium px-2 py-1 sm:py-1.5 md:px-3 md:py-1.5 rounded-md uppercase tracking-wider select-none bg-emerald-400/20 backdrop-blur-xs border border-emerald-400/30 shrink-0 inline-flex items-center justify-center gap-1.5">
-                <Bug className="h-3 w-3 text-emerald-100 shrink-0" />
+              <div className="text-[8px] xs:text-[9px] sm:text-[10px] md:text-[11px] font-medium px-1.5 py-0.5 xs:px-2 xs:py-1 sm:py-1.5 md:px-3 md:py-1.5 rounded-md uppercase tracking-wider select-none bg-emerald-400/20 backdrop-blur-xs border border-emerald-400/30 shrink-0 inline-flex items-center justify-center gap-1 xs:gap-1.5">
+                <Bug className="h-2.5 w-2.5 xs:h-3 xs:w-3 text-emerald-100 shrink-0" />
                 <span className="text-emerald-100 font-normal">Pathogens •</span>
                 <span className="font-extrabold text-white font-mono">12</span>
               </div>
 
               {/* Cases Card */}
-              <div className="text-[9px] sm:text-[10px] md:text-[11px] font-medium px-2 py-1 sm:py-1.5 md:px-3 md:py-1.5 rounded-md uppercase tracking-wider select-none bg-emerald-400/20 backdrop-blur-xs border border-emerald-400/30 shrink-0 inline-flex items-center justify-center gap-1.5">
-                <GraduationCap className="h-3 w-3 text-emerald-100 shrink-0" />
+              <div className="text-[8px] xs:text-[9px] sm:text-[10px] md:text-[11px] font-medium px-1.5 py-0.5 xs:px-2 xs:py-1 sm:py-1.5 md:px-3 md:py-1.5 rounded-md uppercase tracking-wider select-none bg-emerald-400/20 backdrop-blur-xs border border-emerald-400/30 shrink-0 inline-flex items-center justify-center gap-1 xs:gap-1.5">
+                <GraduationCap className="h-2.5 w-2.5 xs:h-3 xs:w-3 text-emerald-100 shrink-0" />
                 <span className="text-emerald-100 font-normal">Cases •</span>
                 <span className="font-extrabold text-white font-mono">5</span>
               </div>
