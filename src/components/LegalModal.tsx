@@ -73,7 +73,7 @@ export default function LegalModal({ isOpen, onClose, initialTab = "privacy" }: 
               Terms & Clinical Disclaimer
             </button>
           </div>
-          <span className="text-[10px] text-slate-400 font-mono">Last updated: May 2026</span>
+          <span className="text-[10px] text-slate-400 font-mono">Last updated: {activeTab === "terms" ? "June 2026" : "May 2026"}</span>
         </div>
 
         {/* Scrollable Doc Content */}
@@ -154,42 +154,286 @@ export default function LegalModal({ isOpen, onClose, initialTab = "privacy" }: 
               <div className="bg-amber-50 border border-amber-100 rounded-lg p-3.5 text-amber-900 flex items-start gap-2.5 leading-normal">
                 <AlertTriangle className="h-4.5 w-4.5 text-amber-600 shrink-0 mt-0.5" />
                 <div>
-                  <strong className="font-bold text-amber-950 block">CRITICAL MEDICAL DISCLAIMER</strong>
-                  This software is compiled exclusively as an interactive study companion for classroom and exam reference (such as NCLEX-RN, USMLE Step 1/2, COMLEX, or NAPLEX). It does not provide real clinic diagnostic services, therapeutic judgments, or prescriptive authority.
+                  <strong className="font-bold text-amber-950 block">IMPORTANT NOTICE</strong>
+                  <p className="mt-1 text-slate-800">
+                    PLEASE READ THESE TERMS CAREFULLY. BY ACCESSING OR USING INFECTATLAS, INCLUDING THE WEBSITE, APPLICATION, PROGRESSIVE WEB APP (PWA), STUDY MATERIALS, QUIZZES, FLASHCARDS, REFERENCE CONTENT, AI-GENERATED CONTENT, OR RELATED SERVICES (COLLECTIVELY, THE "SERVICE"), YOU AGREE TO BE LEGALLY BOUND BY THESE TERMS. IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE THE SERVICE.
+                  </p>
                 </div>
               </div>
 
               <div>
-                <h3 className="text-sm font-bold text-slate-900 mb-1">1. Educational Intended Use Profile</h3>
-                <p>
-                  All microbiological profiles, antibiotic mechanisms, efficacy grids, and practice situations present inside InfectAtlas are based upon standard board exam review curricula (e.g., IDSA clinical guidelines, CDC reports, and standard medical literature). Although we strive for 100% accuracy, medical science changes rapidly.
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1.5">1. Educational Purposes Only</h3>
+                <p className="mb-2">
+                  InfectAtlas is an educational and informational platform intended solely for learning, academic study, examination preparation, and professional continuing education.
                 </p>
-                <p className="mt-1 font-semibold text-slate-800">
-                  ⚠️ NEVER use this application to direct active bedside care, identify optimal empiric therapy regimens for actual patients, or replace professional clinical judgment. For real patient scenarios, reference active hospital antibiograms, institutional protocols, and official guidelines.
+                <p className="mb-2">
+                  The Service is designed to assist users in studying microbiology, infectious diseases, antimicrobial pharmacology, pathogen identification, and related healthcare concepts.
                 </p>
-              </div>
-
-              <div>
-                <h3 className="text-sm font-bold text-slate-900 mb-1">2. Simulated Transactions Policy</h3>
-                <p>
-                  Any access key billing actions, promotional codes (e.g., <code>MICROVIP</code>), or pricing cards present inside InfectAtlas are strict system sandbox simulations designed to replicate the commercial subscription flows of the Google Play and iOS App Stores.
+                <p className="mb-2">
+                  The Service is not intended to diagnose, treat, cure, monitor, prevent, or manage any disease, condition, or patient.
                 </p>
                 <p>
-                  No real monetary cards are authorized, no processing queues occur, and no financial responsibilities arise from unlocking the premium level.
+                  InfectAtlas is not a medical device, clinical decision support system, healthcare service, telemedicine platform, pharmacy service, diagnostic tool, or treatment recommendation engine.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-sm font-bold text-slate-900 mb-1">3. Limitation of Liability</h3>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1.5">2. No Medical Advice</h3>
+                <p className="mb-2 font-bold text-slate-800">
+                  ALL CONTENT IS PROVIDED FOR EDUCATIONAL PURPOSES ONLY.
+                </p>
+                <p className="mb-2 font-semibold">
+                  Nothing within the Service constitutes:
+                </p>
+                <ul className="list-disc pl-5 mb-2.5 space-y-0.5">
+                  <li>Medical advice;</li>
+                  <li>Nursing advice;</li>
+                  <li>Pharmacy advice;</li>
+                  <li>Diagnostic advice;</li>
+                  <li>Treatment advice;</li>
+                  <li>Prescribing advice;</li>
+                  <li>Professional healthcare services;</li>
+                  <li>Clinical consultation.</li>
+                </ul>
+                <p className="mb-2">
+                  No physician-patient, pharmacist-patient, nurse-patient, provider-patient, fiduciary, or professional relationship is created through use of the Service.
+                </p>
                 <p>
-                  To the maximum extent permitted by applicable laws, the publishers and active contributors of InfectAtlas will not be held liable for any clinical errors, exam failure results, data system discrepancies, or miscellaneous damages arising directly or indirectly from using this study tool.
+                  Users must seek qualified professional medical advice for any healthcare-related decision.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-sm font-bold text-slate-900 mb-1">4. Professional Affiliations</h3>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1.5">3. Strict Prohibition on Patient Care Use</h3>
+                <p className="mb-2 font-extrabold text-rose-700">
+                  THE SERVICE MUST NOT BE USED FOR ACTUAL PATIENT CARE.
+                </p>
+                <p className="mb-2">
+                  Without limitation, users may not use InfectAtlas to:
+                </p>
+                <ul className="list-disc pl-5 mb-2.5 space-y-0.5">
+                  <li>Diagnose patients;</li>
+                  <li>Select medications;</li>
+                  <li>Determine antibiotic therapy;</li>
+                  <li>Establish treatment plans;</li>
+                  <li>Make clinical decisions;</li>
+                  <li>Guide emergency treatment;</li>
+                  <li>Replace institutional protocols;</li>
+                  <li>Replace professional judgment.</li>
+                </ul>
+                <p className="mb-2">
+                  Users are solely responsible for independently verifying all information through current clinical guidelines, prescribing information, institutional protocols, local antibiograms, and qualified healthcare professionals.
+                </p>
+                <p className="font-semibold text-slate-800">
+                  Any use of the Service in connection with actual patient care is undertaken entirely at the user's own risk.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1.5">4. Content May Be Inaccurate or Outdated</h3>
+                <p className="mb-2 text-slate-705">
+                  Medical knowledge changes continuously.
+                </p>
+                <p className="mb-2 font-medium">
+                  The Service may contain:
+                </p>
+                <ul className="list-disc pl-5 mb-2.5 space-y-0.5">
+                  <li>Errors;</li>
+                  <li>Omissions;</li>
+                  <li>Outdated information;</li>
+                  <li>Incomplete information;</li>
+                  <li>Simplified educational content;</li>
+                  <li>Incorrect information.</li>
+                </ul>
+                <p className="mb-2">
+                  The inclusion of diseases, organisms, treatments, antimicrobial regimens, susceptibility data, or educational recommendations does not guarantee accuracy, completeness, reliability, or current clinical validity.
+                </p>
                 <p>
-                  InfectAtlas is an independent educational tool. It is not affiliated, endorsed, or partnered with the NBME, the Federation of State Medical Boards (FSMB), the NCSBN, or any pharmaceutical organization.
+                  Users are solely responsible for independently verifying all information.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1.5">5. AI-Generated Content</h3>
+                <p className="mb-2 font-medium">
+                  Certain portions of the Service may utilize artificial intelligence systems to generate:
+                </p>
+                <ul className="list-disc pl-5 mb-2.5 space-y-0.5">
+                  <li>Quiz questions;</li>
+                  <li>Flashcards;</li>
+                  <li>Clinical vignettes;</li>
+                  <li>Educational explanations;</li>
+                  <li>Study materials;</li>
+                  <li>Learning simulations.</li>
+                </ul>
+                <p className="mb-2 text-slate-705">
+                  AI-generated content may contain inaccuracies, hallucinations, omissions, outdated information, misleading conclusions, or incorrect clinical statements.
+                </p>
+                <p className="mb-2 font-semibold">
+                  AI-generated content must never be relied upon for patient care or healthcare decision-making.
+                </p>
+                <p>
+                  Users assume all risks associated with use of AI-generated educational content.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1.5">6. No Warranties</h3>
+                <p className="mb-2 font-bold text-slate-800">
+                  TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE SERVICE IS PROVIDED "AS IS," "AS AVAILABLE," AND WITH ALL FAULTS.
+                </p>
+                <p className="mb-2 font-semibold">
+                  INFECTATLAS DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING:
+                </p>
+                <ul className="list-disc pl-5 mb-2.5 space-y-0.5 font-bold text-slate-800">
+                  <li>MERCHANTABILITY;</li>
+                  <li>FITNESS FOR A PARTICULAR PURPOSE;</li>
+                  <li>NON-INFRINGEMENT;</li>
+                  <li>ACCURACY;</li>
+                  <li>RELIABILITY;</li>
+                  <li>COMPLETENESS;</li>
+                  <li>AVAILABILITY;</li>
+                  <li>SECURITY.</li>
+                </ul>
+                <p className="mt-2 text-slate-705">
+                  WE DO NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED, ERROR-FREE, OR FREE FROM DEFECTS.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1.5">7. Limitation of Liability</h3>
+                <p className="mb-2 font-bold text-slate-800">
+                  TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, INFECTATLAS, ITS OWNERS, OPERATORS, DEVELOPERS, CONTRIBUTORS, CONTRACTORS, AFFILIATES, LICENSORS, SUCCESSORS, AND SERVICE PROVIDERS SHALL NOT BE LIABLE FOR ANY DAMAGES OF ANY KIND ARISING FROM OR RELATING TO THE SERVICE.
+                </p>
+                <p className="mb-2 font-semibold">
+                  THIS INCLUDES, WITHOUT LIMITATION:
+                </p>
+                <ul className="list-disc pl-5 mb-2.5 space-y-0.5 text-slate-800 font-medium">
+                  <li>Direct damages;</li>
+                  <li>Indirect damages;</li>
+                  <li>Consequential damages;</li>
+                  <li>Incidental damages;</li>
+                  <li>Special damages;</li>
+                  <li>Exemplary damages;</li>
+                  <li>Punitive damages;</li>
+                  <li>Lost profits;</li>
+                  <li>Lost business opportunities;</li>
+                  <li>Lost educational opportunities;</li>
+                  <li>Examination failures;</li>
+                  <li>Clinical outcomes;</li>
+                  <li>Healthcare decisions;</li>
+                  <li>Medication errors;</li>
+                  <li>Personal injury;</li>
+                  <li>Death;</li>
+                  <li>Property damage;</li>
+                  <li>Data loss;</li>
+                  <li>Business interruption.</li>
+                </ul>
+                <p className="mt-2 font-semibold text-rose-700">
+                  TO THE MAXIMUM EXTENT PERMITTED BY LAW, YOUR SOLE AND EXCLUSIVE REMEDY IS TO STOP USING THE SERVICE.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1.5">8. Assumption of Risk</h3>
+                <p className="mb-2">
+                  You acknowledge and agree that:
+                </p>
+                <ul className="list-disc pl-5 mb-2.5 space-y-0.5">
+                  <li>Use of the Service is voluntary;</li>
+                  <li>Educational content may be inaccurate;</li>
+                  <li>Medical information may change without notice;</li>
+                  <li>AI-generated content may be incorrect;</li>
+                  <li>The Service is not intended for patient care.</li>
+                </ul>
+                <p className="mt-2">
+                  You assume all risks arising from your use of the Service.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1.5">9. Indemnification</h3>
+                <p>
+                  You agree to defend, indemnify, and hold harmless InfectAtlas and its owners, operators, developers, contributors, contractors, licensors, successors, and service providers from any claims, liabilities, damages, judgments, losses, costs, expenses, or attorneys' fees arising from: Your use of the Service; Your violation of these Terms; Your misuse of educational content; Your use of the Service in connection with patient care; or Your violation of applicable laws or regulations.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1.5">10. Prohibited Content</h3>
+                <p className="mb-2">
+                  Users must not submit:
+                </p>
+                <ul className="list-disc pl-5 mb-2.5 space-y-0.5 font-medium text-slate-805">
+                  <li>Protected Health Information (PHI);</li>
+                  <li>Patient records;</li>
+                  <li>Medical charts;</li>
+                  <li>Insurance information;</li>
+                  <li>Personally identifiable patient information;</li>
+                  <li>Confidential healthcare records.</li>
+                </ul>
+                <p className="mt-2">
+                  InfectAtlas is not designed to receive, store, process, or maintain healthcare records subject to HIPAA or similar healthcare privacy laws.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1.5">11. Intellectual Property</h3>
+                <p>
+                  All software, text, graphics, educational content, branding, logos, databases, designs, and related materials are protected by applicable intellectual property laws. No license is granted except the limited right to access and use the Service for personal educational purposes.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1.5">12. Third-Party Services</h3>
+                <p>
+                  The Service may rely upon third-party providers including hosting providers, analytics providers, artificial intelligence providers, infrastructure providers, payment processors, and other service providers. InfectAtlas is not responsible for the availability, security, content, actions, or practices of third-party services.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1.5">13. International Users</h3>
+                <p>
+                  The Service may be accessed worldwide. Users accessing the Service from outside the United States do so at their own initiative and are responsible for compliance with local laws applicable to their use of the Service.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1.5">14. Dispute Resolution</h3>
+                <p className="mb-2">
+                  To the maximum extent permitted by applicable law, any dispute, claim, or controversy arising out of or relating to the Service shall be resolved exclusively through binding arbitration on an individual basis.
+                </p>
+                <p className="mb-2 font-bold text-slate-800">
+                  Class actions, class arbitrations, representative actions, and jury trials are waived to the fullest extent permitted by law.
+                </p>
+                <p>
+                  Where applicable law prohibits mandatory arbitration or certain liability limitations, such provisions shall apply only to the minimum extent required by law.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1.5">15. Governing Law</h3>
+                <p className="mb-2">
+                  These Terms shall be governed by and construed in accordance with the laws of the jurisdiction selected by InfectAtlas in connection with operation of the Service, without regard to conflict-of-law principles.
+                </p>
+                <p>
+                  Nothing in these Terms shall limit any mandatory consumer protections that may apply under applicable law.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1.5">16. Modifications</h3>
+                <p className="mb-2">
+                  We may modify, suspend, discontinue, or update the Service or these Terms at any time without liability.
+                </p>
+                <p>
+                  Continued use of the Service following publication of revised Terms constitutes acceptance of the revised Terms.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-1.5">17. Contact</h3>
+                <p>
+                  Questions regarding these Terms may be directed to: <a href="mailto:support@infectatlas.com" className="text-indigo-600 font-bold hover:underline">support@infectatlas.com</a>.
                 </p>
               </div>
             </div>
