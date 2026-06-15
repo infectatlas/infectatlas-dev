@@ -495,7 +495,7 @@ export default function OrganismsSEO() {
               <div className="flex flex-col sm:flex-row gap-3 items-center justify-center max-w-sm mx-auto">
                 <button
                   onClick={() => handleLaunchApp("quiz")}
-                  className="w-full sm:w-auto px-6 py-2.5 bg-indigo-650 hover:bg-indigo-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-indigo-600/20 transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                  className="w-full sm:w-auto px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl shadow-lg shadow-indigo-600/20 transition-all cursor-pointer flex items-center justify-center gap-1.5"
                 >
                   <Activity className="h-4.5 w-4.5" />
                   Launch Quiz Sandbox
