@@ -82,7 +82,13 @@ export default function MarketingLandingPage() {
       {/* Footer */}
       <footer className="relative z-10 border-t border-slate-900 bg-slate-950/40 py-6 text-center text-[10px] sm:text-[11px] text-slate-500 w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>&copy; 2026 InfectAtlas. Built for medical training, clinical pharmacy, and boards prep.</p>
+          <p className="flex flex-wrap items-center gap-2.5 justify-center sm:justify-start">
+            <span>&copy; 2026 InfectAtlas. Built for medical training, clinical pharmacy, and boards prep.</span>
+            <span className="hidden sm:inline text-slate-800">|</span>
+            <Link to="/organisms" className="hover:underline text-indigo-400 font-semibold cursor-pointer">
+              Public Ref Library (SEO Directory)
+            </Link>
+          </p>
           <div className="flex items-center gap-1.5 text-slate-500">
             <ShieldCheck className="h-3.5 w-3.5 text-indigo-500" />
             <span>IDSA Aligned Clinical Standards</span>

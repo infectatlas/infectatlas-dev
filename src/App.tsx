@@ -9,6 +9,7 @@ import AntimicrobialGrid from "./components/AntimicrobialGrid";
 import LegalModal from "./components/LegalModal";
 import LandingPage from "./components/LandingPage";
 import MarketingLandingPage from "./components/MarketingLandingPage";
+import OrganismsSEO from "./components/OrganismsSEO";
 import { isSupabaseConfigured, syncUserDataToCloud } from "./lib/supabase";
 import { Search, BrainCircuit, Activity, BookOpen, Layers, Award, Grid, Sparkles, ShieldCheck, CheckCircle, Database, Cloud, CloudOff, RefreshCw, X } from "lucide-react";
 import { analytics as analyticsUtil } from "./utils/analytics";
@@ -77,10 +78,10 @@ function InnerApp() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Redirect invalid paths to root /
+  // Redirect invalid paths to root / or let SEO slugs load cleanly
   useEffect(() => {
     const path = location.pathname;
-    if (path !== "/" && !path.startsWith("/app")) {
+    if (path !== "/" && !path.startsWith("/app") && !path.startsWith("/organisms")) {
       navigate("/", { replace: true });
     }
   }, [location.pathname, navigate]);
@@ -457,6 +458,10 @@ function InnerApp() {
 
   if (location.pathname === "/") {
     return <MarketingLandingPage />;
+  }
+
+  if (location.pathname.startsWith("/organisms")) {
+    return <OrganismsSEO />;
   }
 
   return (
