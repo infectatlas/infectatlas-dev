@@ -50,6 +50,47 @@ export const getSEOIntroduction = (m: Microorganism): string => {
   return defaultIntro;
 };
 
+export const getPathogenSynonyms = (m: Microorganism): string[] => {
+  const nameLower = m.name.toLowerCase();
+  const idLower = m.id.toLowerCase();
+  
+  if (nameLower.includes("staphylococcus aureus") || idLower.includes("s-aureus")) {
+    return ["S. aureus", "Staph aureus", "MRSA", "MSSA", "Golden Staph"];
+  }
+  if (nameLower.includes("clostridioides difficile") || idLower.includes("c-diff") || idLower.includes("c-difficile")) {
+    return ["Clostridium difficile", "C. diff", "C. difficile", "Pseudomembranous colitis bacillus"];
+  }
+  if (nameLower.includes("pseudomonas aeruginosa") || idLower.includes("p-aeruginosa")) {
+    return ["P. aeruginosa", "Pseudomonas", "Blue-green pigment bacilli"];
+  }
+  if (nameLower.includes("escherichia coli") || idLower.includes("e-coli")) {
+    return ["E. coli", "Uropathogenic Escherichia coli (UPEC)", "EHEC", "ETEC", "STEC"];
+  }
+  if (nameLower.includes("streptococcus pneumoniae") || idLower.includes("s-pneumoniae")) {
+    return ["Pneumococcus", "S. pneumoniae", "Lancet-shaped diplococci"];
+  }
+  if (nameLower.includes("neisseria meningitidis") || idLower.includes("n-meningitidis")) {
+    return ["Meningococcus", "N. meningitidis", "Meningococcal coccus"];
+  }
+  if (nameLower.includes("streptococcus pyogenes") || idLower.includes("s-pyogenes")) {
+    return ["Group A Streptococcus", "GAS", "S. pyogenes", "Flesh-eating bacteria"];
+  }
+  if (nameLower.includes("streptococcus agalactiae") || idLower.includes("s-agalactiae")) {
+    return ["Group B Streptococcus", "GBS", "S. agalactiae", "Neonatal sepsis Streptococcus"];
+  }
+  if (nameLower.includes("enterococcus") || idLower.includes("faecalis") || idLower.includes("faecium")) {
+    return ["VRE (Vancomycin-Resistant Enterococcus)", "Group D Strep", "E. faecalis", "E. faecium"];
+  }
+  
+  // Generic abbreviation fallback
+  const parts = m.name.split(" ");
+  if (parts.length >= 2) {
+    const abbreviated = `${parts[0].charAt(0)}. ${parts[1]}`;
+    return [abbreviated];
+  }
+  return [];
+};
+
 export default function OrganismsSEO() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -73,26 +114,28 @@ export default function OrganismsSEO() {
     if (isDetailView && pathogen) {
       // 1. Dynamic Search-Intent Title (Aim for 50-70 characters)
       let pageTitle = `${pathogen.name}: Diagnosis, Shapes & High-Yield Treatments | InfectAtlas`;
-      if (pathogen.name.toLowerCase().includes("staphylococcus aureus")) {
+      const nameLower = pathogen.name.toLowerCase();
+      if (nameLower.includes("staphylococcus aureus")) {
         pageTitle = "Staphylococcus aureus: Symptoms, Diseases, Treatment & MRSA vs MSSA | InfectAtlas";
-      } else if (pathogen.name.toLowerCase().includes("clostridioides difficile")) {
+      } else if (nameLower.includes("clostridioides difficile")) {
         pageTitle = "Clostridioides difficile: C. diff Symptoms, Diagnosis & Treatment | InfectAtlas";
-      } else if (pathogen.name.toLowerCase().includes("pseudomonas aeruginosa")) {
+      } else if (nameLower.includes("pseudomonas aeruginosa")) {
         pageTitle = "Pseudomonas aeruginosa: Infections, Resistance & Treatments | InfectAtlas";
-      } else if (pathogen.name.toLowerCase().includes("streptococcus pneumoniae")) {
+      } else if (nameLower.includes("streptococcus pneumoniae")) {
         pageTitle = "Streptococcus pneumoniae: Symptoms, Infections & Treatments | InfectAtlas";
-      } else if (pathogen.name.toLowerCase().includes("escherichia coli")) {
+      } else if (nameLower.includes("escherichia coli")) {
         pageTitle = "Escherichia coli: Symptoms, UTI, HUS & Empirical Treatment | InfectAtlas";
       }
       document.title = pageTitle;
 
-      // 2. High-Yield Meta Description under 160 characters
-      let metaDesc = `Learn ${pathogen.name} identification, diagnostic shapes, therapy choices, and high-yield board review concepts for USMLE, NCLEX, and NAPLEX.`;
-      if (pathogen.name.toLowerCase().includes("staphylococcus aureus")) {
+      // 2. High-Yield Meta Description under 160 characters with synonyms included
+      const synonyms = getPathogenSynonyms(pathogen).slice(0, 2).join(", ");
+      let metaDesc = `Learn ${pathogen.name} (${synonyms}) identification, diagnostic shapes, therapy choices, and high-yield board review concepts for USMLE, NCLEX, and NAPLEX.`;
+      if (nameLower.includes("staphylococcus aureus")) {
         metaDesc = "Learn Staphylococcus aureus identification, common infections, MRSA vs MSSA treatment, clinical pearls, and board-review concepts for USMLE, NCLEX, COMLEX, and NAPLEX.";
-      } else if (pathogen.name.toLowerCase().includes("clostridioides difficile")) {
+      } else if (nameLower.includes("clostridioides difficile")) {
         metaDesc = "Master Clostridioides difficile (C. diff) identification, toxin assays, oral vancomycin vs fidaxomicin treatment, and high-yield board exam questions.";
-      } else if (pathogen.name.toLowerCase().includes("pseudomonas aeruginosa")) {
+      } else if (nameLower.includes("pseudomonas aeruginosa")) {
         metaDesc = "Study Pseudomonas aeruginosa clinical manifestations, distinguishing biochemical tests, and anti-pseudomonal beta-lactam susceptibility guidelines.";
       }
 
@@ -104,34 +147,85 @@ export default function OrganismsSEO() {
         document.head.appendChild(metaDescriptionTag);
       }
       metaDescriptionTag.setAttribute('content', metaDesc);
+
+      // 1. Dynamic Canonical Link tag Injection
+      let canonicalTag = document.querySelector('link[rel="canonical"]');
+      if (!canonicalTag) {
+        canonicalTag = document.createElement('link');
+        canonicalTag.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonicalTag);
+      }
+      canonicalTag.setAttribute('href', `https://infectatlas.com/organisms/${getPathogenSlug(pathogen.name)}`);
       
-      // Inject Schema.org JSON-LD microdata dynamically for maximum crawl efficiency
-      const schemaData = {
-        "@context": "https://schema.org",
-        "@type": "MedicalWebPage",
-        "name": pathogen.name,
-        "description": metaDesc,
-        "aspect": ["microbiology", "diagnosis", "antimicrobial treatment", "clinical guidelines"],
-        "mainEntity": {
-          "@type": "MedicalCondition",
-          "name": `${pathogen.name} infection`,
-          "possibleTreatment": pathogen.diseases.map((d) => ({
-            "@type": "MedicalTherapy",
-            "name": d.treatment
-          })),
-          "associatedAnatomy": {
-            "@type": "AnatomicalStructure",
-            "name": "Human Host System"
+      // 2. High-Yield "Frequently Asked Questions" (FAQ) Schema.org Microdata + MedicalWebPage Graph
+      const mainDisease = pathogen.diseases[0];
+      const qaList = [
+        {
+          "@type": "Question",
+          "name": `Is ${pathogen.name} Gram-positive or Gram-negative?`,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": `${pathogen.name} is classified as a ${pathogen.gramStatus} ${pathogen.shape || "bacterium"}. It typically presents as ${pathogen.arrangement || "individual cellular structures"} in microbiological morphology.`
           }
         },
-        "publisher": {
-          "@type": "Organization",
-          "name": "InfectAtlas",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://infectatlas.com/assets/favicon.ico"
+        {
+          "@type": "Question",
+          "name": `What are the laboratory identification features of ${pathogen.name}?`,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": `${pathogen.name} exhibits critical diagnostic biomarkers and clinical characteristics including: ${pathogen.characteristics.join(", ")}.`
           }
         }
+      ];
+
+      if (mainDisease) {
+        qaList.push({
+          "@type": "Question",
+          "name": `What is the standard treatment for ${mainDisease.name} caused by ${pathogen.name}?`,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": `Standard guideline antimicrobial treatment suggests: ${mainDisease.treatment}. ${mainDisease.clinicalPearl ? `Clinical Pearl: ${mainDisease.clinicalPearl}` : ""}`
+          }
+        });
+      }
+
+      const schemaData = {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "MedicalWebPage",
+            "@id": `https://infectatlas.com/organisms/${getPathogenSlug(pathogen.name)}#webpage`,
+            "url": `https://infectatlas.com/organisms/${getPathogenSlug(pathogen.name)}`,
+            "name": pageTitle,
+            "description": metaDesc,
+            "aspect": ["microbiology", "diagnosis", "antimicrobial treatment", "clinical guidelines"],
+            "mainEntity": {
+              "@type": "MedicalCondition",
+              "name": `${pathogen.name} infection`,
+              "possibleTreatment": pathogen.diseases.map((d) => ({
+                "@type": "MedicalTherapy",
+                "name": d.treatment
+              })),
+              "associatedAnatomy": {
+                "@type": "AnatomicalStructure",
+                "name": "Human Host System"
+              }
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "InfectAtlas",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://infectatlas.com/assets/favicon.ico"
+              }
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": `https://infectatlas.com/organisms/${getPathogenSlug(pathogen.name)}#faq`,
+            "mainEntity": qaList
+          }
+        ]
       };
 
       const existingScript = document.getElementById("pathogen-jsonld-schema");
@@ -145,7 +239,7 @@ export default function OrganismsSEO() {
         document.head.appendChild(script);
       }
 
-      // Cleanup schema scripts on unmount
+      // Cleanup schema scripts and headers on unmount or updates
       return () => {
         const script = document.getElementById("pathogen-jsonld-schema");
         if (script) script.remove();
@@ -153,6 +247,11 @@ export default function OrganismsSEO() {
         const descTag = document.querySelector('meta[name="description"]');
         if (descTag) {
           descTag.setAttribute('content', "Comprehensive reference guide of clinically critical Gram-positive, Gram-negative, Spirochete, and atypical human pathogens with treatment guidelines.");
+        }
+
+        const canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) {
+          canonical.setAttribute('href', "https://infectatlas.com/organisms");
         }
       };
     } else {
@@ -185,7 +284,7 @@ export default function OrganismsSEO() {
         document.head.appendChild(script);
       }
 
-      // Update directory meta description
+      // Update directory meta description and canonical link
       let metaDescriptionTag = document.querySelector('meta[name="description"]');
       if (!metaDescriptionTag) {
         metaDescriptionTag = document.createElement('meta');
@@ -193,6 +292,14 @@ export default function OrganismsSEO() {
         document.head.appendChild(metaDescriptionTag);
       }
       metaDescriptionTag.setAttribute('content', "Comprehensive reference guide of clinically critical Gram-positive, Gram-negative, Spirochete, and atypical human pathogens with treatment guidelines.");
+
+      let canonicalTag = document.querySelector('link[rel="canonical"]');
+      if (!canonicalTag) {
+        canonicalTag = document.createElement('link');
+        canonicalTag.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonicalTag);
+      }
+      canonicalTag.setAttribute('href', "https://infectatlas.com/organisms");
 
       return () => {
         const script = document.getElementById("directory-jsonld-schema");
@@ -209,6 +316,21 @@ export default function OrganismsSEO() {
     }
     navigate(`/app/${tab}`);
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Scroll smoothly to selected sections to trigger Google Sitelinks targets
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  // Internal visual linking list builder
+  const getRelatedPathogens = (current: Microorganism): Microorganism[] => {
+    return microorganismsData
+      .filter((m) => m.id !== current.id && m.gramStatus === current.gramStatus)
+      .slice(0, 2);
   };
 
   // Group directory list by gram status for rich index grouping
@@ -238,7 +360,7 @@ export default function OrganismsSEO() {
   const groupedPathogens = groupPathogensByGram();
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans" id="seo-root">
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans animate-fade-in" id="seo-root">
       {/* Pristine Clinical Reference Header */}
       <header className="bg-white border-b border-slate-200 py-4 px-4 sticky top-0 z-20 shadow-xs">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
@@ -285,7 +407,7 @@ export default function OrganismsSEO() {
             </div>
             <h2 className="text-lg font-bold text-slate-900">Pathogen Reference Not Found</h2>
             <p className="text-xs text-slate-500 leading-relaxed">
-              We couldn't find a microorganism matching the key "<strong className="text-slate-800">{slug}</strong>" in the reference library.
+              We couldn\'t find a microorganism matching the key "<strong className="text-slate-800">{slug}</strong>" in the reference library.
             </p>
             <div className="pt-2">
               <Link
@@ -302,7 +424,7 @@ export default function OrganismsSEO() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12" id="pathogen-seo-detail">
             
             {/* Left/Middle Column: Clinical Literature */}
-            <div className="lg:col-span-2 space-y-8">
+            <div className="lg:col-span-2 space-y-8" id="overview">
               
               {/* Back navigation */}
               <div>
@@ -332,12 +454,33 @@ export default function OrganismsSEO() {
                   </span>
                 </div>
 
-                <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-sans">
-                  {pathogen.name}
-                </h1>
+                <div className="space-y-2">
+                  <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-sans italic">
+                    {pathogen.name}
+                  </h1>
+                  
+                  {/* Standardized Clinical Nomenclature Indicators / Buzzwords field to capture long-tail query volumes */}
+                  <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-500 bg-slate-100/60 p-2.5 rounded-lg border border-slate-200">
+                    <span className="font-bold text-[10px] text-slate-400 uppercase tracking-widest shrink-0">Synonyms & Buzzwords:</span>
+                    {getPathogenSynonyms(pathogen).map((syn, idx) => (
+                      <span key={idx} className="bg-white border border-slate-200 px-2 py-0.5 rounded text-xs select-all text-indigo-950 font-semibold italic">
+                        {syn}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 4. Interactive sub-navigation bar (Triggers Google Sitelinks) */}
+                <div className="bg-slate-100/80 p-1.5 rounded-xl flex items-center gap-1.5 overflow-x-auto text-[11px] font-bold text-slate-500 border border-slate-200 hide-scrollbar scroll-smooth">
+                  <span className="text-[10px] uppercase font-bold text-slate-400 px-2 select-none shrink-0">Jump To:</span>
+                  <button onClick={() => scrollToSection("overview")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">Overview</button>
+                  <button onClick={() => scrollToSection("identification")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">Laboratory ID</button>
+                  <button onClick={() => scrollToSection("clinical-regimens")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">IDSA Regimens</button>
+                  <button onClick={() => scrollToSection("study-simulator")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">Practice Sandbox</button>
+                </div>
                 
                 {/* 3. Strong H1 and introduction block */}
-                <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal bg-indigo-50/25 border-l-4 border-indigo-600 p-4 rounded-r-xl">
+                <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal bg-indigo-50/25 border-l-4 border-indigo-650 p-4 rounded-r-xl">
                   {getSEOIntroduction(pathogen)}
                 </p>
 
@@ -345,14 +488,14 @@ export default function OrganismsSEO() {
                   <strong className="text-slate-700">Clinical Overview:</strong> {pathogen.description}
                 </p>
 
-                {/* Highly clear but non-annoyable CTA block to try the interactive app sandbox */}
+                {/* Highly visible but user-friendly CTA block to try the interactive app sandbox */}
                 <div className="bg-white border border-slate-200 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 mt-2 shadow-3xs">
                   <div className="space-y-1 text-center sm:text-left">
                     <span className="text-[10px] uppercase font-extrabold text-indigo-600 tracking-wider flex items-center justify-center sm:justify-start gap-1">
                       <Layers className="h-3.5 w-3.5" /> Study Recall Practice Arena
                     </span>
                     <p className="text-xs text-slate-500 font-medium">
-                      Simulate actual USMLE, NCLEX, or NAPLEX style board question workflows for <strong className="text-slate-700">{pathogen.name}</strong>.
+                      Simulate actual USMLE, NCLEX, or COMLEX style clinical vignettes for <strong className="text-slate-700">{pathogen.name}</strong>.
                     </p>
                   </div>
                   <button
@@ -366,7 +509,7 @@ export default function OrganismsSEO() {
               </div>
 
               {/* Biomarkers / Key Characteristics Identification Grid */}
-              <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-2xs space-y-4">
+              <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-2xs space-y-4" id="identification">
                 <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
                   <Tag className="h-3.5 w-3.5 text-indigo-500" />
                   Key Identifying Characteristics & Biochemical Marks
@@ -385,7 +528,7 @@ export default function OrganismsSEO() {
               </div>
 
               {/* Diseases and Treatments Segment */}
-              <div className="space-y-5">
+              <div className="space-y-5" id="clinical-regimens">
                 <div className="flex items-center gap-2">
                   <Table className="h-5 w-5 text-indigo-500" />
                   <h2 className="text-lg font-extrabold text-slate-900 tracking-tight">
@@ -436,8 +579,44 @@ export default function OrganismsSEO() {
                 </div>
               </div>
 
+              {/* Related human pathogens section for internal linking SEO flow */}
+              <div className="space-y-4 pt-6 border-t border-slate-200">
+                <div className="flex items-center gap-1.5">
+                  <BookOpen className="h-4.5 w-4.5 text-indigo-500" />
+                  <h3 className="text-sm font-bold text-slate-950 uppercase tracking-tight">
+                    Related human pathogens for exam comparative study
+                  </h3>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {getRelatedPathogens(pathogen).map((related) => (
+                    <Link
+                      key={related.id}
+                      to={`/organisms/${getPathogenSlug(related.name)}`}
+                      className="p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-300 transition-all shadow-3xs group flex flex-col justify-between cursor-pointer"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between gap-2 mb-1.5">
+                          <span className="text-[10px] font-bold uppercase text-slate-400">
+                            {related.gramStatus} {related.shape}
+                          </span>
+                          <span className="text-[10px] text-indigo-600 font-bold group-hover:underline transition-all inline-flex items-center gap-0.5">
+                            Study <ExternalLink className="h-2.5 w-2.5" />
+                          </span>
+                        </div>
+                        <h4 className="font-extrabold text-sm text-indigo-700 italic group-hover:text-indigo-900 transition-colors">
+                          {related.name}
+                        </h4>
+                        <p className="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                          {related.description}
+                        </p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
               {/* Guidelines / Authority references attribution */}
-              <div className="bg-slate-100/50 rounded-xl p-4 border border-slate-200 text-xs text-slate-500 space-y-1">
+              <div className="bg-slate-100/55 rounded-xl p-4 border border-slate-200 text-xs text-slate-500 space-y-1">
                 <p className="font-semibold text-slate-700">Annotated Quality Medical Safeguards:</p>
                 <p className="leading-relaxed">
                   Treatment outlines correspond to empirical protocol recommendations published by the Infectious Diseases Society of America (IDSA) and are cross-referenced against traditional nursing/medical school curriculums (USMLE, COMLEX, and NCLEX-RN parameters). Always confirm local susceptibility patterns (antibiograms) at your institution prior to therapy decisions.
@@ -447,7 +626,7 @@ export default function OrganismsSEO() {
             </div>
 
             {/* Right Column: Dynamic Conversion Funnel Sidebar */}
-            <div className="space-y-6">
+            <div className="space-y-6" id="study-simulator">
               
               <div className="bg-gradient-to-br from-indigo-900 via-indigo-950 to-slate-900 text-white rounded-2xl border border-indigo-850 p-6 shadow-xl space-y-6 sticky top-24">
                 
