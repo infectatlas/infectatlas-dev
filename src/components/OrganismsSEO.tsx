@@ -23,6 +23,33 @@ export const getPathogenSlug = (name: string): string => {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 };
 
+// Helper to get fully articulated SEO introductory hook paragraph
+export const getSEOIntroduction = (m: Microorganism): string => {
+  const defaultIntro = `${m.name} is a clinically significant ${m.gramStatus.toLowerCase()} ${m.shape} known to cause human infections such as ${m.diseases.map(d => d.name).slice(0, 3).join(", ")}. Understanding its microbiology structure, distinguishing biochemical tests, and guideline treatment choices is essential for board examination diagnostic questions and clinical practice.`;
+  
+  const nameLower = m.name.toLowerCase();
+  if (nameLower.includes("staphylococcus aureus")) {
+    return "Staphylococcus aureus is a Gram-positive coccus that causes skin infections, bacteremia, endocarditis, pneumonia, and osteomyelitis. Learn key diagnostic features, MRSA versus MSSA treatment strategies, and high-yield board review concepts.";
+  }
+  if (nameLower.includes("clostridioides difficile")) {
+    return "Clostridioides difficile is a spore-forming, toxin-producing Gram-positive anaerobic bacillus that is a major cause of antibiotic-associated diarrhea and pseudomembranous colitis. Master identification assays, severity classification guidelines, and oral vancomycin vs fidaxomicin treatment routes.";
+  }
+  if (nameLower.includes("pseudomonas aeruginosa")) {
+    return "Pseudomonas aeruginosa is an opportunistic Gram-negative bacillus characterized as lactose non-fermenting, oxidase-positive, and pigment-producing. It commonly causes hospital-acquired pneumonia, hot tub folliculitis, swimmer's ear, and osteomyelitis in IV drug users.";
+  }
+  if (nameLower.includes("escherichia coli")) {
+    return "Escherichia coli is a Gram-negative bacillus, lactose-fermenting enteroflora of the bowel. It is the leading cause of urinary tract infections (UTIs) and neonatal meningitis, and contains strains like EHEC causing Hemolytic Uremic Syndrome (HUS).";
+  }
+  if (nameLower.includes("streptococcus pneumoniae")) {
+    return "Streptococcus pneumoniae is a lancet-shaped, Gram-positive diplococcus that is alpha-hemolytic and optochin-sensitive. It is the premier etiology of community-acquired pneumonia, otitis media, meningitis, and sinusitis in adults.";
+  }
+  if (nameLower.includes("neisseria meningitidis")) {
+    return "Neisseria meningitidis is a kidney-bean shaped, Gram-negative diplococcus that ferments both glucose and maltose. It causes severe meningococcemia and CSF meningitis, popularized by purpuric skin lesions and Waterhouse-Friderichsen syndrome.";
+  }
+  
+  return defaultIntro;
+};
+
 export default function OrganismsSEO() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -44,14 +71,46 @@ export default function OrganismsSEO() {
   // Dynamic Browser SEO Page Meta update
   useEffect(() => {
     if (isDetailView && pathogen) {
-      document.title = `${pathogen.name}: Description, Characteristics, and Treatment Guidelines | InfectAtlas Library`;
+      // 1. Dynamic Search-Intent Title (Aim for 50-70 characters)
+      let pageTitle = `${pathogen.name}: Diagnosis, Shapes & High-Yield Treatments | InfectAtlas`;
+      if (pathogen.name.toLowerCase().includes("staphylococcus aureus")) {
+        pageTitle = "Staphylococcus aureus: Symptoms, Diseases, Treatment & MRSA vs MSSA | InfectAtlas";
+      } else if (pathogen.name.toLowerCase().includes("clostridioides difficile")) {
+        pageTitle = "Clostridioides difficile: C. diff Symptoms, Diagnosis & Treatment | InfectAtlas";
+      } else if (pathogen.name.toLowerCase().includes("pseudomonas aeruginosa")) {
+        pageTitle = "Pseudomonas aeruginosa: Infections, Resistance & Treatments | InfectAtlas";
+      } else if (pathogen.name.toLowerCase().includes("streptococcus pneumoniae")) {
+        pageTitle = "Streptococcus pneumoniae: Symptoms, Infections & Treatments | InfectAtlas";
+      } else if (pathogen.name.toLowerCase().includes("escherichia coli")) {
+        pageTitle = "Escherichia coli: Symptoms, UTI, HUS & Empirical Treatment | InfectAtlas";
+      }
+      document.title = pageTitle;
+
+      // 2. High-Yield Meta Description under 160 characters
+      let metaDesc = `Learn ${pathogen.name} identification, diagnostic shapes, therapy choices, and high-yield board review concepts for USMLE, NCLEX, and NAPLEX.`;
+      if (pathogen.name.toLowerCase().includes("staphylococcus aureus")) {
+        metaDesc = "Learn Staphylococcus aureus identification, common infections, MRSA vs MSSA treatment, clinical pearls, and board-review concepts for USMLE, NCLEX, COMLEX, and NAPLEX.";
+      } else if (pathogen.name.toLowerCase().includes("clostridioides difficile")) {
+        metaDesc = "Master Clostridioides difficile (C. diff) identification, toxin assays, oral vancomycin vs fidaxomicin treatment, and high-yield board exam questions.";
+      } else if (pathogen.name.toLowerCase().includes("pseudomonas aeruginosa")) {
+        metaDesc = "Study Pseudomonas aeruginosa clinical manifestations, distinguishing biochemical tests, and anti-pseudomonal beta-lactam susceptibility guidelines.";
+      }
+
+      // Update or create meta tag for description
+      let metaDescriptionTag = document.querySelector('meta[name="description"]');
+      if (!metaDescriptionTag) {
+        metaDescriptionTag = document.createElement('meta');
+        metaDescriptionTag.setAttribute('name', 'description');
+        document.head.appendChild(metaDescriptionTag);
+      }
+      metaDescriptionTag.setAttribute('content', metaDesc);
       
       // Inject Schema.org JSON-LD microdata dynamically for maximum crawl efficiency
       const schemaData = {
         "@context": "https://schema.org",
         "@type": "MedicalWebPage",
         "name": pathogen.name,
-        "description": `${pathogen.name} (${pathogen.gramStatus} ${pathogen.shape}). Description: ${pathogen.description}`,
+        "description": metaDesc,
         "aspect": ["microbiology", "diagnosis", "antimicrobial treatment", "clinical guidelines"],
         "mainEntity": {
           "@type": "MedicalCondition",
@@ -90,6 +149,11 @@ export default function OrganismsSEO() {
       return () => {
         const script = document.getElementById("pathogen-jsonld-schema");
         if (script) script.remove();
+        
+        const descTag = document.querySelector('meta[name="description"]');
+        if (descTag) {
+          descTag.setAttribute('content', "Comprehensive reference guide of clinically critical Gram-positive, Gram-negative, Spirochete, and atypical human pathogens with treatment guidelines.");
+        }
       };
     } else {
       document.title = "High-Yield Medical Microorganisms & Pathogens Catalog | InfectAtlas Library";
@@ -120,6 +184,15 @@ export default function OrganismsSEO() {
         script.textContent = JSON.stringify(directorySchema);
         document.head.appendChild(script);
       }
+
+      // Update directory meta description
+      let metaDescriptionTag = document.querySelector('meta[name="description"]');
+      if (!metaDescriptionTag) {
+        metaDescriptionTag = document.createElement('meta');
+        metaDescriptionTag.setAttribute('name', 'description');
+        document.head.appendChild(metaDescriptionTag);
+      }
+      metaDescriptionTag.setAttribute('content', "Comprehensive reference guide of clinically critical Gram-positive, Gram-negative, Spirochete, and atypical human pathogens with treatment guidelines.");
 
       return () => {
         const script = document.getElementById("directory-jsonld-schema");
@@ -243,7 +316,7 @@ export default function OrganismsSEO() {
               </div>
 
               {/* Title Card */}
-              <div className="space-y-4">
+              <div className="space-y-5">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className={`px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-bold shadow-3xs uppercase tracking-wide border ${
                     pathogen.gramStatus === "Gram-positive"
@@ -263,9 +336,33 @@ export default function OrganismsSEO() {
                   {pathogen.name}
                 </h1>
                 
-                <p className="text-sm sm:text-base text-slate-600 leading-relaxed border-l-4 border-indigo-500 pl-4 italic">
-                  {pathogen.description}
+                {/* 3. Strong H1 and introduction block */}
+                <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal bg-indigo-50/25 border-l-4 border-indigo-600 p-4 rounded-r-xl">
+                  {getSEOIntroduction(pathogen)}
                 </p>
+
+                <p className="text-xs sm:text-sm text-slate-500 leading-relaxed border-t border-slate-200 pt-3">
+                  <strong className="text-slate-700">Clinical Overview:</strong> {pathogen.description}
+                </p>
+
+                {/* Highly clear but non-annoyable CTA block to try the interactive app sandbox */}
+                <div className="bg-white border border-slate-200 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 mt-2 shadow-3xs">
+                  <div className="space-y-1 text-center sm:text-left">
+                    <span className="text-[10px] uppercase font-extrabold text-indigo-600 tracking-wider flex items-center justify-center sm:justify-start gap-1">
+                      <Layers className="h-3.5 w-3.5" /> Study Recall Practice Arena
+                    </span>
+                    <p className="text-xs text-slate-500 font-medium">
+                      Simulate actual USMLE, NCLEX, or NAPLEX style board question workflows for <strong className="text-slate-700">{pathogen.name}</strong>.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => handleLaunchApp("quiz", pathogen.id)}
+                    className="w-full sm:w-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs rounded-lg shadow-sm transition-all shrink-0 cursor-pointer flex items-center justify-center gap-1.5"
+                  >
+                    <Activity className="h-4 w-4" />
+                    Launch Practice Quiz
+                  </button>
+                </div>
               </div>
 
               {/* Biomarkers / Key Characteristics Identification Grid */}
