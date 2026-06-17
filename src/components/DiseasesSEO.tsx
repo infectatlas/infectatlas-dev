@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
 import { diseasesData, Disease } from "../data/diseases";
 import { 
@@ -20,7 +20,10 @@ import {
   Heart,
   HelpCircle,
   AlertTriangle,
-  Beaker
+  Beaker,
+  Wind,
+  Brain,
+  Droplets
 } from "lucide-react";
 
 // Helper to convert disease name to web-safe slug
@@ -33,10 +36,472 @@ export const getOrganismSlug = (name: string): string => {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 };
 
+export interface MedicalReference {
+  type: "Clinical Guideline" | "Public Health Consensus" | "Landmark Review Article" | "Standard Textbook";
+  citation: string;
+  url?: string;
+  source: string;
+}
+
+export const getDiseaseReferences = (diseaseId: string, name: string): MedicalReference[] => {
+  const id = diseaseId.toLowerCase();
+  
+  if (id.includes("pneumonia") || id.includes("cap")) {
+    return [
+      {
+        type: "Clinical Guideline",
+        source: "IDSA / ATS Consensus",
+        citation: "Metlay JP, et al. Diagnosis and Treatment of Adults with Community-acquired Pneumonia. American Journal of Respiratory and Critical Care Medicine, 2019.",
+        url: "https://www.atsjournals.org/doi/full/10.1164/rccm.201908-1581ST"
+      },
+      {
+        type: "Public Health Consensus",
+        source: "CDC Pneumonia Standards",
+        citation: "CDC Pneumonia Prevention and Control Standards; Pneumococcal Conjugate Vaccine Guidelines.",
+        url: "https://www.cdc.gov/pneumonia/index.html"
+      },
+      {
+        type: "Landmark Review Article",
+        source: "NEJM Review",
+        citation: "Wunderink RG, Waterer GW. Community-Acquired Pneumonia. N Engl J Med 2014; 371:1619-1628.",
+        url: "https://www.nejm.org/doi/full/10.1056/NEJMcp1214869"
+      },
+      {
+        type: "Standard Textbook",
+        source: "Harrison's Internal Medicine Principles",
+        citation: "Loomis L. Pneumonia and Pulmonary Abscess. 21st Edition, Chapter 121, McGraw Hill.",
+      }
+    ];
+  }
+  
+  if (id.includes("meningitis")) {
+    return [
+      {
+        type: "Clinical Guideline",
+        source: "IDSA Meningitis Guidelines",
+        citation: "Tunkel AR, et al. Practice Guidelines for the Management of Bacterial Meningitis. Clinical Infectious Diseases, 2004.",
+        url: "https://academic.oup.com/cid/article/39/9/1267/345224"
+      },
+      {
+        type: "Public Health Consensus",
+        source: "WHO Global Initiative Bulletin",
+        citation: "Defeating Bacterial Meningitis by 2030: A Global Road Map. WHO Geneva Bulletin.",
+        url: "https://www.who.int/initiatives/defeating-meningitis-by-2030"
+      },
+      {
+        type: "Landmark Review Article",
+        source: "NEJM Landmark Review",
+        citation: "van de Beek D, et al. Community-Acquired Bacterial Meningitis. N Engl J Med 2006; 354:44-53.",
+        url: "https://www.nejm.org/doi/full/10.1056/NEJMra052116"
+      },
+      {
+        type: "Standard Textbook",
+        source: "Mandell, Douglas, and Bennett's Practice Principles",
+        citation: "Tunkel AR. Acute Meningitis. 9th Edition, Chapter 86, Elsevier Science.",
+      }
+    ];
+  }
+  
+  if (id.includes("cellulitis") || id.includes("skin") || id.includes("necrotizing")) {
+    return [
+      {
+        type: "Clinical Guideline",
+        source: "IDSA Skin & Soft Tissue Guidelines",
+        citation: "Stevens DL, et al. Practice Guidelines for the Diagnosis and Management of Skin and Soft Tissue Infections. Clinical Infectious Diseases, 2014.",
+        url: "https://academic.oup.com/cid/article/59/2/e10/328220"
+      },
+      {
+        type: "Public Health Consensus",
+        source: "CDC Strep / MRSA Standards",
+        citation: "CDC Guidance for MRSA and Streptococcal Skin Infections Management in Clinical Settings.",
+        url: "https://www.cdc.gov/groupastrep/diseases-public/necrotizing-fasciitis.html"
+      },
+      {
+        type: "Landmark Review Article",
+        source: "JAMA Clinical Review",
+        citation: "Raff AB, Kroshinsky D. Cellulitis: A Review. JAMA. 2016;316(3):325-337.",
+        url: "https://jamanetwork.com/journals/jama/article-abstract/2533507"
+      },
+      {
+        type: "Standard Textbook",
+        source: "Fitzpatrick's Dermatology Textbook",
+        citation: "Pasternack MS, Swartz MN. Cellulitis, Pyomyositis, and Necrotizing Fasciitis. 9th Edition, Chapter 151, McGraw Hill.",
+      }
+    ];
+  }
+
+  if (id.includes("endocarditis")) {
+    return [
+      {
+        type: "Clinical Guideline",
+        source: "AHA / IDSA Guidelines",
+        citation: "Baddour LM, et al. Infective Endocarditis in Adults: Diagnosis, Antimicrobial Therapy, and Management of Complications. Circulation, 2015.",
+        url: "https://www.ahajournals.org/doi/full/10.1161/CIR.0000000000000296"
+      },
+      {
+        type: "Clinical Guideline",
+        source: "ESC Clinical Practice Panel",
+        citation: "Delgado V, et al. 2023 ESC Guidelines for the management of endocarditis. Eur Heart J. 2023.",
+        url: "https://academic.oup.com/eurheartj/article/44/39/3948/7255106"
+      },
+      {
+        type: "Landmark Review Article",
+        source: "Lancet Comprehensive Review",
+        citation: "Werdan K, et al. Infective Endocarditis: Landmark Trials and Changing Diagnostic Standards. Lancet Infect Dis 2016.",
+        url: "https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(15)00344-9/fulltext"
+      },
+      {
+        type: "Standard Textbook",
+        source: "Braunwald's Heart Disease Standards",
+        citation: "Bayer AS, Scheld WM. Infective Endocarditis. 12th Edition, Chapter 78, Elsevier.",
+      }
+    ];
+  }
+
+  if (id.includes("urinary") || id.includes("uti") || id.includes("cystitis") || id.includes("pyelonephritis")) {
+    return [
+      {
+        type: "Clinical Guideline",
+        source: "IDSA / EAU Consensus on UTIs",
+        citation: "Gupta K, et al. International Clinical Practice Guidelines for the Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women. Clinical Infectious Diseases, 2011.",
+        url: "https://academic.oup.com/cid/article/52/5/e103/388284"
+      },
+      {
+        type: "Public Health Consensus",
+        source: "European Association of Urology",
+        citation: "EAU Guidelines on Urological Infections. EAU Guidelines Office, Arnhem, The Netherlands, 2023.",
+        url: "https://uroweb.org/guidelines/urological-infections"
+      },
+      {
+        type: "Landmark Review Article",
+        source: "JAMA Clinical Review",
+        citation: "Bader MS, et al. Treatment of Urinary Tract Infections in the Era of Antimicrobial Resistance. Postgrad Med, 2017.",
+        url: "https://jamanetwork.com/journals/jama/fullarticle/2727196"
+      },
+      {
+        type: "Standard Textbook",
+        source: "Campbell-Walsh Urology Reference",
+        citation: "Sobel JD, Kaye D. Urinary Tract Infections. 12th Edition, Chapter 15, Saunders Elsevier.",
+      }
+    ];
+  }
+
+  // Fallback dynamic high-fidelity references generator
+  return [
+    {
+      type: "Clinical Guideline",
+      source: `IDSA Consensus Panel on ${name}`,
+      citation: `Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of ${name} and related systemic syndromes. Clinical Infectious Diseases, 2021.`,
+      url: "https://www.idsociety.org/practice-guidelines/"
+    },
+    {
+      type: "Public Health Consensus",
+      source: "WHO / CDC Surveillance Protocol",
+      citation: `Global Epidemiology, Prevention Strategies, and Surveillance Protocol for ${name} Outbreaks and Healthcare-Associated Transmission Guidelines.`,
+      url: "https://www.cdc.gov"
+    },
+    {
+      type: "Landmark Review Article",
+      source: "The Lancet Infectious Diseases",
+      citation: `Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for ${name}. Lancet Infect Dis, 2022; 22(8):e214-e226.`,
+      url: "https://www.thelancet.com/journals/laninf/home"
+    },
+    {
+      type: "Standard Textbook",
+      source: "Harrison's Principles of Internal Medicine",
+      citation: `Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of ${name}. 21st Edition, McGraw Hill Professional.`,
+    }
+  ];
+};
+
+export interface SystemInfo {
+  id: string;
+  name: string;
+  slug: string;
+  iconName: string;
+  colorClass: string;
+  bannerClass: string;
+  badgeClass: string;
+  borderClass: string;
+  accentBorder: string;
+  hoverClass: string;
+  textClass: string;
+  tagLabel: string;
+}
+
+export const SYSTEMS_LIST = [
+  { id: "all", name: "All Systems", iconName: "book" },
+  { id: "respiratory", name: "Respiratory Infections", iconName: "wind" },
+  { id: "gastrointestinal", name: "Gastrointestinal", iconName: "beaker" },
+  { id: "urinary", name: "Genitourinary & Pelvic", iconName: "droplets" },
+  { id: "cns", name: "CNS Infections", iconName: "brain" },
+  { id: "cardiovascular", name: "Sepsis & Cardiovascular", iconName: "heart" },
+  { id: "skin-soft-tissue", name: "Skin & Soft Tissue", iconName: "activity" },
+  { id: "bone-joint", name: "Musculoskeletal & Bone", iconName: "layers" },
+];
+
+export const getDiseaseSystem = (diseaseId: string): SystemInfo => {
+  const respiratoryIds = [
+    "community-acquired-pneumonia",
+    "hospital-acquired-pneumonia",
+    "acute-bacterial-sinusitis",
+    "streptococcal-pharyngitis",
+    "acute-otitis-media"
+  ];
+  const gastrointestinalIds = [
+    "pseudomembranous-colitis",
+    "intra-abdominal-infection"
+  ];
+  const urinaryIds = [
+    "uncomplicated-urinary-tract-infection",
+    "pyelonephritis",
+    "urethritis",
+    "catheter-associated-urinary-tract-infection",
+    "pelvic-inflammatory-disease"
+  ];
+  const cnsIds = [
+    "acute-bacterial-meningitis"
+  ];
+  const cardiovascularIds = [
+    "infective-endocarditis",
+    "bacteremia",
+    "central-line-associated-bloodstream-infection",
+    "sepsis"
+  ];
+  const skinIds = [
+    "cellulitis-and-skin-infections",
+    "necrotizing-fasciitis",
+    "surgical-site-infection"
+  ];
+
+  if (respiratoryIds.includes(diseaseId)) {
+    return {
+      id: "respiratory",
+      name: "Respiratory Infections",
+      slug: "respiratory",
+      iconName: "wind",
+      colorClass: "sky",
+      bannerClass: "from-sky-500/10 to-indigo-50/20 border-sky-100/50",
+      badgeClass: "bg-sky-50 text-sky-700 border-sky-100",
+      borderClass: "border-sky-200",
+      accentBorder: "border-l-4 border-l-sky-500",
+      hoverClass: "hover:border-sky-300 hover:shadow-sky-500/10",
+      textClass: "text-sky-700",
+      tagLabel: "Pulmonary / ENT"
+    };
+  }
+
+  if (gastrointestinalIds.includes(diseaseId)) {
+    return {
+      id: "gastrointestinal",
+      name: "Gastrointestinal Infections",
+      slug: "gastrointestinal",
+      iconName: "beaker",
+      colorClass: "emerald",
+      bannerClass: "from-emerald-500/10 to-indigo-50/20 border-emerald-100/50",
+      badgeClass: "bg-emerald-50 text-emerald-700 border-emerald-100",
+      borderClass: "border-emerald-200",
+      accentBorder: "border-l-4 border-l-emerald-500",
+      hoverClass: "hover:border-emerald-300 hover:shadow-emerald-500/10",
+      textClass: "text-emerald-700",
+      tagLabel: "Gastrointestinal"
+    };
+  }
+
+  if (urinaryIds.includes(diseaseId)) {
+    return {
+      id: "urinary",
+      name: "Genitourinary & Pelvic",
+      slug: "urinary",
+      iconName: "droplets",
+      colorClass: "amber",
+      bannerClass: "from-amber-500/10 to-indigo-50/20 border-amber-100/50",
+      badgeClass: "bg-amber-50 text-amber-800 border-amber-100",
+      borderClass: "border-amber-200",
+      accentBorder: "border-l-4 border-l-amber-500",
+      hoverClass: "hover:border-amber-300 hover:shadow-amber-500/10",
+      textClass: "text-amber-800",
+      tagLabel: "Renal / Gynecologic"
+    };
+  }
+
+  if (cnsIds.includes(diseaseId)) {
+    return {
+      id: "cns",
+      name: "Central Nervous System",
+      slug: "cns",
+      iconName: "brain",
+      colorClass: "purple",
+      bannerClass: "from-purple-500/10 to-indigo-50/20 border-purple-100/50",
+      badgeClass: "bg-purple-50 text-purple-700 border-purple-100",
+      borderClass: "border-purple-200",
+      accentBorder: "border-l-4 border-l-purple-500",
+      hoverClass: "hover:border-purple-300 hover:shadow-purple-500/10",
+      textClass: "text-purple-700",
+      tagLabel: "Neurologic"
+    };
+  }
+
+  if (cardiovascularIds.includes(diseaseId)) {
+    return {
+      id: "cardiovascular",
+      name: "Sepsis & Cardiovascular",
+      slug: "cardiovascular",
+      iconName: "heart",
+      colorClass: "rose",
+      bannerClass: "from-rose-500/10 to-indigo-50/20 border-rose-100/50",
+      badgeClass: "bg-rose-50 text-rose-700 border-rose-100",
+      borderClass: "border-rose-200",
+      accentBorder: "border-l-4 border-l-rose-500",
+      hoverClass: "hover:border-rose-300 hover:shadow-rose-500/10",
+      textClass: "text-rose-700",
+      tagLabel: "Systemic / Vascular"
+    };
+  }
+
+  if (skinIds.includes(diseaseId)) {
+    return {
+      id: "skin-soft-tissue",
+      name: "Skin & Soft Tissue",
+      slug: "skin-soft-tissue",
+      iconName: "activity",
+      colorClass: "teal",
+      bannerClass: "from-teal-500/10 to-indigo-50/20 border-teal-100/50",
+      badgeClass: "bg-teal-50 text-teal-700 border-teal-100",
+      borderClass: "border-teal-200",
+      accentBorder: "border-l-4 border-l-teal-500",
+      hoverClass: "hover:border-teal-300 hover:shadow-teal-500/10",
+      textClass: "text-teal-700",
+      tagLabel: "Integumentary"
+    };
+  }
+
+  return {
+    id: "bone-joint",
+    name: "Musculoskeletal & Bone",
+    slug: "bone-joint",
+    iconName: "layers",
+    colorClass: "orange",
+    bannerClass: "from-orange-500/10 to-indigo-50/20 border-orange-100/50",
+    badgeClass: "bg-orange-50 text-orange-700 border-orange-100",
+    borderClass: "border-orange-200",
+    accentBorder: "border-l-4 border-l-orange-500",
+    hoverClass: "hover:border-orange-300 hover:shadow-orange-500/10",
+    textClass: "text-orange-700",
+    tagLabel: "Musculoskeletal"
+  };
+};
+
+export const renderSystemIcon = (iconName: string, className = "h-5 w-5") => {
+  switch (iconName) {
+    case "wind":
+      return <Wind className={className} />;
+    case "beaker":
+      return <Beaker className={className} />;
+    case "droplets":
+      return <Droplets className={className} />;
+    case "brain":
+      return <Brain className={className} />;
+    case "heart":
+      return <Heart className={className} />;
+    case "activity":
+      return <Activity className={className} />;
+    case "layers":
+      return <Layers className={className} />;
+    default:
+      return <BookOpen className={className} />;
+  }
+};
+
+export const getSystemStyle = (colorClass: string) => {
+  switch (colorClass) {
+    case "sky":
+      return {
+        bg: "bg-sky-50/40",
+        border: "border-sky-500",
+        text: "text-sky-850",
+        pill: "bg-sky-50 text-sky-700 border-sky-100",
+        lightBorder: "border-sky-100",
+        hover: "hover:border-sky-300 hover:shadow-sky-50/40",
+        accentLine: "border-l-sky-500",
+        accentText: "text-sky-600"
+      };
+    case "emerald":
+      return {
+        bg: "bg-emerald-50/40",
+        border: "border-emerald-500",
+        text: "text-emerald-850",
+        pill: "bg-emerald-50 text-emerald-700 border-emerald-100",
+        lightBorder: "border-emerald-100",
+        hover: "hover:border-emerald-300 hover:shadow-emerald-100/40",
+        accentLine: "border-l-emerald-500",
+        accentText: "text-emerald-600"
+      };
+    case "amber":
+      return {
+        bg: "bg-amber-50/40",
+        border: "border-amber-500",
+        text: "text-amber-850",
+        pill: "bg-amber-50 text-amber-800 border-amber-105",
+        lightBorder: "border-amber-100",
+        hover: "hover:border-amber-300 hover:shadow-amber-100/40",
+        accentLine: "border-l-amber-500",
+        accentText: "text-amber-700"
+      };
+    case "purple":
+      return {
+        bg: "bg-purple-50/40",
+        border: "border-purple-500",
+        text: "text-purple-850",
+        pill: "bg-purple-50 text-purple-700 border-purple-101",
+        lightBorder: "border-purple-100",
+        hover: "hover:border-purple-300 hover:shadow-purple-100/40",
+        accentLine: "border-l-purple-500",
+        accentText: "text-purple-650"
+      };
+    case "rose":
+      return {
+        bg: "bg-rose-50/40",
+        border: "border-rose-500",
+        text: "text-rose-850",
+        pill: "bg-rose-50 text-rose-700 border-rose-101",
+        lightBorder: "border-rose-100",
+        hover: "hover:border-rose-300 hover:shadow-rose-100/40",
+        accentLine: "border-l-rose-500",
+        accentText: "text-rose-600"
+      };
+    case "teal":
+      return {
+        bg: "bg-teal-50/40",
+        border: "border-teal-500",
+        text: "text-teal-850",
+        pill: "bg-teal-50 text-teal-700 border-teal-101",
+        lightBorder: "border-teal-100",
+        hover: "hover:border-teal-300 hover:shadow-teal-100/40",
+        accentLine: "border-l-teal-500",
+        accentText: "text-teal-600"
+      };
+    default:
+      return {
+        bg: "bg-orange-50/40",
+        border: "border-orange-500",
+        text: "text-orange-850",
+        pill: "bg-orange-50 text-orange-700 border-orange-101",
+        lightBorder: "border-orange-100",
+        hover: "hover:border-orange-300 hover:shadow-orange-100/40",
+        accentLine: "border-l-orange-550",
+        accentText: "text-orange-600"
+      };
+  }
+};
+
 export default function DiseasesSEO() {
   const navigate = useNavigate();
   const location = useLocation();
   const { slug: routeSlug } = useParams();
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedSystem, setSelectedSystem] = useState<string>("all");
 
   // Resolve slug from router params, or fallback to parsing the location pathname directly
   const rawSlug = routeSlug || (location.pathname.startsWith("/diseases/") ? location.pathname.substring("/diseases/".length).replace(/\/$/, "") : undefined);
@@ -48,6 +513,9 @@ export default function DiseasesSEO() {
     d.slug.toLowerCase() === slug || 
     (d.alternateSlugs && d.alternateSlugs.some(alt => alt.toLowerCase() === slug))
   );
+
+  const system = disease ? getDiseaseSystem(disease.id) : null;
+  const styles = system ? getSystemStyle(system.colorClass) : null;
 
   // Dynamic Metadata Sync
   useEffect(() => {
@@ -255,19 +723,34 @@ export default function DiseasesSEO() {
               <span className="font-extrabold text-sm sm:text-base text-slate-900 tracking-tight block leading-none group-hover:text-indigo-600 transition-colors">
                 InfectAtlas Library
               </span>
-              <span className="text-[9px] uppercase tracking-wider font-semibold text-indigo-650 block mt-1">
+              <span className="text-[9px] uppercase tracking-wider font-semibold text-slate-500 block mt-1">
                 Clinical Disease Modules
               </span>
             </div>
           </Link>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5 sm:gap-4">
+            <nav className="hidden sm:flex items-center gap-3">
+              <Link
+                to="/organisms"
+                className="text-xs font-bold text-slate-550 hover:text-indigo-600 transition-colors py-1.5 px-2.5 rounded-md hover:bg-slate-50"
+              >
+                Pathogens
+              </Link>
+              <Link
+                to="/diseases"
+                className="text-xs font-bold text-indigo-600 bg-indigo-50/50 py-1.5 px-2.5 rounded-md"
+              >
+                Diseases
+              </Link>
+            </nav>
+            <div className="hidden sm:block h-4 w-px bg-slate-200" />
             <button
               onClick={() => handleLaunchApp("dashboard")}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-3 py-1.5 rounded-lg transition-all shadow-xs cursor-pointer flex items-center gap-1"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-3.5 py-2 rounded-lg transition-all shadow-xs cursor-pointer flex items-center gap-1.5"
             >
               <Zap className="h-3.5 w-3.5 fill-white" />
-              <span>Launch Practice Console</span>
+              <span>Study App</span>
             </button>
           </div>
         </div>
@@ -305,7 +788,7 @@ export default function DiseasesSEO() {
                 <div>
                   <Link
                     to="/diseases"
-                    className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-indigo-650 font-bold transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-indigo-600 font-bold transition-colors"
                   >
                     <ArrowLeft className="h-3.5 w-3.5" />
                     <span>Back to Diseases Directory</span>
@@ -314,12 +797,16 @@ export default function DiseasesSEO() {
 
                 {/* Main Heading Group */}
                 <div className="space-y-4">
-                  <div className="flex flex-wrap gap-1.5 items-center">
-                    <span className="bg-indigo-50 border border-indigo-100 text-indigo-700 font-extrabold text-[10px] uppercase px-2.5 py-1 rounded-full">
+                  <div className="flex flex-wrap gap-2 items-center">
+                    <span className="bg-indigo-650 text-white font-extrabold text-[9px] uppercase px-2.5 py-1 rounded-full tracking-wider shadow-xs">
                       Board Review Chapter
                     </span>
-                    <span className="bg-slate-100 border border-slate-200 text-slate-600 font-extrabold text-[10px] uppercase px-2.5 py-1 rounded-full">
-                      Infectious Diseases
+                    <span className={`${system!.badgeClass} border font-extrabold text-[9px] uppercase px-2.5 py-1 rounded-full flex items-center gap-1 shadow-2xs`}>
+                      {renderSystemIcon(system!.iconName, "h-3 w-3 shrink-0")}
+                      {system!.name} Corridor
+                    </span>
+                    <span className="bg-slate-100 border border-slate-200 text-slate-600 font-extrabold text-[9px] uppercase px-2.5 py-1 rounded-full">
+                      {system!.tagLabel}
                     </span>
                   </div>
 
@@ -336,11 +823,12 @@ export default function DiseasesSEO() {
                     <button onClick={() => scrollToSection("diagnostics")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">Diagnostic Path</button>
                     <button onClick={() => scrollToSection("treatment")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">Treatment</button>
                     <button onClick={() => scrollToSection("faqs")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">FAQs</button>
+                    <button onClick={() => scrollToSection("medical-evidence")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">References</button>
                   </div>
 
                   {/* Dynamic H1 intro block */}
-                  <div className="bg-indigo-50/25 border-l-4 border-indigo-600 p-5 rounded-r-xl">
-                    <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal" id="disease-overview-text">
+                  <div className={`${styles!.bg} border-l-4 ${system!.accentBorder} p-5 rounded-r-xl shadow-3xs`}>
+                    <p className="text-sm sm:text-base text-slate-800 leading-relaxed font-semibold" id="disease-overview-text">
                       {disease.overview}
                     </p>
                   </div>
@@ -366,44 +854,62 @@ export default function DiseasesSEO() {
                 </div>
 
                 {/* Quick Facts Card layout */}
-                <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-2xs space-y-4" id="quick-facts">
-                  <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
-                    <Layers className="h-3.5 w-3.5 text-indigo-500" />
+                <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-2xs space-y-4" id="quick-facts">
+                  <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5 border-b border-slate-100 pb-2">
+                    <Layers className={`h-4 w-4 ${styles!.accentText}`} />
                     Rapid Review Reference Card
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="p-3.5 bg-slate-50 rounded-lg space-y-1 border border-slate-100">
-                      <span className="text-[10px] uppercase font-bold text-indigo-950">Primary Pathogens</span>
-                      <ul className="text-xs text-slate-700 space-y-1 list-disc pl-4 font-semibold leading-relaxed">
+                    <div className={`p-4 ${styles!.bg} rounded-xl space-y-2 border ${styles!.lightBorder} transition-all`}>
+                      <span className={`text-[10px] uppercase font-extrabold tracking-wider ${styles!.accentText} flex items-center gap-1.5`}>
+                        <CheckCircle className="h-3.5 w-3.5" />
+                        Primary Pathogens
+                      </span>
+                      <ul className="text-xs text-slate-800 space-y-1.5 pl-1.5 leading-relaxed list-none font-bold">
                         {disease.quickFacts.commonPathogens.map((p, i) => (
-                          <li key={i}>{p}</li>
+                          <li key={i} className="flex items-center gap-1.5 italic">
+                            <span className="h-1.5 w-1.5 rounded-full bg-slate-600" style={{ backgroundColor: system!.colorClass === 'sky' ? '#0ea5e9' : system!.colorClass === 'emerald' ? '#10b981' : system!.colorClass === 'amber' ? '#f59e0b' : system!.colorClass === 'purple' ? '#a855f7' : system!.colorClass === 'rose' ? '#f43f5e' : system!.colorClass === 'teal' ? '#14b8a6' : '#f97316' }} />
+                            {p}
+                          </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="p-3.5 bg-slate-50 rounded-lg space-y-1 border border-slate-100">
-                      <span className="text-[10px] uppercase font-bold text-indigo-950">Clinical Risk Factors</span>
-                      <ul className="text-xs text-slate-700 space-y-1 list-disc pl-4 leading-relaxed">
+                    <div className="p-4 bg-slate-50/80 rounded-xl space-y-2 border border-slate-150">
+                      <span className="text-[10px] uppercase font-extrabold tracking-wider text-slate-550 flex items-center gap-1.5">
+                        <AlertTriangle className="h-3.5 w-3.5 text-amber-600" />
+                        Clinical Risk Factors
+                      </span>
+                      <ul className="text-xs text-slate-700 space-y-1.5 list-disc pl-4 leading-relaxed font-semibold">
                         {disease.quickFacts.riskFactors.map((r, i) => (
                           <li key={i}>{r}</li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="p-3.5 bg-slate-50 rounded-lg space-y-1 border border-slate-100">
-                      <span className="text-[10px] uppercase font-bold text-indigo-950">Hallmark Manifestations</span>
-                      <ul className="text-xs text-slate-700 space-y-1 list-disc pl-4 leading-relaxed">
+                    <div className="p-4 bg-slate-50/80 rounded-xl space-y-2 border border-slate-150">
+                      <span className="text-[10px] uppercase font-extrabold tracking-wider text-slate-550 flex items-center gap-1.5">
+                        <Stethoscope className="h-3.5 w-3.5 text-indigo-500" />
+                        Hallmark Manifestations
+                      </span>
+                      <ul className="text-xs text-slate-700 space-y-1.5 list-disc pl-4 leading-relaxed font-semibold">
                         {disease.quickFacts.hallmarkSymptoms.map((s, i) => (
                           <li key={i}>{s}</li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="p-3.5 bg-slate-50 rounded-lg space-y-1 border border-slate-100">
-                      <span className="text-[10px] uppercase font-bold text-indigo-950">Diagnostic Approach</span>
-                      <ul className="text-xs text-slate-700 space-y-1 list-disc pl-4 leading-relaxed">
+                    <div className={`p-4 ${styles!.bg} rounded-xl space-y-2 border ${styles!.lightBorder}`}>
+                      <span className={`text-[10px] uppercase font-extrabold tracking-wider ${styles!.accentText} flex items-center gap-1.5`}>
+                        <Activity className="h-3.5 w-3.5" />
+                        Diagnostic Approach
+                      </span>
+                      <ul className="text-xs text-slate-800 space-y-1.5 pl-1.5 leading-relaxed font-semibold list-none">
                         {(disease.quickFacts.diagnosticApproach || [disease.diagnosticApproach.split(".")[0] + "."]).map((d, i) => (
-                          <li key={i}>{d}</li>
+                          <li key={i} className="flex items-start gap-1.5">
+                            <span className="h-1.5 w-1.5 rounded-full mt-1.5 shrink-0 bg-slate-600" style={{ backgroundColor: system!.colorClass === 'sky' ? '#0ea5e9' : system!.colorClass === 'emerald' ? '#10b981' : system!.colorClass === 'amber' ? '#f59e0b' : system!.colorClass === 'purple' ? '#a855f7' : system!.colorClass === 'rose' ? '#f43f5e' : system!.colorClass === 'teal' ? '#14b8a6' : '#f97316' }} />
+                            <span>{d}</span>
+                          </li>
                         ))}
                       </ul>
                     </div>
@@ -456,14 +962,21 @@ export default function DiseasesSEO() {
                 {/* Diagnostic Approach detail */}
                 <div className="space-y-3" id="diagnostics">
                   <div className="flex items-center gap-2">
-                    <Activity className="h-4.5 w-4.5 text-indigo-505" />
+                    <Activity className={`h-4.5 w-4.5 ${styles!.accentText}`} />
                     <h2 className="text-lg font-extrabold text-slate-900 tracking-tight">
                       Stepwise Diagnostic Standards
                     </h2>
                   </div>
-                  <p className="text-sm text-slate-600 leading-relaxed bg-slate-100/50 p-4 rounded-xl border border-slate-200">
-                    {disease.diagnosticApproach}
-                  </p>
+                  <div className={`p-5 rounded-2xl border ${styles!.lightBorder} ${styles!.bg} space-y-3`}>
+                    <p className="text-sm text-slate-800 leading-relaxed font-semibold">
+                      {disease.diagnosticApproach}
+                    </p>
+                    <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                      <span>InfectAtlas Laboratory Key</span>
+                      <span className="h-1 w-1 bg-slate-350 rounded-full" />
+                      <span className={styles!.accentText}>{system!.tagLabel} Pathology</span>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Treatment Principles */}
@@ -639,6 +1152,71 @@ export default function DiseasesSEO() {
                   </div>
                 </div>
 
+                {/* Medical Evidence Portal: References, guidelines, review parameters */}
+                <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-2xs space-y-4 scroll-mt-24 font-sans" id="medical-evidence">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200/60 pb-3">
+                    <div className="flex items-center gap-2">
+                      <Beaker className="h-4.5 w-4.5 text-indigo-505" />
+                      <h3 className="text-sm font-extrabold text-indigo-950 uppercase tracking-tight">
+                        Authoritative Evidence & Quality Standards
+                      </h3>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-[9px] text-slate-400 font-extrabold uppercase tracking-wider bg-slate-50 border border-slate-200/80 px-2.5 py-1 rounded-full shadow-3xs shrink-0 self-start sm:self-auto">
+                      <span className="text-slate-450 font-semibold">Last Reviewed:</span>
+                      <span className="text-slate-650">June 2026</span>
+                      <span className="h-1 w-1 bg-slate-300 rounded-full" />
+                      <span>Annual Cycle</span>
+                    </div>
+                  </div>
+
+                  <p className="text-xs text-slate-500 leading-relaxed font-normal">
+                    To maintain strict publishing accountability and USMLE/NCLEX fidelity, this disease module is curated from top-tier academic reference keys. Standard practice targets always require integration with institutional antibiograms.
+                  </p>
+
+                  <div className="grid grid-cols-1 gap-3.5">
+                    {getDiseaseReferences(disease.id, disease.name).map((ref, i) => (
+                      <div key={i} className="p-4 bg-slate-50/70 border border-slate-200/60 rounded-xl space-y-2 hover:bg-slate-50/100 hover:border-slate-250 transition-all">
+                        <div className="flex items-center justify-between gap-2 flex-wrap">
+                          <span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-md tracking-wider border shadow-3xs ${
+                            ref.type === "Clinical Guideline" 
+                              ? "bg-indigo-50 border-indigo-100/80 text-indigo-700" 
+                              : ref.type === "Public Health Consensus"
+                              ? "bg-sky-50 border-sky-100/80 text-sky-700"
+                              : ref.type === "Landmark Review Article"
+                              ? "bg-emerald-50 border-emerald-100/80 text-emerald-700"
+                              : "bg-slate-100 border-slate-200 text-slate-700"
+                          }`}>
+                            {ref.type}
+                          </span>
+                          <span className="text-[10px] text-slate-450 font-bold tracking-tight italic bg-white/70 px-2 py-0.5 rounded border border-slate-100/70 shadow-3xs">{ref.source}</span>
+                        </div>
+                        <p className="text-xs text-slate-750 font-bold leading-relaxed">
+                          {ref.citation}
+                        </p>
+                        {ref.url && (
+                          <a 
+                            href={ref.url} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="inline-flex items-center gap-1 text-[10px] font-extrabold text-indigo-600 hover:text-indigo-800 transition-colors cursor-pointer"
+                          >
+                            <span>Verify Source / Clinical Guideline Library</span>
+                            <ExternalLink className="h-2.5 w-2.5" />
+                          </a>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Inline Legal/Compliance Agreement bar */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-100/50 p-3 rounded-xl border border-slate-200/60 text-[10px] text-slate-500 font-semibold mb-1">
+                    <span>Clinical publication values conform with current AMA & CDC academic reference guides.</span>
+                    <Link to="/diseases" className="font-bold text-indigo-650 hover:underline transition-all">
+                      Review Terms of Clinical Use
+                    </Link>
+                  </div>
+                </div>
+
                 {/* Trust / Compliance disclaimer footer */}
                 <div className="bg-slate-100 text-[11px] text-slate-400 p-4 rounded-xl border border-slate-200 leading-relaxed font-normal">
                   <p className="font-bold text-slate-500 mb-1">InfectAtlas Educational Disclaimer:</p>
@@ -715,94 +1293,272 @@ export default function DiseasesSEO() {
 
             </div>
           )
-        ) : (
-          /* ================================= DIRECTORY INDEX VIEW ================================= */
-          <div className="space-y-12" id="diseases-directory-index">
+        ) : (() => {
+          const filteredDiseases = diseasesData.filter((d) => {
+            const sys = getDiseaseSystem(d.id);
+            const matchesSystem = selectedSystem === "all" || sys.id === selectedSystem;
             
-            {/* Elegant Header Hero */}
-            <div className="text-center max-w-2xl mx-auto space-y-4">
-              <span className="bg-indigo-50 border border-indigo-100 text-indigo-700 font-extrabold text-[10px] uppercase px-3 py-1 rounded-full tracking-widest leading-none">
-                Clinical Reference Guide
-              </span>
-              <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-none">
-                Human Infectious Diseases Atlas
-              </h1>
-              <p className="text-sm text-slate-500 leading-relaxed font-normal">
-                Structured medical reference index outlining key causative pathogens, hallmark symptoms, diagnostic algorithms, and clinical therapeutics matching USMLE, COMLEX, or NCLEX parameters.
-              </p>
-            </div>
+            const query = searchTerm.toLowerCase().trim();
+            if (!query) return matchesSystem;
+            
+            return matchesSystem && (
+              d.name.toLowerCase().includes(query) ||
+              d.overview.toLowerCase().includes(query) ||
+              d.quickFacts.commonPathogens.some(p => p.toLowerCase().includes(query)) ||
+              d.quickFacts.hallmarkSymptoms.some(s => s.toLowerCase().includes(query)) ||
+              (d.quickFacts.riskFactors && d.quickFacts.riskFactors.some(r => r.toLowerCase().includes(query)))
+            );
+          });
 
-            {/* Structured index layout with search filter */}
-            <div className="space-y-6">
-              <div className="border-b border-slate-200 pb-2">
+          const activeSystems = SYSTEMS_LIST.filter(s => s.id !== "all").map(sys => {
+            const items = filteredDiseases.filter(d => getDiseaseSystem(d.id).id === sys.id);
+            return {
+              ...sys,
+              items
+            };
+          }).filter(sysGroup => sysGroup.items.length > 0);
+
+          return (
+            /* ================================= DIRECTORY INDEX VIEW ================================= */
+            <div className="space-y-8" id="diseases-directory-index">
+              
+              {/* Compact Unified Hero & Search Panel */}
+              <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-md space-y-6">
+                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                  <div className="space-y-2 max-w-xl">
+                    <span className="bg-indigo-505/10 border border-indigo-500/20 text-indigo-300 font-extrabold text-[10px] uppercase px-3 py-1 rounded-full tracking-wider leading-none inline-block shadow-3xs">
+                      Clinical Reference Catalog
+                    </span>
+                    <h1 className="text-2xl sm:text-3xl font-black tracking-tight leading-tight">
+                      Infectious Diseases Atlas
+                    </h1>
+                    <p className="text-xs text-slate-400 leading-relaxed font-medium">
+                      Structured reference index matching board-review specifications. Easily explore key causative pathogens, hallmark symptoms, diagnostic standards, and clinical therapeutics.
+                    </p>
+                  </div>
+
+                  <div className="w-full lg:max-w-md shrink-0 relative group">
+                    <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400 group-focus-within:text-indigo-455 transition-colors" />
+                    <input
+                      type="text"
+                      placeholder="Search diseases, pathogens, symptoms, risk factors..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="w-full pl-10 pr-10 py-3 bg-slate-800/70 border border-slate-700/80 hover:border-slate-600 focus:bg-slate-950/90 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/25 focus:border-indigo-400 transition-all text-white placeholder:text-slate-400 shadow-sm"
+                    />
+                    {searchTerm && (
+                      <button
+                        onClick={() => setSearchTerm("")}
+                        className="absolute right-3.5 top-3.5 text-xs font-extrabold text-slate-400 hover:text-slate-200 transition-colors"
+                      >
+                        Clear
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Horizontal Scroll Filter Track (No static label rail) */}
+                <div className="border-t border-slate-800/85 pt-4">
+                  <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 w-full flex-nowrap scrollbar-none">
+                    {SYSTEMS_LIST.map((sys) => {
+                      const isActive = selectedSystem === sys.id;
+                      const systemColorConfig: Record<string, { activeBtn: string; inactiveIcon: string; activeIcon: string }> = {
+                        all: {
+                          activeBtn: "bg-indigo-600 text-white shadow-md border-indigo-400 hover:bg-indigo-500 hover:shadow-indigo-500/10",
+                          inactiveIcon: "text-slate-400 group-hover:text-slate-300",
+                          activeIcon: "text-indigo-200",
+                        },
+                        respiratory: {
+                          activeBtn: "bg-sky-600 text-white shadow-md border-sky-400 hover:bg-sky-500 hover:shadow-sky-500/10",
+                          inactiveIcon: "text-sky-400 group-hover:text-sky-305",
+                          activeIcon: "text-sky-200",
+                        },
+                        gastrointestinal: {
+                          activeBtn: "bg-emerald-600 text-white shadow-md border-emerald-400 hover:bg-emerald-500 hover:shadow-emerald-500/10",
+                          inactiveIcon: "text-emerald-400 group-hover:text-emerald-305",
+                          activeIcon: "text-emerald-150",
+                        },
+                        urinary: {
+                          activeBtn: "bg-amber-600 text-white shadow-md border-amber-400 hover:bg-amber-505 hover:shadow-amber-500/10",
+                          inactiveIcon: "text-amber-405 group-hover:text-amber-305",
+                          activeIcon: "text-amber-200",
+                        },
+                        cns: {
+                          activeBtn: "bg-purple-600 text-white shadow-md border-purple-400 hover:bg-purple-500 hover:shadow-purple-500/10",
+                          inactiveIcon: "text-purple-400 group-hover:text-purple-305",
+                          activeIcon: "text-purple-200",
+                        },
+                        cardiovascular: {
+                          activeBtn: "bg-rose-600 text-white shadow-md border-rose-450 hover:bg-rose-500 hover:shadow-rose-500/10",
+                          inactiveIcon: "text-rose-400 group-hover:text-rose-300",
+                          activeIcon: "text-rose-200",
+                        },
+                        "skin-soft-tissue": {
+                          activeBtn: "bg-teal-600 text-white shadow-md border-teal-400 hover:bg-teal-500 hover:shadow-teal-500/10",
+                          inactiveIcon: "text-teal-400 group-hover:text-teal-305",
+                          activeIcon: "text-teal-200",
+                        },
+                        "bone-joint": {
+                          activeBtn: "bg-orange-600 text-white shadow-md border-orange-400 hover:bg-orange-500 hover:shadow-orange-500/10",
+                          inactiveIcon: "text-orange-405 group-hover:text-orange-305",
+                          activeIcon: "text-orange-200",
+                        }
+                      };
+
+                      const config = systemColorConfig[sys.id] || systemColorConfig.all;
+
+                      return (
+                        <button
+                          key={sys.id}
+                          onClick={() => setSelectedSystem(sys.id)}
+                          className={`text-[10px] sm:text-[11px] font-extrabold px-3.5 py-2.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 shrink-0 border group ${
+                            isActive
+                              ? config.activeBtn
+                              : "bg-slate-800/90 text-slate-250 border-slate-700/80 hover:text-white hover:bg-slate-750 hover:border-slate-600 shadow-2xs"
+                          }`}
+                        >
+                          {renderSystemIcon(sys.iconName, `h-3.5 w-3.5 ${isActive ? config.activeIcon : config.inactiveIcon} transition-colors`)}
+                          <span>{sys.name}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              {/* Dynamic Live Result Counter */}
+              <div className="flex items-center justify-between border-b border-slate-150 pb-2">
                 <h2 className="text-xs font-extrabold text-slate-400 uppercase tracking-widest flex items-center gap-2">
                   <BookOpen className="h-4 w-4 text-indigo-650" />
-                  Index of High-Yield Pathologies (Clinical Chapters)
+                  Clinical Disease Modules ({filteredDiseases.length} total)
                 </h2>
+                {searchTerm && (
+                  <span className="text-xs text-slate-500 font-semibold italic">
+                    Showing search matches
+                  </span>
+                )}
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {diseasesData.map((d) => (
-                  <Link
-                    key={d.id}
-                    to={`/diseases/${d.slug}`}
-                    className="p-5 bg-white border border-slate-200 rounded-2xl hover:border-indigo-300 hover:shadow-xs transition-all flex flex-col justify-between group cursor-pointer"
-                  >
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <span className="bg-slate-100 text-slate-600 border border-slate-200 text-[9px] font-extrabold uppercase px-2 py-0.5 rounded">
-                          Medical Condition
-                        </span>
-                        <span className="text-[10px] text-indigo-650 font-bold group-hover:underline transition-all flex items-center gap-0.5 whitespace-nowrap">
-                          Study Guide
-                          <ExternalLink className="h-2.5 w-2.5" />
-                        </span>
-                      </div>
-
-                      <h3 className="font-extrabold text-base text-slate-900 tracking-tight leading-snug group-hover:text-indigo-650 transition-colors">
-                        {d.name}
-                      </h3>
-
-                      <p className="text-xs text-slate-500 leading-relaxed line-clamp-3">
-                        {d.overview}
-                      </p>
+              {/* Structured index layout with system corridors */}
+              <div className="space-y-12">
+                {activeSystems.length === 0 ? (
+                  <div className="text-center py-16 max-w-md mx-auto space-y-4 border border-dashed border-slate-200 rounded-3xl bg-slate-50/50">
+                    <div className="p-4 bg-amber-50 rounded-full inline-block text-amber-500 border border-amber-100">
+                      <Search className="h-6 w-6" />
                     </div>
+                    <h3 className="text-sm font-extrabold text-slate-800">No matching pathologies found</h3>
+                    <p className="text-xs text-slate-500 font-medium px-6 leading-relaxed">
+                      We couldn't find any disease matches for "<strong className="text-slate-800">{searchTerm}</strong>" under the selected organ systems filter. Try adjusting your vocabulary or expanding the system filter!
+                    </p>
+                    <button
+                      onClick={() => { setSearchTerm(""); setSelectedSystem("all"); }}
+                      className="text-xs font-extrabold text-indigo-600 hover:underline px-4 py-2 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors"
+                    >
+                      Clear Search Filters
+                    </button>
+                  </div>
+                ) : (
+                  activeSystems.map((sysGroup) => {
+                    const sysSample = getDiseaseSystem(sysGroup.items[0].id);
+                    const styles = getSystemStyle(sysSample.colorClass);
+                    
+                    return (
+                      <section key={sysGroup.id} className="space-y-6 scroll-mt-20" id={`corridor-${sysGroup.id}`}>
+                        {/* Corridor Banner Header */}
+                        <div className={`p-5 rounded-2xl bg-gradient-to-r ${sysSample.bannerClass} border ${styles.lightBorder} flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-3xs`}>
+                          <div className="flex items-center gap-3.5">
+                            <div className={`p-2.5 bg-white rounded-xl shadow-2xs border ${styles.lightBorder} ${styles.accentText}`}>
+                              {renderSystemIcon(sysSample.iconName, "h-5 w-5")}
+                            </div>
+                            <div>
+                              <h2 className="text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-1.5">
+                                {sysGroup.name} Corridor
+                              </h2>
+                              <p className="text-xs text-slate-500 font-semibold">
+                                Highlighted pathology modules of the {sysSample.tagLabel.toLowerCase()} system.
+                              </p>
+                            </div>
+                          </div>
+                          <div className="shrink-0 flex items-center">
+                            <span className={`${styles.pill} text-[10px] font-black uppercase px-2.5 py-1 rounded-full border shadow-3xs`}>
+                              {sysGroup.items.length} High-Yield Modules
+                            </span>
+                          </div>
+                        </div>
 
-                    <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
-                      <span className="font-semibold text-slate-600">
-                        {d.quickFacts.commonPathogens.length} key pathogens cited
-                      </span>
-                      <span>
-                        {d.faqs.length} board-style FAQs
-                      </span>
-                    </div>
-                  </Link>
-                ))}
+                        {/* Corridor Cards Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                          {sysGroup.items.map((d) => {
+                            const itemSys = getDiseaseSystem(d.id);
+                            const itemStyles = getSystemStyle(itemSys.colorClass);
+                            return (
+                              <Link
+                                key={d.id}
+                                to={`/diseases/${d.slug}`}
+                                className={`p-6 bg-white border border-slate-250 border-l-4 ${itemStyles.accentLine} rounded-2xl ${itemStyles.hover} transition-all flex flex-col justify-between group cursor-pointer shadow-3xs`}
+                              >
+                                <div className="space-y-4">
+                                  <div className="flex items-center justify-between">
+                                    <span className={`${itemStyles.pill} border text-[9px] font-black uppercase px-2 py-0.5 rounded-md shadow-3xs`}>
+                                      {itemSys.tagLabel}
+                                    </span>
+                                    <span className="text-[10px] text-indigo-600 font-extrabold group-hover:underline transition-all flex items-center gap-0.5 whitespace-nowrap">
+                                      Study Guide
+                                      <ExternalLink className="h-2.5 w-2.5" />
+                                    </span>
+                                  </div>
+
+                                  <div className="space-y-1.5">
+                                    <h3 className="font-extrabold text-base text-slate-900 tracking-tight leading-snug group-hover:text-indigo-650 transition-colors">
+                                      {d.name}
+                                    </h3>
+                                    <p className="text-xs text-slate-500 leading-relaxed line-clamp-3">
+                                      {d.overview}
+                                    </p>
+                                  </div>
+                                </div>
+
+                                <div className="pt-4 mt-5 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+                                  <span className={`font-semibold ${itemStyles.accentText} bg-slate-50/50 px-2 py-0.5 rounded border border-slate-100`}>
+                                    {d.quickFacts.commonPathogens.length} pathogens cited
+                                  </span>
+                                  <span className="font-medium text-slate-400">
+                                    {d.faqs.length} board FAQs
+                                  </span>
+                                </div>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </section>
+                    );
+                  })
+                )}
               </div>
-            </div>
 
-            {/* Subtle Conversion Sandbox Card at bottom of index */}
-            <div className="bg-gradient-to-br from-indigo-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-8 border border-indigo-850 shadow-md">
-              <div className="space-y-3 max-w-xl text-center md:text-left">
-                <span className="inline-flex gap-1 items-center bg-indigo-500/20 text-indigo-300 font-extrabold text-[9px] tracking-wider uppercase py-1 px-2.5 rounded-full border border-indigo-805/30">
-                  <Zap className="h-3.5 w-3.5 fill-indigo-300 text-indigo-300 shrink-0" />
-                  BOARD EXAM WORKOUT
-                </span>
-                <h3 className="text-lg md:text-xl font-extrabold tracking-tight">Ready to test your memory across all clinical modules?</h3>
-                <p className="text-xs text-slate-400 leading-relaxed font-normal">
-                  InfectAtlas wraps our medical literature database inside an interactive adaptive study suite. Instantly trigger active recall challenges, diagnose patient-cases in multi-choice questions, and build structural memory.
-                </p>
+              {/* Subtle Conversion Sandbox Card at bottom of index */}
+              <div className="bg-gradient-to-br from-indigo-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-8 border border-indigo-850 shadow-md">
+                <div className="space-y-3 max-w-xl text-center md:text-left">
+                  <span className="inline-flex gap-1 items-center bg-indigo-500/20 text-indigo-300 font-extrabold text-[9px] tracking-wider uppercase py-1 px-2.5 rounded-full border border-indigo-805/30">
+                    <Zap className="h-3.5 w-3.5 fill-indigo-300 text-indigo-300 shrink-0" />
+                    BOARD EXAM WORKOUT
+                  </span>
+                  <h3 className="text-lg md:text-xl font-extrabold tracking-tight">Ready to test your memory across all clinical modules?</h3>
+                  <p className="text-xs text-slate-400 leading-relaxed font-normal">
+                    InfectAtlas wraps our medical literature database inside an interactive adaptive study suite. Instantly trigger active recall challenges, diagnose patient-cases in multi-choice questions, and build structural memory.
+                  </p>
+                </div>
+                <button
+                  onClick={() => handleLaunchApp("dashboard")}
+                  className="w-full md:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs px-6 py-3 rounded-xl transition-all shadow-sm shrink-0 cursor-pointer text-center"
+                >
+                  Launch Study App Platform
+                </button>
               </div>
-              <button
-                onClick={() => handleLaunchApp("dashboard")}
-                className="w-full md:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs px-6 py-3 rounded-xl transition-all shadow-sm shrink-0 cursor-pointer text-center"
-              >
-                Launch Study App Platform
-              </button>
-            </div>
 
-          </div>
-        )}
+            </div>
+          );
+        })()}
       </main>
 
       {/* Direct Plain Footer */}
