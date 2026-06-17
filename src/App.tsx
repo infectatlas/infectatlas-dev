@@ -10,6 +10,7 @@ import LegalModal from "./components/LegalModal";
 import LandingPage from "./components/LandingPage";
 import MarketingLandingPage from "./components/MarketingLandingPage";
 import OrganismsSEO from "./components/OrganismsSEO";
+import DiseasesSEO from "./components/DiseasesSEO";
 import { isSupabaseConfigured, syncUserDataToCloud } from "./lib/supabase";
 import { Search, BrainCircuit, Activity, BookOpen, Layers, Award, Grid, Sparkles, ShieldCheck, CheckCircle, Database, Cloud, CloudOff, RefreshCw, X } from "lucide-react";
 import { analytics as analyticsUtil } from "./utils/analytics";
@@ -81,7 +82,7 @@ function InnerApp() {
   // Redirect invalid paths to root / or let SEO slugs load cleanly
   useEffect(() => {
     const path = location.pathname;
-    if (path !== "/" && !path.startsWith("/app") && !path.startsWith("/organisms")) {
+    if (path !== "/" && !path.startsWith("/app") && !path.startsWith("/organisms") && !path.startsWith("/diseases")) {
       navigate("/", { replace: true });
     }
   }, [location.pathname, navigate]);
@@ -462,6 +463,10 @@ function InnerApp() {
 
   if (location.pathname.startsWith("/organisms")) {
     return <OrganismsSEO />;
+  }
+
+  if (location.pathname.startsWith("/diseases")) {
+    return <DiseasesSEO />;
   }
 
   return (
