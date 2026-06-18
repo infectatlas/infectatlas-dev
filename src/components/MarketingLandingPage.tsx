@@ -85,8 +85,16 @@ export default function MarketingLandingPage() {
           <p className="flex flex-wrap items-center gap-2.5 justify-center sm:justify-start">
             <span>&copy; 2026 InfectAtlas. Built for medical training, clinical pharmacy, and boards prep.</span>
             <span className="hidden sm:inline text-slate-800">|</span>
-            <Link to="/organisms" className="hover:underline text-indigo-400 font-semibold cursor-pointer">
-              Public Ref Library (SEO Directory)
+            <Link to="/organisms" className="hover:underline text-indigo-455 font-extrabold cursor-pointer">
+              Organisms
+            </Link>
+            <span className="text-slate-800 font-extrabold">|</span>
+            <Link to="/diseases" className="hover:underline text-indigo-455 font-extrabold cursor-pointer">
+              Diseases
+            </Link>
+            <span className="text-slate-800 font-extrabold">|</span>
+            <Link to="/drugs" className="hover:underline text-indigo-455 font-extrabold cursor-pointer">
+              Drugs
             </Link>
           </p>
           <div className="flex items-center gap-1.5 text-slate-500">

@@ -735,13 +735,19 @@ export default function DiseasesSEO() {
                 to="/organisms"
                 className="text-xs font-bold text-slate-550 hover:text-indigo-600 transition-colors py-1.5 px-2.5 rounded-md hover:bg-slate-50"
               >
-                Pathogens
+                Organisms
               </Link>
               <Link
                 to="/diseases"
                 className="text-xs font-bold text-indigo-600 bg-indigo-50/50 py-1.5 px-2.5 rounded-md"
               >
                 Diseases
+              </Link>
+              <Link
+                to="/drugs"
+                className="text-xs font-bold text-slate-550 hover:text-indigo-600 transition-colors py-1.5 px-2.5 rounded-md hover:bg-slate-50"
+              >
+                Drugs
               </Link>
             </nav>
             <div className="hidden sm:block h-4 w-px bg-slate-200" />
