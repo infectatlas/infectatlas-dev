@@ -8,7 +8,7 @@ export default function LandingPage({ onStartStudying }: LandingPageProps) {
   return (
     <div id="landing-page-container" className="space-y-12 pb-12">
       {/* SECTION 1 — HERO */}
-      <section className="relative overflow-hidden bg-radial from-indigo-900 via-slate-900 to-slate-950 rounded-3xl text-white py-12 px-6 sm:py-16 sm:px-12 md:py-20 md:px-16 shadow-xl border border-slate-800">
+      <section className="relative overflow-hidden bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-3xl text-white py-12 px-6 sm:py-16 sm:px-12 md:py-20 md:px-16 shadow-xl border border-slate-800">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-35" />
         
         <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6">
