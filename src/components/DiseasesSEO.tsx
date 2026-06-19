@@ -503,6 +503,32 @@ export default function DiseasesSEO() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSystem, setSelectedSystem] = useState<string>("all");
 
+  // Dynamic Smart Header state on scroll
+  const [showHeader, setShowHeader] = useState(true);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY < 80) {
+        setShowHeader(true);
+        lastScrollY = currentScrollY;
+        return;
+      }
+      const diff = Math.abs(currentScrollY - lastScrollY);
+      if (diff > 12) {
+        if (currentScrollY > lastScrollY) {
+          setShowHeader(false); // scrolling down
+        } else {
+          setShowHeader(true); // scrolling up
+        }
+        lastScrollY = currentScrollY;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   // Resolve slug from router params, or fallback to parsing the location pathname directly
   const rawSlug = routeSlug || (location.pathname.startsWith("/diseases/") ? location.pathname.substring("/diseases/".length).replace(/\/$/, "") : undefined);
   const slug = rawSlug?.toLowerCase().trim();
@@ -713,7 +739,7 @@ export default function DiseasesSEO() {
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans" id="disease-seo-root">
       
       {/* Pristine Clinical Reference Header */}
-      <header className="bg-white border-b border-slate-200 py-4 px-4 sticky top-0 z-20 shadow-xs">
+      <header className={`bg-white border-b border-slate-200 py-4 px-4 sticky top-0 z-20 shadow-xs transition-transform duration-300 ease-in-out ${showHeader ? "translate-y-0" : "-translate-y-full"}`}>
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <Link to="/" className="flex items-center gap-2.5 group" title="Back to Homepage">
             <div className="p-2 bg-indigo-600 text-white rounded-lg shadow-sm group-hover:bg-indigo-700 transition-colors">
@@ -1329,8 +1355,9 @@ export default function DiseasesSEO() {
             <div className="space-y-8" id="diseases-directory-index">
               
               {/* Compact Unified Hero & Search Panel */}
-              <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-md space-y-6">
-                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+              <div className="relative bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-md space-y-6 overflow-hidden">
+                <div className="absolute right-0 bottom-0 top-0 w-1/3 opacity-15 bg-[radial-gradient(circle_at_bottom_right,#6366f1,transparent)] pointer-events-none" />
+                <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                   <div className="space-y-2 max-w-xl">
                     <span className="bg-indigo-505/10 border border-indigo-500/20 text-indigo-300 font-extrabold text-[10px] uppercase px-3 py-1 rounded-full tracking-wider leading-none inline-block shadow-3xs">
                       Clinical Reference Catalog
@@ -1364,7 +1391,7 @@ export default function DiseasesSEO() {
                 </div>
 
                 {/* Horizontal Scroll Filter Track (No static label rail) */}
-                <div className="border-t border-slate-800/85 pt-4">
+                <div className="relative z-10 border-t border-slate-800/85 pt-4">
                   <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 w-full flex-nowrap scrollbar-none">
                     {SYSTEMS_LIST.map((sys) => {
                       const isActive = selectedSystem === sys.id;

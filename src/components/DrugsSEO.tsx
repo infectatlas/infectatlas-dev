@@ -39,6 +39,39 @@ const CLASS_FILTERS = [
   { id: "others", name: "Other Classes" }
 ];
 
+export const getDrugStyle = (cat: string) => {
+  switch (cat) {
+    case "antibacterial":
+      return {
+        accentLine: "border-l-emerald-500",
+        hover: "hover:border-emerald-300 hover:shadow-emerald-50/40",
+        pill: "bg-emerald-50 text-emerald-850 border-emerald-100",
+        accentText: "text-emerald-600"
+      };
+    case "antiviral":
+      return {
+        accentLine: "border-l-rose-500",
+        hover: "hover:border-rose-300 hover:shadow-rose-50/40",
+        pill: "bg-rose-50 text-rose-850 border-rose-100",
+        accentText: "text-rose-600"
+      };
+    case "antifungal":
+      return {
+        accentLine: "border-l-purple-500",
+        hover: "hover:border-purple-300 hover:shadow-purple-50/40",
+        pill: "bg-purple-50 text-purple-850 border-purple-100",
+        accentText: "text-purple-600"
+      };
+    default:
+      return {
+        accentLine: "border-l-amber-500",
+        hover: "hover:border-amber-300 hover:shadow-amber-50/40",
+        pill: "bg-amber-50 text-amber-800 border-amber-100",
+        accentText: "text-amber-700"
+      };
+  }
+};
+
 export default function DrugsSEO() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -51,6 +84,32 @@ export default function DrugsSEO() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedClass, setSelectedClass] = useState("all");
   const [activeCategory, setActiveCategory] = useState<"all" | "antibacterial" | "antiviral" | "antifungal">("all");
+
+  // Dynamic Smart Header state on scroll
+  const [showHeader, setShowHeader] = useState(true);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY < 80) {
+        setShowHeader(true);
+        lastScrollY = currentScrollY;
+        return;
+      }
+      const diff = Math.abs(currentScrollY - lastScrollY);
+      if (diff > 12) {
+        if (currentScrollY > lastScrollY) {
+          setShowHeader(false); // scrolling down
+        } else {
+          setShowHeader(true); // scrolling up
+        }
+        lastScrollY = currentScrollY;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Locate current drug if detail view
   const drug = isDetailView
@@ -263,7 +322,7 @@ export default function DrugsSEO() {
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans" id="drug-seo-root">
       
       {/* Pristine Master Header */}
-      <header className="bg-white border-b border-slate-200 py-4 px-4 sticky top-0 z-20 shadow-xs">
+      <header className={`bg-white border-b border-slate-200 py-4 px-4 sticky top-0 z-20 shadow-xs transition-transform duration-300 ease-in-out ${showHeader ? "translate-y-0" : "-translate-y-full"}`}>
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <Link to="/" className="flex items-center gap-2.5 group" title="Back to Homepage">
             <div className="p-2 bg-indigo-600 text-white rounded-lg shadow-sm group-hover:bg-indigo-700 transition-colors">
@@ -313,7 +372,7 @@ export default function DrugsSEO() {
       </header>
 
       {/* Main Container */}
-      <main className="max-w-7xl mx-auto px-4 py-8">
+      <main className="max-w-7xl mx-auto px-4 py-8 md:py-12">
         {isDetailView ? (
           !drug ? (
             /* Drug Not Found Error View */
@@ -699,8 +758,9 @@ export default function DrugsSEO() {
             <div className="space-y-8 animate-fade-in" id="drugs-directory-index">
               
               {/* Compact Unified Hero & Search Panel */}
-              <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-md space-y-6">
-                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+              <div className="relative bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-md space-y-6 overflow-hidden">
+                <div className="absolute right-0 bottom-0 top-0 w-1/3 opacity-15 bg-[radial-gradient(circle_at_bottom_right,#6366f1,transparent)] pointer-events-none" />
+                <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                   <div className="space-y-2 max-w-xl">
                     <span className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 font-extrabold text-[10px] uppercase px-3 py-1 rounded-full tracking-wider leading-none inline-block shadow-3xs">
                       Clinical Reference Compendium
@@ -734,7 +794,7 @@ export default function DrugsSEO() {
                 </div>
 
                 {/* Horizontal Scroll Filter Track */}
-                <div className="border-t border-slate-800/85 pt-4">
+                <div className="relative z-10 border-t border-slate-800/85 pt-4">
                   <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 w-full flex-nowrap scrollbar-none">
                     {[
                       { id: "all", name: "All Medications", color: "bg-indigo-600 text-white shadow-md border-indigo-400 hover:bg-indigo-500 hover:shadow-indigo-500/10" },
@@ -781,53 +841,57 @@ export default function DrugsSEO() {
                     </div>
                   ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {filteredDrugs.map((d) => (
-                        <Link
-                          key={d.id}
-                          to={`/drugs/${d.slug}`}
-                          className="bg-white border border-slate-200/80 hover:border-emerald-250 hover:shadow-2xs rounded-2xl p-5 flex flex-col justify-between transition-all group cursor-pointer"
-                        >
-                          <div className="space-y-3">
-                            <div className="flex items-start justify-between gap-2.5">
-                              <span className="bg-emerald-50 border border-emerald-100 text-emerald-800 font-extrabold text-[9px] uppercase px-2 py-0.5 rounded-md tracking-wider shadow-3xs">
-                                {d.drugClass}
-                              </span>
-                              <span className="text-[10px] text-slate-400 font-bold font-mono">
-                                ID: {d.id}
-                              </span>
-                            </div>
+                      {filteredDrugs.map((d) => {
+                        const styleCat = d.category || "antibacterial";
+                        const itemStyles = getDrugStyle(styleCat);
+                        return (
+                          <Link
+                            key={d.id}
+                            to={`/drugs/${d.slug}`}
+                            className={`bg-white border border-slate-250 border-l-4 ${itemStyles.accentLine} ${itemStyles.hover} rounded-2xl p-5 flex flex-col justify-between transition-all group cursor-pointer shadow-3xs`}
+                          >
+                            <div className="space-y-3">
+                              <div className="flex items-start justify-between gap-2.5">
+                                <span className={`${itemStyles.pill} border text-[9px] uppercase px-2 py-0.5 rounded-md tracking-wider shadow-3xs font-extrabold`}>
+                                  {d.drugClass}
+                                </span>
+                                <span className={`text-[10px] ${itemStyles.accentText} font-bold font-mono uppercase bg-slate-50/50 px-1.5 py-0.5 rounded border border-slate-100`}>
+                                  {styleCat}
+                                </span>
+                              </div>
 
-                            <div className="space-y-1">
-                              <h3 className="text-base font-black text-slate-900 tracking-tight font-sans group-hover:text-indigo-650 transition-colors">
-                                {d.name}
-                              </h3>
-                              <p className="text-xs text-slate-450 leading-relaxed font-semibold line-clamp-2">
-                                {d.mechanismOfAction}
-                              </p>
-                            </div>
+                              <div className="space-y-1">
+                                <h3 className="text-base font-black text-slate-900 tracking-tight font-sans group-hover:text-indigo-650 transition-colors">
+                                  {d.name}
+                                </h3>
+                                <p className="text-xs text-slate-450 leading-relaxed font-semibold line-clamp-2">
+                                  {d.mechanismOfAction}
+                                </p>
+                              </div>
 
-                            <div className="pt-2 border-t border-slate-100/60 overflow-hidden">
-                              <span className="text-[9.5px] uppercase font-black text-slate-400 tracking-wider block mb-1.5 select-none">Top Indication:</span>
-                              <div className="flex items-center gap-1.5 text-xs text-slate-755 font-bold">
-                                <CheckCircle className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
-                                <span className="truncate">{d.commonIndications[0]}</span>
+                              <div className="pt-2 border-t border-slate-100/60 overflow-hidden">
+                                <span className="text-[9.5px] uppercase font-black text-slate-400 tracking-wider block mb-1.5 select-none font-bold">Top Indication:</span>
+                                <div className="flex items-center gap-1.5 text-xs text-slate-755 font-bold">
+                                  <CheckCircle className={`h-3.5 w-3.5 ${itemStyles.accentText} shrink-0`} />
+                                  <span className="truncate">{d.commonIndications[0]}</span>
+                                </div>
                               </div>
                             </div>
-                          </div>
 
-                          <div className="pt-4 mt-4 border-t border-slate-100/60 flex items-center justify-between gap-3 flex-wrap sm:flex-nowrap">
-                            <span className="text-[10px] font-extrabold text-slate-400 bg-slate-50 px-2.5 py-1 rounded inline-block">
-                              {d.relatedPathogens.length} Targets
-                            </span>
-                            <div
-                              className="text-xs font-black text-indigo-600 group-hover:text-indigo-805 transition-colors inline-flex items-center gap-1"
-                            >
-                              <span>Review Profile</span>
-                              <ArrowLeft className="h-3 w-3 rotate-180" />
+                            <div className="pt-4 mt-4 border-t border-slate-100/60 flex items-center justify-between gap-3 flex-wrap sm:flex-nowrap">
+                              <span className="text-[10px] font-extrabold text-slate-400 bg-slate-50 px-2.5 py-1 rounded inline-block">
+                                {d.relatedPathogens.length} Targets
+                              </span>
+                              <div
+                                className="text-xs font-black text-indigo-600 group-hover:text-indigo-805 transition-colors inline-flex items-center gap-1"
+                              >
+                                <span>Review Profile</span>
+                                <ArrowLeft className="h-3 w-3 rotate-180" />
+                              </div>
                             </div>
-                          </div>
-                        </Link>
-                      ))}
+                          </Link>
+                        );
+                      })}
                     </div>
                   )}
 

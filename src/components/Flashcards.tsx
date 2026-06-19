@@ -4,6 +4,14 @@ import { StudyList } from "../types";
 import { Sparkles, ArrowRight, RotateCw, CheckCircle2, Bookmark, BookmarkCheck, BrainCircuit } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { analytics } from "../utils/analytics";
+import { diseasesData } from "../data/diseases";
+import { drugsData } from "../data/drugs";
+
+const getPathogenSlug = (name: string): string => {
+  return name.toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-");
+};
 
 interface FlashcardsProps {
   studyLists: StudyList[];
@@ -435,6 +443,56 @@ export default function Flashcards({
                         </div>
                       </div>
                     )
+                  )}
+
+                  {/* Contextual reference links */}
+                  {isFlipped && currentMicrobe && (
+                    <div className="mt-3 pt-3 border-t border-white/10 flex flex-wrap gap-2 text-[11px] relative z-10 w-full text-left justify-start">
+                      <a
+                        href={`/organisms/${getPathogenSlug(currentMicrobe.name)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1 px-2.5 py-1 bg-indigo-900 border border-indigo-700/30 hover:bg-indigo-850 text-indigo-100 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
+                      >
+                        📚 View full reference article
+                      </a>
+                      
+                      {diseasesData.filter(dis => 
+                        currentMicrobe.diseases.some(d => 
+                          d.name.toLowerCase().includes(dis.name.toLowerCase()) || 
+                          dis.name.toLowerCase().includes(d.name.toLowerCase())
+                        )
+                      ).slice(0, 1).map(dis => (
+                        <a
+                          key={dis.id}
+                          href={`/diseases/${dis.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-900 border border-emerald-700/35 hover:bg-emerald-850 text-emerald-105 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
+                        >
+                          📚 Review {dis.name}
+                        </a>
+                      ))}
+
+                      {drugsData.filter(drug => 
+                        currentMicrobe.diseases.some(d => 
+                          d.treatment.toLowerCase().includes(drug.name.toLowerCase())
+                        )
+                      ).slice(0, 1).map(drug => (
+                        <a
+                          key={drug.id}
+                          href={`/drugs/${drug.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-1 px-2.5 py-1 bg-amber-900/90 border border-amber-750/35 hover:bg-amber-850 text-amber-105 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
+                        >
+                          📚 Drug: {drug.name}
+                        </a>
+                      ))}
+                    </div>
                   )}
                 </div>
 

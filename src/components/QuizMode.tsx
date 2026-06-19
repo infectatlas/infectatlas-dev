@@ -3,6 +3,31 @@ import { Microorganism, microorganismsData } from "../data/microorganisms";
 import { Award, CheckCircle, XCircle, ChevronRight, Sparkles, BookOpen, Brain, Activity } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { analytics } from "../utils/analytics";
+import { diseasesData } from "../data/diseases";
+import { drugsData } from "../data/drugs";
+
+const getPathogenSlug = (name: string): string => {
+  return name.toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-");
+};
+
+const getRelatedDiseases = (text: string) => {
+  const lowercaseText = text.toLowerCase();
+  return diseasesData.filter(dis => 
+    lowercaseText.includes(dis.name.toLowerCase()) || 
+    lowercaseText.includes(dis.id.toLowerCase()) ||
+    (dis.alternateSlugs && dis.alternateSlugs.some(alt => lowercaseText.includes(alt.toLowerCase())))
+  );
+};
+
+const getRelatedDrugs = (text: string) => {
+  const lowercaseText = text.toLowerCase();
+  return drugsData.filter(drug => 
+    lowercaseText.includes(drug.name.toLowerCase()) || 
+    lowercaseText.includes(drug.id.toLowerCase())
+  );
+};
 
 interface QuizModeProps {
   onCommitQuizResults: (correctCount: number, totalCount: number, categoryHits: Record<string, { correct: number; incorrect: number }>) => void;
@@ -532,6 +557,45 @@ export default function QuizMode({
                   <p className="text-xs text-slate-600 leading-relaxed">
                     {questions[activeQuestionIndex].explanation}
                   </p>
+
+                  {/* Contextual reference links */}
+                  <div className="pt-2 border-t border-indigo-100/30 flex flex-wrap gap-2 text-[11px]">
+                    {questions[activeQuestionIndex].referencePathogen && (
+                      <a
+                        href={`/organisms/${getPathogenSlug(questions[activeQuestionIndex].referencePathogen.name)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 px-2 py-1 bg-white hover:bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
+                      >
+                        📚 View full reference article
+                      </a>
+                    )}
+                    
+                    {getRelatedDiseases(questions[activeQuestionIndex].questionText + " " + questions[activeQuestionIndex].explanation).slice(0, 1).map(dis => (
+                      <a
+                        key={dis.id}
+                        href={`/diseases/${dis.slug}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 px-2 py-1 bg-white hover:bg-emerald-50 border border-emerald-100 text-emerald-700 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
+                      >
+                        📚 Review {dis.name}
+                      </a>
+                    ))}
+
+                    {getRelatedDrugs(questions[activeQuestionIndex].explanation).slice(0, 1).map(drug => (
+                      <a
+                        key={drug.id}
+                        href={`/drugs/${drug.slug}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 px-2 py-1 bg-white hover:bg-amber-50 border border-amber-100 text-amber-700 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
+                      >
+                        📚 Drug reference: {drug.name}
+                      </a>
+                    ))}
+                  </div>
+
                   <p className="text-[10px] text-slate-400 italic">
                     Note: Statically aligned verified guidelines.
                   </p>
@@ -690,6 +754,45 @@ export default function QuizMode({
                       Boards-Style Rationale Explanation
                     </span>
                     <p className="leading-relaxed mt-0.5">{activeVignetteQuestion.explanation}</p>
+
+                    {/* Contextual reference links */}
+                    <div className="pt-2 border-t border-indigo-150/40 flex flex-wrap gap-2 text-[11px] mt-2">
+                      {activeVignetteQuestion.referencePathogen && (
+                        <a
+                          href={`/organisms/${getPathogenSlug(activeVignetteQuestion.referencePathogen.name)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 px-2.5 py-1 bg-white hover:bg-indigo-100/50 border border-indigo-200 text-indigo-700 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
+                        >
+                          📚 View full reference article
+                        </a>
+                      )}
+                      
+                      {getRelatedDiseases(activeVignetteQuestion.vignette + " " + activeVignetteQuestion.explanation).slice(0, 1).map(dis => (
+                        <a
+                          key={dis.id}
+                          href={`/diseases/${dis.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 px-2.5 py-1 bg-white hover:bg-emerald-50 border border-emerald-100 text-emerald-700 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
+                        >
+                          📚 Review {dis.name}
+                        </a>
+                      ))}
+
+                      {getRelatedDrugs(activeVignetteQuestion.explanation).slice(0, 1).map(drug => (
+                        <a
+                          key={drug.id}
+                          href={`/drugs/${drug.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 px-2.5 py-1 bg-white hover:bg-amber-50 border border-amber-100 text-amber-700 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
+                        >
+                          📚 Drug reference: {drug.name}
+                        </a>
+                      ))}
+                    </div>
+
                     <span className="text-[9px] block text-right text-slate-400 italic">
                       Correct target pathogen: {activeVignetteQuestion.referencePathogen.name}
                     </span>

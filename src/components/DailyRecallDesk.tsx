@@ -6,6 +6,14 @@ import {
   RotateCw, Plus, Zap, Award, BookOpen, Layers, Play, Check, AlertCircle, X
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { diseasesData } from "../data/diseases";
+import { drugsData } from "../data/drugs";
+
+const getPathogenSlug = (name: string): string => {
+  return name.toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-");
+};
 
 interface DailyRecallDeskProps {
   spacedRepetitionItems: SpacedRepetitionItem[];
@@ -488,6 +496,53 @@ export default function DailyRecallDesk({
                             </div>
                           ))}
                         </div>
+
+                        {/* Contextual reference links */}
+                        {activeMicrobe && (
+                          <div className="pt-3 border-t border-slate-200 mt-4 flex flex-wrap gap-2 text-xs text-left">
+                            <a
+                              href={`/organisms/${getPathogenSlug(activeMicrobe.name)}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-white hover:bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
+                            >
+                              📚 View full reference article
+                            </a>
+                            
+                            {diseasesData.filter(dis => 
+                              activeMicrobe.diseases.some(d => 
+                                d.name.toLowerCase().includes(dis.name.toLowerCase()) || 
+                                dis.name.toLowerCase().includes(d.name.toLowerCase())
+                              )
+                            ).slice(0, 1).map(dis => (
+                              <a
+                                key={dis.id}
+                                href={`/diseases/${dis.slug}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-white hover:bg-emerald-50 border border-emerald-100 text-emerald-700 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
+                              >
+                                📚 Review {dis.name}
+                              </a>
+                            ))}
+
+                            {drugsData.filter(drug => 
+                              activeMicrobe.diseases.some(d => 
+                                d.treatment.toLowerCase().includes(drug.name.toLowerCase())
+                              )
+                            ).slice(0, 1).map(drug => (
+                              <a
+                                key={drug.id}
+                                href={`/drugs/${drug.slug}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-white hover:bg-amber-50 border border-amber-100 text-amber-700 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
+                              >
+                                📚 Drug reference: {drug.name}
+                              </a>
+                            ))}
+                          </div>
+                        )}
                       </div>
 
                     </motion.div>

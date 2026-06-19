@@ -269,6 +269,48 @@ export const getPathogenReferences = (pathogenId: string, name: string): Pathoge
   ];
 };
 
+export const getPathogenStyles = (gramStatus: string) => {
+  switch (gramStatus) {
+    case "Gram-positive":
+      return {
+        bannerBg: "from-emerald-50/50 via-white to-emerald-50/30",
+        lightBorder: "border-emerald-100",
+        accentText: "text-emerald-600",
+        pill: "bg-emerald-50 text-emerald-700 border-emerald-100",
+        accentLine: "border-l-emerald-500",
+        hover: "hover:border-emerald-300 hover:shadow-emerald-50/40",
+      };
+    case "Gram-negative":
+      return {
+        bannerBg: "from-rose-50/50 via-white to-rose-50/30",
+        lightBorder: "border-rose-100",
+        accentText: "text-rose-600",
+        pill: "bg-rose-50 text-rose-700 border-rose-100",
+        accentLine: "border-l-rose-500",
+        hover: "hover:border-rose-300 hover:shadow-rose-50/40",
+      };
+    case "Spirochete":
+    case "Acid-fast":
+      return {
+        bannerBg: "from-purple-50/50 via-white to-purple-50/30",
+        lightBorder: "border-purple-100",
+        accentText: "text-purple-600",
+        pill: "bg-purple-50 text-purple-700 border-purple-100",
+        accentLine: "border-l-purple-500",
+        hover: "hover:border-purple-300 hover:shadow-purple-50/40",
+      };
+    default:
+      return {
+        bannerBg: "from-amber-50/50 via-white to-amber-50/30",
+        lightBorder: "border-amber-100",
+        accentText: "text-amber-700",
+        pill: "bg-amber-50 text-amber-805 border-amber-105",
+        accentLine: "border-l-amber-500",
+        hover: "hover:border-amber-300 hover:shadow-amber-50/40",
+      };
+  }
+};
+
 export default function OrganismsSEO() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -276,6 +318,32 @@ export default function OrganismsSEO() {
   
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGram, setSelectedGram] = useState("all");
+
+  // Dynamic Smart Header state on scroll
+  const [showHeader, setShowHeader] = useState(true);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY < 80) {
+        setShowHeader(true);
+        lastScrollY = currentScrollY;
+        return;
+      }
+      const diff = Math.abs(currentScrollY - lastScrollY);
+      if (diff > 12) {
+        if (currentScrollY > lastScrollY) {
+          setShowHeader(false); // scrolling down
+        } else {
+          setShowHeader(true); // scrolling up
+        }
+        lastScrollY = currentScrollY;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   
   // Resolve slug from router params, or fallback to parsing the location pathname directly
   const slug = routeSlug || (location.pathname.startsWith("/organisms/") ? location.pathname.substring("/organisms/".length) : undefined);
@@ -564,7 +632,7 @@ export default function OrganismsSEO() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans animate-fade-in" id="seo-root">
       {/* Pristine Clinical Reference Header */}
-      <header className="bg-white border-b border-slate-200 py-4 px-4 sticky top-0 z-20 shadow-xs">
+      <header className={`bg-white border-b border-slate-200 py-4 px-4 sticky top-0 z-20 shadow-xs transition-transform duration-300 ease-in-out ${showHeader ? "translate-y-0" : "-translate-y-full"}`}>
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <Link to="/" className="flex items-center gap-2.5 group" title="Back to Homepage">
             <div className="p-2 bg-indigo-600 text-white rounded-lg shadow-sm group-hover:bg-indigo-700 transition-colors">
@@ -973,8 +1041,9 @@ export default function OrganismsSEO() {
           <div id="pathogens-seo-directory" className="space-y-10">
             
             {/* Compact Unified Hero & Search Panel */}
-            <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-md space-y-6">
-              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div className="relative bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-md space-y-6 overflow-hidden">
+              <div className="absolute right-0 bottom-0 top-0 w-1/3 opacity-15 bg-[radial-gradient(circle_at_bottom_right,#6366f1,transparent)] pointer-events-none" />
+              <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                 <div className="space-y-2 max-w-xl">
                   <span className="bg-indigo-505/10 border border-indigo-500/20 text-indigo-300 font-extrabold text-[10px] uppercase px-3 py-1 rounded-full tracking-wider leading-none inline-block shadow-3xs">
                     Clinical Reference Catalog
@@ -1008,7 +1077,7 @@ export default function OrganismsSEO() {
               </div>
 
               {/* Horizontal Scroll Filter Track */}
-              <div className="border-t border-slate-800/85 pt-4">
+              <div className="relative z-10 border-t border-slate-800/85 pt-4">
                 <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 w-full flex-nowrap scrollbar-none">
                   {[
                     { id: "all", name: "All Pathogens", color: "bg-indigo-600 text-white shadow-md border-indigo-400 hover:bg-indigo-500 hover:shadow-indigo-500/10" },
@@ -1037,45 +1106,83 @@ export default function OrganismsSEO() {
               </div>
             </div>
 
-            {/* Clean Grouped Directory Index Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-              {Object.keys(groupedPathogens).filter(k => groupedPathogens[k].length > 0).map((groupName) => (
-                <div
-                  key={groupName}
-                  className="bg-white border border-slate-200 rounded-2xl shadow-2xs overflow-hidden"
-                >
-                  {/* Category Title */}
-                  <div className="bg-slate-50 border-b border-slate-200 px-5 py-3.5">
-                    <h2 className="font-extrabold text-sm sm:text-base text-slate-800 uppercase tracking-wider">
-                      {groupName} Groupings
-                    </h2>
-                  </div>
-
-                  {/* List items */}
-                  <div className="p-4 sm:p-5 divide-y divide-slate-100">
-                    {groupedPathogens[groupName].map((m) => (
-                      <Link
-                        key={m.id}
-                        to={`/organisms/${getPathogenSlug(m.name)}`}
-                        className="py-3 px-1.5 flex items-center justify-between hover:bg-slate-50 rounded-lg group transition-colors"
-                      >
-                        <div className="min-w-0 pr-4">
-                          <span className="font-extrabold text-xs sm:text-sm text-slate-900 group-hover:text-indigo-650 transition-colors block italic">
-                            {m.name}
-                          </span>
-                          <span className="text-[10px] text-slate-400 block mt-0.5 truncate leading-tight">
-                            {m.description}
-                          </span>
+            {/* Structured index layout with group corridors */}
+            <div className="space-y-12">
+              {Object.keys(groupedPathogens).filter(k => groupedPathogens[k].length > 0).map((groupName) => {
+                const pathogens = groupedPathogens[groupName];
+                const sample = pathogens[0];
+                const styles = getPathogenStyles(sample.gramStatus);
+                
+                return (
+                  <section key={groupName} className="space-y-6">
+                    {/* Corridor Banner Header */}
+                    <div className={`p-5 rounded-2xl bg-gradient-to-r ${styles.bannerBg} border ${styles.lightBorder} flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-3xs`}>
+                      <div className="flex items-center gap-3.5">
+                        <div className={`p-2.5 bg-white rounded-xl shadow-2xs border ${styles.lightBorder} ${styles.accentText}`}>
+                          <Layers className="h-5 w-5" />
                         </div>
-                        <span className="text-[10px] font-bold text-indigo-550 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1 shrink-0 bg-indigo-50 py-1 px-2.5 rounded-lg border border-indigo-100">
-                          Review Pearls
-                          <ExternalLink className="h-3 w-3" />
+                        <div>
+                          <h2 className="text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-1.5">
+                            {groupName} Corridor
+                          </h2>
+                          <p className="text-xs text-slate-500 font-semibold">
+                            Clinical reference modules of the {groupName} category.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="shrink-0 flex items-center">
+                        <span className={`${styles.pill} text-[10px] font-black uppercase px-2.5 py-1 rounded-full border shadow-3xs`}>
+                          {pathogens.length} Microorganisms
                         </span>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ))}
+                      </div>
+                    </div>
+
+                    {/* Corridor Cards Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {pathogens.map((m) => {
+                        const mStyles = getPathogenStyles(m.gramStatus);
+                        return (
+                          <Link
+                            key={m.id}
+                            to={`/organisms/${getPathogenSlug(m.name)}`}
+                            className={`p-6 bg-white border border-slate-250 border-l-4 ${mStyles.accentLine} rounded-2xl ${mStyles.hover} transition-all flex flex-col justify-between group cursor-pointer shadow-3xs`}
+                          >
+                            <div className="space-y-4">
+                              <div className="flex items-center justify-between">
+                                <span className={`${mStyles.pill} border text-[9px] font-black uppercase px-2 py-0.5 rounded-md shadow-3xs`}>
+                                  {m.gramStatus} • {m.shape}
+                                </span>
+                                <span className="text-[10px] text-indigo-600 font-extrabold group-hover:underline transition-all flex items-center gap-0.5 whitespace-nowrap">
+                                  Micro Pearls
+                                  <ExternalLink className="h-2.5 w-2.5" />
+                                </span>
+                              </div>
+
+                              <div className="space-y-1.5">
+                                <h3 className="font-extrabold text-base text-slate-900 tracking-tight leading-snug group-hover:text-indigo-650 transition-colors italic">
+                                  {m.name}
+                                </h3>
+                                <p className="text-xs text-slate-500 leading-relaxed line-clamp-3">
+                                  {m.description}
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="pt-4 mt-5 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+                              <span className={`font-semibold ${mStyles.accentText} bg-slate-50/50 px-2 py-0.5 rounded border border-slate-100`}>
+                                {m.characteristics.slice(0, 2).join(", ")}
+                              </span>
+                              <span className="font-medium text-slate-400">
+                                {m.diseases.length} pathologies
+                              </span>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </section>
+                );
+              })}
             </div>
 
             {Object.keys(groupedPathogens).filter(k => groupedPathogens[k].length > 0).length === 0 && (

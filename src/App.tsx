@@ -12,6 +12,7 @@ import MarketingLandingPage from "./components/MarketingLandingPage";
 import OrganismsSEO from "./components/OrganismsSEO";
 import DiseasesSEO from "./components/DiseasesSEO";
 import DrugsSEO from "./components/DrugsSEO";
+import ComparisonsSEO from "./components/ComparisonsSEO";
 import { isSupabaseConfigured, syncUserDataToCloud } from "./lib/supabase";
 import { Search, BrainCircuit, Activity, BookOpen, Layers, Award, Grid, Sparkles, ShieldCheck, CheckCircle, Database, Cloud, CloudOff, RefreshCw, X } from "lucide-react";
 import { analytics as analyticsUtil } from "./utils/analytics";
@@ -82,11 +83,46 @@ function InnerApp() {
 
   // Redirect invalid paths to root / or let SEO slugs load cleanly
   useEffect(() => {
-    const path = location.pathname;
-    if (path !== "/" && !path.startsWith("/app") && !path.startsWith("/organisms") && !path.startsWith("/diseases") && !path.startsWith("/drugs")) {
+    const path = location.pathname.toLowerCase().trim().replace(/\/$/, "");
+    const isComparison = [
+      "/mrsa-vs-mssa",
+      "/vancomycin-vs-linezolid",
+      "/cellulitis-vs-erysipelas",
+      "/gram-positive-vs-gram-negative",
+      "/bactericidal-vs-bacteriostatic"
+    ].includes(path);
+
+    if (
+      location.pathname !== "/" && 
+      !isComparison &&
+      !location.pathname.startsWith("/app") && 
+      !location.pathname.startsWith("/organisms") && 
+      !location.pathname.startsWith("/diseases") && 
+      !location.pathname.startsWith("/drugs")
+    ) {
       navigate("/", { replace: true });
     }
   }, [location.pathname, navigate]);
+
+  // Technical SEO meta-robots management: block search indexes on study paths
+  useEffect(() => {
+    const path = location.pathname.toLowerCase();
+    const isAppPath = path.startsWith("/app") || path.startsWith("/profile") || path.startsWith("/settings");
+
+    let robotsTag = document.querySelector('meta[name="robots"]');
+    if (isAppPath) {
+      if (!robotsTag) {
+        robotsTag = document.createElement("meta");
+        robotsTag.setAttribute("name", "robots");
+        document.head.appendChild(robotsTag);
+      }
+      robotsTag.setAttribute("content", "noindex, nofollow");
+    } else {
+      if (robotsTag) {
+        robotsTag.remove();
+      }
+    }
+  }, [location.pathname]);
 
   // Track app opened log on initial load
   useEffect(() => {
@@ -97,6 +133,39 @@ function InnerApp() {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [showPwaBanner, setShowPwaBanner] = useState<boolean>(false);
   const [isIOS, setIsIOS] = useState<boolean>(false);
+
+  // Dynamic Smart Header show/hide state on scroll
+  const [showHeader, setShowHeader] = useState<boolean>(true);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // If close to top, always show header
+      if (currentScrollY < 80) {
+        setShowHeader(true);
+        lastScrollY = currentScrollY;
+        return;
+      }
+      
+      const diff = Math.abs(currentScrollY - lastScrollY);
+      if (diff > 12) {
+        if (currentScrollY > lastScrollY) {
+          setShowHeader(false); // scrolling down
+        } else {
+          setShowHeader(true); // scrolling up
+        }
+        lastScrollY = currentScrollY;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     // Check if user has already dismissed the banner in this browser session or persistent store
@@ -462,6 +531,19 @@ function InnerApp() {
     return <MarketingLandingPage />;
   }
 
+  const cleanPath = location.pathname.toLowerCase().trim().replace(/\/$/, "");
+  const comparisons = [
+    "/mrsa-vs-mssa",
+    "/vancomycin-vs-linezolid",
+    "/cellulitis-vs-erysipelas",
+    "/gram-positive-vs-gram-negative",
+    "/bactericidal-vs-bacteriostatic"
+  ];
+
+  if (comparisons.includes(cleanPath)) {
+    return <ComparisonsSEO />;
+  }
+
   if (location.pathname.startsWith("/organisms")) {
     return <OrganismsSEO />;
   }
@@ -477,7 +559,7 @@ function InnerApp() {
   return (
     <div className="min-h-screen bg-[#f8fafc] text-[#0f172a] flex flex-col font-sans" id="app-viewport">
       {/* Principal Academic Header */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-2xs">
+      <header className={`bg-white border-b border-slate-200 sticky top-0 z-30 shadow-2xs transition-transform duration-300 ease-in-out ${showHeader ? "translate-y-0" : "-translate-y-full"}`}>
         <div className="max-w-7xl mx-auto px-3 py-2.5 sm:px-4 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-4">
           <div className="flex items-center justify-between w-full sm:w-auto gap-3">
             <button
@@ -671,6 +753,17 @@ function InnerApp() {
             <Activity className="h-4 w-4" />
             Boards Exam Practicum
           </button>
+
+          <div className="flex-1" />
+
+          <a
+            href="/organisms"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 px-2 py-1 sm:px-3 sm:py-1.5 text-[11px] sm:text-xs font-semibold text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-150 border border-indigo-100 rounded-lg transition-all shrink-0 font-sans cursor-pointer shadow-3xs"
+          >
+            📚 Reference Library
+          </a>
         </div>
       </div>
 
@@ -810,55 +903,55 @@ function InnerApp() {
               </p>
             </div>
             {/* Scrollable Contents Container */}
-            <div className="p-4 sm:p-6 space-y-3.5 sm:space-y-4 overflow-y-auto flex-1 text-slate-700">
-              <div className="bg-slate-50 rounded-xl p-3 sm:p-4 border border-slate-200 text-[11px] sm:text-xs">
-                <h3 className="font-bold text-slate-800 text-[11px] sm:text-xs uppercase tracking-wider mb-2 sm:mb-2.5 flex items-center gap-1.5">
-                  🛡️ Free Tier vs. 👑 Paid Tier Breakdown
+            <div className="p-4 sm:p-6 space-y-4 overflow-y-auto flex-1 text-slate-700">
+              <div className="bg-slate-50 rounded-xl p-4 sm:p-5 border border-slate-200">
+                <h3 className="font-bold text-slate-900 text-xs sm:text-sm uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                  <span>🛡️</span> Free Tier vs. Paid Tier Breakdown
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   {/* Free columns */}
-                  <div className="space-y-1.5">
-                    <span className="font-extrabold text-[#0f172a] text-[10px] sm:text-[11px] block text-slate-500 uppercase">Always Free & No-Signup:</span>
-                    <ul className="space-y-1 text-slate-600">
+                  <div className="space-y-2">
+                    <span className="font-extrabold text-[11px] sm:text-xs block text-slate-550 uppercase tracking-wide">Always Free & No-Signup:</span>
+                    <ul className="space-y-1.5 text-[11px] sm:text-xs text-slate-600">
                       <li className="flex items-center gap-1.5">
-                        <span className="text-emerald-600 font-bold">✓</span> Pathogen Browser
+                        <span className="text-emerald-600 font-extrabold">✓</span> Pathogen Browser
                       </li>
                       <li className="flex items-center gap-1.5">
-                        <span className="text-emerald-600 font-bold">✓</span> Disease & Bug Lookup
+                        <span className="text-emerald-600 font-extrabold">✓</span> Disease & Bug Lookup
                       </li>
                       <li className="flex items-center gap-1.5">
-                        <span className="text-emerald-600 font-bold">✓</span> Basic IV/PO treatment maps
+                        <span className="text-emerald-600 font-extrabold">✓</span> Basic IV/PO treatment maps
                       </li>
                       <li className="flex items-center gap-1.5">
-                        <span className="text-emerald-600 font-bold">✓</span> Full catalog cross-reference
+                        <span className="text-emerald-600 font-extrabold">✓</span> Full catalog cross-reference
                       </li>
                     </ul>
-                    <p className="text-[9px] sm:text-[10px] text-slate-400 italic mt-1 leading-snug">
+                    <p className="text-[10px] sm:text-[11px] text-slate-400 italic mt-1 leading-normal">
                       Valuable immediately without signup to build peer-to-peer trust.
                     </p>
                   </div>
 
                   {/* Paid columns */}
-                  <div className="space-y-1.5 md:border-l md:border-slate-200 md:pl-4">
-                    <span className="font-extrabold text-indigo-700 text-[10px] sm:text-[11px] block uppercase">Premium Retention:</span>
-                    <ul className="space-y-1 text-slate-600">
+                  <div className="space-y-2 md:border-l md:border-slate-200 md:pl-5">
+                    <span className="font-extrabold text-indigo-700 text-[11px] sm:text-xs block uppercase tracking-wide">Premium Retention:</span>
+                    <ul className="space-y-1.5 text-[11px] sm:text-xs text-slate-600">
                       <li className="flex items-center gap-1.5 font-medium">
-                        <span className="text-indigo-600">★</span> Spaced repetition intervals
+                        <span className="text-indigo-600 font-extrabold">★</span> Spaced repetition intervals
                       </li>
                       <li className="flex items-center gap-1.5 font-medium">
-                        <span className="text-indigo-600">★</span> Board-style active recall quiz
+                        <span className="text-indigo-600 font-extrabold">★</span> Board-style active recall quiz
                       </li>
                       <li className="flex items-center gap-1.5 font-medium">
-                        <span className="text-indigo-600">★</span> Progress tracking & streak logs
+                        <span className="text-indigo-600 font-extrabold">★</span> Progress tracking & streak logs
                       </li>
                       <li className="flex items-center gap-1.5 font-medium">
-                        <span className="text-indigo-600">★</span> Weak categories analysis
+                        <span className="text-indigo-600 font-extrabold">★</span> Weak categories analysis
                       </li>
                       <li className="flex items-center gap-1.5 font-medium">
-                        <span className="text-indigo-600">★</span> Dynamic AI Board Vignettes
+                        <span className="text-indigo-600 font-extrabold">★</span> Dynamic AI Board Vignettes
                       </li>
                     </ul>
-                    <p className="text-[9px] sm:text-[10px] text-indigo-500 font-semibold mt-1 leading-snug">
+                    <p className="text-[10px] sm:text-[11px] text-indigo-600 font-bold mt-1 leading-normal">
                       Engineered for high-yield retention and boards performance.
                     </p>
                   </div>
@@ -867,45 +960,45 @@ function InnerApp() {
 
               {/* Early Adopter Grandfathering Offer */}
               {isPromoActive && (
-                <div id="grandfather-promotion-banner" className="bg-gradient-to-br from-indigo-50 to-violet-50 rounded-xl p-3 sm:p-4 border-2 border-dashed border-indigo-300 space-y-2.5 sm:space-y-3">
+                <div id="grandfather-promotion-banner" className="bg-gradient-to-br from-indigo-50 to-violet-50 rounded-xl p-4 sm:p-5 border border-dashed border-indigo-350 space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="text-base sm:text-lg">📚</span>
-                    <h4 className="font-bold text-slate-900 text-[11px] sm:text-xs uppercase tracking-wider">
+                    <span className="text-base">📚</span>
+                    <h4 className="font-bold text-slate-900 text-xs sm:text-sm uppercase tracking-wider">
                       InfectAtlas is currently in open study mode.
                     </h4>
                   </div>
-                  <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed font-medium">
+                  <p className="text-[11px] sm:text-xs text-slate-600 leading-normal font-medium">
                     All features are available for free during early access.
                   </p>
                   
-                  <div className="bg-white/60 rounded-lg p-2.5 text-xs text-slate-700 space-y-1.5 border border-indigo-100">
-                    <div className="font-semibold text-[10px] uppercase tracking-wider text-slate-500">We are currently improving:</div>
-                    <ul className="space-y-1 text-slate-600 pl-1">
+                  <div className="bg-white/60 rounded-xl p-3 text-[11px] sm:text-xs text-slate-700 space-y-2 border border-indigo-100">
+                    <div className="font-extrabold text-[11px] sm:text-xs uppercase tracking-wide text-slate-500">We are currently improving:</div>
+                    <ul className="space-y-1.5 text-slate-600 pl-0.5">
                       <li className="flex items-center gap-1.5 font-medium">
-                        <span className="text-indigo-500">•</span> AI clinical case generation
+                        <span className="text-indigo-500 font-extrabold">•</span> AI clinical case generation
                       </li>
                       <li className="flex items-center gap-1.5 font-medium">
-                        <span className="text-indigo-500">•</span> board-style question quality
+                        <span className="text-indigo-500 font-extrabold">•</span> board-style question quality
                       </li>
                       <li className="flex items-center gap-1.5 font-medium">
-                        <span className="text-indigo-500">•</span> learning system feedback
+                        <span className="text-indigo-500 font-extrabold">•</span> learning system feedback
                       </li>
                     </ul>
                   </div>
 
-                  <div className="text-[10px] sm:text-xs text-indigo-700 font-extrabold text-center bg-indigo-50 py-1.5 px-3 rounded-lg border border-indigo-100 uppercase tracking-widest mt-1">
+                  <div className="text-[10px] sm:text-[11px] text-indigo-700 font-extrabold text-center bg-indigo-50 py-2 px-4 rounded-xl border border-indigo-100 uppercase tracking-widest mt-1">
                     No payment required.
                   </div>
                 </div>
               )}
 
               {/* Pricing Cards Selection - Simplified for local scholar session */}
-              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 sm:p-5 text-center space-y-3.5">
+              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 sm:p-6 text-center space-y-3">
                 <div className="inline-flex items-center justify-center p-2.5 bg-emerald-100 text-emerald-800 rounded-full">
                   <ShieldCheck className="h-6 w-6 text-emerald-600" />
                 </div>
-                <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wide">Premium Active & Fully Unlocked</h3>
-                <p className="text-xs text-slate-600 leading-relaxed max-w-sm mx-auto">
+                <h3 className="text-xs sm:text-sm font-bold text-slate-900 uppercase tracking-wider">Premium Active & Fully Unlocked</h3>
+                <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed max-w-sm mx-auto">
                   InfectAtlas is now running in <strong>Local Scholar Mode</strong>. All board exam vignette generators, active recall flashcards, and weak-area trackers are 100% unlocked offline.
                 </p>
                 <div className="pt-1.5">

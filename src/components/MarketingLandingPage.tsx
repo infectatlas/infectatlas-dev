@@ -76,6 +76,58 @@ export default function MarketingLandingPage() {
               <div className="text-[8px] xs:text-[9px] sm:text-[10px] text-slate-500 uppercase font-bold tracking-wider mt-1 block">Practice Boards</div>
             </div>
           </div>
+
+          {/* High-Yield Clinical Comparisons Suite */}
+          <div className="pt-12 sm:pt-16 border-t border-slate-900/60 w-full text-left space-y-6 max-w-4xl mx-auto">
+            <div className="flex items-center gap-2">
+              <span className="p-1 px-1.5 bg-indigo-500/10 text-indigo-300 border border-indigo-500/30 rounded text-[10px] sm:text-xs font-black select-none">Suite</span>
+              <h2 className="text-lg sm:text-xl font-extrabold text-white tracking-tight font-sans">
+                High-Yield Clinical Comparisons
+              </h2>
+            </div>
+            
+            <p className="text-xs sm:text-sm text-slate-450 max-w-2xl font-medium leading-relaxed">
+              Explore side-by-side conceptual diagnostic grids, examiners' trap warnings, and clinical recall questions engineered to maximize USMLE, COMLEX, or NCLEX performance.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              <Link to="/mrsa-vs-mssa" className="p-4 bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-indigo-500/40 rounded-xl transition-all block group">
+                <span className="text-[9px] text-indigo-405 font-bold uppercase tracking-wider block mb-1">Microbial Resistance</span>
+                <span className="font-extrabold text-white text-xs sm:text-sm block group-hover:text-indigo-300 transition-colors">MRSA vs. MSSA</span>
+                <span className="text-[10px] text-slate-500 block mt-1 leading-normal font-medium">PBP2a alteration dynamics & drug affinities</span>
+              </Link>
+              
+              <Link to="/vancomycin-vs-linezolid" className="p-4 bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-indigo-500/40 rounded-xl transition-all block group">
+                <span className="text-[9px] text-emerald-405 font-bold uppercase tracking-wider block mb-1">Pharmacology</span>
+                <span className="font-extrabold text-white text-xs sm:text-sm block group-hover:text-emerald-300 transition-colors">Vancomycin vs. Linezolid</span>
+                <span className="text-[10px] text-slate-500 block mt-1 leading-normal font-medium">Bioavailability, troughs, & serotonin risks</span>
+              </Link>
+
+              <Link to="/cellulitis-vs-erysipelas" className="p-4 bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-indigo-500/40 rounded-xl transition-all block group">
+                <span className="text-[9px] text-purple-405 font-bold uppercase tracking-wider block mb-1">Clinical Diagnosis</span>
+                <span className="font-extrabold text-white text-xs sm:text-sm block group-hover:text-purple-300 transition-colors">Cellulitis vs. Erysipelas</span>
+                <span className="text-[10px] text-slate-500 block mt-1 leading-normal font-medium">Demarcated margins & tissue infection depth</span>
+              </Link>
+
+              <Link to="/gram-positive-vs-gram-negative" className="p-4 bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-indigo-500/40 rounded-xl transition-all block group">
+                <span className="text-[9px] text-pink-405 font-bold uppercase tracking-wider block mb-1">Microbial Morphology</span>
+                <span className="font-extrabold text-white text-xs sm:text-sm block group-hover:text-pink-300 transition-colors">Gram+ vs. Gram-</span>
+                <span className="text-[10px] text-slate-500 block mt-1 leading-normal font-medium">Outer membranes, Lipid A, & porin channels</span>
+              </Link>
+
+              <Link to="/bactericidal-vs-bacteriostatic" className="p-4 bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-indigo-500/40 rounded-xl transition-all block group">
+                <span className="text-[9px] text-amber-505 font-bold uppercase tracking-wider block mb-1">Pharmacology</span>
+                <span className="font-extrabold text-white text-xs sm:text-sm block group-hover:text-amber-400 transition-colors">Cidal vs. Static</span>
+                <span className="text-[10px] text-slate-500 block mt-1 leading-normal font-medium">ANC & meningitis therapy CSF constraints</span>
+              </Link>
+              
+              <Link to="/app" className="p-4 bg-indigo-950 hover:bg-indigo-900 border border-indigo-850 hover:border-indigo-500/60 rounded-xl transition-all block text-center flex flex-col justify-center items-center group">
+                <span className="font-black text-[10px] text-indigo-305 uppercase tracking-widest block mb-1 animate-pulse">Practice Sandbox</span>
+                <span className="font-black text-white text-xs sm:text-sm block group-hover:scale-[1.01] transition-transform">Launch Practice App</span>
+                <span className="text-[10px] text-indigo-205 block mt-0.5 leading-normal font-medium">Enter Study Dashboard</span>
+              </Link>
+            </div>
+          </div>
         </div>
       </main>
 
