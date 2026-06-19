@@ -443,7 +443,7 @@ export default function ComparisonsSEO() {
         </nav>
 
         {/* Hero Banner Grid layout */}
-        <div className="bg-slate-900 text-white rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg border border-slate-800 relative overflow-hidden mb-8">
+        <div className="relative bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-slate-800 shadow-md overflow-hidden mb-8">
           <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl -z-1" />
           <div className="absolute bottom-0 left-10 w-60 h-60 bg-emerald-600/5 rounded-full blur-2xl -z-1" />
           

@@ -124,6 +124,11 @@ function InnerApp() {
     }
   }, [location.pathname]);
 
+  // Handle automatic scrolling to the top on any route change to prevent mid-page loads
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [location.pathname]);
+
   // Track app opened log on initial load
   useEffect(() => {
     analyticsUtil.track("app_opened");
