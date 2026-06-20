@@ -767,26 +767,16 @@ export default function MarketingLandingPage() {
       <section id="popular-comparisons" className="py-16 sm:py-20 w-full bg-slate-50 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div className="space-y-2">
-              <span className="text-[10px] font-black uppercase tracking-widest text-indigo-600 font-sans block">
-                Study Hotspots
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-display italic">
-                Popular Board Diferentials
-              </h2>
-              <p className="text-slate-550 text-sm max-w-xl leading-relaxed">
-                Classic diagnostic traps and high-frequency examination targets organized side-by-side.
-              </p>
-            </div>
-            <Link 
-              to="/comparisons" 
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 hover:text-indigo-750 hover:underline shrink-0"
-              id="all-comparisons-link"
-            >
-              <span>View All Board Differentials</span>
-              <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
+          <div className="text-center space-y-2 max-w-2xl mx-auto">
+            <span className="text-[10px] font-black uppercase tracking-widest text-indigo-600 font-sans block">
+              Study Hotspots
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-display italic">
+              Popular Board Diferentials
+            </h2>
+            <p className="text-slate-550 text-sm max-w-xl mx-auto leading-relaxed mt-1">
+              Classic diagnostic traps and high-frequency examination targets organized side-by-side.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5" id="comparisons-showcase-grid">
@@ -883,6 +873,17 @@ export default function MarketingLandingPage() {
               </span>
             </Link>
 
+          </div>
+
+          <div className="flex justify-center pt-6">
+            <Link 
+              to="/comparisons" 
+              className="inline-flex items-center gap-1.5 text-xs font-black text-indigo-600 hover:text-indigo-750 hover:underline transition-all"
+              id="all-comparisons-link"
+            >
+              <span>View All Board Differentials</span>
+              <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </div>
       </section>
