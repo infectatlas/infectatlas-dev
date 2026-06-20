@@ -323,7 +323,7 @@ export default function DrugsSEO() {
       
       {/* Pristine Master Header */}
       <header className={`bg-white border-b border-slate-200 active:bg-white sticky top-0 z-20 w-full h-16 transition-transform duration-300 ease-in-out ${showHeader ? "translate-y-0" : "-translate-y-full"}`}>
-        <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 relative">
           <Link to="/" className="flex items-center gap-2.5 group focus:outline-indigo-600 rounded-lg p-1" title="Back to Homepage">
             <div className="p-2 bg-indigo-600 text-white rounded-lg flex items-center justify-center transition-transform duration-200 group-hover:scale-105 shadow-sm shrink-0">
                <BrainCircuit className="h-5 w-5" />
@@ -338,31 +338,38 @@ export default function DrugsSEO() {
             </div>
           </Link>
 
-          <div className="flex items-center gap-2.5 sm:gap-4">
-            <nav className="hidden sm:flex items-center gap-3">
-              <Link
-                to="/organisms"
-                className="text-xs font-bold text-slate-550 hover:text-indigo-600 transition-colors py-1.5 px-2.5 rounded-md hover:bg-slate-50"
-              >
-                Organisms
-              </Link>
-              <Link
-                to="/diseases"
-                className="text-xs font-bold text-slate-550 hover:text-indigo-600 transition-colors py-1.5 px-2.5 rounded-md hover:bg-slate-50"
-              >
-                Diseases
-              </Link>
-              <Link
-                to="/drugs"
-                className="text-xs font-bold text-indigo-600 bg-indigo-50/50 py-1.5 px-2.5 rounded-md"
-              >
-                Drugs
-              </Link>
-            </nav>
-            <div className="hidden sm:block h-4 w-px bg-slate-200" />
+          {/* Center Links (Desktop only, match homepage) */}
+          <div className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2" id="nav-links">
+            <Link 
+              to="/organisms" 
+              className="px-4 py-2 text-[14px] font-semibold text-slate-600 hover:text-indigo-600 focus:outline-indigo-600 rounded-lg transition-colors"
+            >
+              Organisms
+            </Link>
+            <Link 
+              to="/diseases" 
+              className="px-4 py-2 text-[14px] font-semibold text-slate-600 hover:text-indigo-600 focus:outline-indigo-600 rounded-lg transition-colors"
+            >
+              Diseases
+            </Link>
+            <Link 
+              to="/drugs" 
+              className="px-4 py-2 text-[14px] font-semibold text-indigo-600 bg-indigo-50/50 focus:outline-indigo-600 rounded-lg transition-colors"
+            >
+              Drugs
+            </Link>
+            <Link 
+              to="/comparisons" 
+              className="px-4 py-2 text-[14px] font-semibold text-slate-600 hover:text-indigo-600 focus:outline-indigo-600 rounded-lg transition-colors"
+            >
+              Comparisons
+            </Link>
+          </div>
+
+          <div className="flex items-center gap-3">
             <button
               onClick={() => handleLaunchApp("dashboard")}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-3.5 py-2 rounded-lg transition-all shadow-xs cursor-pointer flex items-center gap-1.5"
+              className="bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg transition-all shadow-xs hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 min-h-[36px] cursor-pointer flex items-center gap-1.5"
             >
               <Zap className="h-3.5 w-3.5 fill-white" />
               <span>Study App</span>

@@ -15,7 +15,8 @@ import {
   ShieldCheck,
   BrainCircuit,
   Heart,
-  ClipboardList
+  ClipboardList,
+  Zap
 } from "lucide-react";
 import { microorganismsData } from "../data/microorganisms";
 import { diseasesData } from "../data/diseases";
@@ -43,6 +44,11 @@ export default function MarketingLandingPage() {
   const [isFocused, setIsFocused] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleLaunchApp = (focusTask: string) => {
+    localStorage.setItem("infectatlas_active_tab", focusTask);
+    navigate("/app");
+  };
 
   // Close search suggestion overlay on click outside
   useEffect(() => {
@@ -164,7 +170,7 @@ export default function MarketingLandingPage() {
       
       {/* 1. STICKY NAVIGATION */}
       <nav id="sticky-header" className="sticky top-0 z-50 w-full h-16 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-shadow duration-200">
-        <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between relative">
           
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group focus:outline-indigo-600 rounded-lg p-1" id="nav-logo">
@@ -182,7 +188,7 @@ export default function MarketingLandingPage() {
           </Link>
 
           {/* Center Links (Desktop only) */}
-          <div className="hidden md:flex items-center gap-1" id="nav-links">
+          <div className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2" id="nav-links">
             <Link 
               to="/organisms" 
               className="px-4 py-2 text-[14px] font-semibold text-slate-600 hover:text-indigo-600 focus:outline-indigo-600 rounded-lg transition-colors"
@@ -211,13 +217,14 @@ export default function MarketingLandingPage() {
 
           {/* Right CTA (Desktop) */}
           <div className="hidden md:flex items-center gap-3" id="nav-right">
-            <Link 
-              to="/app" 
-              className="px-3.5 py-1.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 rounded-lg transition-all duration-150 shadow-xs hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 min-h-[36px] flex items-center justify-center"
+            <button
+              onClick={() => handleLaunchApp("dashboard")}
+              className="bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg transition-all shadow-xs hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 min-h-[36px] cursor-pointer flex items-center gap-1.5"
               id="cta-nav-start"
             >
-              Start Studying Free
-            </Link>
+              <Zap className="h-3.5 w-3.5 fill-white" />
+              <span>Study App</span>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -269,13 +276,16 @@ export default function MarketingLandingPage() {
               </Link>
               
               <div className="pt-4 border-t border-slate-100 mt-2">
-                <Link 
-                  to="/app" 
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="w-full py-3.5 text-center font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl transition-all duration-150 shadow-sm block min-h-[48px]"
+                <button 
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    handleLaunchApp("dashboard");
+                  }}
+                  className="w-full py-3 text-center font-bold text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 min-h-[44px]"
                 >
-                  Start Studying Free
-                </Link>
+                  <Zap className="h-4 w-4 fill-white" />
+                  <span>Study App</span>
+                </button>
               </div>
             </div>
           </div>
