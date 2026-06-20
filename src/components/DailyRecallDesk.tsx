@@ -25,6 +25,7 @@ interface DailyRecallDeskProps {
   externalSessionLaunchIds?: string[] | null;
   onClearExternalSessionLaunch?: () => void;
   isUnified?: boolean;
+  renderSection?: "queue" | "hydrate" | "all";
 }
 
 export default function DailyRecallDesk({
@@ -36,7 +37,8 @@ export default function DailyRecallDesk({
   onUnlockPremium,
   externalSessionLaunchIds = null,
   onClearExternalSessionLaunch,
-  isUnified = false
+  isUnified = false,
+  renderSection = "all"
 }: DailyRecallDeskProps) {
   // Session Active states
   const [sessionQueue, setSessionQueue] = useState<string[]>([]);
@@ -176,137 +178,156 @@ export default function DailyRecallDesk({
     return microorganismsData.find(m => m.id === activePathogenId) || null;
   }, [activePathogenId]);
 
-  const renderConsoleContent = () => (
-    <div className="p-5 space-y-5">
-      {dueItems.length === 0 && (
-        /* Queue Cleared Success Box */
-        <div className="bg-emerald-50/40 border border-emerald-100 rounded-xl p-4 text-center space-y-2.5">
-          <div className="inline-flex items-center justify-center p-2 bg-emerald-100/60 text-emerald-800 rounded-full">
-            <CheckCircle2 className="h-5 w-5 text-emerald-600" />
-          </div>
-          <div className="space-y-0.5">
-            <h4 className="text-xs font-bold text-slate-800">Your Active Recall Queue is Pristine!</h4>
-            <p className="text-[11px] text-slate-500 max-w-md mx-auto leading-relaxed">
-              Amazing compliance. All spaced repetition pathogen schedules are fully synced. Keep your knowledge sharp by hydrating the desk with additional organisms below.
-            </p>
-          </div>
-        </div>
+  const renderConsoleContent = (section: "queue" | "hydrate" | "all" = "all") => (
+    <div className={section === "all" ? "p-5 space-y-5" : "p-5"}>
+      {(section === "all" || section === "queue") && (
+        <>
+          {dueItems.length === 0 ? (
+            /* Queue Cleared Success Box */
+            <div className="bg-emerald-50/40 border border-emerald-100 rounded-xl p-4 text-center space-y-2.5">
+              <div className="inline-flex items-center justify-center p-2 bg-emerald-100/60 text-emerald-800 rounded-full">
+                <CheckCircle2 className="h-5 w-5 text-emerald-600" />
+              </div>
+              <div className="space-y-0.5">
+                <h4 className="text-xs font-bold text-slate-800">Your Active Recall Queue is Pristine!</h4>
+                <p className="text-[11px] text-slate-500 max-w-md mx-auto leading-relaxed">
+                  Amazing compliance. All spaced repetition pathogen schedules are fully synced. Use the hydration tools below or custom focal lists to study ahead.
+                </p>
+              </div>
+            </div>
+          ) : (
+            /* Queue Due Alert Box */
+            <div className="bg-rose-50/35 border border-rose-100/60 rounded-xl p-4 text-center space-y-2.5">
+              <div className="inline-flex items-center justify-center p-2 bg-rose-105-bg text-rose-800 rounded-full">
+                <Clock className="h-5 w-5 text-rose-600" />
+              </div>
+              <div className="space-y-0.5">
+                <h4 className="text-xs font-bold text-slate-850">Critical Spaced Repetition Due</h4>
+                <p className="text-[11px] text-slate-505 max-w-md mx-auto leading-relaxed">
+                  You have <span className="font-sans font-extrabold text-rose-600">{dueItems.length} pathogens</span> scheduled for memory retention checks today. Use the active launcher at the top right to complete reviews.
+                </p>
+              </div>
+            </div>
+          )}
+        </>
       )}
 
-      {/* Desk Hydrator Action Console */}
-      <div className="border-t border-slate-100 pt-4 space-y-3">
-        <div className="flex items-center justify-between">
-          <h4 className="text-xs font-extrabold uppercase tracking-wide text-slate-700 flex items-center gap-1.5 font-sans">
-            <RotateCw className="h-3.5 w-3.5 text-indigo-500" />
-            Hydrate Memory Desk & Study Ahead
-          </h4>
-          <span className="text-[10px] text-slate-400">Simulate practice anytime</span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {/* Random hydrate */}
-          <div className="bg-slate-50 border border-slate-150 rounded-xl p-3 flex flex-col justify-between text-xs space-y-2.5">
-            <div className="space-y-0.5">
-              <span className="font-bold text-slate-800 text-[11px] sm:text-xs">Dynamic Target Picker</span>
-              <p className="text-[10px] text-slate-500 leading-normal">
-                Pulls 3 fresh, high-yield pathogens from the syllabus that are not yet mastered.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => handleHydrateDeskRandom(3)}
-              className="w-full inline-flex items-center justify-center gap-1.5 py-1.5 px-3 bg-white hover:bg-indigo-50 text-indigo-600 border border-indigo-200 hover:border-indigo-300 font-bold rounded-lg transition-colors text-[10px]"
-            >
-              <Plus className="h-3 w-3" />
-              Load 3 Target Pathogens
-            </button>
+      {(section === "all" || section === "hydrate") && (
+        /* Desk Hydrator Action Console */
+        <div className={section === "all" ? "border-t border-slate-100 pt-4 space-y-3" : "space-y-3"}>
+          <div className="flex items-center justify-between">
+            <h4 className="text-xs font-extrabold uppercase tracking-wide text-slate-700 flex items-center gap-1.5 font-sans">
+              <RotateCw className="h-3.5 w-3.5 text-indigo-500" />
+              Hydrate Memory Desk & Study Ahead
+            </h4>
+            <span className="text-[10px] text-slate-400">Simulate practice anytime</span>
           </div>
 
-          {/* Lists hydrate */}
-          <div className="bg-slate-50 border border-slate-150 rounded-xl p-3 flex flex-col justify-between text-xs space-y-2.5">
-            <div className="space-y-0.5">
-              <span className="font-bold text-slate-800 text-[11px] sm:text-xs">Load Active Curriculum</span>
-              <p className="text-[10px] text-slate-500 leading-normal">
-                Feed targets instantly from your custom focal study lists or school presets.
-              </p>
-            </div>
-            
-            {studyLists.length > 0 ? (
-              <div className="relative group text-[10px]">
-                <select
-                  title="Select Study List to Study now"
-                  className="w-full bg-white border border-slate-200 hover:border-indigo-300 font-semibold rounded-lg py-1.5 px-2.5 text-slate-755 focus:outline-hidden"
-                  onChange={(e) => {
-                    if (e.target.value) {
-                      handleHydrateDeskFromList(e.target.value);
-                      e.target.value = ""; // reset
-                    }
-                  }}
-                >
-                  <option value="">-- Choose Study List to Load --</option>
-                  {studyLists.map(list => (
-                    <option key={list.id} value={list.id}>
-                      {list.name} ({list.pathogenIds.length} bugs)
-                    </option>
-                  ))}
-                </select>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {/* Random hydrate */}
+            <div className="bg-slate-50 border border-slate-150 rounded-xl p-3 flex flex-col justify-between text-xs space-y-2.5">
+              <div className="space-y-0.5">
+                <span className="font-bold text-slate-800 text-[11px] sm:text-xs">Dynamic Target Picker</span>
+                <p className="text-[10px] text-slate-505 leading-normal">
+                  Pulls 3 fresh, high-yield pathogens from the syllabus that are not yet mastered.
+                </p>
               </div>
-            ) : (
-              <p className="text-[9px] text-slate-400 italic">No custom study lists logged. Create lists in the right panel.</p>
-            )}
-          </div>
-        </div>
-
-        {/* Study Tracker Status list if tracking but not due */}
-        {trackingButNotDueItems.length > 0 && (
-          <div className="bg-slate-50 rounded-xl border border-slate-150 p-2 text-xs">
-            <div className="flex justify-between text-[10px] text-slate-500 font-semibold px-1 pb-1">
-              <span>Upcoming Automated Reviews (Future Spacings):</span>
-              <span>{trackingButNotDueItems.length} total</span>
+              <button
+                type="button"
+                onClick={() => handleHydrateDeskRandom(3)}
+                className="w-full inline-flex items-center justify-center gap-1.5 py-1.5 px-3 bg-white hover:bg-indigo-50 text-indigo-600 border border-indigo-200 hover:border-indigo-300 font-bold rounded-lg transition-colors text-[10px]"
+              >
+                <Plus className="h-3 w-3" />
+                Load 3 Target Pathogens
+              </button>
             </div>
-            <div className="max-h-24 overflow-y-auto space-y-1 pr-1">
-              {trackingButNotDueItems.slice(0, 5).map(item => {
-                const name = microorganismsData.find(m => m.id === item.pathogenId)?.name || item.pathogenId;
-                const diffInSecs = new Date(item.nextReviewDate).getTime() - Date.now();
-                const hoursLeft = Math.max(1, Math.round(diffInSecs / (1000 * 60 * 60)));
-                const daysLeft = Math.round(hoursLeft / 24);
 
-                return (
-                  <div key={item.pathogenId} className="bg-white p-1.5 rounded-md border border-slate-200/40 flex justify-between items-center text-[11px]">
-                    <span className="font-semibold text-slate-755 italic truncate max-w-[170px]">{name}</span>
-                    <div className="flex items-center gap-1.5 shrink-0 text-[10px]">
-                      <span className="font-semibold text-slate-400">Int: {item.intervalDays}d</span>
-                      <span className="bg-slate-100 text-slate-505 py-0.5 px-1.5 rounded-full font-bold">
-                        {daysLeft >= 1 ? `Due in ${daysLeft}d` : `Due in ${hoursLeft}h`}
-                      </span>
-                      <button
-                        title="Review ahead"
-                        type="button"
-                        onClick={() => startSession([item.pathogenId])}
-                        className="text-indigo-600 hover:text-indigo-800 font-bold hover:underline"
-                      >
-                        Study
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
-              {trackingButNotDueItems.length > 5 && (
-                <div className="text-center text-[9px] text-slate-400 italic pt-1 text-[9px]">
-                  + {trackingButNotDueItems.length - 5} more mapped future reviews
+            {/* Lists hydrate */}
+            <div className="bg-slate-50 border border-slate-150 rounded-xl p-3 flex flex-col justify-between text-xs space-y-2.5">
+              <div className="space-y-0.5">
+                <span className="font-bold text-slate-800 text-[11px] sm:text-xs">Load Active Curriculum</span>
+                <p className="text-[10px] text-slate-505 leading-normal">
+                  Feed targets instantly code-safe from your custom focal study lists or school presets.
+                </p>
+              </div>
+              
+              {studyLists.length > 0 ? (
+                <div className="relative group text-[10px]">
+                  <select
+                    title="Select Study List to Study now"
+                    className="w-full bg-white border border-slate-200 hover:border-indigo-300 font-semibold rounded-lg py-1.5 px-2.5 text-slate-755 focus:outline-hidden"
+                    onChange={(e) => {
+                      if (e.target.value) {
+                        handleHydrateDeskFromList(e.target.value);
+                        e.target.value = ""; // reset
+                      }
+                    }}
+                  >
+                    <option value="">-- Choose Study List to Load --</option>
+                    {studyLists.map(list => (
+                      <option key={list.id} value={list.id}>
+                        {list.name} ({list.pathogenIds.length} bugs)
+                      </option>
+                    ))}
+                  </select>
                 </div>
+              ) : (
+                <p className="text-[9px] text-slate-400 italic">No custom study lists logged. Create lists in the right panel.</p>
               )}
             </div>
           </div>
-        )}
-      </div>
+
+          {/* Study Tracker Status list if tracking but not due */}
+          {trackingButNotDueItems.length > 0 && (
+            <div className="bg-slate-50 rounded-xl border border-slate-150 p-2 text-xs">
+              <div className="flex justify-between text-[10px] text-slate-505 font-semibold px-1 pb-1">
+                <span>Upcoming Automated Reviews (Future Spacings):</span>
+                <span>{trackingButNotDueItems.length} total</span>
+              </div>
+              <div className="max-h-24 overflow-y-auto space-y-1 pr-1">
+                {trackingButNotDueItems.slice(0, 5).map(item => {
+                  const name = microorganismsData.find(m => m.id === item.pathogenId)?.name || item.pathogenId;
+                  const diffInSecs = new Date(item.nextReviewDate).getTime() - Date.now();
+                  const hoursLeft = Math.max(1, Math.round(diffInSecs / (1000 * 60 * 60)));
+                  const daysLeft = Math.round(hoursLeft / 24);
+
+                  return (
+                    <div key={item.pathogenId} className="bg-white p-1.5 rounded-md border border-slate-200/40 flex justify-between items-center text-[11px]">
+                      <span className="font-semibold text-slate-755 italic truncate max-w-[170px]">{name}</span>
+                      <div className="flex items-center gap-1.5 shrink-0 text-[10px]">
+                        <span className="font-semibold text-slate-400">Int: {item.intervalDays}d</span>
+                        <span className="bg-slate-100 text-slate-505 py-0.5 px-1.5 rounded-full font-bold">
+                          {daysLeft >= 1 ? `Due in ${daysLeft}d` : `Due in ${hoursLeft}h`}
+                        </span>
+                        <button
+                          title="Review ahead"
+                          type="button"
+                          onClick={() => startSession([item.pathogenId])}
+                          className="text-indigo-600 hover:text-indigo-800 font-bold hover:underline cursor-pointer"
+                        >
+                          Study
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+                {trackingButNotDueItems.length > 5 && (
+                  <div className="text-center text-[9px] text-slate-400 italic pt-1 text-[9px]">
+                    + {trackingButNotDueItems.length - 5} more mapped future reviews
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 
   return (
     <div id="daily-recall-desk-widget" className={isUnified ? "" : "space-y-6"}>
       {isUnified ? (
-        renderConsoleContent()
+        renderConsoleContent(renderSection)
       ) : (
         /* 1. Main Static Desk Dashboard Card */
         <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
@@ -314,14 +335,14 @@ export default function DailyRecallDesk({
           <div className="px-5 py-4 border-b border-slate-150 flex items-center justify-between">
             <h2 className="text-sm font-semibold text-slate-800 flex items-center gap-2">
               <BrainCircuit className="h-5 w-5 text-indigo-600" />
-              Adaptive Recall Console
+              {renderSection === "hydrate" ? "Memory Hydration Desk" : "Adaptive Recall Console"}
             </h2>
             <span className="text-[10px] text-indigo-505 font-bold uppercase tracking-wider bg-indigo-50 py-0.5 px-2 rounded-md">
               {dueItems.length} Due Today
             </span>
           </div>
 
-          {renderConsoleContent()}
+          {renderConsoleContent(renderSection)}
         </div>
       )}
 

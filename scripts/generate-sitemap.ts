@@ -101,6 +101,7 @@ async function generate() {
 
   // 4. Comparisons & Index Sitemap (holding home Page, Study App Guide, and comparisons)
   const comparisonSlugs = [
+    "comparisons",
     "mrsa-vs-mssa",
     "vancomycin-vs-linezolid",
     "cellulitis-vs-erysipelas",

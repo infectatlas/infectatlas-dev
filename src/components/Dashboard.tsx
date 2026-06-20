@@ -106,143 +106,111 @@ export default function Dashboard({
 
   return (
     <div className="space-y-6" id="dashboard-root">
-      {/* Unified Master Header & Spaced Repetition Workspace Card */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden" id="dashboard-unified-card">
-        {/* Top: Sleek Ultra-Slim Board HUD Section merged seamlessly as header */}
-        <div className="relative bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 pt-4 pb-3 px-3.5 sm:pt-5 sm:pb-3.5 sm:px-5 md:pt-5.5 md:pb-4 md:px-6 text-white overflow-hidden border-b border-slate-800/85">
-          <div className="absolute right-0 bottom-0 top-0 w-1/3 opacity-15 bg-[radial-gradient(circle_at_bottom_right,var(--color-indigo-500),transparent)] pointer-events-none" />
-          
-          <div className="relative z-10 flex flex-col gap-1 sm:gap-1.5">
-            {/* Main heading and stats row */}
-            <div className="relative flex flex-col md:flex-row md:items-start md:justify-between gap-3">
-              <div className="space-y-1.5">
-                <h1 className="text-base sm:text-lg md:text-xl font-black tracking-tight text-white leading-tight sm:leading-snug pr-[105px] xs:pr-[125px] sm:pr-[145px] md:pr-0">
-                  <span>Master Infectious Diseases</span>
-                  <span className="block sm:inline sm:pl-1 mt-0.5 sm:mt-0">
-                    Through <span className="text-indigo-400 bg-linear-to-r from-indigo-300 to-violet-300 bg-clip-text text-transparent font-black inline-block">Adaptive Recall</span>
-                  </span>
-                </h1>
-                
-                <p className="text-[9px] sm:text-xs text-slate-400 font-semibold leading-normal pr-[105px] xs:pr-[125px] sm:pr-[145px] md:pr-0 whitespace-normal block">
-                  Medical Board active memory spacing dashboard
-                </p>
-              </div>
+      {/* Unified Master Header Hero Card - Just keep the beautiful Indigo Gradient block */}
+      <div className="relative bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-2xl pt-4 pb-3.5 px-3.5 sm:pt-5 sm:pb-4 sm:px-5 md:pt-5.5 md:pb-5 md:px-6 text-white overflow-hidden border border-slate-800/85 shadow-sm" id="dashboard-unified-card">
+        <div className="absolute right-0 bottom-0 top-0 w-1/3 opacity-15 bg-[radial-gradient(circle_at_bottom_right,var(--color-indigo-500),transparent)] pointer-events-none" />
+        
+        <div className="relative z-10 flex flex-col gap-1 sm:gap-1.5">
+          {/* Main heading and stats row */}
+          <div className="relative flex flex-col md:flex-row md:items-start md:justify-between gap-3">
+            <div className="space-y-1.5">
+              <h1 className="text-base sm:text-lg md:text-xl font-black tracking-tight text-white leading-tight sm:leading-snug pr-[105px] xs:pr-[125px] sm:pr-[145px] md:pr-0">
+                <span>Master Infectious Diseases</span>
+                <span className="block sm:inline sm:pl-1 mt-0.5 sm:mt-0">
+                  Through <span className="text-indigo-400 bg-linear-to-r from-indigo-300 to-violet-300 bg-clip-text text-transparent font-black inline-block">Adaptive Recall</span>
+                </span>
+              </h1>
+              
+              <p className="text-[9px] sm:text-xs text-slate-400 font-semibold leading-normal pr-[105px] xs:pr-[125px] sm:pr-[145px] md:pr-0 whitespace-normal block">
+                Medical Board active memory spacing dashboard
+              </p>
+            </div>
 
-              <div className="absolute top-0 right-0 md:relative md:top-auto md:right-auto flex flex-col items-end md:flex-row md:items-center gap-1.5 sm:gap-2 md:gap-3 shrink-0 md:mt-0.5">
-                {/* Start Recall / Queue Clear Action */}
-                {dueItems.length > 0 ? (
-                  <button
-                    onClick={() => setSessionLaunchQueue(dueItems.map(item => item.pathogenId))}
-                    title="Click to launch active recall session"
-                    className="text-[9px] sm:text-[10px] md:text-[11px] font-medium px-2 py-1 sm:py-1.5 md:px-3 md:py-1.5 rounded-md uppercase tracking-wider select-none transition-all active:scale-[0.96] duration-150 flex items-center justify-center gap-1.5 border border-rose-500/20 text-rose-300 bg-rose-950/40 hover:bg-rose-900/55 hover:border-rose-500/40 cursor-pointer shadow-xs animate-glow-rose shrink-0"
-                  >
-                    <Clock className="h-3 w-3 text-rose-300 shrink-0" />
-                    <span className="text-slate-300 font-normal"><span className="text-rose-300 font-mono font-normal">{dueItems.length}</span> Due • Start</span>
-                  </button>
-                ) : (
-                  <span className="text-[9px] sm:text-[10px] md:text-[11px] font-medium px-2 py-1 sm:py-1.5 md:px-3 md:py-1.5 rounded-md uppercase tracking-wider select-none bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0 inline-flex items-center justify-center gap-1.5">
-                    <Clock className="h-3 w-3 text-emerald-400 shrink-0" />
-                    <span className="font-normal text-emerald-300">✓ Clear</span>
-                  </span>
-                )}
+            <div className="absolute top-0 right-0 md:relative md:top-auto md:right-auto flex flex-col items-end md:flex-row md:items-center gap-1.5 sm:gap-2 md:gap-3 shrink-0 md:mt-0.5">
+              {/* Start Recall / Queue Clear Action */}
+              {dueItems.length > 0 ? (
+                <button
+                  onClick={() => setSessionLaunchQueue(dueItems.map(item => item.pathogenId))}
+                  title="Click to launch active recall session"
+                  className="text-[9px] sm:text-[10px] md:text-[11px] font-medium px-2 py-1 sm:py-1.5 md:px-3 md:py-1.5 rounded-md uppercase tracking-wider select-none transition-all active:scale-[0.96] duration-150 flex items-center justify-center gap-1.5 border border-rose-500/20 text-rose-300 bg-rose-950/40 hover:bg-rose-900/55 hover:border-rose-500/40 cursor-pointer shadow-xs animate-glow-rose shrink-0"
+                >
+                  <Clock className="h-3 w-3 text-rose-300 shrink-0" />
+                  <span className="text-slate-300 font-normal"><span className="text-rose-300 font-mono font-normal">{dueItems.length}</span> Due • Start</span>
+                </button>
+              ) : (
+                <span className="text-[9px] sm:text-[10px] md:text-[11px] font-medium px-2 py-1 sm:py-1.5 md:px-3 md:py-1.5 rounded-md uppercase tracking-wider select-none bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0 inline-flex items-center justify-center gap-1.5">
+                  <Clock className="h-3 w-3 text-emerald-400 shrink-0" />
+                  <span className="font-normal text-emerald-300">✓ Clear</span>
+                </span>
+              )}
 
-                {/* Streak Panel */}
-                <div className="text-[9px] sm:text-[10px] md:text-[11px] font-medium px-2 py-1 sm:py-1.5 md:px-3 md:py-1.5 rounded-md uppercase tracking-wider select-none bg-slate-950/60 backdrop-blur-md border border-white/10 shrink-0 inline-flex items-center justify-center gap-1.5">
-                  <Flame className="h-3 w-3 text-amber-500 shrink-0 fill-amber-500/20" />
-                  <span className="text-slate-300 font-normal">Streak •</span>
-                  <span className="font-extrabold text-indigo-300 font-mono">{analytics.currentStreak}</span>
-                </div>
+              {/* Streak Panel */}
+              <div className="text-[9px] sm:text-[10px] md:text-[11px] font-medium px-2 py-1 sm:py-1.5 md:px-3 md:py-1.5 rounded-md uppercase tracking-wider select-none bg-slate-950/60 backdrop-blur-md border border-white/10 shrink-0 inline-flex items-center justify-center gap-1.5">
+                <Flame className="h-3 w-3 text-amber-500 shrink-0 fill-amber-500/20" />
+                <span className="text-slate-300 font-normal">Streak •</span>
+                <span className="font-extrabold text-indigo-300 font-mono">{analytics.currentStreak}</span>
               </div>
-            </div>
-          </div>
-
-          {/* Horizontal HUD Bar - Arranged in one sleek, clean line on desktop */}
-          <div className="hidden sm:flex flex-row items-center justify-between mt-3 text-[10px] tracking-tight text-slate-300 w-full gap-2">
-            <div className="flex items-center gap-1.5 font-medium">
-              <div className="p-1 bg-indigo-500/15 rounded-md text-indigo-400 shrink-0">
-                <Layers className="h-3.5 w-3.5" />
-              </div>
-              <span className="font-semibold tracking-tight">Weak-Area Tracking</span>
-            </div>
-            <div className="h-3 w-px bg-white/10 shrink-0" />
-            <div className="flex items-center gap-1.5 font-medium">
-              <div className="p-1 bg-indigo-500/15 rounded-md text-indigo-400 shrink-0">
-                <Clock className="h-3.5 w-3.5" />
-              </div>
-              <span className="font-semibold tracking-tight font-sans">Spaced Repetition</span>
-            </div>
-            <div className="h-3 w-px bg-white/10 shrink-0" />
-            <div className="flex items-center gap-1.5 font-medium">
-              <div className="p-1 bg-indigo-500/15 rounded-md text-indigo-400 shrink-0">
-                <Calendar className="h-3.5 w-3.5" />
-              </div>
-              <span className="font-semibold tracking-tight">Review Scheduling</span>
-            </div>
-            <div className="h-3 w-px bg-white/10 shrink-0" />
-            <div className="flex items-center gap-1.5 font-medium">
-              <div className="p-1 bg-indigo-500/15 rounded-md text-indigo-400 shrink-0">
-                <Zap className="h-3.5 w-3.5" />
-              </div>
-              <span className="font-semibold tracking-tight font-sans">Streak Tracking</span>
-            </div>
-            <div className="h-3 w-px bg-white/10 shrink-0" />
-            <div className="flex items-center gap-1.5 font-medium">
-              <div className="p-1 bg-indigo-500/15 rounded-md text-indigo-400 shrink-0">
-                <Target className="h-3.5 w-3.5" />
-              </div>
-              <span className="font-semibold tracking-tight">Progress Analytics</span>
             </div>
           </div>
         </div>
 
-        {/* Bottom Panel Dynamic Workspace with Overlay and DailyRecallDesk nested */}
-        <div className="relative">
-          {/* If not premium, overlay a high-conversion CTA over the lower dashboard widgets */}
-          {!isPremium && (
-            <div className="absolute inset-0 z-20 bg-slate-50/55 backdrop-blur-md flex flex-col items-center justify-center text-center p-6 border-t border-slate-150">
-              <div className="max-w-md bg-white p-7 rounded-3xl border border-slate-200 shadow-2xl space-y-4">
-                <div className="inline-flex items-center justify-center p-3 bg-amber-50 text-amber-500 rounded-full animate-pulse">
-                  <Clock className="h-7 w-7 text-amber-600" />
-                </div>
-                <h2 className="text-lg font-bold text-slate-900 font-sans">👑 Scholar Progress & Repetition Systems Locked</h2>
-                <p className="text-xs text-slate-500 leading-relaxed font-sans">
-                  Unlock active review desks, custom board focal lists, spaced repetition scheduling, and diagnostic category bars to maximize your clinical exam results.
-                </p>
-                <div className="pt-2">
-                  <button
-                    type="button"
-                    onClick={onUnlockPremium}
-                    className="w-full text-xs font-bold py-2.5 px-5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-150 transition-all transform hover:scale-101 cursor-pointer"
-                  >
-                    Unlock Premium Access ($5.99/mo)
-                  </button>
-                  <span className="text-[9px] text-slate-400 mt-2 block font-medium">
-                    Free Reference tools (Browser, Lookup, and maps) remain fully open.
-                  </span>
-                </div>
-              </div>
+        {/* Horizontal HUD Bar - Arranged in one sleek, clean line on desktop */}
+        <div className="hidden sm:flex flex-row items-center justify-between mt-3.5 text-[10px] tracking-tight text-slate-300 w-full gap-2 relative z-10 font-sans">
+          <div className="flex items-center gap-1.5 font-medium">
+            <div className="p-1 bg-indigo-500/15 rounded-md text-indigo-400 shrink-0">
+              <Layers className="h-3.5 w-3.5" />
             </div>
-          )}
-
-          <div className={!isPremium ? "pointer-events-none select-none max-h-[300px] overflow-hidden brightness-95" : ""}>
-            {/* Active Recall Spaced Repetition Desk placed right inside the unified card */}
-            <DailyRecallDesk
-              spacedRepetitionItems={spacedRepetitionItems}
-              studyLists={studyLists}
-              onReviewSpacedRepetition={onReviewSpacedRepetition}
-              onAddSpacedRepetition={onAddSpacedRepetition}
-              isPremium={isPremium}
-              onUnlockPremium={onUnlockPremium}
-              externalSessionLaunchIds={sessionLaunchQueue}
-              onClearExternalSessionLaunch={() => setSessionLaunchQueue(null)}
-              isUnified={true}
-            />
+            <span className="font-semibold tracking-tight">Weak-Area Tracking</span>
+          </div>
+          <div className="h-3 w-px bg-white/10 shrink-0" />
+          <div className="flex items-center gap-1.5 font-medium">
+            <div className="p-1 bg-indigo-500/15 rounded-md text-indigo-400 shrink-0">
+              <Clock className="h-3.5 w-3.5" />
+            </div>
+            <span className="font-semibold tracking-tight">Spaced Repetition</span>
+          </div>
+          <div className="h-3 w-px bg-white/10 shrink-0" />
+          <div className="flex items-center gap-1.5 font-medium">
+            <div className="p-1 bg-indigo-500/15 rounded-md text-indigo-400 shrink-0">
+              <Calendar className="h-3.5 w-3.5" />
+            </div>
+            <span className="font-semibold tracking-tight">Review Scheduling</span>
+          </div>
+          <div className="h-3 w-px bg-white/10 shrink-0" />
+          <div className="flex items-center gap-1.5 font-medium">
+            <div className="p-1 bg-indigo-500/15 rounded-md text-indigo-400 shrink-0">
+              <Zap className="h-3.5 w-3.5" />
+            </div>
+            <span className="font-semibold tracking-tight">Streak Tracking</span>
+          </div>
+          <div className="h-3 w-px bg-white/10 shrink-0" />
+          <div className="flex items-center gap-1.5 font-medium">
+            <div className="p-1 bg-indigo-500/15 rounded-md text-indigo-400 shrink-0">
+              <Target className="h-3.5 w-3.5" />
+            </div>
+            <span className="font-semibold tracking-tight">Progress Analytics</span>
           </div>
         </div>
       </div>
 
+      {/* Unified Adaptive Recall & Memory Hydration Desk Console */}
+      <div className={!isPremium ? "pointer-events-none select-none opacity-50 brightness-95" : ""}>
+        <DailyRecallDesk
+          spacedRepetitionItems={spacedRepetitionItems}
+          studyLists={studyLists}
+          onReviewSpacedRepetition={onReviewSpacedRepetition}
+          onAddSpacedRepetition={onAddSpacedRepetition}
+          isPremium={isPremium}
+          onUnlockPremium={onUnlockPremium}
+          externalSessionLaunchIds={sessionLaunchQueue}
+          onClearExternalSessionLaunch={() => setSessionLaunchQueue(null)}
+          isUnified={false}
+          renderSection="all"
+        />
+      </div>
+
       {/* Main Split Grid wrapped in premium block if not unlocked */}
-      <div className={`pt-4 ${!isPremium ? "pointer-events-none select-none brightness-95 opacity-50" : ""}`}>
+      <div className={`pt-2 ${!isPremium ? "pointer-events-none select-none brightness-95 opacity-50" : ""}`}>
           
 
 

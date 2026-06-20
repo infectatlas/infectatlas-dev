@@ -353,11 +353,31 @@ export default function QuizMode({
           {/* 1. Selector Config State */}
           {!selectedQuizType && (
         <div className="space-y-6">
-          <div className="border-b border-slate-200 pb-4">
-            <h2 className="text-xl font-bold text-slate-900 tracking-tight">Clinical Knowledge Exam Practice</h2>
-            <p className="text-sm text-slate-500 mt-1">
-              Select an exam mode designed around boards-style testing criteria. This is strictly for educational assessment only.
-            </p>
+          {/* Title Header Hero Card */}
+          <div className="relative bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-2xl pt-4 pb-3.5 px-3.5 sm:pt-4.5 sm:pb-4 sm:px-5 md:pt-5.5 md:pb-5 md:px-6 text-white overflow-hidden border border-slate-800/85 shadow-sm">
+            <div className="absolute right-0 bottom-0 top-0 w-1/3 opacity-15 bg-[radial-gradient(circle_at_bottom_right,var(--color-indigo-500),transparent)] pointer-events-none" />
+            
+            <div className="relative z-10 flex flex-col gap-1 sm:gap-1.5">
+              <div className="relative flex flex-col md:flex-row md:items-start md:justify-between gap-3">
+                <div className="space-y-1.5 flex-1 min-w-0">
+                  <h2 className="text-base sm:text-lg md:text-xl font-black tracking-tight text-white leading-tight sm:leading-snug pr-[105px] xs:pr-[125px] sm:pr-[145px] md:pr-0 whitespace-normal">
+                    Clinical Knowledge Exam Practice
+                  </h2>
+
+                  <p className="text-[9px] sm:text-xs text-slate-400 font-semibold leading-normal pr-[105px] xs:pr-[125px] sm:pr-[145px] md:pr-0 whitespace-normal block mt-1">
+                    Select an exam mode designed around boards-style testing criteria. This is strictly for educational assessment only.
+                  </p>
+                </div>
+
+                <div className="absolute top-0 right-0 md:relative md:top-auto md:right-auto flex flex-col items-end md:flex-row md:items-center gap-1.5 sm:gap-2 md:gap-3 shrink-0 md:mt-0.5">
+                  <div className="text-[9px] sm:text-[10px] md:text-[11px] font-medium px-2 py-1 sm:py-1.5 md:px-3 md:py-1.5 rounded-md uppercase tracking-wider select-none bg-slate-950/60 backdrop-blur-md border border-white/10 shrink-0 inline-flex items-center justify-center gap-1.5 font-sans">
+                    <Award className="h-3 w-3 text-indigo-400 shrink-0" />
+                    <span className="text-slate-400 font-normal">Assessment •</span>
+                    <span className="font-extrabold text-indigo-300 font-mono">Board-Prep</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

@@ -9,6 +9,7 @@ import AntimicrobialGrid from "./components/AntimicrobialGrid";
 import LegalModal from "./components/LegalModal";
 import LandingPage from "./components/LandingPage";
 import MarketingLandingPage from "./components/MarketingLandingPage";
+import LegalPage from "./components/LegalPage";
 import OrganismsSEO from "./components/OrganismsSEO";
 import DiseasesSEO from "./components/DiseasesSEO";
 import DrugsSEO from "./components/DrugsSEO";
@@ -536,8 +537,17 @@ function InnerApp() {
     return <MarketingLandingPage />;
   }
 
+  if (location.pathname === "/privacy") {
+    return <LegalPage initialTab="privacy" />;
+  }
+
+  if (location.pathname === "/terms") {
+    return <LegalPage initialTab="terms" />;
+  }
+
   const cleanPath = location.pathname.toLowerCase().trim().replace(/\/$/, "");
   const comparisons = [
+    "/comparisons",
     "/mrsa-vs-mssa",
     "/vancomycin-vs-linezolid",
     "/cellulitis-vs-erysipelas",
@@ -569,15 +579,15 @@ function InnerApp() {
           <div className="flex items-center justify-between w-full sm:w-auto gap-3">
             <button
               onClick={() => handleTabChange("dashboard")}
-              className="flex items-center gap-2 group text-left cursor-pointer focus:outline-hidden"
+              className="flex items-center gap-2.5 group text-left cursor-pointer focus:outline-hidden"
               title="Go to Progress Dashboard"
             >
-              <div className="p-1.5 sm:p-2.5 bg-indigo-600 text-white rounded-lg sm:rounded-xl shadow-sm group-hover:bg-indigo-700 transition-colors">
-                <BrainCircuit className="h-5 w-5 sm:h-6 sm:w-6" />
+              <div className="p-2 bg-indigo-600 text-white rounded-lg shadow-sm group-hover:bg-indigo-700 transition-colors shrink-0">
+                <BrainCircuit className="h-5 w-5" />
               </div>
               <div>
-                <h1 className="font-extrabold text-base sm:text-lg text-slate-900 tracking-tight leading-none group-hover:text-indigo-600 transition-colors col-span-full">InfectAtlas</h1>
-                <span className="text-[9px] sm:text-[10px] text-indigo-600 font-bold uppercase tracking-wider block mt-0.5 sm:mt-1.5">
+                <h1 className="font-extrabold text-base sm:text-lg text-slate-900 tracking-tight block leading-none group-hover:text-indigo-600 transition-colors col-span-full">InfectAtlas</h1>
+                <span className="text-[9px] sm:text-[10px] text-indigo-600 font-bold uppercase tracking-wider block mt-1 leading-none">
                   Medical Microorganism Study Tool
                 </span>
               </div>

@@ -15,7 +15,8 @@ import {
   Pill,
   Sparkles,
   Award,
-  Database
+  Database,
+  Search
 } from "lucide-react";
 
 interface ComparisonModule {
@@ -42,7 +43,7 @@ interface ComparisonModule {
   };
 }
 
-const COMPARISONS_DATA: ComparisonModule[] = [
+export const COMPARISONS_DATA: ComparisonModule[] = [
   {
     slug: "mrsa-vs-mssa",
     title: "MRSA vs. MSSA",
@@ -333,6 +334,9 @@ const COMPARISONS_DATA: ComparisonModule[] = [
 export default function ComparisonsSEO() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const isIndexView = location.pathname.toLowerCase().trim().replace(/\/$/, "") === "/comparisons";
 
   // Find active comparison based on slug route
   const getActiveSlug = () => {
@@ -376,12 +380,30 @@ export default function ComparisonsSEO() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Reset quiz when active page changes
+  // Reset quiz when active page changes & handle browser metadata dynamically
   useEffect(() => {
     setSelectedQuizOption(null);
     setQuizSubmitted(false);
 
-    if (item) {
+    if (isIndexView) {
+      document.title = "High-Yield Medical Comparisons & Clinical Differentials | InfectAtlas";
+
+      let metaDescriptionTag = document.querySelector('meta[name="description"]');
+      if (!metaDescriptionTag) {
+        metaDescriptionTag = document.createElement('meta');
+        metaDescriptionTag.setAttribute('name', 'description');
+        document.head.appendChild(metaDescriptionTag);
+      }
+      metaDescriptionTag.setAttribute('content', "Master clinical differentials, resistance mechanisms, and drug treatments side-by-side with high-yield USMLE & COMLEX board review guides.");
+
+      let canonicalTag = document.querySelector('link[rel="canonical"]');
+      if (!canonicalTag) {
+        canonicalTag = document.createElement('link');
+        canonicalTag.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonicalTag);
+      }
+      canonicalTag.setAttribute('href', "https://infectatlas.com/comparisons");
+    } else if (item) {
       document.title = `${item.title} - ${item.subtitle} | Study Comparison | InfectAtlas`;
 
       let metaDescriptionTag = document.querySelector('meta[name="description"]');
@@ -400,21 +422,25 @@ export default function ComparisonsSEO() {
       }
       canonicalTag.setAttribute('href', `https://infectatlas.com/${item.slug}`);
     }
-  }, [activeSlug, item]);
+  }, [activeSlug, item, isIndexView]);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans" id="comparisons-root">
       
       {/* Dynamic Header */}
-      <header className={`bg-white border-b border-slate-200 py-4 px-4 sticky top-0 z-20 shadow-xs transition-transform duration-300 ease-in-out ${showHeader ? "translate-y-0" : "-translate-y-full"}`}>
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          <Link to="/" className="flex items-center gap-2.5 group" title="Back to Homepage">
-            <div className="p-2 bg-indigo-600 text-white rounded-lg shadow-sm group-hover:bg-indigo-700 transition-colors">
-              <BrainCircuit className="h-5 w-5" />
+      <header className={`bg-white border-b border-slate-200 active:bg-white sticky top-0 z-20 w-full h-16 transition-transform duration-300 ease-in-out ${showHeader ? "translate-y-0" : "-translate-y-full"}`}>
+        <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+          <Link to="/" className="flex items-center gap-2.5 group focus:outline-indigo-600 rounded-lg p-1" title="Back to Homepage">
+            <div className="p-2 bg-indigo-600 text-white rounded-lg flex items-center justify-center transition-transform duration-200 group-hover:scale-105 shadow-sm shrink-0">
+               <BrainCircuit className="h-5 w-5" />
             </div>
             <div>
-              <span className="font-extrabold text-sm sm:text-base text-slate-900 group-hover:text-indigo-600 transition-colors block">InfectAtlas Reference</span>
-              <span className="text-[10px] text-slate-400 block font-bold uppercase tracking-wider">Clinical Study Suite</span>
+              <span className="font-extrabold text-slate-900 text-base sm:text-lg tracking-tight group-hover:text-indigo-600 transition-colors block leading-none">
+                InfectAtlas
+              </span>
+              <span className="text-[9px] sm:text-[10px] text-indigo-600 font-bold uppercase tracking-wider block mt-1 leading-none">
+                Medical Microbiology
+              </span>
             </div>
           </Link>
 
@@ -434,45 +460,195 @@ export default function ComparisonsSEO() {
       <main className="max-w-7xl mx-auto px-4 py-8">
         
         {/* Compact Breadcrumb */}
-        <nav className="mb-6 text-[11px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-          <Link to="/" className="hover:text-indigo-600 transition-colors">Home</Link>
-          <span>/</span>
-          <span className="text-slate-500">Clinical Focus Comparisons</span>
-          <span>/</span>
-          <span className="text-indigo-600">{item.title}</span>
-        </nav>
+        {isIndexView ? (
+          <nav className="mb-6 text-[11px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+            <Link to="/" className="hover:text-indigo-600 transition-colors">Home</Link>
+            <span>/</span>
+            <span className="text-indigo-600">Comparisons</span>
+          </nav>
+        ) : (
+          <nav className="mb-6 text-[11px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+            <Link to="/" className="hover:text-indigo-600 transition-colors">Home</Link>
+            <span>/</span>
+            <Link to="/comparisons" className="text-slate-505 hover:text-indigo-600 transition-colors">Comparisons</Link>
+            <span>/</span>
+            <span className="text-indigo-600">{item.title}</span>
+          </nav>
+        )}
 
-        {/* Hero Banner Grid layout */}
-        <div className="relative bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-slate-800 shadow-md overflow-hidden mb-8">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl -z-1" />
-          <div className="absolute bottom-0 left-10 w-60 h-60 bg-emerald-600/5 rounded-full blur-2xl -z-1" />
-          
-          <div className="max-w-3xl space-y-4">
-            <span className={`px-3 py-1 text-[10px] font-black uppercase rounded-full border border-indigo-400/20 text-indigo-300 bg-indigo-950/40 tracking-wider inline-block`}>
-              {item.category} Module
-            </span>
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-none italic font-sans">
-              {item.title} Study Module
-            </h1>
-            <p className="text-slate-350 text-sm sm:text-base font-medium leading-relaxed font-sans max-w-2xl">
-              {item.subtitle}
-            </p>
-            <p className="text-xs text-slate-400 leading-relaxed pt-2 border-t border-slate-800 font-medium">
-              {item.intro}
-            </p>
+        {isIndexView ? (
+          <div className="space-y-8 animate-fade-in" id="comparisons-directory-index">
+            {/* Compact Unified Hero & Search Panel */}
+            <div className="relative bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-md space-y-6 overflow-hidden">
+              <div className="absolute right-0 bottom-0 top-0 w-1/3 opacity-15 bg-[radial-gradient(circle_at_bottom_right,#6366f1,transparent)] pointer-events-none" />
+              <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div className="space-y-2 max-w-xl">
+                  <span className="bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 font-extrabold text-[10px] uppercase px-3 py-1 rounded-full tracking-wider leading-none inline-block shadow-3xs">
+                    Clinical Dual Reference Catalog
+                  </span>
+                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-none italic font-sans animate-fade-in">
+                    High-Yield Clinical Comparisons
+                  </h1>
+                  <p className="text-slate-300 text-xs sm:text-sm font-medium leading-relaxed font-sans mt-1">
+                    Master key pathogen distinctions, antibiotic resistance profiles, and drug selection criteria side-by-side. Designed to assist with USMLE, COMLEX, and infectious diseases clerkships.
+                  </p>
+                </div>
+
+                <div className="w-full lg:max-w-md shrink-0 relative group">
+                  <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400 group-focus-within:text-indigo-400 transition-colors" />
+                  <input
+                    type="text"
+                    placeholder="Search clinical comparisons, pathogens, drugs..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-10 pr-10 py-3 bg-slate-800/70 border border-slate-700/80 hover:border-slate-600 focus:bg-slate-950/90 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/25 focus:border-indigo-400 transition-all text-white placeholder:text-slate-400 shadow-sm"
+                  />
+                  {searchTerm && (
+                    <button
+                      onClick={() => setSearchTerm("")}
+                      className="absolute right-3.5 top-3.5 text-slate-450 hover:text-white font-bold text-xs cursor-pointer bg-transparent border-0"
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Comparisons Cards Grid */}
+            {(() => {
+              const query = searchTerm.toLowerCase().trim();
+              const filtered = COMPARISONS_DATA.filter((c) => 
+                c.title.toLowerCase().includes(query) ||
+                c.subtitle.toLowerCase().includes(query) ||
+                c.intro.toLowerCase().includes(query) ||
+                c.category.toLowerCase().includes(query)
+              );
+
+              if (filtered.length === 0) {
+                return (
+                  <div className="bg-white border border-slate-200 rounded-2xl p-12 text-center max-w-md mx-auto space-y-4 shadow-3xs">
+                    <div className="p-3 bg-rose-50 text-rose-600 rounded-full inline-block">
+                      <Scale className="h-8 w-8" />
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="font-extrabold text-slate-900 text-sm">No comparisons found</h3>
+                      <p className="text-xs text-slate-500">We couldn't find any clinical comparisons matching "{searchTerm}".</p>
+                    </div>
+                    <button
+                      onClick={() => setSearchTerm("")}
+                      className="px-4 py-2 bg-indigo-50 text-indigo-700 text-xs font-black rounded-lg hover:bg-indigo-100 transition-colors cursor-pointer"
+                    >
+                      Reset Filter
+                    </button>
+                  </div>
+                );
+              }
+
+              return (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
+                  {filtered.map((c) => (
+                    <Link
+                      key={c.slug}
+                      to={`/${c.slug}`}
+                      className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-3xs hover:shadow-2xs transition-all duration-300 hover:border-slate-350 h-full flex flex-col justify-between group"
+                    >
+                      <div className="space-y-3.5">
+                        <div className="flex items-center justify-between">
+                          <span className={`px-2.5 py-0.5 text-[9px] font-extrabold uppercase rounded-full border ${
+                            c.category === "Microbial Resistance" ? "bg-rose-50 text-rose-700 border-rose-100" :
+                            c.category === "Antimicrobial Pharmacology" ? "bg-emerald-50 text-emerald-700 border-emerald-100" :
+                            c.category === "Clinical Diagnosis" ? "bg-amber-50 text-amber-700 border-amber-100" :
+                            "bg-indigo-50 text-indigo-700 border-indigo-100"
+                          } tracking-wider`}>
+                            {c.category}
+                          </span>
+                          <Scale className="h-4 w-4 text-slate-350 group-hover:text-indigo-500 transition-colors" />
+                        </div>
+                        
+                        <div className="space-y-1.5">
+                          <h2 className="font-extrabold text-lg text-slate-900 tracking-tight group-hover:text-indigo-600 transition-colors italic font-sans animate-fade-in">
+                            {c.title}
+                          </h2>
+                          <p className="text-slate-500 text-xs font-semibold leading-relaxed line-clamp-2">
+                            {c.subtitle}
+                          </p>
+                        </div>
+                        
+                        <p className="text-slate-400 text-[11px] leading-relaxed line-clamp-3 pt-2.5 border-t border-slate-100 font-medium">
+                          {c.intro}
+                        </p>
+                      </div>
+                      
+                      <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between text-indigo-650 font-extrabold text-xs">
+                        <span>Explore Differential Module</span>
+                        <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1.5 transition-transform text-indigo-600" />
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              );
+            })()}
+
+            {/* Bottom traffic conversion / study funnel block (Index copy) */}
+            <div className="bg-gradient-to-br from-indigo-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 md:p-10 border border-indigo-950 shadow-md text-center space-y-5 relative overflow-hidden mt-12">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-2xl -z-1" />
+              
+              <div className="max-w-xl mx-auto space-y-3.5">
+                <div className="inline-flex items-center justify-center p-2.5 bg-indigo-800/40 text-indigo-300 rounded-full border border-indigo-705/30">
+                  <BrainCircuit className="h-7 w-7 text-indigo-400 animate-pulse" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-black text-white tracking-tight italic font-sans">
+                  Ready to Master Medical School Microorganisms?
+                </h3>
+                <p className="text-slate-355 text-xs sm:text-sm font-medium leading-relaxed font-sans">
+                  Study smart with Spaced Repetition decks, complete dynamic AI clinical vignetting exercises, and review IDSA drug administration route protocols in a fully interactive practice suite!
+                </p>
+                <div className="pt-3 flex flex-col sm:flex-row gap-3 justify-center max-w-sm mx-auto">
+                  <Link
+                    to="/app/dashboard"
+                    className="flex-1 py-3 px-5 bg-indigo-600 hover:bg-indigo-505 text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-md transition-all hover:scale-[1.015] font-sans inline-flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    <span>Enter Student Dashboard</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        ) : (
+          <>
+            {/* Hero Banner Grid layout */}
+            <div className="relative bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-slate-800 shadow-md overflow-hidden mb-8">
+              <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl -z-1" />
+              <div className="absolute bottom-0 left-10 w-60 h-60 bg-emerald-600/5 rounded-full blur-2xl -z-1" />
+              
+              <div className="max-w-3xl space-y-4">
+                <span className={`px-3 py-1 text-[10px] font-black uppercase rounded-full border border-indigo-400/20 text-indigo-300 bg-indigo-950/40 tracking-wider inline-block`}>
+                  {item.category} Module
+                </span>
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-none italic font-sans">
+                  {item.title} Study Module
+                </h1>
+                <p className="text-slate-350 text-sm sm:text-base font-medium leading-relaxed font-sans max-w-2xl">
+                  {item.subtitle}
+                </p>
+                <p className="text-xs text-slate-400 leading-relaxed pt-2 border-t border-slate-800 font-medium">
+                  {item.intro}
+                </p>
+              </div>
+            </div>
 
-        {/* Two-Column split layout: Sticky Selection Sidecorridors & Active View contents */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* Side navigation drawer/corridor */}
-          <div className="lg:col-span-4 space-y-4 md:sticky md:top-24">
-            <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-3xs">
-              <h2 className="text-xs font-black uppercase tracking-wider text-slate-400 mb-4 pb-2 border-b border-slate-100 flex items-center gap-1.5">
-                <Scale className="h-4 w-4 text-slate-400" />
-                Comparison Corridor
-              </h2>
+            {/* Two-Column split layout: Sticky Selection Sidecorridors & Active View contents */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              
+              {/* Side navigation drawer/corridor */}
+              <div className="lg:col-span-4 space-y-4 md:sticky md:top-24">
+                <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-3xs">
+                  <h2 className="text-xs font-black uppercase tracking-wider text-slate-400 mb-4 pb-2 border-b border-slate-100 flex items-center gap-1.5">
+                    <Scale className="h-4 w-4 text-slate-400" />
+                    Comparison Corridor
+                  </h2>
               
               <div className="space-y-2.5">
                 {COMPARISONS_DATA.map((c) => {
@@ -825,6 +1001,8 @@ export default function ComparisonsSEO() {
           </div>
 
         </div>
+        </>
+        )}
 
       </main>
 

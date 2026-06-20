@@ -632,18 +632,18 @@ export default function OrganismsSEO() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans animate-fade-in" id="seo-root">
       {/* Pristine Clinical Reference Header */}
-      <header className={`bg-white border-b border-slate-200 py-4 px-4 sticky top-0 z-20 shadow-xs transition-transform duration-300 ease-in-out ${showHeader ? "translate-y-0" : "-translate-y-full"}`}>
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          <Link to="/" className="flex items-center gap-2.5 group" title="Back to Homepage">
-            <div className="p-2 bg-indigo-600 text-white rounded-lg shadow-sm group-hover:bg-indigo-700 transition-colors">
+      <header className={`bg-white border-b border-slate-200 active:bg-white sticky top-0 z-20 w-full h-16 transition-transform duration-300 ease-in-out ${showHeader ? "translate-y-0" : "-translate-y-full"}`}>
+        <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+          <Link to="/" className="flex items-center gap-2.5 group focus:outline-indigo-600 rounded-lg p-1" title="Back to Homepage">
+            <div className="p-2 bg-indigo-600 text-white rounded-lg flex items-center justify-center transition-transform duration-200 group-hover:scale-105 shadow-sm shrink-0">
               <BrainCircuit className="h-5 w-5" />
             </div>
             <div>
-              <span className="font-extrabold text-sm sm:text-base text-slate-900 tracking-tight block leading-none group-hover:text-indigo-600 transition-colors">
-                InfectAtlas Library
+              <span className="font-extrabold text-slate-900 text-base sm:text-lg tracking-tight group-hover:text-indigo-600 transition-colors block leading-none">
+                InfectAtlas
               </span>
-              <span className="text-[9px] uppercase tracking-wider font-semibold text-slate-500 block mt-1">
-                Open Access Pathogen Reference
+              <span className="text-[9px] sm:text-[10px] text-indigo-600 font-bold uppercase tracking-wider block mt-1 leading-none">
+                Medical Microbiology
               </span>
             </div>
           </Link>

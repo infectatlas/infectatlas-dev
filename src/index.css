@@ -1,4 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+
+  /* Custom Professional Navy & Indigo Overrides */
+  --color-indigo-50: #EEF4FB;      /* Primary light background */
+  --color-indigo-100: #DCE9F7;     /* Light border / badge accent */
+  --color-indigo-505: #1B4474;     /* Accent midtone */
+  --color-indigo-600: #011E41;     /* Primary brand - Deep Navy */
+  --color-indigo-650: #011E41;     /* Mid-deep alignment */
+  --color-indigo-700: #022B5C;     /* Primary hover - Navy 700 */
+  --color-indigo-750: #022B5C;     /* Hover match */
+  --color-indigo-800: #01142B;     /* Deep footer / dark border */
+  --color-indigo-900: #011E41;     /* Deep Navy */
+  --color-indigo-955: #000B1A;     /* Soft black */
+  --color-indigo-950: #000B1A;     /* Dark slate navy */
+
+  /* Neutral Modern Slate Overrides */
+  --color-slate-50: #F8FAFC;       /* Page background */
+  --color-slate-100: #F1F5F9;      /* Delicate card backdrops */
+  --color-slate-150: #E2E8F0;      /* Secondary lighter border */
+  --color-slate-200: #E2E8F0;      /* Standard borders */
+  --color-slate-205: #E2E8F0;      /* Explicit border reference */
+  --color-slate-400: #94A3B8;      /* Disabled / placeholder labels */
+  --color-slate-450: #64748B;      /* Supporting icons */
+  --color-slate-500: #64748B;      /* General captions */
+  --color-slate-550: #475569;      /* Standard body copy key */
+  --color-slate-600: #475569;      /* Body text key */
+  --color-slate-750: #1E293B;      /* Card titles / subheadings */
+  --color-slate-800: #192231;      /* Deep elements */
+  --color-slate-900: #0F172A;      /* Primary high-contrast headings */
+  --color-slate-930: #0F172A;      /* Title alignment match */
+
+  /* Secondary Accent and Warnings */
+  --color-emerald-50: #ECFDF5;
+  --color-emerald-100: #D1FAE5;
+  --color-emerald-600: #059669;
+  --color-emerald-700: #047857;
+
+  --color-amber-50: #FFFBEB;
+  --color-amber-100: #FEF3C7;
+  --color-amber-600: #D97706;
+  --color-amber-605: #D97706;
+  --color-amber-700: #B45309;
+
+  --color-rose-50: #FFF5F5;
+  --color-rose-100: #FEE2E2;
+  --color-rose-700: #BE123C;
+
+  --color-teal-50: #F0FDFA;
+  --color-teal-100: #CCFBF1;
+  --color-teal-600: #0D9488;
+  --color-teal-700: #0F766E;
+}
 
 @keyframes slow-blink {
   0%, 100% {
