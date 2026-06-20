@@ -86,6 +86,7 @@ function InnerApp() {
   useEffect(() => {
     const path = location.pathname.toLowerCase().trim().replace(/\/$/, "");
     const isComparison = [
+      "/comparisons",
       "/mrsa-vs-mssa",
       "/vancomycin-vs-linezolid",
       "/cellulitis-vs-erysipelas",
