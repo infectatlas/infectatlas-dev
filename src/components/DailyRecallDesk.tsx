@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef, useEffect } from "react";
-import { SpacedRepetitionItem, StudyList } from "../types";
+import { SpacedRepetitionItem, StudyList, SessionStats } from "../types";
 import { microorganismsData, Microorganism } from "../data/microorganisms";
 import { 
   BrainCircuit, Sparkles, Clock, Calendar, CheckCircle2, ChevronRight, 
@@ -8,6 +8,7 @@ import {
 import { motion, AnimatePresence } from "motion/react";
 import { diseasesData } from "../data/diseases";
 import { drugsData } from "../data/drugs";
+import AdaptiveRecallConsole from "./AdaptiveRecallConsole";
 
 const getPathogenSlug = (name: string): string => {
   return name.toLowerCase()
@@ -43,7 +44,7 @@ export default function DailyRecallDesk({
   // Session Active states
   const [sessionQueue, setSessionQueue] = useState<string[]>([]);
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [sessionState, setSessionState] = useState<"idle" | "expose" | "reveal" | "complete">("idle");
+  const [sessionState, setSessionState] = useState<"idle" | "active" | "complete">("idle");
   const [isTheaterScrolled, setIsTheaterScrolled] = useState(false);
   const theaterScrollRef = useRef<HTMLDivElement>(null);
 
@@ -85,7 +86,7 @@ export default function DailyRecallDesk({
     setSessionQueue(pathogenIds);
     setActiveIndex(0);
     setStats({ forgot: 0, partial: 0, mastered: 0 });
-    setSessionState("expose");
+    setSessionState("active");
   };
 
   // Skip / Quit active session
@@ -103,25 +104,36 @@ export default function DailyRecallDesk({
     }
   }, [externalSessionLaunchIds, onClearExternalSessionLaunch]);
 
-  // Perform recall rating review
-  const handleRate = (pathogenId: string, grade: "forgot" | "partial" | "mastered") => {
-    // 1. Trigger the spacing logic update
-    const gotEasy = grade === "mastered";
-    onReviewSpacedRepetition(pathogenId, gotEasy, grade);
+  // Handle final completion results of adaptive query engine
+  const handleSessionComplete = (
+    finalStats: SessionStats, 
+    pathogenGrades: Record<string, "forgot" | "partial" | "mastered">
+  ) => {
+    // 1. Log metrics in the same Spaced Repetition scheduling system
+    Object.keys(pathogenGrades).forEach(pId => {
+      const grade = pathogenGrades[pId];
+      const gotEasy = grade === "mastered";
+      onReviewSpacedRepetition(pId, gotEasy, grade);
+    });
 
-    // 2. Log performance metrics in local session state
-    setStats(prev => ({
-      ...prev,
-      [grade]: prev[grade] + 1
-    }));
+    // 2. Set stats for the desk completed summary metrics
+    let masteredCount = 0;
+    let partialCount = 0;
+    let forgotCount = 0;
+    Object.values(pathogenGrades).forEach(g => {
+      if (g === "mastered") masteredCount++;
+      if (g === "partial") partialCount++;
+      if (g === "forgot") forgotCount++;
+    });
 
-    // 3. Cycle to next card
-    if (activeIndex + 1 >= sessionQueue.length) {
-      setSessionState("complete");
-    } else {
-      setActiveIndex(prev => prev + 1);
-      setSessionState("expose");
-    }
+    setStats({
+      mastered: masteredCount,
+      partial: partialCount,
+      forgot: forgotCount
+    });
+
+    // 3. Move to completion view
+    setSessionState("complete");
   };
 
   // Hydration Helper: Load random/high-yield bugs instantly to study desk
@@ -180,41 +192,9 @@ export default function DailyRecallDesk({
 
   const renderConsoleContent = (section: "queue" | "hydrate" | "all" = "all") => (
     <div className={section === "all" ? "p-5 space-y-5" : "p-5"}>
-      {(section === "all" || section === "queue") && (
-        <>
-          {dueItems.length === 0 ? (
-            /* Queue Cleared Success Box */
-            <div className="bg-emerald-50/40 border border-emerald-100 rounded-xl p-4 text-center space-y-2.5">
-              <div className="inline-flex items-center justify-center p-2 bg-emerald-100/60 text-emerald-800 rounded-full">
-                <CheckCircle2 className="h-5 w-5 text-emerald-600" />
-              </div>
-              <div className="space-y-0.5">
-                <h4 className="text-xs font-bold text-slate-800">Your Active Recall Queue is Pristine!</h4>
-                <p className="text-[11px] text-slate-500 max-w-md mx-auto leading-relaxed">
-                  Amazing compliance. All spaced repetition pathogen schedules are fully synced. Use the hydration tools below or custom focal lists to study ahead.
-                </p>
-              </div>
-            </div>
-          ) : (
-            /* Queue Due Alert Box */
-            <div className="bg-rose-50/35 border border-rose-100/60 rounded-xl p-4 text-center space-y-2.5">
-              <div className="inline-flex items-center justify-center p-2 bg-rose-105-bg text-rose-800 rounded-full">
-                <Clock className="h-5 w-5 text-rose-600" />
-              </div>
-              <div className="space-y-0.5">
-                <h4 className="text-xs font-bold text-slate-850">Critical Spaced Repetition Due</h4>
-                <p className="text-[11px] text-slate-505 max-w-md mx-auto leading-relaxed">
-                  You have <span className="font-sans font-extrabold text-rose-600">{dueItems.length} pathogens</span> scheduled for memory retention checks today. Use the active launcher at the top right to complete reviews.
-                </p>
-              </div>
-            </div>
-          )}
-        </>
-      )}
-
       {(section === "all" || section === "hydrate") && (
         /* Desk Hydrator Action Console */
-        <div className={section === "all" ? "border-t border-slate-100 pt-4 space-y-3" : "space-y-3"}>
+        <div className="space-y-3">
           <div className="flex items-center justify-between">
             <h4 className="text-xs font-extrabold uppercase tracking-wide text-slate-700 flex items-center gap-1.5 font-sans">
               <RotateCw className="h-3.5 w-3.5 text-indigo-500" />
@@ -409,163 +389,20 @@ export default function DailyRecallDesk({
                 className="p-5 sm:p-7 flex-1 overflow-y-auto"
               >
                 <AnimatePresence mode="wait">
-                  {/* State 2: Expose Stage of active recall session */}
-                  {sessionState === "expose" && activeMicrobe && (
+                  {/* State 2: Active Recall adaptive console */}
+                  {sessionState === "active" && (
                     <motion.div
-                      key="expose-state"
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      className="space-y-5"
+                      key="active-state"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="w-full"
                     >
-                      {/* Session Stepper */}
-                      <div className="flex justify-between items-center text-xs">
-                        <span className="text-slate-400 font-semibold font-mono">
-                          Organism {activeIndex + 1} of {sessionQueue.length}
-                        </span>
-                        <div className="w-1/2 h-1.5 bg-slate-150 rounded-full overflow-hidden">
-                          <div
-                            className="h-full bg-indigo-600 rounded-full transition-all duration-300"
-                            style={{ width: `${((activeIndex + 1) / sessionQueue.length) * 100}%` }}
-                          />
-                        </div>
-                      </div>
-
-                      {/* Microbe Reveal Query Prompt */}
-                      <div className="bg-slate-50/70 border-2 border-dashed border-indigo-200 rounded-2xl p-6 md:p-8 text-center space-y-4 relative">
-                        <div className="absolute top-3 right-3 text-[10px] uppercase font-bold text-indigo-500 tracking-wider flex items-center gap-1">
-                          <span className="h-2 w-2 rounded-full bg-indigo-500 animate-ping" />
-                          Testing phase
-                        </div>
-
-                        <div className="inline-flex items-center justify-center p-3.5 bg-indigo-50 text-indigo-600 border border-indigo-150 rounded-full mb-1">
-                          <BrainCircuit className="h-7 w-7" />
-                        </div>
-
-                        <div className="space-y-1.5">
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block">Identify Pathology Target:</span>
-                          <h4 className="text-xl md:text-2xl font-extrabold text-slate-900 italic leading-none">{activeMicrobe.name}</h4>
-                        </div>
-
-                        <p className="text-xs text-slate-500 font-sans max-w-md mx-auto leading-relaxed pt-2">
-                          Study prompt: Recite the principal Gram staining characteristics, common clinical diseases, first-line treatments (drugs & delivery routes), and USMLE clinical pearls for <strong className="text-slate-800">{activeMicrobe.name}</strong> before revealing.
-                        </p>
-                      </div>
-
-                    </motion.div>
-                  )}
-
-                  {/* State 3: Reveal and Judgment Console */}
-                  {sessionState === "reveal" && activeMicrobe && (
-                    <motion.div
-                      key="reveal-state"
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -15 }}
-                      className="space-y-4"
-                    >
-                      {/* Session Stepper */}
-                      <div className="flex justify-between items-center text-xs pb-1">
-                        <span className="text-slate-400 font-semibold font-mono">
-                          Evaluation target {activeIndex + 1} of {sessionQueue.length}
-                        </span>
-                        <span className="font-bold text-indigo-600 uppercase tracking-widest text-[9px]">Comparing details</span>
-                      </div>
-
-                      {/* Clean Verification Cards Column */}
-                      <div className="space-y-3.5 pr-1">
-                        {/* Core Taxonomy Block */}
-                        <div className="bg-slate-50 rounded-xl p-3 border border-slate-200 space-y-1.5 hover:border-slate-300 transition-colors">
-                          <span className="text-[9px] font-extrabold uppercase text-slate-400 tracking-wider">Classification Core</span>
-                          <h4 className="font-extrabold text-slate-800 text-xs italic leading-tight">{activeMicrobe.name}</h4>
-                          <p className="text-xs text-slate-600 leading-normal">{activeMicrobe.description}</p>
-                          
-                          {activeMicrobe.characteristics && activeMicrobe.characteristics.length > 0 && (
-                            <div className="flex flex-wrap gap-1 pt-1 border-t border-slate-200 mt-1.5">
-                              {activeMicrobe.characteristics.map(char => (
-                                <span key={char} className="bg-white text-slate-700 text-[9px] font-semibold border border-slate-200 rounded px-1.5 py-0.5">
-                                  {char}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Disease-Treatment Matrix */}
-                        <div className="space-y-2">
-                          <span className="text-[9px] font-extrabold uppercase text-indigo-500 tracking-wider block">Empiric Treatments Checklist</span>
-                          
-                          {activeMicrobe.diseases.map(disease => (
-                            <div key={disease.id} className="bg-indigo-50/20 rounded-xl p-3 border border-indigo-100/50 space-y-1.5 text-xs text-left">
-                              <div className="flex justify-between items-start gap-2">
-                                <span className="font-bold text-slate-800">{disease.name}</span>
-                                <span className="bg-indigo-55 border border-indigo-105 text-indigo-700 text-[9px] font-bold px-1.5 rounded">
-                                  {disease.route}
-                                </span>
-                              </div>
-                              
-                              <div className="bg-white px-2 py-1.5 rounded-lg border border-indigo-50/40">
-                                <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Therapeutic Drugs:</div>
-                                <p className="font-bold text-indigo-805 text-[11px] leading-relaxed mt-0.5">{disease.treatment}</p>
-                              </div>
-
-                              {disease.clinicalPearl && (
-                                <p className="text-[10px] text-slate-500 italic leading-relaxed border-l-2 border-indigo-400 pl-2 mt-1">
-                                  <strong>Clinical Pearl:</strong> {disease.clinicalPearl}
-                                </p>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-
-                        {/* Contextual reference links */}
-                        {activeMicrobe && (
-                          <div className="pt-3 border-t border-slate-200 mt-4 flex flex-wrap gap-2 text-xs text-left">
-                            <a
-                              href={`/organisms/${getPathogenSlug(activeMicrobe.name)}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-white hover:bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
-                            >
-                              📚 View full reference article
-                            </a>
-                            
-                            {diseasesData.filter(dis => 
-                              activeMicrobe.diseases.some(d => 
-                                d.name.toLowerCase().includes(dis.name.toLowerCase()) || 
-                                dis.name.toLowerCase().includes(d.name.toLowerCase())
-                              )
-                            ).slice(0, 1).map(dis => (
-                              <a
-                                key={dis.id}
-                                href={`/diseases/${dis.slug}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-white hover:bg-emerald-50 border border-emerald-100 text-emerald-700 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
-                              >
-                                📚 Review {dis.name}
-                              </a>
-                            ))}
-
-                            {drugsData.filter(drug => 
-                              activeMicrobe.diseases.some(d => 
-                                d.treatment.toLowerCase().includes(drug.name.toLowerCase())
-                              )
-                            ).slice(0, 1).map(drug => (
-                              <a
-                                key={drug.id}
-                                href={`/drugs/${drug.slug}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-white hover:bg-amber-50 border border-amber-100 text-amber-700 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
-                              >
-                                📚 Drug reference: {drug.name}
-                              </a>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-
+                      <AdaptiveRecallConsole
+                        pathogenIds={sessionQueue}
+                        onComplete={handleSessionComplete}
+                        onQuit={quitSession}
+                      />
                     </motion.div>
                   )}
 
@@ -642,60 +479,7 @@ export default function DailyRecallDesk({
                 </AnimatePresence>
               </div>
 
-              {/* Pin Action Footer to the Absolute Bottom */}
-              {(sessionState === "expose" || sessionState === "reveal") && activeMicrobe && (
-                <div className="border-t border-slate-100 p-4 sm:p-5 bg-slate-50/70 shrink-0">
-                  {sessionState === "expose" && (
-                    <button
-                      onClick={() => setSessionState("reveal")}
-                      className="w-full inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 active:scale-[0.985] text-white font-extrabold text-xs py-3 rounded-xl shadow-md cursor-pointer transition-all"
-                    >
-                      Expose Therapy Model & Verify Answers
-                      <ChevronRight className="h-4 w-4" />
-                    </button>
-                  )}
 
-                  {sessionState === "reveal" && (
-                    <div className="space-y-3">
-                      <div className="text-center">
-                        <span className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest block">How was your recall?</span>
-                      </div>
-
-                      <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                        {/* Got wrong/Forgot */}
-                        <button
-                          type="button"
-                          onClick={() => handleRate(activeMicrobe.id, "forgot")}
-                          className="bg-rose-50 hover:bg-rose-100/90 active:scale-[0.985] text-rose-700 border border-rose-200 font-bold py-2.5 px-1.5 sm:px-3 rounded-xl transition-all cursor-pointer text-[11px] sm:text-xs text-center flex items-center justify-center gap-1 sm:gap-1.5"
-                        >
-                          <X className="h-3.5 w-3.5 text-rose-600 shrink-0" />
-                          <span className="font-extrabold whitespace-nowrap">Forgot</span>
-                        </button>
-
-                        {/* Partially right */}
-                        <button
-                          type="button"
-                          onClick={() => handleRate(activeMicrobe.id, "partial")}
-                          className="bg-amber-50 hover:bg-amber-100/90 active:scale-[0.985] text-amber-800 border border-amber-200 font-bold py-2.5 px-1.5 sm:px-3 rounded-xl transition-all cursor-pointer text-[11px] sm:text-xs text-center flex items-center justify-center gap-1 sm:gap-1.5"
-                        >
-                          <AlertCircle className="h-3.5 w-3.5 text-amber-600 shrink-0" />
-                          <span className="font-extrabold whitespace-nowrap">Partial</span>
-                        </button>
-
-                        {/* Mastered */}
-                        <button
-                          type="button"
-                          onClick={() => handleRate(activeMicrobe.id, "mastered")}
-                          className="bg-emerald-50 hover:bg-emerald-100/90 active:scale-[0.985] text-emerald-800 border border-emerald-200 font-extrabold py-2.5 px-1.5 sm:px-3 rounded-xl transition-all cursor-pointer text-[11px] sm:text-xs text-center flex items-center justify-center gap-1 sm:gap-1.5"
-                        >
-                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
-                          <span className="font-extrabold whitespace-nowrap">Mastered</span>
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
             </motion.div>
           </motion.div>
         )}

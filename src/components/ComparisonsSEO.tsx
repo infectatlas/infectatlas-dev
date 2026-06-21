@@ -17,7 +17,8 @@ import {
   Award,
   Database,
   Search,
-  Zap
+  Zap,
+  X
 } from "lucide-react";
 
 interface ComparisonModule {
@@ -336,6 +337,7 @@ export default function ComparisonsSEO() {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchTerm, setSearchTerm] = useState("");
+  const [activeCategory, setActiveCategory] = useState("all");
 
   const handleLaunchApp = (focusTask: string) => {
     localStorage.setItem("infectatlas_active_tab", focusTask);
@@ -491,61 +493,63 @@ export default function ComparisonsSEO() {
       </header>
 
       {/* Main Container */}
-      <main className="max-w-7xl mx-auto px-4 py-8">
+      <main className="max-w-7xl mx-auto px-4 py-8 md:py-12">
         
         {/* Compact Breadcrumb */}
-        {isIndexView ? (
-          <nav className="mb-6 text-[11px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-            <Link to="/" className="hover:text-indigo-600 transition-colors">Home</Link>
-            <span>/</span>
-            <span className="text-indigo-600">Comparisons</span>
-          </nav>
-        ) : (
-          <nav className="mb-6 text-[11px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-            <Link to="/" className="hover:text-indigo-600 transition-colors">Home</Link>
-            <span>/</span>
-            <Link to="/comparisons" className="text-slate-505 hover:text-indigo-600 transition-colors">Comparisons</Link>
-            <span>/</span>
-            <span className="text-indigo-600">{item.title}</span>
-          </nav>
-        )}
 
         {isIndexView ? (
           <div className="space-y-8 animate-fade-in" id="comparisons-directory-index">
             {/* Compact Unified Hero & Search Panel */}
             <div className="relative bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-md space-y-6 overflow-hidden">
               <div className="absolute right-0 bottom-0 top-0 w-1/3 opacity-15 bg-[radial-gradient(circle_at_bottom_right,#6366f1,transparent)] pointer-events-none" />
+              
               <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                 <div className="space-y-2 max-w-xl">
-                  <span className="bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 font-extrabold text-[10px] uppercase px-3 py-1 rounded-full tracking-wider leading-none inline-block shadow-3xs">
-                    Clinical Dual Reference Catalog
+                  <span className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 font-extrabold text-[10px] uppercase px-3 py-1 rounded-full tracking-wider leading-none inline-block shadow-3xs">
+                    Clinical Reference Compendium
                   </span>
-                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-none italic font-sans animate-fade-in">
+                  <h1 className="text-2xl sm:text-3xl font-black tracking-tight leading-tight">
                     High-Yield Clinical Comparisons
                   </h1>
-                  <p className="text-slate-300 text-xs sm:text-sm font-medium leading-relaxed font-sans mt-1">
+                  <p className="text-xs text-slate-400 leading-relaxed font-medium">
                     Master key pathogen distinctions, antibiotic resistance profiles, and drug selection criteria side-by-side. Designed to assist with USMLE, COMLEX, and infectious diseases clerkships.
                   </p>
                 </div>
 
                 <div className="w-full lg:max-w-md shrink-0 relative group">
-                  <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400 group-focus-within:text-indigo-400 transition-colors" />
+                  <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400 group-focus-within:text-emerald-450 transition-colors" />
                   <input
                     type="text"
-                    placeholder="Search clinical comparisons, pathogens, drugs..."
+                    placeholder="Search clinical comparisons..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-10 pr-10 py-3 bg-slate-800/70 border border-slate-700/80 hover:border-slate-600 focus:bg-slate-950/90 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/25 focus:border-indigo-400 transition-all text-white placeholder:text-slate-400 shadow-sm"
+                    className="w-full pl-10 pr-10 py-3 bg-slate-800/70 border border-slate-700/80 hover:border-slate-600 focus:bg-slate-950/90 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/25 focus:border-emerald-450 transition-all text-white placeholder:text-slate-400 shadow-sm"
                   />
                   {searchTerm && (
                     <button
                       onClick={() => setSearchTerm("")}
-                      className="absolute right-3.5 top-3.5 text-slate-450 hover:text-white font-bold text-xs cursor-pointer bg-transparent border-0"
+                      className="absolute right-3.5 top-3.5 text-xs font-extrabold text-slate-400 hover:text-slate-200 transition-colors"
                     >
-                      Clear
+                      <X className="h-4 w-4" />
                     </button>
                   )}
                 </div>
+              </div>
+
+              {/* Ribbon of buttons */}
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-800/80 relative z-10">
+                {COMPARISONS_DATA.map((c) => {
+                  return (
+                    <Link
+                      key={c.slug}
+                      to={`/${c.slug}`}
+                      className="text-[10px] sm:text-[11px] font-extrabold px-3.5 py-2.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 shrink-0 border bg-slate-800/90 text-slate-250 border-slate-700/80 hover:text-white hover:bg-slate-755 hover:border-slate-600 active:scale-[0.98] active:bg-indigo-600 active:border-indigo-400 shadow-2xs group"
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full bg-slate-400 group-hover:bg-slate-300" />
+                      <span>{c.title}</span>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
 
@@ -651,23 +655,40 @@ export default function ComparisonsSEO() {
             </div>
           </div>
         ) : (
-          <>
-            {/* Hero Banner Grid layout */}
-            <div className="relative bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-slate-800 shadow-md overflow-hidden mb-8">
-              <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl -z-1" />
-              <div className="absolute bottom-0 left-10 w-60 h-60 bg-emerald-600/5 rounded-full blur-2xl -z-1" />
-              
-              <div className="max-w-3xl space-y-4">
-                <span className={`px-3 py-1 text-[10px] font-black uppercase rounded-full border border-indigo-400/20 text-indigo-300 bg-indigo-950/40 tracking-wider inline-block`}>
+          <div className="space-y-8 animate-fade-in">
+            {/* Elegant Back Navigation */}
+            <div className="flex items-center justify-between flex-wrap gap-2">
+              <Link
+                to="/comparisons"
+                className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-indigo-650 font-bold transition-colors"
+              >
+                <ArrowLeft className="h-3.5 w-3.5" />
+                <span>Back to Clinical Comparisons</span>
+              </Link>
+            </div>
+
+            {/* Main Heading Group */}
+            <div className="space-y-4">
+              <div className="flex flex-wrap gap-2 items-center">
+                <span className={`px-2.5 py-1 text-[9px] font-black uppercase rounded-full border border-indigo-150 text-indigo-700 bg-indigo-50/50 tracking-wider shadow-2xs`}>
                   {item.category} Module
                 </span>
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-none italic font-sans">
-                  {item.title} Study Module
-                </h1>
-                <p className="text-slate-350 text-sm sm:text-base font-medium leading-relaxed font-sans max-w-2xl">
+                <span className="bg-slate-100 border border-slate-200 text-slate-600 font-extrabold text-[9px] uppercase px-2.5 py-1 rounded-full">
+                  USMLE High-Yield
+                </span>
+              </div>
+
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-sans">
+                {item.title} Study Module
+              </h1>
+
+              {/* Substantive intro */}
+              <div className="bg-indigo-50/30 border-l-4 border-indigo-505 p-5 rounded-r-xl shadow-3xs">
+                <h2 className="text-[10px] font-black uppercase text-indigo-805 tracking-wider mb-1">Module Overview:</h2>
+                <p className="text-sm sm:text-base text-slate-850 leading-relaxed font-semibold">
                   {item.subtitle}
                 </p>
-                <p className="text-xs text-slate-400 leading-relaxed pt-2 border-t border-slate-800 font-medium">
+                <p className="text-xs text-slate-500 leading-relaxed font-medium mt-2">
                   {item.intro}
                 </p>
               </div>
@@ -1035,7 +1056,7 @@ export default function ComparisonsSEO() {
           </div>
 
         </div>
-        </>
+        </div>
         )}
 
       </main>

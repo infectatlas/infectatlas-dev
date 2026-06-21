@@ -27,6 +27,7 @@ import {
   Sparkles,
   Award
 } from "lucide-react";
+import ActiveRecallDrawer from "./ActiveRecallDrawer";
 
 // Helper to categorize drugs for filters
 const CLASS_FILTERS = [
@@ -88,6 +89,12 @@ export default function DrugsSEO() {
   // Dynamic Smart Header state on scroll
   const [showHeader, setShowHeader] = useState(true);
 
+  // Contextual Active Recall Drawer
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerEntityId, setDrawerEntityId] = useState("");
+  const [drawerEntityName, setDrawerEntityName] = useState("");
+  const [drawerEntityType, setDrawerEntityType] = useState<"organism" | "disease" | "drug">("drug");
+
   useEffect(() => {
     let lastScrollY = window.scrollY;
     const handleScroll = () => {
@@ -129,6 +136,13 @@ export default function DrugsSEO() {
     localStorage.setItem("study_focus_preference", focusTask);
     navigate("/app");
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleTriggerRecall = (type: "organism" | "disease" | "drug", id: string, name: string) => {
+    setDrawerEntityType(type);
+    setDrawerEntityId(id);
+    setDrawerEntityName(name);
+    setDrawerOpen(true);
   };
 
   // Dynamic Browser SEO Page Meta update
@@ -692,24 +706,24 @@ export default function DrugsSEO() {
                     </div>
                     <div className="space-y-2.5 pt-1 text-xs">
                       <button
-                        onClick={() => handleLaunchApp("flashcards")}
-                        className="w-full flex items-center justify-between p-2.5 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 transition-all font-semibold text-[11px] text-white cursor-pointer group"
+                        onClick={() => handleTriggerRecall("drug", drug.id, drug.name)}
+                        className="w-full flex items-center justify-between p-2.5 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 transition-all font-semibold text-[11px] text-white cursor-pointer group font-sans"
                       >
                         <span className="flex items-center gap-1.5">
                           <CheckCircle className="h-3.5 w-3.5 text-emerald-400" />
-                          Active Flashcard Deck
+                          Add to Mastery
                         </span>
-                        <span className="bg-indigo-550 text-white text-[9px] font-bold px-2 py-0.5 rounded group-hover:bg-indigo-650 transition-all">Start</span>
+                        <span className="bg-emerald-500 text-white text-[9px] font-bold px-2 py-0.5 rounded group-hover:bg-emerald-600 transition-all">Save</span>
                       </button>
                       <button
-                        onClick={() => handleLaunchApp("quiz")}
-                        className="w-full flex items-center justify-between p-2.5 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 transition-all font-semibold text-[11px] text-white cursor-pointer group"
+                        onClick={() => handleTriggerRecall("drug", drug.id, drug.name)}
+                        className="w-full flex items-center justify-between p-2.5 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 transition-all font-semibold text-[11px] text-white cursor-pointer group font-sans"
                       >
                         <span className="flex items-center gap-1.5">
                           <Brain className="h-3.5 w-3.5 text-indigo-400" />
-                          Board Simulator Quiz
+                          Test Recall (2 min)
                         </span>
-                        <span className="bg-indigo-550 text-white text-[9px] font-bold px-2 py-0.5 rounded group-hover:bg-indigo-650 transition-all">Start</span>
+                        <span className="bg-indigo-500 text-white text-[9px] font-bold px-2 py-0.5 rounded group-hover:bg-indigo-650 transition-all">Quiz</span>
                       </button>
                     </div>
                   </div>
@@ -1023,6 +1037,14 @@ export default function DrugsSEO() {
           <p>© 2026 InfectAtlas Academic Publishing. Standard IDSA / CDC alignments reviewed yearly.</p>
         </div>
       </footer>
+
+      <ActiveRecallDrawer
+        isOpen={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        entityType={drawerEntityType}
+        entityId={drawerEntityId}
+        entityName={drawerEntityName}
+      />
 
     </div>
   );

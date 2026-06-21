@@ -17,6 +17,7 @@ import {
   Zap,
   BookmarkPlus
 } from "lucide-react";
+import ActiveRecallDrawer from "./ActiveRecallDrawer";
 
 // Helper to convert microorganism name to a web-safe slug
 export const getPathogenSlug = (name: string): string => {
@@ -319,6 +320,12 @@ export default function OrganismsSEO() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGram, setSelectedGram] = useState("all");
 
+  // Contextual Active Recall Drawer
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerEntityId, setDrawerEntityId] = useState("");
+  const [drawerEntityName, setDrawerEntityName] = useState("");
+  const [drawerEntityType, setDrawerEntityType] = useState<"organism" | "disease" | "drug">("organism");
+
   // Dynamic Smart Header state on scroll
   const [showHeader, setShowHeader] = useState(true);
 
@@ -567,6 +574,13 @@ export default function OrganismsSEO() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleTriggerRecall = (type: "organism" | "disease" | "drug", id: string, name: string) => {
+    setDrawerEntityType(type);
+    setDrawerEntityId(id);
+    setDrawerEntityName(name);
+    setDrawerOpen(true);
+  };
+
   // Scroll smoothly to selected sections to trigger Google Sitelinks targets
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -792,11 +806,11 @@ export default function OrganismsSEO() {
                     </p>
                   </div>
                   <button
-                    onClick={() => handleLaunchApp("quiz", pathogen.id)}
+                    onClick={() => handleTriggerRecall("organism", pathogen.id, pathogen.name)}
                     className="w-full sm:w-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs rounded-lg shadow-sm transition-all shrink-0 cursor-pointer flex items-center justify-center gap-1.5"
                   >
                     <Activity className="h-4 w-4" />
-                    Launch Practice Quiz
+                    Test Recall (2 min)
                   </button>
                 </div>
               </div>
@@ -1017,19 +1031,19 @@ export default function OrganismsSEO() {
                   </h4>
                   <div className="space-y-2.5">
                     <button
-                      onClick={() => handleLaunchApp("quiz", pathogen.id)}
-                      className="w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs rounded-xl shadow-md transition-all cursor-pointer hover:scale-[1.01] flex items-center justify-center gap-2"
+                      onClick={() => handleTriggerRecall("organism", pathogen.id, pathogen.name)}
+                      className="w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs rounded-xl shadow-md transition-all cursor-pointer hover:scale-[1.01] flex items-center justify-center gap-2 font-sans"
                     >
-                      <Activity className="h-4 w-4" />
-                      Practice Case Vignettes Now
+                      <Activity className="h-4 w-4 text-white" />
+                      Quick Quiz: {pathogen.name}
                     </button>
                     
                     <button
-                      onClick={() => handleLaunchApp("search", pathogen.id)}
-                      className="w-full py-2.5 px-4 bg-white/10 hover:bg-white/15 text-white border border-white/10 font-bold text-xs rounded-xl transition-all cursor-pointer flex items-center justify-center gap-2"
+                      onClick={() => handleTriggerRecall("organism", pathogen.id, pathogen.name)}
+                      className="w-full py-2.5 px-4 bg-white/10 hover:bg-white/15 text-white border border-white/20 font-bold text-xs rounded-xl transition-all cursor-pointer flex items-center justify-center gap-2 font-sans"
                     >
                       <BookmarkPlus className="h-4 w-4 text-emerald-400" />
-                      Save to Spaced Repetition Deck
+                      Add to Mastery
                     </button>
                   </div>
                 </div>
@@ -1263,6 +1277,14 @@ export default function OrganismsSEO() {
           </div>
         </div>
       </footer>
+
+      <ActiveRecallDrawer
+        isOpen={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        entityType={drawerEntityType}
+        entityId={drawerEntityId}
+        entityName={drawerEntityName}
+      />
 
     </div>
   );

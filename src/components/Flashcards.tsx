@@ -137,6 +137,23 @@ export default function Flashcards({
 
   return (
     <div className="space-y-6" id="flashcards-root">
+      {/* Title Header Hero Card */}
+      <div className="relative bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-2xl p-6 sm:p-8 text-white overflow-hidden border border-slate-800 shadow-sm">
+        <div className="absolute right-0 bottom-0 top-0 w-1/3 opacity-15 bg-[radial-gradient(circle_at_bottom_right,var(--color-indigo-500),transparent)] pointer-events-none" />
+        
+        <div className="relative z-10 flex flex-col gap-1.5">
+          <div className="space-y-2">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white leading-tight">
+              Active Recall Study Flashcards
+            </h2>
+
+            <p className="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed max-w-none">
+              Study high-yield medical microbiology flashcard decks. Challenge your recall of pathogen structures, hallmark clinical symptoms, and initial antimicrobial treatments.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Filters Toolbar */}
       <div className="bg-white p-4 rounded-xl border border-slate-200 grid grid-cols-1 md:grid-cols-12 gap-3 items-center shadow-xs">
         <div className="md:col-span-4">
@@ -443,56 +460,6 @@ export default function Flashcards({
                         </div>
                       </div>
                     )
-                  )}
-
-                  {/* Contextual reference links */}
-                  {isFlipped && currentMicrobe && (
-                    <div className="mt-3 pt-3 border-t border-white/10 flex flex-wrap gap-2 text-[11px] relative z-10 w-full text-left justify-start">
-                      <a
-                        href={`/organisms/${getPathogenSlug(currentMicrobe.name)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1 px-2.5 py-1 bg-indigo-900 border border-indigo-700/30 hover:bg-indigo-850 text-indigo-100 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
-                      >
-                        📚 View full reference article
-                      </a>
-                      
-                      {diseasesData.filter(dis => 
-                        currentMicrobe.diseases.some(d => 
-                          d.name.toLowerCase().includes(dis.name.toLowerCase()) || 
-                          dis.name.toLowerCase().includes(d.name.toLowerCase())
-                        )
-                      ).slice(0, 1).map(dis => (
-                        <a
-                          key={dis.id}
-                          href={`/diseases/${dis.slug}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-900 border border-emerald-700/35 hover:bg-emerald-850 text-emerald-105 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
-                        >
-                          📚 Review {dis.name}
-                        </a>
-                      ))}
-
-                      {drugsData.filter(drug => 
-                        currentMicrobe.diseases.some(d => 
-                          d.treatment.toLowerCase().includes(drug.name.toLowerCase())
-                        )
-                      ).slice(0, 1).map(drug => (
-                        <a
-                          key={drug.id}
-                          href={`/drugs/${drug.slug}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-1 px-2.5 py-1 bg-amber-900/90 border border-amber-750/35 hover:bg-amber-850 text-amber-105 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
-                        >
-                          📚 Drug: {drug.name}
-                        </a>
-                      ))}
-                    </div>
                   )}
                 </div>
 

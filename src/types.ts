@@ -8,13 +8,23 @@ export interface StudyList {
   createdAt: string;
 }
 
-export interface SpacedRepetitionItem {
-  pathogenId: string;
-  intervalDays: number; // Interval for SR (1, 3, 7, 14, 30, etc.)
-  easinessFactor: number; // EF modifier
-  repetitions: number;
-  nextReviewDate: string; // ISO String
-  lastReviewed?: string;
+export interface Question {
+  id: string;
+  organism: string;
+  difficulty: "easy" | "medium" | "hard";
+  type: "mcq" | "true_false" | "short_answer" | "multi_select" | "vignette";
+  topic: "classification" | "clinical" | "treatment" | "differential" | "diagnostics" | "resistance";
+  prompt: string;
+  options?: string[];
+  correctAnswer: string | string[];
+  explanation: string;
+}
+
+export interface SessionStats {
+  accuracy: number;
+  difficultyBreakdown: { easy: number; medium: number; hard: number };
+  weakTopics: string[];
+  missedQuestionsCount: number;
 }
 
 export interface QuizSessionStats {
@@ -42,4 +52,12 @@ export interface PerformanceAnalytics {
     questionsAttempted: number;
     correctCount: number;
   }[];
+}
+
+export interface SpacedRepetitionItem {
+  pathogenId: string;
+  intervalDays: number;
+  easinessFactor: number;
+  repetitions: number;
+  nextReviewDate: string;
 }

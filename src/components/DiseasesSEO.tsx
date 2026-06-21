@@ -25,6 +25,7 @@ import {
   Brain,
   Droplets
 } from "lucide-react";
+import ActiveRecallDrawer from "./ActiveRecallDrawer";
 
 // Helper to convert disease name to web-safe slug
 export const getDiseaseSlug = (name: string): string => {
@@ -503,6 +504,12 @@ export default function DiseasesSEO() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSystem, setSelectedSystem] = useState<string>("all");
 
+  // Contextual Active Recall Drawer
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerEntityId, setDrawerEntityId] = useState("");
+  const [drawerEntityName, setDrawerEntityName] = useState("");
+  const [drawerEntityType, setDrawerEntityType] = useState<"organism" | "disease" | "drug">("disease");
+
   // Dynamic Smart Header state on scroll
   const [showHeader, setShowHeader] = useState(true);
 
@@ -733,6 +740,13 @@ export default function DiseasesSEO() {
     localStorage.setItem("study_focus_preference", focusTask);
     navigate("/app");
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleTriggerRecall = (type: "organism" | "disease" | "drug", id: string, name: string) => {
+    setDrawerEntityType(type);
+    setDrawerEntityId(id);
+    setDrawerEntityName(name);
+    setDrawerOpen(true);
   };
 
   return (
@@ -1286,25 +1300,25 @@ export default function DiseasesSEO() {
                   {/* Progressive features buttons to route into app */}
                   <div className="space-y-3 pt-2">
                     <button
-                      onClick={() => handleLaunchApp("quiz")}
+                      onClick={() => handleTriggerRecall("disease", disease.id, disease.name)}
                       className="w-full flex items-center justify-between p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 transition-all font-semibold text-xs text-white cursor-pointer group"
                     >
-                      <span className="flex items-center gap-2">
+                      <span className="flex items-center gap-2 font-sans">
                         <Layers className="h-4 w-4 text-indigo-400" />
-                        Interactive Active Recall Quiz
+                        Test Recall (2 min)
                       </span>
-                      <span className="bg-indigo-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-md group-hover:bg-indigo-600 transition-colors">Launch</span>
+                      <span className="bg-indigo-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-md group-hover:bg-indigo-600 transition-colors">Quiz</span>
                     </button>
 
                     <button
-                      onClick={() => handleLaunchApp("flashcards")}
+                      onClick={() => handleTriggerRecall("disease", disease.id, disease.name)}
                       className="w-full flex items-center justify-between p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 transition-all font-semibold text-xs text-white cursor-pointer group"
                     >
-                      <span className="flex items-center gap-2">
+                      <span className="flex items-center gap-2 font-sans">
                         <CheckCircle className="h-4 w-4 text-emerald-400" />
-                        Microbiology Flashcards
+                        Add to Mastery
                       </span>
-                      <span className="bg-emerald-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-md group-hover:bg-emerald-600 transition-colors">Start</span>
+                      <span className="bg-emerald-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-md group-hover:bg-emerald-600 transition-colors">Save</span>
                     </button>
 
                     <button
@@ -1612,6 +1626,14 @@ export default function DiseasesSEO() {
           </p>
         </div>
       </footer>
+
+      <ActiveRecallDrawer
+        isOpen={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        entityType={drawerEntityType}
+        entityId={drawerEntityId}
+        entityName={drawerEntityName}
+      />
 
     </div>
   );
