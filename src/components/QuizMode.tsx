@@ -78,6 +78,7 @@ export default function QuizMode({
   const [aiVignetteLoading, setAiVignetteLoading] = useState<boolean>(false);
   const [activeVignetteQuestion, setActiveVignetteQuestion] = useState<VignetteQuestion | null>(null);
   const [isVignetteComplete, setIsVignetteComplete] = useState<boolean>(false);
+  const [isStaticQuizComplete, setIsStaticQuizComplete] = useState<boolean>(false);
 
   // Generate randomized questions statically for the chosen quiz mode
   const generateStaticQuiz = (type: QuizType, count: number) => {
@@ -165,6 +166,7 @@ export default function QuizMode({
     setHasAnswered(false);
     setCorrectAnswersCount(0);
     setSessionCategoryHits({});
+    setIsStaticQuizComplete(false);
   };
 
   // Generate dynamic AI boards-style question using server-side Gemini
@@ -286,6 +288,7 @@ export default function QuizMode({
         });
 
         onCommitQuizResults(correctAnswersCount, questions.length, sessionCategoryHits);
+        setIsStaticQuizComplete(true);
       }
     }
   };
@@ -497,7 +500,7 @@ export default function QuizMode({
       )}
 
       {/* 2. Static Quiz Session View */}
-      {selectedQuizType && selectedQuizType !== "AI_VIGNETTE" && questions.length > 0 && (
+      {selectedQuizType && selectedQuizType !== "AI_VIGNETTE" && questions.length > 0 && !isStaticQuizComplete && (
         <div className="max-w-2xl mx-auto space-y-6">
           {/* Header Stats bar */}
           <div className="flex justify-between items-center text-xs text-slate-500 border-b border-slate-100 pb-3">
@@ -647,7 +650,7 @@ export default function QuizMode({
       )}
 
       {/* 3. Static Quiz Done summary card */}
-      {selectedQuizType && selectedQuizType !== "AI_VIGNETTE" && questions.length === 0 && (
+      {selectedQuizType && selectedQuizType !== "AI_VIGNETTE" && isStaticQuizComplete && (
         <div className="max-w-md mx-auto bg-white border border-slate-250 rounded-2xl p-6 text-center space-y-5 shadow-sm">
           <div className="inline-block p-4 bg-indigo-50 text-indigo-600 rounded-full">
             <Award className="h-8 w-8" />
@@ -667,14 +670,14 @@ export default function QuizMode({
             <div className="border-r border-slate-200" />
             <div>
               <span className="text-2xl text-rose-600 block">
-                {quizLength - correctAnswersCount}
+                {questions.length - correctAnswersCount}
               </span>
               <span className="text-[9px] text-slate-400 uppercase font-sans">Missed</span>
             </div>
             <div className="border-r border-slate-200" />
             <div>
               <span className="text-2xl text-indigo-600 block">
-                {Math.round((correctAnswersCount / quizLength) * 100)}%
+                {Math.round((correctAnswersCount / questions.length) * 100)}%
               </span>
               <span className="text-[9px] text-slate-400 uppercase font-sans">Session accuracy</span>
             </div>
