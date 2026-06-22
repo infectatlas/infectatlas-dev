@@ -423,11 +423,11 @@ export default function MarketingLandingPage() {
 
                 {/* Card Step 1: Pathogen */}
                 <div className="p-3 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 shadow-3xs flex flex-col gap-1.5 hover:border-indigo-400/30 transition-all">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-2.5">
                     <span className="text-[9.5px] font-bold uppercase tracking-wider text-indigo-300">
                       Step 1 • Pathogen Identified
                     </span>
-                    <span className="text-[9px] px-1.5 py-0.2 font-extrabold text-emerald-305 bg-emerald-500/10 rounded border border-emerald-500/20 font-mono leading-none">
+                    <span className="text-[10px] sm:text-xs px-2.5 py-1 font-extrabold text-emerald-300 bg-emerald-500/10 rounded-lg border border-emerald-500/20 font-mono leading-none whitespace-nowrap shrink-0">
                       Gram-Positive
                     </span>
                   </div>
@@ -452,11 +452,11 @@ export default function MarketingLandingPage() {
 
                 {/* Card Step 2: Disease */}
                 <div className="p-3 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 shadow-3xs flex flex-col gap-1.5 hover:border-indigo-400/30 transition-all">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-2.5">
                     <span className="text-[9.5px] font-bold uppercase tracking-wider text-indigo-300">
                       Step 2 • Clinical Presentation
                     </span>
-                    <span className="text-[9px] px-1.5 py-0.2 font-extrabold text-amber-305 bg-amber-500/10 rounded border border-amber-500/20 font-mono leading-none">
+                    <span className="text-[10px] sm:text-xs px-2.5 py-1 font-extrabold text-amber-300 bg-amber-500/10 rounded-lg border border-amber-500/20 font-mono leading-none whitespace-nowrap shrink-0">
                       Skin & Soft Tissue
                     </span>
                   </div>
@@ -481,11 +481,11 @@ export default function MarketingLandingPage() {
 
                 {/* Card Step 3: Treatment */}
                 <div className="p-3 bg-emerald-950/20 backdrop-blur-md rounded-xl border border-emerald-500/20 shadow-3xs flex flex-col gap-1.5 hover:border-emerald-400/30 transition-all">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-2.5">
                     <span className="text-[9.5px] font-bold uppercase tracking-wider text-emerald-400">
                       Step 3 • Guideline Pharmacotherapy
                     </span>
-                    <span className="text-[9px] px-1.5 py-0.2 font-extrabold text-indigo-300 bg-indigo-500/10 rounded border border-indigo-500/20 font-mono leading-none">
+                    <span className="text-[10px] sm:text-xs px-2.5 py-1 font-extrabold text-indigo-300 bg-indigo-500/10 rounded-lg border border-indigo-500/20 font-mono leading-none whitespace-nowrap shrink-0">
                       Glycopeptide
                     </span>
                   </div>
@@ -579,7 +579,6 @@ export default function MarketingLandingPage() {
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-display italic">
               Proven Learning Mechanics Built for Retention
             </h2>
-            <div className="w-12 h-1 bg-indigo-500 mx-auto rounded"></div>
             <p className="text-slate-550 text-sm max-w-xl mx-auto mt-2 leading-relaxed">
               Stop passive re-reading. InfectAtlas reinforces your diagnostic recall systematically through circular active recall triggers.
             </p>
@@ -1050,6 +1049,11 @@ export default function MarketingLandingPage() {
                 <li>
                   <Link to="/comparisons" className="hover:text-white hover:underline transition-colors">
                     Diagnostic Comparisons
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/how-it-works" className="hover:text-white hover:underline transition-colors">
+                    Methodology: How It Works
                   </Link>
                 </li>
               </ul>

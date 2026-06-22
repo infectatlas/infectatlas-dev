@@ -521,18 +521,18 @@ export default function AntimicrobialGrid() {
           
           {/* Scrollable Matrix Grid Card */}
           <div className="bg-white rounded-xl border border-slate-200 shadow-2xs overflow-hidden">
-            <div className="border-b border-slate-100 bg-slate-50 px-4 py-3 flex items-center justify-between gap-4">
+            <div className="border-b border-slate-100 bg-slate-50 px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4">
               <h3 className="font-bold text-xs uppercase tracking-wider text-slate-600">
                 Susceptibility & Coverage Matrix
               </h3>
-              <div className="flex items-center gap-3 text-[10px] font-bold text-slate-500">
-                <span className="flex items-center gap-1">
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 text-[10px] font-bold text-slate-500">
+                <span className="flex items-center gap-1 shrink-0">
                   <span className="h-2 w-2 rounded-full bg-emerald-500" /> Standard / First-line
                 </span>
-                <span className="flex items-center gap-1">
+                <span className="flex items-center gap-1 shrink-0">
                   <span className="h-2 w-2 rounded-full bg-amber-500" /> Scenario/Marginal
                 </span>
-                <span className="flex items-center gap-1">
+                <span className="flex items-center gap-1 shrink-0">
                   <span className="h-2 w-2 rounded-full bg-rose-500" /> No Action/Resistant
                 </span>
               </div>

@@ -330,8 +330,1052 @@ export const COMPARISONS_DATA: ComparisonModule[] = [
       correctIndex: 0,
       explanation: "Bacteriostatic drugs arrest bacterial protein synthesis or folate metabolism but do not kill the bacteria outright; they require intact host leukocytes to phagocytose and eliminate the resting bacteria. In a severely neutropenic patient (A.N.C. < 500) who has depleted immune defenses, bacteriostatic agents are highly prone to treatment failure. Therefore, rapidly bactericidal drugs (like double antipseudomonal beta-lactams or aminoglycosides) must be used."
     }
+  },
+  {
+    slug: "staph-aureus-vs-strep-pyogenes",
+    title: "Staphylococcus aureus vs. Streptococcus pyogenes",
+    subtitle: "Gram-Positive Clusters vs. Chains: Skin, Throat, and Toxin Pathways",
+    category: "Clinical Diagnosis",
+    badgeColor: "bg-red-50 text-red-700 border-red-100",
+    intro: "S. aureus and S. pyogenes are the two primary Gram-positive pyogenic pathogens. While both cause severe skin infections, they differ fundamentally in biochemical identity (catalase) and the specific toxin-mediated systemic syndromes they trigger.",
+    leftTitle: "Staphylococcus aureus",
+    rightTitle: "Streptococcus pyogenes (Group A)",
+    comparisonPoints: [
+      {
+        attribute: "Microscopic Morpology",
+        leftValue: "Gram-positive cocci in clusters (grape-like)",
+        rightValue: "Gram-positive cocci in pairs or chains"
+      },
+      {
+        attribute: "Catalase Status",
+        leftValue: "Catalase Positive (converts hydrogen peroxide into water and oxygen bubbles)",
+        rightValue: "Catalase Negative"
+      },
+      {
+        attribute: "Coagulase Status",
+        leftValue: "Coagulase Positive (clots plasma; distinguishes S. aureus from other staph)",
+        rightValue: "Not applicable (typically beta-hemolytic, Pyrrolidonyl Arylamidase/PYR positive)"
+      },
+      {
+        attribute: "Impetigo Features",
+        leftValue: "Causes bullous or non-bullous impetigo; can cause scalded skin syndrome",
+        rightValue: "Causes non-bullous impetigo (honey-crusted lesions) exclusively"
+      },
+      {
+        attribute: "Systemic Toxins",
+        leftValue: "TSST-1 (superantigen causing Toxic Shock Syndrome), Exfoliatin (scalded skin), Enterotoxins (food poisoning)",
+        rightValue: "Pyrogenic Exotoxin A (superantigen causing Streptococcal Toxic Shock Syndrome), Streptolysin O/S"
+      }
+    ],
+    clinicalPearls: [
+      "Staphylococcal TSS vs. Streptococcal TSS: Staphylococcal TSS is classic for vaginal tampon usage and blood cultures are typically negative (isolated localized toxin release). Streptococcal TSS is typically associated with necrotizing fasciitis, and blood cultures are frequently positive.",
+      "Post-infectious sequelae: S. pyogenes pharyngitis or impetigo can lead to Acute Post-Streptococcal Glomerulonephritis (APSGN). Only S. pyogenes pharyngitis leads to Rheumatic Fever (highly preventable with early penicillin therapy)."
+    ],
+    examTraps: [
+      "Watch out for Catalase positive organisms in patients with Chronic Granulomatous Disease (CGD). S. aureus goes on to cause recurrent abscesses because CGD neutrophils cannot generate reactive oxygen, while S. pyogenes is catalase-negative and does NOT pose a high risk.",
+      "An impetigo prompt that mentions large fluid-filled blisters (bullae) points exclusively to S. aureus due to localized exfoliative toxin action cleavage of desmoglein 1."
+    ],
+    quiz: {
+      question: "A 12-year-old child presents with a severe sore throat, fever, and a red rash with sandpaper texture that is more intense in skin folds. Throat culture grows Gram-positive cocci in chains that are catalase-negative and demonstrate a zone of clear beta-hemolysis around colonies. What is the classic long-term complication preventable with early antimicrobial therapy?",
+      options: [
+        "Infective Endocarditis",
+        "Acute Rheumatic Fever",
+        "Acute Post-Streptococcal Glomerulonephritis",
+        "Epidermolytic Scalded Skin Syndrome"
+      ],
+      correctIndex: 1,
+      explanation: "The clinical presentation (sore throat, sandpaper-like rash, accentuated in skin folds) indicates Scarlet Fever caused by Streptococcus pyogenes (Group A Strep, catalase-negative, beta-hemolytic cocci in chains). Early treatment of GAS pharyngitis with Penicillin G or Amoxicillin is highly indicated to prevent the development of Acute Rheumatic Fever. Antibiotic therapy does not reduce the risk of Post-Streptococcal Glomerulonephritis, which can occur after either phreatic or dermatological infections."
+    }
+  },
+  {
+    slug: "strep-pneumo-vs-strep-pyogenes",
+    title: "Streptococcus pneumoniae vs. Streptococcus pyogenes",
+    subtitle: "Alpha-Hemolytic Pneumococcus vs. Beta-Hemolytic Group A Strep",
+    category: "Microbial Morphology",
+    badgeColor: "bg-indigo-50 text-indigo-700 border-indigo-100",
+    intro: "Both are formidable streptococci, but S. pneumoniae represents the absolute leader in community-acquired bacterial pneumonia and adult meningitis, while S. pyogenes reigns over clinical throat, skin, and necrotizing soft tissue infections.",
+    leftTitle: "Streptococcus pneumoniae",
+    rightTitle: "Streptococcus pyogenes",
+    comparisonPoints: [
+      {
+        attribute: "Hemolysis Pattern",
+        leftValue: "Alpha-hemolytic (partial greening on blood agar due to hydrogen peroxide production)",
+        rightValue: "Beta-hemolytic (complete, clear zone of RBC lysis around colonies)"
+      },
+      {
+        attribute: "Cell Arrangement",
+        leftValue: "Lancet-shaped Gram-positive diplococci (pairs)",
+        rightValue: "Gram-positive cocci in long chains"
+      },
+      {
+        attribute: "Chemical Susceptibility Test",
+        leftValue: "Optochin Sensitive; Bile Soluble (lysed by bile salts)",
+        rightValue: "Bacitracin Sensitive; PYR Positive"
+      },
+      {
+        attribute: "Major Virulence Shield",
+        leftValue: "Thick Polysaccharide Capsule (inhibits phagocytosis; target of vaccine)",
+        rightValue: "M Protein (destabilizes complement activation, inhibits phagocytosis, triggers molecular mimicry)"
+      },
+      {
+        attribute: "Clinical Primary Target Sites",
+        leftValue: "Pneumonia, Meningitis, Otitis media, Sinusitis (The MOPS bugs)",
+        rightValue: "Pharyngitis, Cellulitis, Impetigo, Necrotizing fasciitis, Erysipelas"
+      }
+    ],
+    clinicalPearls: [
+      "Quellung Reaction: Adding antibodies specific to S. pneumoniae capsule leads to swelling of the polysaccharide coat, a classic diagnostic test for pneumococcus identity.",
+      "Rusty Sputum: Pneumococcal pneumonia is classic for generating rusty, blood-tinged sputum as macrophages break down intra-alveolar erythrocytes."
+    ],
+    examTraps: [
+      "Optochin-resistant alpha-hemolytic streptococci represent the Viridans group (S. mutans, S. sanguinis), which are responsible for dental caries and subacute infective endocarditis. Optochin-sensitive means S. pneumoniae.",
+      "A patient presenting with a rapid, life-threatening skin infection that progresses to severe tenderness out of proportion to exam findings indicates Necrotizing Fasciitis ('flesh-eating disease') caused by S. pyogenes."
+    ],
+    quiz: {
+      question: "A blood culture from a 68-year-old male with severe lobar pneumonia grows Gram-positive diplococci. On blood agar, the colonies exhibit alpha-hemolysis, are lysed upon exposure to bile salts, and demonstrate a zone of inhibition around an optochin disc. What is the primary virulence factor that protects this pathogen from splenic clearance?",
+      options: [
+        "M Protein",
+        "Polysaccharide Capsule",
+        "IgA Protease",
+        "Pneumolysin"
+      ],
+      correctIndex: 1,
+      explanation: "The pathogen is Streptococcus pneumoniae (alpha-hemolytic, bile soluble, optochin-sensitive lancet-shaped diplococci). Its most critical virulence factor is its thick polysaccharide capsule, which resists phagocytosis. Patients without a functional spleen (asplenic, sickle-cell) are extremely vulnerable to encapsulated organisms like S. pneumoniae because they rely on the spleen for opsonized clearance."
+    }
+  },
+  {
+    slug: "enterococcus-faecalis-vs-strep-bovis",
+    title: "Enterococcus faecalis vs. Streptococcus bovis",
+    subtitle: "Group D Streptococcal Subdivisions: UTI/Endocarditis vs. Colon Cancer Associations",
+    category: "Clinical Diagnosis",
+    badgeColor: "bg-slate-55 text-slate-700 border-slate-200",
+    intro: "Prior classification grouped enterococci within Streptococcus. Today, they are distinguished because Enterococcus is intensely resistant to many standard antibiotics, while S. bovis bacteriuria/endocarditis holds a massive clinical correlation to colon malignancies.",
+    leftTitle: "Enterococcus faecalis / faecium",
+    rightTitle: "Streptococcus bovis (S. gallolyticus)",
+    comparisonPoints: [
+      {
+        attribute: "Bile Esculin Agar Test",
+        leftValue: "Positive (grows in bile and hydrolyzes esculin to blacken medium)",
+        rightValue: "Positive (grows in bile and hydrolyzes esculin to blacken medium)"
+      },
+      {
+        attribute: "Growth in 6.5% NaCl",
+        leftValue: "Positive (readily grows in hyper-saline broth)",
+        rightValue: "Negative (cannot tolerate 6.5% NaCl concentration)"
+      },
+      {
+        attribute: "Major Clinical Settings",
+        leftValue: "UTIs, Biliary tract infections, Nosocomial lines, Endocarditis",
+        rightValue: "Infective Subacute Endocarditis with high-yield cancer indicators"
+      },
+      {
+        attribute: "Drug Resistance Profile",
+        leftValue: "Highly resistant to cephalosporins; can develop Vancomycin resistance (VRE via vanA gene)",
+        rightValue: "Typically highly sensitive to Penicillin G and simple beta-lactams"
+      }
+    ],
+    clinicalPearls: [
+      "S. bovis and the GI screen: Finding Streptococcus gallolyticus (S. bovis) in blood cultures or endocarditis is highly associated with underlying colon cancer, micro-perforations in bowel mucosa are the suspected gateway. A diagnostic colonoscopy is MANDATORY.",
+      "Enterococcal Synergism: Enterococci are naturally tolerant to Penicillin, meaning penicillins merely stop growth but do not kill them. To treat enterococcal endocarditis, you MUST combine Ampicillin with an aminoglycoside (Gentamicin) for synergistic bactericidal action."
+    ],
+    examTraps: [
+      "Do not try to treat Enterococcus with any Cephalosporin (like Ceftriaxone or Ceftazidime)! They are inherently resistant to all cephalosporins because they contain low-affinity penicillin-binding proteins.",
+      "Pay attention to salt growth: Both Enterococcus and Streptococcus bovis are Group D and hydrolyze bile esculin. However, Enterococcus grows safely in 6.5% NaCl, while S. bovis does not."
+    ],
+    quiz: {
+      question: "A study of blood cultures from a 63-year-old male with low-grade fever reveals Gram-positive cocci. The organism is catalase-negative and is able to grow on bile esculin agar, blackening the medium. However, the organism fails to grow in 6.5% NaCl broth. What is the most appropriate next clinical step for this patient?",
+      options: [
+        "Schedule an urgent outpatient colonoscopy",
+        "Add high-dose Vancomycin and coordinate renal monitoring",
+        "Initiate a multi-drug course for suspected tuberculosis",
+        "Refer for bone marrow aspiration to look for leukemia"
+      ],
+      correctIndex: 0,
+      explanation: "The organism described is catalase-negative, bile-esculin positive, but salt (6.5% NaCl) intolerant. This profiles Streptococcus bovis (S. gallolyticus). S. bovis bacteremia and endocarditis are heavily associated with occult gastrointestinal malignancies (colorectal carcinoma). Therefore, the mandatory next step is a colonoscopy to screen for underlying colon cancer."
+    }
+  },
+  {
+    slug: "listeria-vs-bacillus-anthracis",
+    title: "Listeria monocytogenes vs. Bacillus anthracis",
+    subtitle: "Tumbling Non-spore Former vs. Medusa-Head Spore-Forming Rod",
+    category: "Microbial Morphology",
+    badgeColor: "bg-amber-50 text-amber-700 border-amber-100",
+    intro: "These Gram-positive bacilli cause catastrophic systemic disease. Listeria is a cold-tolerant pathogen linked to unpasteurized cheese and milk, whereas Bacillus anthracis produces deadly biological toxins transported inside specialized military spores.",
+    leftTitle: "Listeria monocytogenes",
+    rightTitle: "Bacillus anthracis",
+    comparisonPoints: [
+      {
+        attribute: "Spore Formation",
+        leftValue: "Non-spore forming rod",
+        rightValue: "Spore-forming rod (highly stable spores in soil/animal products)"
+      },
+      {
+        attribute: "Pathogen Motility",
+        leftValue: "Tumbling motility at room temp (22°C); projects 'actin rocket' tails inside host cells",
+        rightValue: "Non-motile"
+      },
+      {
+        attribute: "Capsule Composition",
+        leftValue: "No Capsule present",
+        rightValue: "D-Glutamic acid polypeptide capsule (unique poly-D-glutamate, resists protease digestion)"
+      },
+      {
+        attribute: "Cold Growth (Cold Enrichment)",
+        leftValue: "Cold-tolerant; replicates actively at refrigerator temps (4-10°C)",
+        rightValue: "Cannot replicate or grow in refrigeration"
+      },
+      {
+        attribute: "Clinical Manifestations",
+        leftValue: "Neonatal meningitis, maternal miscarriage, septicemia in elderly or immunocompromised",
+        rightValue: "Cutaneous black eschar, Inhalation Anthrax (Woolsorter's disease, widened mediastinum)"
+      }
+    ],
+    clinicalPearls: [
+      "Listeria Action: Listeria uses Listeriolysin O to escape macrophage phagosomes and hijack host cell actin (creating 'actin rockets') to move directly into adjacent cells, bypassing antibody-rich extracellular spaces.",
+      "Anthrax Toxin Trio: Anthrax toxin consists of Protective Antigen (PA), Edema Factor (EF, an adenylate cyclase that increases cAMP), and Lethal Factor (LF, a zinc-dependent metalloprotease that cleaves MAPKK, causing tissue necrosis)."
+    ],
+    examTraps: [
+      "Empiric meningitis therapy must be augmented with Ampicillin in infants (<1 month) and elderly adults (>50 years) specifically to cover Listeria monocytogenes, as standard ceftriaxone lacks efficacy against it.",
+      "An inhalation anthrax chest X-ray does NOT show localized consolidation like typical pneumonias; it classicially demonstrates a dramatically Widened Mediastinum due to hemorrhagic mediastinal lymphadenitis."
+    ],
+    quiz: {
+      question: "A pregnant woman presents with high fever, chills, and muscle aches. She reports eating unpasteurized feta cheese a week ago. Blood cultures grow Gram-positive rods that exhibit tumbling motility at room temperature and produce a small zone of beta-hemolysis on blood agar. What is the cellular mechanism this pathogen uses to relocate from cell-to-cell, avoiding host antibodies?",
+      options: [
+        "Invasion of host red cells via hemolysis receptors",
+        "Direct cytoplasmic transition via actin polymerization",
+        "Extracellular migration using polar flagella",
+        "Toxin-mediated cellular lysis and systemic reinfection"
+      ],
+      correctIndex: 1,
+      explanation: "The pathogen is Listeria monocytogenes (Gram-positive rods, tumbling motility, unpasteurized cheese link). Listeria is an intracellular pathogen that polymerizes host cell actin filaments to create 'actin rocket tails.' This allows it to move directly from the cytoplasm of one cell to another, avoiding neutralizing antibodies and extracellular host defenses."
+    }
+  },
+  {
+    slug: "clostridium-tetani-vs-clostridium-botulinum",
+    title: "Clostridium tetani vs. Clostridium botulinum",
+    subtitle: "Spastic Tetanus vs. Flaccid Botulism: The Mirror-Image Neurotoxins",
+    category: "Antimicrobial Pharmacology",
+    badgeColor: "bg-orange-50 text-orange-700 border-orange-100",
+    intro: "Two anaerobic, spore-forming Gram-positive bacilli produce some of the most lethal toxins known. Despite mechanical similarities (SNARE protein cleavage), their site-specific actions create two diametric clinical endpoints: rigid spasticity vs. flaccid paralysis.",
+    leftTitle: "Clostridium tetani",
+    rightTitle: "Clostridium botulinum",
+    comparisonPoints: [
+      {
+        attribute: "Clinical Disease Effect",
+        leftValue: "Tetanus: Spastic rigid paralysis (lockjaw/trismus, risus sardonicus, opisthotonus)",
+        rightValue: "Botulism: Descending flaccid paralysis (diplopia, dysarthria, dysphagia, dyspnea)"
+      },
+      {
+        attribute: "Toxin Name & Class",
+        leftValue: "Tetanospasmin (retrograde axonal transport protein toxin)",
+        rightValue: "Botulinum toxin (heat-labile enterotoxin)"
+      },
+      {
+        attribute: "Primary Target Synapses",
+        leftValue: "Renshaw inhibitory interneurons in the spinal cord",
+        rightValue: "Peripheral neuromuscular junctions (motor nerve terminals)"
+      },
+      {
+        attribute: "Neurotransmitter Blocked",
+        leftValue: "Inhibits GABA and Glycine release (blocks inhibitory signals, causing constant contraction)",
+        rightValue: "Inhibits Acetylcholine (ACh) release (blocks excitatory muscle signal, causing flaccidity)"
+      },
+      {
+        attribute: "Source of Infection",
+        leftValue: "Spore inoculation via deep dirty wounds (stepping on rusty nails, soil contact)",
+        rightValue: "Adult: ingestion of preformed toxin in canned food. Infant: ingestion of raw honey spores"
+      }
+    ],
+    clinicalPearls: [
+      "In vivo infant botulism: Infants ingest environmental SPORES under 1 year of age (often in raw honey) because their microflora is underdeveloped. The spores germinate in the colon and produce toxin inside the gut ('Floppy Baby Syndrome'). Adults ingest PREFORMED TOXIN from anaerobic canned foods (spores germinate inside the can, not the adult gut).",
+      "Therapeutic utility: Botulinum toxin injection (Botox) is clinically utilized for cosmetic wrinkle reduction, migraine prophylaxis, and dystonias by selectively inducing temporary minor muscle flaccidity."
+    ],
+    examTraps: [
+      "Avoid giving raw honey to babies! Pediatric board exams frequently trap students with a 'constipated, weak-crying, hypotonic infant' who was fed raw honey for a cough - this is Botulism.",
+      "Tetanus toxin travels retrogradely up motor axons to reach the spinal cord. Botulinum toxin does not undergo retrograde transport; it remains localized at the motor peripheral terminals."
+    ],
+    quiz: {
+      question: "A 4-month-old infant is brought to the emergency department for severe progressive weakness. The parents report the child has been constipated, has a weak suck, and a feeble cry. They mention adding raw honey to the infant's formula over the past month. What is the fundamental cellular mechanism of the toxin responsible for this hypotonic status?",
+      options: [
+        "Irreversible inhibition of spinal inhibitory GABA interneurons",
+        "Cleavage of SNARE proteins halting peripheral Acetylcholine release",
+        "Direct destruction of the skeletal muscle sarcolemma",
+        "Adenylate cyclase activation leading to local fluid secretion"
+      ],
+      correctIndex: 1,
+      explanation: "This infant has infant botulism caused by ingested Clostridium botulinum spores found in honey. The botulinum toxin is a protease that cleaves SNARE proteins required for synaptic vesicle fusion, which blocks the release of the stimulatory neurotransmitter Acetylcholine at the neuromuscular junction. This leads to flaccid paralysis, characterized by poor muscle tone, constipation, and weak cry ('Floppy Baby Syndrome'). Tetanus toxin also cleaves SNAREs but acts centrally on Glycine/GABA interneurons."
+    }
+  },
+  {
+    slug: "clostridium-perfringens-vs-clostridioides-difficile",
+    title: "Clostridium perfringens vs. Clostridioides difficile",
+    subtitle: "Gas Gangrene and Food Poisoning vs. Pseudomembranous Colitis",
+    category: "Clinical Diagnosis",
+    badgeColor: "bg-yellow-50 text-yellow-700 border-yellow-105",
+    intro: "Two anaerobic spore-formers dominate different clinical spheres: C. perfringens specializes in gas gangrene (myonecrosis) via hemolytic alpha toxin and re-heated meat food poisoning, while C. difficile targets the colon mucosa after antibiotic therapy wipes out local flora.",
+    leftTitle: "Clostridium perfringens",
+    rightTitle: "Clostridioides difficile",
+    comparisonPoints: [
+      {
+        attribute: "Major Clinical Settings",
+        leftValue: "Gas gangrene (myonecrosis after traumatic wounds), or delayed food poisoning (watery diarrhea from reheated meats)",
+        rightValue: "Antibiotic-associated diarrhea, Pseudomembranous colitis (colon wall inflammation)"
+      },
+      {
+        attribute: "Key Pathogenic Toxins",
+        leftValue: "Alpha Toxin (lecithinase/phospholipase C causing cell membrane cleavage), and heat-labile Enterotoxin (foodborne)",
+        rightValue: "Toxin A (enterotoxin binding brush border) and Toxin B (cytotoxin causing actin depolymerization)"
+      },
+      {
+        attribute: "Predisposing Trigger",
+        leftValue: "Traumatic soil-contaminated crush injuries, or eating leftover buffet food kept warm",
+        rightValue: "Clindamycin, Cephalosporins, fluoroquinolones, or Proton Pump Inhibitor usage"
+      },
+      {
+        attribute: "Diagnostic Features",
+        leftValue: "Tissue crepitus (gas bubbles), double zone of hemolysis on blood agar, boxcar-shaped rods",
+        rightValue: "Stool PCR or enzyme immunoassay for Toxin A/B; white pseudomembranes on colonoscopy"
+      },
+      {
+        attribute: "First Line Therapy",
+        leftValue: "Surgical debridement + Penicillin G paired with Clindamycin (inhibits toxin production)",
+        rightValue: "Oral Vancomycin, or Fidaxomicin (narrow-spectrum macrocyclic)"
+      }
+    ],
+    clinicalPearls: [
+      "The Clindamycin Double Standard: Clindamycin is a premier culprit that wipes out gut flora and triggers C. difficile colitis. Yet, Clindamycin is actively added to C. perfringens gas gangrene therapy because it arrests bacterial ribosomal translation, instantly shutting down lethal alpha-toxin production.",
+      "C. perfringens food poisoning is delayed (8-22 hours) because spores must germinate in the gut to release enterotoxtin. This is unlike S. aureus, which is rapid (1-6 hours) because you ingest preformed heat-stable toxins on potato salad."
+    ],
+    examTraps: [
+      "Crepitus is the buzzword of buzzwords! If a patient has a dirty wound and you feel a crackling sensation (subcutaneous gas) under the skin, choose C. perfringens. Do not wait for cultures before starting Penicillin/Clindamycin.",
+      "Do NOT use intravenous Vancomycin to treat C. difficile colitis; IV Vancomycin is not excreted into the colon bowel lumen and will completely fail. You must administer oral Vancomycin."
+    ],
+    quiz: {
+      question: "A 54-year-old male is hospitalized for osteomyelitis and completes a 3-week course of IV Ceftriaxone. He develops profuse, foul-smelling watery diarrhea, abdominal cramping, and a white blood cell count of 19,000. Colonoscopy reveals yellowish-white plaques on erythematous colonic mucosa. What is the molecular action of the toxin causing these plaques?",
+      options: [
+        "Inactivation of EF-2 via ADP-ribosylation",
+        "Cleavage of 28S ribosomal RNA halting translation",
+        "Disruption of cell membrane lecithin causing cellular lysis",
+        "Inhibition of Rho GTPase leading to actin depolymerization"
+      ],
+      correctIndex: 3,
+      explanation: "This patient has pseudomembranous colitis caused by Clostridioides difficile (yellowish-white plaques on erythematous mucosa, post-cephalosporin history). The primary cytotoxin responsible for this damage is C. difficile Toxin B, which glycosylates and inactivates Rho GTPases. This leads to actin depolymerization, cellular cytoskeletal collapse, cell death, and mucosal inflammation, forming 'pseudomembranes'."
+    }
+  },
+  {
+    slug: "e-coli-vs-klebsiella-vs-proteus",
+    title: "E. coli vs. Klebsiella vs. Proteus",
+    subtitle: "The UTI Trio: Lactose Fermenters vs. Urease-Positive Staghorn Calculi",
+    category: "Clinical Diagnosis",
+    badgeColor: "bg-blue-50 text-blue-700 border-blue-100",
+    intro: "These Gram-negative enteric bacilli represent the most common causative agents of Urinary Tract Infections (UTIs). Clinicians distinguish them immediately via MacConkey agar lactose fermentation and chemical urease status.",
+    leftTitle: "Escherichia coli",
+    rightTitle: "Klebsiella pneumoniae & Proteus mirabilis",
+    comparisonPoints: [
+      {
+        attribute: "MacConkey Lactose Test",
+        leftValue: "Strong Lactose Fermenter (pink colonies on MacConkey agar)",
+        rightValue: "Klebsiella: Strong fermenter (highly mucoid pink colonies). Proteus: Non-fermenter (colorless)"
+      },
+      {
+        attribute: "Urease Enzyme Status",
+        leftValue: "Urease Negative",
+        rightValue: "Proteus: Strongly Urease-positive (converts urea to ammonia, raises urine pH > 8.0). Klebsiella: Weakly positive"
+      },
+      {
+        attribute: "Key Virulence Factors",
+        leftValue: "Fimbriae/pili (adherence to uroepithelium), K1 capsule (neonatal meningitis), LPS Lipid A",
+        rightValue: "Klebsiella: Abundant mucoid polysaccharide capsule. Proteus: Swarming motility"
+      },
+      {
+        attribute: "Classic Pathognomonic Clue",
+        leftValue: "Green metallic sheen on EMB agar; causes 80%+ of uncomplicated UTIs",
+        rightValue: "Klebsiella: Currant jelly sputum. Proteus: Staghorn renal calculi (magnesium ammonium phosphate/struvite)"
+      }
+    ],
+    clinicalPearls: [
+      "Staghorn stone chemistry: Proteus's powerful urease enzyme breaks down urea into ammonia, creating highly alkaline urine (pH > 8.0). Ammonia alkaline environments precipitate magnesium, ammonium, and phosphate (struvite stones), forming massive branch-like staghorn calculi that can completely fill the renal pelvis.",
+      "The Mucoid Factor: Klebsiella colonies are famously wet and slimy (mucoid) because the bacterium synthesizes an exceptionally thick carbohydrate-capsule shield."
+    ],
+    examTraps: [
+      "Any UTI vignette that mentions a urine pH of 8.5, or a large branching stone in the kidney pelvis, is an immediate giveaway for Proteus. Do not select E. coli, as E. coli does not produce urease.",
+      "Remember that E. coli is a common cause of neonatal meningitis, second only to Group B Strep. The specific virulence factor that allows it to bypass neonate blood-brain-barriers is the K1 capsular antigen."
+    ],
+    quiz: {
+      question: "A 32-year-old female presents with flank pain, dysuria, and hematuria. Urinalysis shows a urine pH of 8.4, numerous white blood cells, and triple-phosphate crystals. A kidney ultrasound reveals a large staghorn calculus occupying the left renal pelvis. What is the most likely pathogen and its biochemical feature?",
+      options: [
+        "Escherichia coli; Metallic sheen on EMB agar",
+        "Proteus mirabilis; Highly active urease producing alkaline urine",
+        "Klebsiella pneumoniae; Abundant mucoid polysaccharide capsule",
+        "Staphylococcus saprophyticus; Novobiocin resistance"
+      ],
+      correctIndex: 1,
+      explanation: "A high urinary pH (8.4) with struvite (triple phosphate) staghorn renal stones points directly to Proteus mirabilis. Proteus's urease hydrolyzes urea into NH3 (ammonia) and CO2, raising the pH. This alkaline urine provides the chemical conditions for struvite (magnesium ammonium phosphate) crystals to precipitate, forming staghorn stones. E. coli and Klebsiella are not strongly urease-positive and typically do not raise urine pH to this level."
+    }
+  },
+  {
+    slug: "pseudomonas-vs-enterobacteriaceae",
+    title: "Pseudomonas aeruginosa vs. Enterobacteriaceae",
+    subtitle: "Non-Fermenting Opportunist vs. Glucose-Fermenting Enteric Family",
+    category: "Microbial Morphology",
+    badgeColor: "bg-teal-50 text-teal-700 border-teal-100",
+    intro: "In hospital medicine, distinguishing Pseudomonas aeruginosa from the Enterobacteriaceae (E. coli, Klebsiella, Enterobacter) is critical. Pseudomonas is a highly resistant, non-fermenting aerobe that is notorious for opportunistic hospital acquisitions.",
+    leftTitle: "Pseudomonas aeruginosa",
+    rightTitle: "Enterobacteriaceae (E. coli, Klebsiella, etc.)",
+    comparisonPoints: [
+      {
+        attribute: "Oxidase Reaction Test",
+        leftValue: "Oxidase Positive (contains cytochrome c oxidase; quickly turns blue with redox reagent)",
+        rightValue: "Oxidase Negative"
+      },
+      {
+        attribute: "Glucose Metabolism",
+        leftValue: "Non-fermenter (obtains energy through aerobic respiration only, does not ferment sugars)",
+        rightValue: "Glucose Fermenters (ferment glucose, active anaerobes)"
+      },
+      {
+        attribute: "Natural Pigment & Odor",
+        leftValue: "Produces Pyocyanin (blue-green pigment) and Pyoverdine (fluorescent); sweet grape-like odor",
+        rightValue: "No intense metallic grape odor, typical colony colors on agar"
+      },
+      {
+        attribute: "Major Pathologies",
+        leftValue: "Pneumonia in Cystic Fibrosis, Otitis externa (swimmer's ear), ecthyma gangrenosum, hot tub folliculitis, burn wound infections",
+        rightValue: "UTIs, abdominal sepsis, neonatal sepsis, standard community-acquired lobar pneumonias"
+      },
+      {
+        attribute: "Empirical Susceptibility",
+        leftValue: "Incredibly drug-resistant. Requires specific antipseudomonal agents (Pip-Tazo, Ceftazidime, Cefepime, Meropenem)",
+        rightValue: "Varying susceptibility, many respond well to standard penicillins or early cephalosporins"
+      }
+    ],
+    clinicalPearls: [
+      "Pseudomonas and cystic fibrosis: P. aeruginosa utilizes a specialized alginate mucoid exopolysaccharide biofilm to shelter itself inside CF lung alveolar niches, making eradication nearly impossible once established.",
+      "Ecthyma Gangrenosum: A severe neutropenic septicemia characterized by skin lesions containing black necrotic centers with surrounding redness - this is a classic systemic sign of Pseudomonas bacteremia causing vascular invasion."
+    ],
+    examTraps: [
+      "Do NOT use Ceftriaxone to treat Pseudomonas! Ceftriaxone is an excellent broad-spectrum 3rd-generation cephalosporin, but it has exactly ZERO activity against Pseudomonas. You must use Ceftazidime (3rd gen with antipseudomonal cover) or Cefepime (4th gen).",
+      "Pay attention to the oxygen environment: Pseudomonas is an obligate aerobe; it requires oxygen to synthesize ATP and cannot ferment."
+    ],
+    quiz: {
+      question: "An oncology patient with severe neutropenia develops a high fever, and over 12 hours, a black, necrotic, indurated skin lesion with a surrounding erythematous halo appears on his groin. Blood cultures grow Gram-negative rods that are oxidase-positive, produce a green pigment, and do not ferment glucose. Which of the following cephalosporins is active against this pathogen?",
+      options: [
+        "Ceftriaxone",
+        "Cefazolin",
+        "Cefepime",
+        "Cefuroxime"
+      ],
+      correctIndex: 2,
+      explanation: "The clinical lesion (ecthyma gangrenosum in a neutropenic patient) and organism properties (oxidase-positive, non-fermenting, green pigment Gram-negative rod) indicate Pseudomonas aeruginosa. Uncomplicated pseudomonal sepsis requires broad antipseudomonal coverage. Cefepime (a 4th-generation cephalosporin) and Ceftazidime have powerful antipseudomonal activity. Ceftriaxone, Cefazolin, and Cefuroxime lack any activity against P. aeruginosa."
+    }
+  },
+  {
+    slug: "salmonella-vs-shigella-vs-campylobacter",
+    title: "Salmonella vs. Shigella vs. Campylobacter",
+    subtitle: "Invasive Diarrheas: Motile H2S Producer vs. Acid-Stable Dysentery vs. Seagull-Wing Thermophile",
+    category: "Clinical Diagnosis",
+    badgeColor: "bg-sky-50 text-sky-700 border-sky-100",
+    intro: "These three Gram-negative pathogens represent major causes of invasive, bloody diarrhea (dysentery). Clinical boards test their biochemical differences, animal reservoirs, and neurologic post-infectious manifestations.",
+    leftTitle: "Salmonella & Shigella",
+    rightTitle: "Campylobacter jejuni",
+    comparisonPoints: [
+      {
+        attribute: "Microscopic Shape",
+        leftValue: "Gram-negative rods (bacilli)",
+        rightValue: "Curved, comma-shaped or seagull-wing Gram-negative rods"
+      },
+      {
+        attribute: "Flagellar Motility & H2S",
+        leftValue: "Salmonella: Motile, produces H2S (black colonies on Hektoen agar). Shigella: Non-motile, no H2S",
+        rightValue: "Highly motile ('corkscrew' motility); does not produce H2S"
+      },
+      {
+        attribute: "Infectious Dose (Acid)",
+        leftValue: "Salmonella: High dose required (acid-sensitive, killed by stomach acid). Shigella: Extremely low dose (acid-stable)",
+        rightValue: "Moderate dose; thrives in hot temperatures (thermophilic; grows at 42°C)"
+      },
+      {
+        attribute: "Animal Reservoirs",
+        leftValue: "Salmonella: Poultry, eggs, turtles, reptiles (S. typhi is human only). Shigella: Humans only",
+        rightValue: "Poultry, chickens, birds, unpasteurized milk, domestic pets"
+      },
+      {
+        attribute: "Severe Sequelae Risk",
+        leftValue: "Salmonella: Osteomyelitis in sickle cell. Shigella: Hemolytic Uremic Syndrome (HUS via Shiga toxin)",
+        rightValue: "Guillain-Barré Syndrome (ascending paralysis via antigenic mimicry), Reactive Arthritis"
+      }
+    ],
+    clinicalPearls: [
+      "The low-dose Shigella transmission: Because Shigella is highly resistant to stomach acid, as few as 10 to 100 organisms can survive ingestion and cause full-blown dysentery. This is why it spreads incredibly fast in daycare centers (fecal-oral route). Salmonella enteritidis requires massive populations (>10^5) to cause food poisoning.",
+      "Campylobacter's neurological mimicry: C. jejuni's outer lipooligosaccharide (LOS) structurally mimics human peripheral myelin ganglioside GM1. After clearance, autoimmune antibodies mistakenly cross-react and damage host myelin, causing Guillain-Barré Syndrome."
+    ],
+    examTraps: [
+      "If a sickle cell patient develops Osteomyelitis, the most common pathogen is Salmonella, even though S. aureus is the most common cause in the general population. Sickle cell splenic dysfunction impairs clearance of encapsulated Salmonella.",
+      "Campylobacter jejuni is a thermophilic organism. If a bacterial culture from a stool sample must be grown at 42°C on Skirrow agar to isolate the bug, think Campylobacter."
+    ],
+    quiz: {
+      question: "A stool culture from a 26-year-old male with severe bloody diarrhea. On Hektoen enteric agar, the isolated Gram-negative rods form translucent colonies with black centers, confirming H2S production and flagellar motility. The patient has a history of sickle cell anemia. What secondary bone-associated pathology is this patient highly predisposed to form?",
+      options: [
+        "Avascular necrosis of the femoral head",
+        "Salmonella Osteomyelitis",
+        "Reactive arthritis of the knee joint",
+        "Post-infectious rhabdomyolysis"
+      ],
+      correctIndex: 1,
+      explanation: "The pathogen described is Salmonella (Gram-negative motile rod producing H2S with black centers on Hektoen agar). Sickle-cell anemia patients suffer micro-infarcts in their gastrointestinal vasculature and have impaired splenic macrophage function. This allows Salmonella to transcend the bowel and seed the necrotic bone, making Salmonella the classic cause of bacterial Osteomyelitis in patients with sickle cell disease."
+    }
+  },
+  {
+    slug: "neisseria-meningitidis-vs-neisseria-gonorrhoeae",
+    title: "Neisseria meningitidis vs. Neisseria gonorrhoeae",
+    subtitle: "Gram-Negative Diplococci: Epidemic Meningitis vs. Sexually Transmitted Strains",
+    category: "Microbial Morphology",
+    badgeColor: "bg-indigo-50 text-indigo-700 border-indigo-100",
+    intro: "The genus Neisseria consist of Gram-negative 'kidney bean' diplococci. Despite structural similarities, they split into two separate clinical emergencies: N. meningitidis, an encapsulated respiratory-borne pathogen causing rapid meningitis, and N. gonorrhoeae, a classic sexually transmitted infection.",
+    leftTitle: "Neisseria meningitidis (Meningococcus)",
+    rightTitle: "Neisseria gonorrhoeae (Gonococcus)",
+    comparisonPoints: [
+      {
+        attribute: "Polysaccharide Capsule",
+        leftValue: "Has thick protective capsule (antiphagocytic; base for conjugate vaccine)",
+        rightValue: "No Capsule present"
+      },
+      {
+        attribute: "Maltose Fermentation Test",
+        leftValue: "Ferments both Maltose and Glucose (Meningococcus = Maltose + Glucose)",
+        rightValue: "Ferments Glucose ONLY (Gonococcus = Glucose only)"
+      },
+      {
+        attribute: "Primary Transmission Mode",
+        leftValue: "Respiratory droplets, colonizes nasopharynx first, common in crowded college dorms",
+        rightValue: "Sexual contact, or neonatal vertical transmission during childbirth"
+      },
+      {
+        attribute: "Key Clinical Syndromes",
+        leftValue: "Meningitis, acute meningococcemia (purpura fulminans, Waterhouse-Friderichsen syndrome)",
+        rightValue: "Urethritis, cervicitis, PID, septic arthritis (uniarticular), neonatal ophthalmia neonatorum"
+      },
+      {
+        attribute: "Vaccine Availability",
+        leftValue: "Conjugate vaccines available (MenACWY and MenB)",
+        rightValue: "None, due to extreme antigenic variation of pilin proteins"
+      }
+    ],
+    clinicalPearls: [
+      "Waterhouse-Friderichsen Syndrome: Severe meningococcemia causes disseminated intravascular coagulation (DIC), leading to hemorrhagic necrosis of both adrenal glands, triggering acute adrenal insufficiency, extreme shock, and death within hours.",
+      "The Gonorrhea Antigenic Shuffle: N. gonorrhoeae has no vaccine because its main attachment organ, the pilus, undergoes constant antigenic variation via DNA genetic recombination. The human immune system cannot build long-lasting memory cells against it."
+    ],
+    examTraps: [
+      "Neisseria meningitidis is an obligate encapsulated pathogen. If a patient is deficient in the late complement membrane attack complex (C5-C9), they are highly vulnerable to recurrent, systemic Neisseria infections.",
+      "A young sexually active female presenting with a swollen, highly agonizing single knee joint (monoarticular septic arthritis) should make you suspect N. gonorrhoeae septic arthritis."
+    ],
+    quiz: {
+      question: "A spinal fluid sample from an 18-year-old college freshman with altered mental status, high fever, and a petechial rash on both legs grows Gram-negative kidney bean-shaped diplococci. The isolated organism is able to ferment both glucose and maltose. What is the status of a capsule in this bacterium and what genetic deficiency would predispose a host to recurrent infections?",
+      options: [
+        "Unencapsulated; IgA deficiency",
+        "Encapsulated; C5-C9 Membrane Attack Complex deficiency",
+        "Encapsulated; NADPH Oxidase deficiency",
+        "Unencapsulated; Splendore-Hoeppli phenomenon"
+      ],
+      correctIndex: 1,
+      explanation: "The pathogen is Neisseria meningitidis (meningitis, petechial rash, college freshman, maltose + glucose fermenter). Unlike N. gonorrhoeae, N. meningitidis is encapsulated (protecting it from early phagocytosis). Individuals with a late complement terminal pathway deficiency (C5-C9) cannot assemble the Membrane Attack Complex (MAC), leaving them highly vulnerable to invasive bacteremia from Neisseria species."
+    }
+  },
+  {
+    slug: "strep-pneumo-vs-haemophilus-influenzae",
+    title: "Streptococcus pneumoniae vs. Haemophilus influenzae",
+    subtitle: "Encapsulated Foes: Lancet-Shaped Diplococcus vs. Chocolate Agar Growth Factor Dependent Coccobacillus",
+    category: "Clinical Diagnosis",
+    badgeColor: "bg-zinc-50 text-zinc-700 border-zinc-100",
+    intro: "S. pneumoniae and H. influenzae represent the two primary encapsulated pathogens of the upper and lower respiratory tracts. In clinical exams, they are differentiated by direct morphology, hemolysis, and specific growth factor requirements on blood vs. chocolate agar.",
+    leftTitle: "Streptococcus pneumoniae",
+    rightTitle: "Haemophilus influenzae",
+    comparisonPoints: [
+      {
+        attribute: "Microscopic Shape",
+        leftValue: "Lancet-shaped Gram-positive diplococci (pairs)",
+        rightValue: "Gram-negative pleomorphic coccobacillus (short rods)"
+      },
+      {
+        attribute: "Culture Medium & Factors",
+        leftValue: "Grows on blood agar, exhibits alpha-hemolysis (partial greening)",
+        rightValue: "Requires Chocolate Agar with Hematine (Factor X) and NAD (Factor V) to support growth"
+      },
+      {
+        attribute: "Satellite Phenomenon",
+        leftValue: "No satellite association needed",
+        rightValue: "Can grow on blood agar only as satellites directly surrounding colonies of helper S. aureus (which synthesizes Factor V)"
+      },
+      {
+        attribute: "Major Capsular Serotype",
+        leftValue: "Over 90 distinct polysaccharide capsular serotypes",
+        rightValue: "Serotype b (Hib) is the historically most invasive capped subtype"
+      },
+      {
+        attribute: "Vaccine Compositions",
+        leftValue: "Pneumococcal vaccines: PCV13/PCV15/PCV20 (conjugate), PPSV23 (pure polysaccharide)",
+        rightValue: "Hib Conjugate vaccine: Hib capsule polysaccharide conjugated to tetanus toxoid or diphtheria protein carrier"
+      }
+    ],
+    clinicalPearls: [
+      "The Satellite Phenomenon: H. influenzae cannot grow on raw blood agar because red cells shelter NAD (Factor V) inside healthy envelopes. However, if S. aureus is co-plated, S. aureus's hemolytic enzymes lyse surrounding RBCs (releasing hematin/Factor X) and actively excrete NAD (Factor V). H. influenzae then multiplies as satellite colonies surrounding the S. aureus colonies.",
+      "The Conjugated Protection: Pure capsular polysaccharide vaccines are poor triggers for CD4 T helper lymphocytes. Conjugating the polysaccharide to an immunogenic protein allows antigen-presenting cells to present peptides to T cells, shifting immunity towards powerful antibody-secreting plasma memory B cell profiles."
+    ],
+    examTraps: [
+      "If a child presents with rapid high fever, inspiratory stridor, drooling, and sitting in a 'tripod position' with an enlarged cherry-red epiglottis on lateral neck X-rays (Thumbprint sign), choose acute Epiglottitis from Hib. Never instrument the airway without an anesthesiologist ready to intubate.",
+      "Hib refers to Haemophilus influenzae type B. This is separate from non-typeable H. influenzae (unencapsulated), which is a common cause of uncomplicated otitis media, acute sinusitis, and bronchitis."
+    ],
+    quiz: {
+      question: "A throat swab from a pediatric patient with high fever and respiratory distress is plated on standard sheep blood agar. No growth of the primary gram-negative coccobacilli is observed, except as tiny 'satellite' colonies immediately adjacent to colonies of hemolytic Staphylococcus aureus. Why does this pathogen grow specifically in this arrangement?",
+      options: [
+        "Staphylococcus aureus generates hydrogen sulfide required for anaerobic metabolic processes",
+        "Staphylococcus aureus provides Factor V (NAD) and releases Factor X (hemin) through red blood cell hemolysis",
+        "Staphylococcus aureus neutralizes toxic lactic acids secreted by the mucosal host cells",
+        "Staphylococcus aureus acts as an endocellular chaperone transport vector"
+      ],
+      correctIndex: 1,
+      explanation: "The child's pathogen is Haemophilus influenzae (Gram-negative coccobacillus, fails to grow alone on blood agar but satellites S. aureus). H. influenzae requires Factor X (hemin) and Factor V (NAD) for growth. S. aureus lyses surrounding erythrocytes (releasing Factor X) and actively secretes Factor V as a metabolic by-product, permitting H. influenzae's growth nearby."
+    }
+  },
+  {
+    slug: "legionella-vs-mycoplasma-pneumoniae",
+    title: "Legionella vs. Mycoplasma pneumoniae",
+    subtitle: "Atypical Pneumonias: Pontiac Fever/Hyponatremia vs. Walking Pneumonia with Cold Agglutinins",
+    category: "Clinical Diagnosis",
+    badgeColor: "bg-purple-50 text-purple-700 border-purple-100",
+    intro: "Both are premier causes of 'atypical' or walking pneumonia (characterized by hazy chest X-rays contrasting with minor physical symptoms). They differ completely in environmental reservoirs and systemic extra-pulmonary clinical presentations.",
+    leftTitle: "Legionella pneumophila",
+    rightTitle: "Mycoplasma pneumoniae",
+    comparisonPoints: [
+      {
+        attribute: "Cell Wall Structure",
+        leftValue: "Gram-negative rod (stains poorly; requires silver stain to visualize)",
+        rightValue: "No cell wall (no peptidoglycan; contains sterols in cell membrane to add stability; cannot Gram stain)"
+      },
+      {
+        attribute: "Primary Reservoirs",
+        leftValue: "Freshwater systems, cooling towers, showers, air conditioning units (no human-to-human spread)",
+        rightValue: "Humans only; spreads rapidly via respiratory droplets in crowded military bases or dorms"
+      },
+      {
+        attribute: "Extrapulmonary Signs",
+        leftValue: "Hyponatremia (low sodium), neurological confusion, severe watery diarrhea",
+        rightValue: "Erythema multiforme (targetoid lesions), cold autoimmune hemolytic anemia, bullous myringitis"
+      },
+      {
+        attribute: "Diagnostic Modalities",
+        leftValue: "Urinary antigen test (detects L. pneumophila serogroup 1), culture on BCYE charcoal agar",
+        rightValue: "Cold agglutinin titer (IgM antibodies agglutinate RBCs at 4°C), PCR assay"
+      },
+      {
+        attribute: "Empirical Classes",
+        leftValue: "Fluoroquinolones (Levofloxacin) or Macrolides (Azithromycin)",
+        rightValue: "Macrolides (Azithromycin), Doxycycline (beta-lactams are totally useless due to absent cell walls)"
+      }
+    ],
+    clinicalPearls: [
+      "The Hyponatremia Link: Legionnaires' disease is classic for triggering severe syndrome of inappropriate ADH (SIADH) or renal tubular damage, pushing plasma sodium levels below 130 mEq/L, which drives the altered mental status and confusion.",
+      "Cold Agglutinins demystified: In Mycoplasma infection, human IgM antibodies generated against the bacterial antigen cross-react with the I-antigen on red blood cells at cold temperatures (like in the extremities). This leads to localized intravascular RBC agglutination, visible as a transient cold-induced autoimmune hemolysis."
+    ],
+    examTraps: [
+      "If a patient presents with atypical pneumonia symptoms paired with gastrointestinal symptoms like diarrhea, and laboratory markers reveal hyponatremia and relative bradycardia, immediately prioritize Legionella.",
+      "Mycoplasma pneumoniae is completely resistant to Penicillins, Cephalosporins, and Vancomycin because these drugs inhibit cell-wall synthesis. Since Mycoplasma literally lacks a cell wall, these drugs have no biological target."
+    ],
+    quiz: {
+      question: "A 43-year-old hotel maintenance worker presents with high fever, respiratory distress, and dry cough. Labs show a sodium level of 124 mEq/L (severe hyponatremia), liver transaminases are elevated, and the patient has three loose watery stools today. Chest X-ray show patchy infiltrates. What is the most definitive culture medium required to isolate the causative organism?",
+      options: [
+        "Chocolate agar with Factors V and X",
+        "Buffered Charcoal Yeast Extract (BCYE) agar supplemented with iron and L-cysteine",
+        "Lowenstein-Jensen medium",
+        "MacConkey agar with sorbitol fermentation"
+      ],
+      correctIndex: 1,
+      explanation: "This patient is presenting with Legionnaires' disease (atypical pneumonia, hyponatremia 124, watery diarrhea, hotel maintenance water contact). Legionella pneumophila is a fastidious organism that requires Buffered Charcoal Yeast Extract (BCYE) agar supplemented with L-cysteine and iron to grow. Charcoal is added to absorb toxic fatty acids present in standard culture broths."
+    }
+  },
+  {
+    slug: "mycoplasma-vs-chlamydophila-vs-legionella",
+    title: "Mycoplasma vs. Chlamydophila vs. Legionella",
+    subtitle: "Atypical Respiratory Triangle: Cell Wall Absent vs. Obligate Intracellular vs. Environmental Reservoir",
+    category: "Clinical Diagnosis",
+    badgeColor: "bg-violet-50 text-violet-700 border-violet-100",
+    intro: "These three distinct atypical pathogens represent the absolute primary triad of community-acquired walking pneumonias. Because they do not respond to beta-lactam therapies, clinicians must master their biological identities and distinct diagnostic hallmarks.",
+    leftTitle: "Mycoplasma / Chlamydophila",
+    rightTitle: "Legionella pneumophila",
+    comparisonPoints: [
+      {
+        attribute: "Biological Integrity",
+        leftValue: "Mycoplasma: Free-living, lacks peptide walls. Chlamydophila: Obligate intracellular, cannot synthesize own ATP",
+        rightValue: "Facultative intracellular, Gram-negative, lives inside flagellated aquatic amoebae"
+      },
+      {
+        attribute: "Extrapulmonary Hallmark",
+        leftValue: "Mycoplasma: Sore ears (bullous myringitis), target rash. Chlamydophila: Often associated with subacute asthma flareups",
+        rightValue: "SIADH (extreme low sodium), severe diarrhea, neurological confusion"
+      },
+      {
+        attribute: "Chlamydia Lifecycle",
+        leftValue: "Chlamydophila uses Elementary body (infectious, enters cell) and Reticulate body (replicates inside cell)",
+        rightValue: "Not applicable (typical binary fission inside amoedas/macrophages)"
+      },
+      {
+        attribute: "First-Line Therapy",
+        leftValue: "Azithromycin, Doxycycline, or Respiratory Fluoroquinolones (Moxifloxacin)",
+        rightValue: "Levofloxacin, Azithromycin"
+      }
+    ],
+    clinicalPearls: [
+      "The Elementary / Reticulate shift: Chlamydia species are unable to produce their own high-energy phosphates (ATP), requiring them to exist as obligate parasites inside eukaryotic cells. The 'Elementary body' is the extracellular, spore-like infectious form. Once inside the host cell phagosome, it reorganizes into the metabolically active, replicating 'Reticulate body'."
+    ],
+    examTraps: [
+      "Do not try to stain Mycoplasma or Chlamydia with a standard Gram stain! Choose PCR, serology, or special stains (Giemsa for Chlamydophila; Silver stain or fluorescent antibody stains for Legionella) in board-style diagnostic question pools."
+    ],
+    quiz: {
+      question: "A basic science researcher is studying cellular replication under microscopes. She observes an infectious agent that undergoes an biphasic cell cycle. The agent's extracellular form is chemically inert and enters host lines via receptor-mediated endocytosis, reorganizing into a larger, ATP-dependent form that divides by binary fission. What is this organism?",
+      options: [
+        "Mycoplasma pneumoniae",
+        "Chlamydophila pneumoniae",
+        "Legionella pneumophila",
+        "Streptococcus pneumoniae"
+      ],
+      correctIndex: 1,
+      explanation: "This biphasic lifestyle (Elementary body for infectious entry, Reticulate body for intracellular replication) is the hallmark of the Chlamydiaceae family, which includes Chlamydophila pneumoniae. Mycoplasma is free-living and extracellular, and Legionella is a facultative intracellular flagellate."
+    }
+  },
+  {
+    slug: "bacterial-meningitis-pathogens",
+    title: "Bacterial Meningitis: Pneumococcus vs. Meningococcus vs. Listeria",
+    subtitle: "Age-Based Empiric Pathogens: Neonates, College Dorms, and Elderly Cohorts",
+    category: "Clinical Diagnosis",
+    badgeColor: "bg-cyan-50 text-cyan-700 border-cyan-100",
+    intro: "Meningitis represents a high-criticality diagnostic emergency. Because delays lead to permanent neurological damage or death, empirical antibiotic therapies are dictated strictly by the most statistically likely age-based pathogens.",
+    leftTitle: "S. pneumoniae & N. meningitidis",
+    rightTitle: "Listeria monocytogenes",
+    comparisonPoints: [
+      {
+        attribute: "Suspetible Populations",
+        leftValue: "S. pneumoniae: Most common cause overall (all ages). N. meningitidis: Teenagers, young adults, military recruits, college dorms",
+        rightValue: "Neonates (<1 month), Elderly (>50 years), pregnant women, immunocompromised (transplant patients)"
+      },
+      {
+        attribute: "Microscopic Attributes",
+        leftValue: "S. pneumoniae: Gram-positive lancet diplococci. N. meningitidis: Gram-negative kidney diplococci",
+        rightValue: "Gram-positive rods; exhibits tumbling motility at room temp"
+      },
+      {
+        attribute: "Key Invasive Virulence",
+        leftValue: "IgA Proteases (cleaves IgA to colonize mucosa first), thick protective capsules",
+        rightValue: "Listeriolysin O (destroys phagosome membrane), internalins (helps cell entry)"
+      },
+      {
+        attribute: "Empiric Treatment Additions",
+        leftValue: "Standard: Vancomycin + Ceftriaxone (highly active against resistant pneumococci and Neisseria)",
+        rightValue: "Mandatory addition of Ampicillin to standard therapy to cover Listeria (which is resistant to Ceftriaxone)"
+      }
+    ],
+    clinicalPearls: [
+      "The Ampicillin mandate: Always add Ampicillin to empiric meningitis protocols if the patient is under 1 month of age, over 50 years of age, or possesses known cell-mediated immunofailures (HIV, transplants) specifically to cover Listeria monocytogenes. Ceftriaxone has zero coverage against Listeria.",
+      "The Steroid Cushion: Give Dexamethasone just before or concurrent with the first dose of antibiotics. This dampens the massive, toxic inflammatory cascade triggered as the bactericidal drugs rupture bacterial membranes, preventing severe sensorineural hearing loss."
+    ],
+    examTraps: [
+      "If you see a teenager with high fever, neck stiffness, and a petechial/purpuric rash, choose N. meningitidis. If you see an elderly patient with meningitis, choose S. pneumoniae as the most likely cause, but make sure Ampicillin is in their antibiotic order set."
+    ],
+    quiz: {
+      question: "An empiric meningitis cocktail consisting of high-dose Vancomycin and Ceftriaxone is ordered for a 62-year-old female presenting with nuchal rigidity and high fever. Blood cultures later grow Gram-positive rods that survive under cold refrigeration. What drug is missing from this patient's empirical regimen?",
+      options: [
+        "Gentamicin",
+        "Amoxicillin",
+        "Ampicillin",
+        "Linezolid"
+      ],
+      correctIndex: 2,
+      explanation: "This patient is over 50 years of age, meaning she is at high risk for Listeria monocytogenes meningitis (Gram-positive cold-tolerant rod). The standard empiric cocktail (Vancomycin + Ceftriaxone) does not cover Listeria. Ampicillin must be added of all meningitis patients over 50 or under 1 month to prevent treatment failure."
+    }
+  },
+  {
+    slug: "viral-vs-bacterial-meningitis",
+    title: "Viral vs. Bacterial Meningitis",
+    subtitle: " Lumbar Puncture CSF Profiles: Glucose, Protein, and White Cell Differentials",
+    category: "Clinical Diagnosis",
+    badgeColor: "bg-pink-50 text-pink-700 border-pink-100",
+    intro: "Differentiating viral (aseptic) from bacterial meningitis is one of the most common, high-yield clinical evaluations. Lumbar puncture analysis of the cerebrospinal fluid (CSF) provides the objective biochemical maps to guide immediate therapies.",
+    leftTitle: "Bacterial Meningitis CSF",
+    rightTitle: "Viral (Aseptic) Meningitis CSF",
+    comparisonPoints: [
+      {
+        attribute: "Cerebrospinal Opening Pressure",
+        leftValue: "Markedly elevated (typically >200-250 mm H2O)",
+        rightValue: "Normal or only mildly elevated (<200 mm H2O)"
+      },
+      {
+        attribute: "Dominant White Cell Class",
+        leftValue: "Neutrophils (PMNs) dominate (often >1,000 cells/uL)",
+        rightValue: "Lymphocytes dominate (typically <500 cells/uL)"
+      },
+      {
+        attribute: "CSF Glucose Levels",
+        leftValue: "Markedly decreased (<40% of blood glucose; bacteria actively consume glucose)",
+        rightValue: "Normal (typically 60-70% of blood glucose; viruses do not consume glucose)"
+      },
+      {
+        attribute: "CSF Protein Levels",
+        leftValue: "Markedly elevated (typically >250 mg/dL; blood-brain barrier is heavily damaged)",
+        rightValue: "Normal or only mildly elevated (<100 mg/dL)"
+      },
+      {
+        attribute: "Primary Organisms",
+        leftValue: "S. pneumoniae, N. meningitidis, GBS, Listeria",
+        rightValue: "Enteroviruses (coxsackievirus, echovirus), HSV-2 (mononuclear meningitis)"
+      }
+    ],
+    clinicalPearls: [
+      "The Glucose consumption rule: Why does glucose drop in bacterial meningitis? Transporter molecules on the inflamed blood-brain barrier are chemically damaged, and polymorphonuclear neutrophils (PMNs) consuming glucose via anaerobiosis, drastically depleting CSF glucose values.",
+      "Aseptic Meningitis: The term 'aseptic' refers to a CSF profile showing lymphocytes and normal glucose with negative standard bacterial cultures. The vast majority of these cases are caused by non-polio Enteroviruses."
+    ],
+    examTraps: [
+      "A lumbar puncture revealing high pressure, high protein (>250), low glucose (<40), but with lymphocytic dominance instead of neutrophils points directly to Fungal or Tuberculous meningitis. Do not select viral meningitis, which has normal glucose.",
+      "Kernig's and Brudzinski's signs: Kernig's (pain on passive knee extension when hip is flexed) and Brudzinski's (passive neck flexion causes involuntary hip/knee flexion) indicate meningeal irritation but do not distinguish viral from bacterial."
+    ],
+    quiz: {
+      question: "A lumbar puncture is performed on a 22-year-old male with severe headache, neck stiffness, and photophobia. CSF analysis reveals: opening pressure 140 mm H2O (normal), WBC 180/uL with 88% lymphocytes, glucose 65 mg/dL (serum level 100 mg/dL), and protein 45 mg/dL. What is the most likely etiology?",
+      options: [
+        "Streptococcus pneumoniae",
+        "Cryptococcus neoformans",
+        "Coxsackievirus",
+        "Mycobacterium tuberculosis"
+      ],
+      correctIndex: 2,
+      explanation: "This CSF profile (normal opening pressure, lymphocyte dominance, normal glucose around 65% of serum, and normal/mild protein) indicates classic Viral (aseptic) Meningitis. Non-polio enteroviruses (like Coxsackievirus or Echovirus) causes the vast majority of viral cases. Bacterial (S. pneumoniae), fungal (Cryptococcus), and tuberculous (Tuberculous) meningitis would show severely decreased glucose levels."
+    }
+  },
+  {
+    slug: "ehec-vs-etec-vs-eiec-vs-eaec",
+    title: "EHEC vs. ETEC vs. EIEC vs. EAEC",
+    subtitle: "Escherichia coli Pathotypes: Shiga-Like Toxins, Traveler's Diarrhea, and Tissue Invasion",
+    category: "Clinical Diagnosis",
+    badgeColor: "bg-emerald-50 text-emerald-700 border-emerald-100",
+    intro: "Escherichia coli possesses multiple distinct clinical virulence strains (pathotypes). Distinguishing these strains is of paramount importance for board exams because therapies and systemic risks (such as renal failure) differ fundamentally.",
+    leftTitle: "EHEC & ETEC",
+    rightTitle: "EIEC & EAEC",
+    comparisonPoints: [
+      {
+        attribute: "Full Pathology Name",
+        leftValue: "EHEC: Enterohemorrhagic E. coli. ETEC: Enterotoxigenic E. coli",
+        rightValue: "EIEC: Enteroinvasive E. coli. EAEC: Enteroaggregative E. coli"
+      },
+      {
+        attribute: "Toxin & Mechanism",
+        leftValue: "EHEC: Shiga-like toxin (Stx-1/2, halts protein synthesis). ETEC: Heat-labile (LT, increases cAMP) and Heat-stable (ST, increases cGMP)",
+        rightValue: "EIEC: Invades colonic cell walls directly. EAEC: Plasmid-encoded fimbriae form stacked microcolonies ('stacked brick' pattern)"
+      },
+      {
+        attribute: "Primary Clinical Manifestations",
+        leftValue: "EHEC: Severe bloody diarrhea (hemorrhagic colitis). ETEC: Watery, secretory 'Traveler's' diarrhea (non-bloody)",
+        rightValue: "EIEC: Severe bloody diarrhea with fever (dysentery mimicking Shigella). EAEC: Chronic pediatric watery diarrhea"
+      },
+      {
+        attribute: "Hemolytic Uremic Syndrome risk",
+        leftValue: "EHEC: High risk (O157:H7 subtype). ETEC: No HUS association",
+        rightValue: "EIEC: No HUS association. EAEC: No classic association"
+      },
+      {
+        attribute: "Antibiotic Treatment Guideline",
+        leftValue: "EHEC: STRICTLY CONTRAINDICATED (antibiotics trigger massive releases of Shiga-like toxins, increasing HUS risk). ETEC: Self-limiting, hydration",
+        rightValue: "EIEC: Supportive, hydration. EAEC: Rehydration"
+      }
+    ],
+    clinicalPearls: [
+      "The ETEC Toxin Mnemonic: 'Labile in the Air (cAMP), Stable on the Ground (cGMP)'. Heat-Labile toxin activates Adenylate cyclase (elevating cAMP); Heat-Stable toxin activates Guanylate cyclase (elevating cGMP). Both cause massive electrolyte secretion into the intestinal lumen, drawing water along and initiating watery diarhea.",
+      "EHEC O157:H7 diagnostic trap: This specific strain does NOT ferment Sorbitol, whereas 95% of other E. coli strains do. Plating on MacConkey Sorbitol (SMAC) agar will yield colorless colonies for EHEC, confirming its presence."
+    ],
+    examTraps: [
+      "In a pediatric patient presenting with bloody diarrhea after eating undercooked hamburger meat, do NOT prescribe antibiotics (like Ciprofloxacin)! Rupturing the dying EHEC cells releases massive amounts of Shiga-like toxins, promoting acute glomerular damage and Hemolytic Uremic Syndrome (characterized by thrombocytopenia, microangiopathic hemolytic anemia, and acute kidney injury).",
+      "EIEC is structurally and pathologically almost identical to Shigella. EIEC uses the same actin-rocket intracellular movement system to invade and destroy the colonic epithelium."
+    ],
+    quiz: {
+      question: "A 5-year-old child presents with bloody diarrhea after eating at a local barbecue. A stool specimen is positive for Escherichia coli that does not ferment sorbitol on sorbitol-MacConkey agar. Two days later, the child develops oliguria, pallor, and petechiae. Labs reveal a platelet count of 45,000, high creatinine, and numerous schistocytes on blood smear. What classic clinical syndrome has emerged?",
+      options: [
+        "Henoch-Schönlein Purpura",
+        "Hemolytic Uremic Syndrome (HUS)",
+        "Disseminated Intravascular Coagulation (DIC)",
+        "Systemic Inflammatory Response Syndrome (SIRS)"
+      ],
+      correctIndex: 1,
+      explanation: "This child has developed Hemolytic Uremic Syndrome (HUS), triggered by an infection with Enterohemorrhagic E. coli O157:H7 (bloody diarrhea, colorless non-sorbitol-fermenting colonies). The Shiga-like toxin binds glomerular endothelial cells, triggering local platelet activation, microvascular clots, and mechanical RBC destruction (schistocytes on blood smear). This leads to the classic HUS triad: Microangiopathic hemolytic anemia, Thrombocytopenia, and Acute Renal Failure."
+    }
+  },
+  {
+    slug: "giardia-vs-entamoeba",
+    title: "Giardia lamblia vs. Entamoeba histolytica",
+    subtitle: "Secretory Flagellate Protozoan vs. Invasive Tissue-Destroying Amoeba",
+    category: "Clinical Diagnosis",
+    badgeColor: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    intro: "These two high-yield gastrointestinal protozoans are contracted via contaminated water cysts. However, Giardia is a non-invasive flagellate that coats the duodenum, while Entamoeba is a cytotoxically invasive pathogen that deeply penetrates the mucosal wall.",
+    leftTitle: "Giardia lamblia",
+    rightTitle: "Entamoeba histolytica",
+    comparisonPoints: [
+      {
+        attribute: "Pathology Type",
+        leftValue: "Non-invasive flagellate trophozoite (looks like a face with 'owl eye' nuclei)",
+        rightValue: "Invasive cytotoxically-destructive amoeba (trophozoites show engulfed RBCs inside cytoplasm)"
+      },
+      {
+        attribute: "Primary Clinical Symptoms",
+        leftValue: "Foul-smelling, greasy watery diarrhea (steatorrhea), flatulence, bloating, weight loss",
+        rightValue: "Bloody dysentery (bloody stools), severe abdominal cramping, liver pain"
+      },
+      {
+        attribute: "Anatomical Target Site",
+        leftValue: "Duodenum and jejunum (adheres to brush border via a ventral suction disc)",
+        rightValue: "Colon mucosal wall (causes deep flask-shaped mucosal ulcers)"
+      },
+      {
+        attribute: "Extraintestinal Complications",
+        leftValue: "Malabsorption of fat-soluble vitamins (A, D, E, K), severe weight loss",
+        rightValue: "Amoebic Liver Abscess (classic 'anchovy paste' fluid with intense right upper quadrant pain)"
+      },
+      {
+        attribute: "Microscopic Diagnosis",
+        leftValue: "Trophozoites or cysts in stool; pear-shaped with 4 pairs of flagella and 2 nuclei",
+        rightValue: "Stool O&P showing erythrophagocytosis (engulfed red blood cells within the amoebic trophozoite)"
+      }
+    ],
+    clinicalPearls: [
+      "The Ventral Suction Disc: Giardia does not invade tissue or secrete painful cytotoxins. Instead, it uses a highly specialized ventral adhesive disc to 'carpet' the microvillus brush border of the duodenum, mechanically blocking the absorption of fats and lipids. This causes the classic greasy, foul-smelling, floating stools (steatorrhea).",
+      "The 'Anchovy Paste' Abscess: If Entamoeba migrates from the colon into the portal circulation, it seeds the liver (usually the right lobe) to form a sterile liver abscess containing fluid described in board questions as having an 'anchovy paste' appearance."
+    ],
+    examTraps: [
+      "A wilderness hiker or camper who drinks untreated mountain stream water and develops severe bloating, flatulence, and bulky foul stools has Giardia. A patient who traveled internationally and presents with bloody stools and a liver mass has Entamoeba.",
+      "Treatment for both includes Metronidazole (or Tinidazole). However, for Entamoeba, you must follow metronidazole with a luminal amebicide like Paromomycin or Iodoquinol to eradicate cyst reservoirs remaining in the colon wall."
+    ],
+    quiz: {
+      question: "A 34-year-old aid worker returning from an international mission presents with right upper quadrant abdominal pain and low-grade fevers. Stool tests have been positive for bloody diarrhea. A liver ultrasound shows a single large abscess in the right hepatic lobe. Fluid aspiration reveals odor-free, reddish-brown fluid resembling 'anchovy paste'. What is the most likely microscopic hallmark of this pathogen?",
+      options: [
+        "Pyriform trophozoites with prominent ventral suction discs",
+        "Trophozoites containing ingested erythrocytes inside the cytoplasm",
+        "Spore-forming bacilli with terminal swelling",
+        "Acid-fast positive developmental oocysts"
+      ],
+      correctIndex: 1,
+      explanation: "This patient is presenting with an Amoebic Liver Abscess secondary to invasive Entamoeba histolytica (bloody dysentery history, standard right hepatic lobe liver mass with sterile, reddish-brown 'anchovy paste' fluid). E. histolytica's classic hallmark diagnostic signature is finding trophozoites with ingested red blood cells (erythrophagocytosis) in stool or tissue samples. Giardia trophozoites have ventral suction discs but do not ingest erythrocytes."
+    }
+  },
+  {
+    slug: "bacteroides-vs-clostridium",
+    title: "Bacteroides fragilis vs. Clostridium species",
+    subtitle: "Obligate Anaerobes: Lipopolysaccharide Non-Toxigenic Rod vs. Spore-Forming Toxin Producer",
+    category: " Clinical Diagnosis",
+    badgeColor: "bg-teal-50 text-teal-700 border-teal-100",
+    intro: "Anaerobic infections below the diaphragm represent severe clinical emergencies. Bacteroides fragilis dominates surgical intra-abdominal abscesses, while Clostridium species are spore-formers who utilize deadly specialized toxins.",
+    leftTitle: "Bacteroides fragilis",
+    rightTitle: "Clostridium species (perfringens, difficile)",
+    comparisonPoints: [
+      {
+        attribute: "Spore-Forming Status",
+        leftValue: "Non-spore forming Gram-negative rod",
+        rightValue: "Spore-forming Gram-positive rods"
+      },
+      {
+        attribute: "Lipopolysaccharide (LPS)",
+        leftValue: "Possesses LPS but it has a unique Lipid A that does NOT trigger septic shock (non-toxic LPS)",
+        rightValue: "No LPS present (Gram-positive wall, relies on protein exotoxins)"
+      },
+      {
+        attribute: "Clinical Association",
+        leftValue: "Intra-abdominal surgical abscesses (post-appendicitis, bowel perforations)",
+        rightValue: "Gas gangrene, botulism, tetanus, pseudomembranous colitis"
+      },
+      {
+        attribute: "Penicillin Resistance",
+        leftValue: "Highly resistant to penicillin (produces natural beta-lactamases)",
+        rightValue: "Typically highly sensitive to Penicillin G (except for cephalosporin-induced C. diff)"
+      }
+    ],
+    clinicalPearls: [
+      "The Surgical Abscess: Gunshots, appendicitis, or surgical bowel trauma lets Bacteroides fragilis breach the intestinal lumen into the sterile peritoneal cavity. B. fragilis cooperates with aerobic E. coli, taking advantage of the aerobe's oxygen consumption to form thick, anaerobic abdominal abscesses.",
+      "Resistance profile: B. fragilis can synthesize beta-lactamases, meaning you must treat it with Metronidazole, Carbapenems (Meropenem), or beta-lactamase inhibitors (Piperacillin-Tazobactam)."
+    ],
+    examTraps: [
+      "Do not choose simple penicillin or cephalosporins (like Ceftriaxone) to treat Bacteroides fragilis! Its beta-lactamase enzymes will easily destroy them. You must use Metronidazole or Pip-Tazo."
+    ],
+    quiz: {
+      question: "Which of the following describes why Bacteroides fragilis is naturally resistant to early penicillins, whereas gas-gangrene causing Clostridium perfringens remains highly sensitive?",
+      options: [
+        "Bacteroides possesses an outer cell envelope that completely blocks small chemical molecules",
+        "Bacteroides routinely produces beta-lactamase enzymes that hydrolyze the antibiotic ring structure",
+        "Bacteroides lacks penicillin-binding proteins inside its cytoplasm",
+        "Clostridium actively exports beta-lactams using a multi-drug resistance pump"
+      ],
+      correctIndex: 1,
+      explanation: "Bacteroides fragilis is a Gram-negative anaerobe that routinely expresses beta-lactamase enzymes, destroying the core beta-lactam ring of simple penicillins. Therefore, B. fragilis requires Metronidazole, Meropenem, or Piperacillin-Tazobactam. In contrast, Clostridium perfringens is a Gram-positive anaerobe that does not produce beta-lactamase and remains sensitive to Penicillin G."
+    }
+  },
+  {
+    slug: "actinomyces-vs-nocardia",
+    title: "Actinomyces israelii vs. Nocardia asteroides",
+    subtitle: "Filamentous Branching Foes: Severe Oral-Jaw Abscesses vs. Acid-Fast Lung/Brain Lesions",
+    category: "Microbial Morphology",
+    badgeColor: "bg-rose-50 text-rose-700 border-rose-100",
+    intro: "These two unique bacteria grow as long, branching filamentous structures that mimic fungi. Yet, they are true bacteria, differentiated by their oxygen requirements, acid-fast staining, and primary target sites.",
+    leftTitle: "Actinomyces israelii",
+    rightTitle: "Nocardia asteroides",
+    comparisonPoints: [
+      {
+        attribute: "Oxygen Environment",
+        leftValue: "Obligate Anaerobe (must grow in zero-oxygen environments)",
+        rightValue: "Obligate Aerobe (requires oxygen; targets lungs and brain)"
+      },
+      {
+        attribute: "Acid-Fast Stain Status",
+        leftValue: "Not Acid Fast (negative staining)",
+        rightValue: "Weakly Acid-Fast (partially retains carbolfuchsin stain because cell wall contains mycolic acid)"
+      },
+      {
+        attribute: "Primary Clinical Setting",
+        leftValue: "Cervicofacial abscesses ('lumpy jaw') after dental trauma, pelvic infection linked to long-term IUDS",
+        rightValue: "Pulmonary nodules/pneumonia in immunocompromised patients, migrating to form brain abscesses"
+      },
+      {
+        attribute: "Pathognomonic Clue",
+        leftValue: "Yellow 'sulfur granules' draining from sinus tracts (hard clumps of compressed bacteria and calcium)",
+        rightValue: "Multi-lobed brain abscesses in patients with depleted T-cell lines; matches soil contact"
+      },
+      {
+        attribute: "First-Line Drug Therapy",
+        leftValue: "High-dose Penicillin G ('SNAP' mnemonic: Sulfa for Nocardia, Actinomyces gets Penicillin)",
+        rightValue: "Trimethoprim-Sulfamethoxazole (TMP-SMX) ('SNAP' mnemonic)"
+      }
+    ],
+    clinicalPearls: [
+      "The 'SNAP' Mnemonic: How do you remember the therapy difference? **SNAP**: **S**ulfa for **N**ocardia, **A**ctinomyces gets **P**enicillin. This is highly tested because getting the drug choice wrong could result in treatment failure.",
+      "The Sulfur Granule: The yellow sand-like specs draining from cervicofacial actinomycosis lesions are not made of sulfur. They are hard colonies of Actinomyces bound together with calcium and host inflammatory proteins."
+    ],
+    examTraps: [
+      "If you see a cervicofacial mass after dental work with sinus tracts draining yellow granules, choose Actinomyces and treat with high-dose penicillin. If you see an immunocompromised patient with lung infiltrates and a brain abscess, choose Nocardia and treat with TMP-SMX.",
+      "Nocardia's weak acid-fast positive staining is due to intermediate-length mycolic acids in its cell wall. True Mycobacterium tuberculosis has much longer mycolic acids and is strongly acid-fast."
+    ],
+    quiz: {
+      question: "A 48-year-old male receives a kidney transplant and is on immunosuppressive drugs. He presents with fever, productive cough, and a new brain MRI shows three ring-enhancing abscesses. Sputum staining reveals Gram-positive, branching, filamentous rods that are weakly acid-fast. What is the drug combination of choice?",
+      options: [
+        "Penicillin G + Clindamycin",
+        "Trimethoprim-Sulfamethoxazole (TMP-SMX)",
+        "Amphotericin B + Flucytosine",
+        "Ceftriaxone + Metronidazole"
+      ],
+      correctIndex: 1,
+      explanation: "This immunocompromised patient has a systemic Nocardia asteroides infection (pulmonary symptoms paired with brain abscesses, Gram-positive, branching, filamentous, weakly acid-fast rods). The clinical mnemonic **SNAP** states that **S**ulfa is used for **N**ocardia, and **A**ctinomyces gets **P**enicillin. Therefore, Trimethoprim-Sulfamethoxazole (TMP-SMX) is the first-line treatment of choice."
+    }
   }
 ];
+
+const normalizeCategory = (category: string) => {
+  const c = category.trim().toLowerCase();
+  if (c.includes("diagnosis")) return "clinical";
+  if (c.includes("morphology")) return "morphology";
+  if (c.includes("pharmacology")) return "pharmacology";
+  if (c.includes("resistance")) return "resistance";
+  return "other";
+};
 
 export default function ComparisonsSEO() {
   const navigate = useNavigate();
@@ -536,32 +1580,57 @@ export default function ComparisonsSEO() {
                 </div>
               </div>
 
-              {/* Ribbon of buttons */}
-              <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-800/80 relative z-10">
-                {COMPARISONS_DATA.map((c) => {
-                  return (
-                    <Link
-                      key={c.slug}
-                      to={`/${c.slug}`}
-                      className="text-[10px] sm:text-[11px] font-extrabold px-3.5 py-2.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 shrink-0 border bg-slate-800/90 text-slate-250 border-slate-700/80 hover:text-white hover:bg-slate-755 hover:border-slate-600 active:scale-[0.98] active:bg-indigo-600 active:border-indigo-400 shadow-2xs group"
-                    >
-                      <span className="h-1.5 w-1.5 rounded-full bg-slate-400 group-hover:bg-slate-300" />
-                      <span>{c.title}</span>
-                    </Link>
-                  );
-                })}
+              {/* Group selection ribbon (similar to /drugs) */}
+              <div className="relative z-10 border-t border-slate-800/85 pt-4">
+                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 w-full flex-nowrap scrollbar-none">
+                  {[
+                    { id: "all", name: "All Comparisons", color: "bg-indigo-600 text-white border-indigo-500 shadow-md shadow-indigo-650/10 hover:bg-indigo-500" },
+                    { id: "clinical", name: "Clinical Diagnosis", color: "bg-amber-600 text-white border-amber-500 shadow-md shadow-amber-650/10 hover:bg-amber-500" },
+                    { id: "morphology", name: "Microbial Morphology", color: "bg-purple-600 text-white border-purple-500 shadow-md shadow-purple-650/10 hover:bg-purple-500" },
+                    { id: "pharmacology", name: "Antimicrobial Pharmacology", color: "bg-emerald-600 text-white border-emerald-500 shadow-md shadow-emerald-650/10 hover:bg-emerald-500" },
+                    { id: "resistance", name: "Microbial Resistance", color: "bg-rose-600 text-white border-rose-500 shadow-md shadow-rose-650/10 hover:bg-rose-500" }
+                  ].map((cat) => {
+                    const isActive = activeCategory === cat.id;
+                    return (
+                      <button
+                        key={cat.id}
+                        type="button"
+                        onClick={() => setActiveCategory(cat.id)}
+                        className={`text-[10px] sm:text-[11px] font-extrabold px-3.5 py-2.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 shrink-0 border group ${
+                          isActive
+                            ? cat.color
+                            : "bg-slate-800/90 text-slate-250 border-slate-700/80 hover:text-white hover:bg-slate-755 hover:border-slate-600 shadow-2xs"
+                        }`}
+                      >
+                        <span className={`h-1.5 w-1.5 rounded-full ${isActive ? 'bg-white' : 'bg-slate-400 group-hover:bg-slate-300'}`} />
+                        <span>{cat.name}</span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
             {/* Comparisons Cards Grid */}
             {(() => {
               const query = searchTerm.toLowerCase().trim();
-              const filtered = COMPARISONS_DATA.filter((c) => 
-                c.title.toLowerCase().includes(query) ||
-                c.subtitle.toLowerCase().includes(query) ||
-                c.intro.toLowerCase().includes(query) ||
-                c.category.toLowerCase().includes(query)
-              );
+              const filtered = COMPARISONS_DATA.filter((c) => {
+                // Category Filter selection
+                if (activeCategory !== "all") {
+                  const norm = normalizeCategory(c.category);
+                  if (norm !== activeCategory) return false;
+                }
+                // Text Search selection
+                if (query) {
+                  return (
+                    c.title.toLowerCase().includes(query) ||
+                    c.subtitle.toLowerCase().includes(query) ||
+                    c.intro.toLowerCase().includes(query) ||
+                    c.category.toLowerCase().includes(query)
+                  );
+                }
+                return true;
+              });
 
               if (filtered.length === 0) {
                 return (

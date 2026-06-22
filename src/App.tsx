@@ -13,7 +13,8 @@ import LegalPage from "./components/LegalPage";
 import OrganismsSEO from "./components/OrganismsSEO";
 import DiseasesSEO from "./components/DiseasesSEO";
 import DrugsSEO from "./components/DrugsSEO";
-import ComparisonsSEO from "./components/ComparisonsSEO";
+import ComparisonsSEO, { COMPARISONS_DATA } from "./components/ComparisonsSEO";
+import HowItWorksPage from "./components/HowItWorks";
 import { isSupabaseConfigured, syncUserDataToCloud } from "./lib/supabase";
 import { Search, BrainCircuit, Activity, BookOpen, Layers, Award, Grid, Sparkles, ShieldCheck, CheckCircle, Database, Cloud, CloudOff, RefreshCw, X } from "lucide-react";
 import { analytics as analyticsUtil } from "./utils/analytics";
@@ -85,18 +86,14 @@ function InnerApp() {
   // Redirect invalid paths to root / or let SEO slugs load cleanly
   useEffect(() => {
     const path = location.pathname.toLowerCase().trim().replace(/\/$/, "");
-    const isComparison = [
-      "/comparisons",
-      "/mrsa-vs-mssa",
-      "/vancomycin-vs-linezolid",
-      "/cellulitis-vs-erysipelas",
-      "/gram-positive-vs-gram-negative",
-      "/bactericidal-vs-bacteriostatic"
-    ].includes(path);
+    const isComparison = path === "/comparisons" || COMPARISONS_DATA.some(c => path === "/" + c.slug);
 
     if (
       location.pathname !== "/" && 
       !isComparison &&
+      location.pathname !== "/how-it-works" &&
+      location.pathname !== "/privacy" &&
+      location.pathname !== "/terms" &&
       !location.pathname.startsWith("/app") && 
       !location.pathname.startsWith("/organisms") && 
       !location.pathname.startsWith("/diseases") && 
@@ -538,6 +535,10 @@ function InnerApp() {
     return <MarketingLandingPage />;
   }
 
+  if (location.pathname === "/how-it-works") {
+    return <HowItWorksPage />;
+  }
+
   if (location.pathname === "/privacy") {
     return <LegalPage initialTab="privacy" />;
   }
@@ -547,16 +548,9 @@ function InnerApp() {
   }
 
   const cleanPath = location.pathname.toLowerCase().trim().replace(/\/$/, "");
-  const comparisons = [
-    "/comparisons",
-    "/mrsa-vs-mssa",
-    "/vancomycin-vs-linezolid",
-    "/cellulitis-vs-erysipelas",
-    "/gram-positive-vs-gram-negative",
-    "/bactericidal-vs-bacteriostatic"
-  ];
+  const isComparisonPath = cleanPath === "/comparisons" || COMPARISONS_DATA.some(c => cleanPath === "/" + c.slug);
 
-  if (comparisons.includes(cleanPath)) {
+  if (isComparisonPath) {
     return <ComparisonsSEO />;
   }
 

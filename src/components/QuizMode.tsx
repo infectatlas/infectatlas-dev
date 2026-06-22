@@ -98,7 +98,12 @@ export default function QuizMode({
       let explanation = "";
 
       if (type === "RECOGNITION") {
-        questionText = `A patient biopsy or laboratory stain reveals a microbe with the following characteristics: ${microbe.characteristics.join(", ")}. It is classified as ${microbe.gramStatus} with a shape of ${microbe.shape} and arrangement described as "${microbe.arrangement}". Identify this microorganism.`;
+        const shapeText = microbe.shape.toLowerCase();
+        const arrangementText = microbe.arrangement.toLowerCase() === "none" ? "no specific" : microbe.arrangement.toLowerCase();
+        const gramText = microbe.gramStatus;
+        const charList = microbe.characteristics.join(", ");
+
+        questionText = `Laboratory analysis of a patient stool, sputum, or tissue sample isolates a pathogen with the following key characteristics: ${charList}. Microscopic examination reveals ${gramText} ${shapeText} organized in a ${arrangementText} arrangement. Identify the culprit microorganism.`;
         
         // Options should be pathogen names
         const incorrects = pathogens.filter(p => p.id !== microbe.id).sort(() => 0.5 - Math.random()).slice(0, 3).map(p => p.name);
@@ -108,7 +113,7 @@ export default function QuizMode({
 
       } else if (type === "DISEASE") {
         const randomDisease = microbe.diseases[Math.floor(Math.random() * microbe.diseases.length)];
-        questionText = `Which of the following is the primary curative/etiological pathogen responsible for the disease presentation: "${randomDisease.name}"?`;
+        questionText = `Which of the following is the primary causative (etiological) pathogen typically responsible for the clinical disease presentation of "${randomDisease.name}"?`;
         
         // Options should be pathogen names
         const incorrects = pathogens.filter(p => p.id !== microbe.id).sort(() => 0.5 - Math.random()).slice(0, 3).map(p => p.name);
@@ -118,7 +123,7 @@ export default function QuizMode({
 
       } else if (type === "TREATMENT_ROUTE") {
         const randomDisease = microbe.diseases[Math.floor(Math.random() * microbe.diseases.length)];
-        questionText = `Identify the correct clinical treatment drug AND administration route (IV vs PO) to manage: "${randomDisease.name}" associated with suspected causative pathogen "${microbe.name}".`;
+        questionText = `Following a clinical diagnosis of "${randomDisease.name}" caused by the suspected pathogen "${microbe.name}", what is the standard recommended guideline pharmacotherapy and its corresponding route of administration?`;
 
         // We construct options carefully to test drug AND route!
         // Option 1 (Correct): correct drug + correct route
@@ -561,12 +566,23 @@ export default function QuizMode({
                   animate={{ opacity: 1, height: "auto" }}
                   className="bg-indigo-50/25 p-4 rounded-xl border border-indigo-100/30 space-y-2.5 overflow-hidden"
                 >
-                  <span className="font-bold text-indigo-900 uppercase tracking-wide text-[10px] block">
-                    Diagnostic & Pharmacotherapy Rationale
-                  </span>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    {questions[activeQuestionIndex].explanation}
-                  </p>
+                  <div className="flex flex-col gap-2">
+                    {selectedOptionIndex === questions[activeQuestionIndex].correctIndex ? (
+                      <div className="flex items-center gap-1.5 bg-emerald-500/10 text-emerald-700 border border-emerald-500/20 px-2.5 py-1 rounded-lg text-xs font-extrabold w-fit font-sans">
+                        <CheckCircle className="h-3.5 w-3.5" /> Correct Diagnostic Rationale
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-1.5 bg-rose-500/10 text-rose-700 border border-rose-500/20 px-2.5 py-1 rounded-lg text-xs font-extrabold w-fit font-sans">
+                        <XCircle className="h-3.5 w-3.5" /> Incorrect Diagnostic Rationale
+                      </div>
+                    )}
+                    <span className="font-bold text-indigo-900 uppercase tracking-wide text-[10px] block">
+                      Diagnostic & Pharmacotherapy Rationale
+                    </span>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      {questions[activeQuestionIndex].explanation.replace(/^Correct\.\s*/i, "")}
+                    </p>
+                  </div>
 
                   {/* Contextual reference links */}
                   <div className="pt-2 border-t border-indigo-100/30 flex flex-wrap gap-2 text-[11px]">
@@ -758,12 +774,25 @@ export default function QuizMode({
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
-                    className="bg-indigo-50/35 p-4 rounded-xl border border-indigo-150/50 space-y-2 overflow-hidden text-xs text-slate-700"
+                    className="bg-indigo-50/35 p-4 rounded-xl border border-indigo-150/50 space-y-2.5 overflow-hidden text-xs text-slate-700 font-sans"
                   >
-                    <span className="font-bold text-indigo-900 uppercase tracking-wide text-[10px] block">
-                      Boards-Style Rationale Explanation
-                    </span>
-                    <p className="leading-relaxed mt-0.5">{activeVignetteQuestion.explanation}</p>
+                    <div className="flex flex-col gap-2">
+                      {selectedOptionIndex === activeVignetteQuestion.correctAnswerIndex ? (
+                        <div className="flex items-center gap-1.5 bg-emerald-500/10 text-emerald-700 border border-emerald-500/20 px-2.5 py-1 rounded-lg text-xs font-extrabold w-fit">
+                          <CheckCircle className="h-3.5 w-3.5" /> Correct Diagnostic Outcome
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-1.5 bg-rose-500/10 text-rose-700 border border-rose-500/20 px-2.5 py-1 rounded-lg text-xs font-extrabold w-fit">
+                          <XCircle className="h-3.5 w-3.5" /> Incorrect Diagnostic Outcome
+                        </div>
+                      )}
+                      <div>
+                        <span className="font-bold text-indigo-900 uppercase tracking-wide text-[10px] block mb-1">
+                          Boards-Style Rationale Explanation
+                        </span>
+                        <p className="leading-relaxed mt-0.5">{activeVignetteQuestion.explanation.replace(/^Correct\.\s*/i, "")}</p>
+                      </div>
+                    </div>
 
                     {/* Contextual reference links */}
                     <div className="pt-2 border-t border-indigo-150/40 flex flex-wrap gap-2 text-[11px] mt-2">
