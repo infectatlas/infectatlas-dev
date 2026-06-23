@@ -10,6 +10,8 @@ export interface AnalyticsPropsMap {
   quiz_completed: { score: number; totalQuestions: number; category?: string };
   review_started: { totalCards: number };
   review_completed: { cardsReviewed: number };
+  deck_reshuffled: undefined;
+  deck_auto_reshuffled: undefined;
   founder_claimed: { email: string };
 }
 

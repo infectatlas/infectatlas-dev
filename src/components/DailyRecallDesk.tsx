@@ -2,7 +2,7 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { SpacedRepetitionItem, StudyList, SessionStats } from "../types";
 import { microorganismsData, Microorganism } from "../data/microorganisms";
 import { 
-  BrainCircuit, Sparkles, Clock, Calendar, CheckCircle2, ChevronRight, 
+  BrainCircuit, Sparkles, Clock, Calendar, CheckCircle, ChevronRight, 
   RotateCw, Plus, Zap, Award, BookOpen, Layers, Play, Check, AlertCircle, X
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
@@ -433,7 +433,7 @@ export default function DailyRecallDesk({
                         {/* Mastered element */}
                         <div className="bg-emerald-50 border border-emerald-100 p-2 px-3 rounded-lg flex justify-between items-center text-emerald-800 font-semibold text-xs gap-2">
                           <span className="flex items-center gap-1.5 min-w-0">
-                            <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
+                            <CheckCircle className="h-4 w-4 text-emerald-600 shrink-0" />
                             <span className="truncate">Organisms Mastered:</span>
                           </span>
                           <span className="bg-emerald-100 px-2 py-0.5 rounded-md font-bold shrink-0">{stats.mastered}</span>

@@ -1264,7 +1264,7 @@ export const COMPARISONS_DATA: ComparisonModule[] = [
     slug: "bacteroides-vs-clostridium",
     title: "Bacteroides fragilis vs. Clostridium species",
     subtitle: "Obligate Anaerobes: Lipopolysaccharide Non-Toxigenic Rod vs. Spore-Forming Toxin Producer",
-    category: " Clinical Diagnosis",
+    category: "Clinical Diagnosis",
     badgeColor: "bg-teal-50 text-teal-700 border-teal-100",
     intro: "Anaerobic infections below the diaphragm represent severe clinical emergencies. Bacteroides fragilis dominates surgical intra-abdominal abscesses, while Clostridium species are spore-formers who utilize deadly specialized toxins.",
     leftTitle: "Bacteroides fragilis",
@@ -1545,7 +1545,7 @@ export default function ComparisonsSEO() {
           <div className="space-y-8 animate-fade-in" id="comparisons-directory-index">
             {/* Compact Unified Hero & Search Panel */}
             <div className="relative bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-md space-y-6 overflow-hidden">
-              <div className="absolute right-0 bottom-0 top-0 w-1/3 opacity-15 bg-[radial-gradient(circle_at_bottom_right,#6366f1,transparent)] pointer-events-none" />
+              <div className="absolute right-0 bottom-0 top-0 w-1/3 opacity-15 bg-[radial-gradient(circle_at_bottom_right,#0D254D,transparent)] pointer-events-none" />
               
               <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                 <div className="space-y-2 max-w-xl">

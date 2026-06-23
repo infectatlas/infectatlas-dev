@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { 
-  CheckCircle2, 
+  CheckCircle, 
   XCircle, 
   AlertCircle, 
   RotateCcw, 
@@ -580,7 +580,7 @@ export default function AntimicrobialGrid() {
 
                           if (cell.status === "effective") {
                             cellBg = "bg-emerald-50/40 text-emerald-700 hover:bg-emerald-100/50";
-                            iconNode = <CheckCircle2 className="h-3.5 w-3.5 mx-auto text-emerald-500" />;
+                            iconNode = <CheckCircle className="h-3.5 w-3.5 mx-auto text-emerald-500" />;
                           } else if (cell.status === "intermediate") {
                             cellBg = "bg-amber-50/40 text-amber-700 hover:bg-amber-100/50";
                             iconNode = <AlertCircle className="h-3.5 w-3.5 mx-auto text-amber-500" />;

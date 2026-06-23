@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect, useRef } from "react";
 import { Microorganism, microorganismsData } from "../data/microorganisms";
 import { StudyList } from "../types";
-import { Sparkles, ArrowRight, RotateCw, CheckCircle2, Bookmark, BookmarkCheck, BrainCircuit } from "lucide-react";
+import { Sparkles, ArrowRight, RotateCw, CheckCircle, Bookmark, BookmarkCheck, BrainCircuit } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { analytics } from "../utils/analytics";
 import { diseasesData } from "../data/diseases";
@@ -13,6 +13,16 @@ const getPathogenSlug = (name: string): string => {
     .replace(/\s+/g, "-");
 };
 
+function shuffleArray<T>(array: T[]): T[] {
+  if (!array || !Array.isArray(array)) return [];
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 interface FlashcardsProps {
   studyLists: StudyList[];
   spacedRepetitionIds: string[];
@@ -22,7 +32,7 @@ interface FlashcardsProps {
   onUnlockPremium?: () => void;
 }
 
-type ModeFilter = "NameToDescription" | "NameToDiseases" | "DiseasesToTreatment" | "NameToCharacteristics" | "CharacteristicsToName" | "DiseaseToName";
+type ModeFilter = "NameToDescription" | "NameToDiseases" | "DiseasesToTreatment" | "CharacteristicsToName" | "DiseaseToName";
 
 export default function Flashcards({
   studyLists,
@@ -40,9 +50,18 @@ export default function Flashcards({
   // Deck Index
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [shuffleSeed, setShuffleSeed] = useState(0);
 
   // Analytics states to track cards reviewed in current session
   const [viewedCardIds, setViewedCardIds] = useState<Set<string>>(new Set());
+
+  type FlashcardDeckItem = {
+    id: string; // unique ID for the card (e.g., 's-aureus' or 's-aureus-disease-1')
+    microbe?: Microorganism;
+    disease?: typeof microorganismsData[0]["diseases"][0];
+    diseaseName?: string;
+    microbes?: Microorganism[];
+  };
 
   // Filtered Deck
   const deck = useMemo(() => {
@@ -61,30 +80,78 @@ export default function Flashcards({
       listPathogens = listPathogens.filter((m) => m.gramStatus === selectedGramFilter);
     }
 
-    // Shuffle option (kept in stable index or we can let users reset)
-    return listPathogens;
-  }, [selectedListId, selectedGramFilter, studyLists]);
+    // Flatten into flashcard items
+    const flattened: FlashcardDeckItem[] = [];
+
+    if (cardTypeMode === "DiseaseToName") {
+      const diseaseMap = new Map<string, FlashcardDeckItem>();
+      listPathogens.forEach((microbe) => {
+        if (microbe.diseases && microbe.diseases.length > 0) {
+          microbe.diseases.forEach((disease) => {
+            const diseaseName = disease.name;
+            if (!diseaseMap.has(diseaseName)) {
+              diseaseMap.set(diseaseName, { 
+                id: `disease-${diseaseName}`, 
+                diseaseName, 
+                microbes: [] 
+              });
+            }
+            if (!diseaseMap.get(diseaseName)!.microbes!.some(m => m.id === microbe.id)) {
+              diseaseMap.get(diseaseName)!.microbes!.push(microbe);
+            }
+          });
+        }
+      });
+      diseaseMap.forEach((val) => flattened.push(val));
+    } else {
+      listPathogens.forEach((microbe) => {
+        // For modes that should separate out each disease into its own flashcard
+        if (cardTypeMode === "DiseasesToTreatment") {
+          if (microbe.diseases && microbe.diseases.length > 0) {
+            microbe.diseases.forEach((disease) => {
+              flattened.push({
+                id: `${microbe.id}-${disease.id}`,
+                microbe,
+                disease,
+              });
+            });
+          }
+        } else {
+          // Standard modes just map one card per microbe
+          flattened.push({
+            id: microbe.id,
+            microbe,
+          });
+        }
+      });
+    }
+    
+    // Shuffle by default
+    return shuffleArray(flattened);
+  }, [selectedListId, selectedGramFilter, studyLists, cardTypeMode, shuffleSeed]);
 
   // 1. Trigger review_started whenever selection filters are configured
   useEffect(() => {
     if (deck.length > 0) {
       analytics.track("review_started", { totalCards: deck.length });
     }
-  }, [selectedListId, selectedGramFilter]);
+  }, [selectedListId, selectedGramFilter, cardTypeMode]);
 
-  const currentMicrobe: Microorganism | undefined = deck[currentIndex];
+  const currentCard: FlashcardDeckItem | undefined = deck[currentIndex];
+  const currentMicrobe = currentCard?.microbe;
+  const currentDisease = currentCard?.disease;
 
   // 2. Track unique cards reviewed
   useEffect(() => {
-    if (currentMicrobe) {
+    if (currentCard) {
       setViewedCardIds((prev) => {
-        if (prev.has(currentMicrobe.id)) return prev;
+        if (prev.has(currentCard.id)) return prev;
         const updated = new Set(prev);
-        updated.add(currentMicrobe.id);
+        updated.add(currentCard.id);
         return updated;
       });
     }
-  }, [currentMicrobe]);
+  }, [currentCard]);
 
   // 3. Keep ref synced with latest size for safe unmount extraction
   const cardsReviewedCountRef = useRef(0);
@@ -107,7 +174,10 @@ export default function Flashcards({
     if (currentIndex < deck.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      setCurrentIndex(0); // Loop back
+      // Automatic reshuffle when looping back
+      setShuffleSeed(s => s + 1);
+      setCurrentIndex(0);
+      analytics.track("deck_auto_reshuffled");
     }
   };
 
@@ -167,6 +237,7 @@ export default function Flashcards({
               setSelectedListId(e.target.value);
               setCurrentIndex(0);
               setIsFlipped(false);
+              setShuffleSeed(s => s + 1);
             }}
           >
             <option value="All">All Registered Organisms ({microorganismsData.length})</option>
@@ -189,6 +260,7 @@ export default function Flashcards({
               setSelectedGramFilter(e.target.value);
               setCurrentIndex(0);
               setIsFlipped(false);
+              setShuffleSeed(s => s + 1);
             }}
           >
             <option value="All">All stain Reactions & Shapes</option>
@@ -210,16 +282,17 @@ export default function Flashcards({
             value={cardTypeMode}
             onChange={(e) => {
               setCardTypeMode(e.target.value as ModeFilter);
+              setCurrentIndex(0);
               setIsFlipped(false);
+              setShuffleSeed(s => s + 1);
             }}
           >
-            <option value="NameToDescription">1. Front: Pathogen &bull; Back: Description</option>
-            <option value="NameToDiseases">2. Front: Pathogen &bull; Back: Disease</option>
-            <option value="DiseasesToTreatment">3. Front: Pathogen & Disease &bull; Back: Treatment</option>
-            <option value="NameToCharacteristics">4. Front: Pathogen &bull; Back: Characteristics</option>
-            <option value="CharacteristicsToName">5. Front: Characteristics &bull; Back: Pathogen</option>
-            <option value="DiseaseToName">6. Front: Disease & Treatment &bull; Back: Pathogen</option>
-          </select>
+              <option value="NameToDescription">1. Front: Pathogen &bull; Back: Description</option>
+              <option value="NameToDiseases">2. Front: Pathogen &bull; Back: Disease</option>
+              <option value="DiseasesToTreatment">3. Front: Pathogen & Disease &bull; Back: Treatment</option>
+              <option value="CharacteristicsToName">4. Front: Characteristics &bull; Back: Pathogen</option>
+              <option value="DiseaseToName">5. Front: Disease &bull; Back: Pathogen</option>
+            </select>
         </div>
       </div>
 
@@ -282,7 +355,7 @@ export default function Flashcards({
           <div className="perspective-1000 min-h-[300px] h-full relative cursor-pointer" onClick={handleFlip}>
             <AnimatePresence mode="popLayout">
               <motion.div
-                key={`${currentMicrobe?.id}-${isFlipped}-${cardTypeMode}`}
+                key={`${currentCard?.id}-${isFlipped}-${cardTypeMode}`}
                 initial={{ opacity: 0, rotateY: isFlipped ? -90 : 90 }}
                 animate={{ opacity: 1, rotateY: 0 }}
                 exit={{ opacity: 0, rotateY: isFlipped ? 90 : -90 }}
@@ -295,13 +368,17 @@ export default function Flashcards({
               >
                 {/* SRS Tracking Pin Overlay */}
                 <div className="flex justify-between items-center text-xs">
-                  <span className={`px-2 py-0.5 rounded-full uppercase text-[10px] font-bold ${
-                    isFlipped 
-                      ? "bg-indigo-800 text-indigo-200" 
-                      : "bg-slate-100 text-slate-500"
-                  }`}>
-                    {currentMicrobe?.gramStatus} &bull; {currentMicrobe?.shape}
-                  </span>
+                  <div className="flex-1">
+                    {!(cardTypeMode === "NameToDescription" && !isFlipped) && (
+                      <span className={`px-2 py-0.5 rounded-full uppercase text-[10px] font-bold ${
+                        isFlipped 
+                          ? "bg-indigo-800 text-indigo-200" 
+                          : "bg-slate-100 text-slate-500"
+                      }`}>
+                        {currentMicrobe?.gramStatus} &bull; {currentMicrobe?.shape}
+                      </span>
+                    )}
+                  </div>
 
                   <button
                     onClick={(e) => {
@@ -329,11 +406,10 @@ export default function Flashcards({
                     // Front side layouts depending on CardTypeMode selection
                     cardTypeMode === "NameToDescription" ? (
                       <div className="space-y-2">
-                        <span className="text-[11px] uppercase tracking-wider font-extrabold text-indigo-600 font-sans block">Identify Profile For</span>
+                        <span className="text-[11px] uppercase tracking-wider font-extrabold text-indigo-600 font-sans block">Describe the following pathogen</span>
                         <h3 className="text-2xl md:text-3xl font-extrabold italic text-slate-900 leading-tight">
                           {currentMicrobe?.name}
                         </h3>
-                        <span className="text-xs text-slate-400 block mt-1">(Recall organism description and characteristics)</span>
                       </div>
                     ) : cardTypeMode === "NameToDiseases" ? (
                       <div className="space-y-2">
@@ -345,26 +421,17 @@ export default function Flashcards({
                       </div>
                     ) : cardTypeMode === "DiseasesToTreatment" ? (
                       <div className="space-y-3 w-full text-center">
-                        <span className="text-[11px] uppercase tracking-wider font-extrabold text-indigo-600 font-sans block">Diseases Associated With</span>
+                        <span className="text-[11px] uppercase tracking-wider font-extrabold text-indigo-600 font-sans block">Identify Treatment For</span>
                         <h3 className="text-xl md:text-2xl font-extrabold italic text-slate-900 leading-tight">
                           {currentMicrobe?.name}
                         </h3>
                         <div className="space-y-2 text-xs text-left text-slate-700 bg-slate-50 p-3 rounded-xl border border-slate-150 max-h-[140px] overflow-y-auto">
-                          <span className="text-slate-500 font-semibold block text-[10px] uppercase tracking-wide mb-1">Causative Pathogenic Scope:</span>
-                          <ul className="list-disc pl-4 space-y-1">
-                            {currentMicrobe?.diseases.map((d, idx) => (
-                              <li key={idx} className="font-medium">{d.name}</li>
-                            ))}
-                          </ul>
+                          <span className="text-slate-500 font-semibold block text-[10px] uppercase tracking-wide mb-1">Disease Focus:</span>
+                          <p className="font-bold text-slate-900 text-sm leading-relaxed">
+                            {currentDisease?.name}
+                          </p>
                         </div>
-                        <span className="text-xs text-slate-400 block mt-1">(Recall drug therapies and administration routes)</span>
-                      </div>
-                    ) : cardTypeMode === "NameToCharacteristics" ? (
-                      <div className="space-y-2">
-                        <span className="text-[11px] uppercase tracking-wider font-extrabold text-indigo-600 font-sans block">Identify Profile For</span>
-                        <h3 className="text-2xl md:text-3xl font-extrabold italic text-slate-900 leading-tight">
-                          {currentMicrobe?.name}
-                        </h3>
+                        <span className="text-xs text-slate-400 block mt-1">(Recall drug therapies and administration route)</span>
                       </div>
                     ) : cardTypeMode === "CharacteristicsToName" ? (
                       <div className="space-y-3 px-4">
@@ -377,14 +444,11 @@ export default function Flashcards({
                         </p>
                       </div>
                     ) : (
-                      <div className="space-y-3 px-4">
-                        <span className="text-[11px] uppercase tracking-wider font-extrabold text-indigo-600 font-sans block">Identify Causative Pathogen for</span>
-                        <p className="text-base font-semibold text-slate-800 leading-relaxed bg-indigo-50/50 p-3.5 rounded-xl border border-indigo-100/30 font-serif italic">
-                          "{currentMicrobe?.diseases[0]?.name}"
-                        </p>
-                        <p className="text-xs text-slate-500 font-mono">
-                          First-line Treatment: {currentMicrobe?.diseases[0]?.treatment}
-                        </p>
+                      <div className="space-y-2 w-full text-center px-4">
+                        <span className="text-[11px] uppercase tracking-wider font-extrabold text-indigo-600 font-sans block">Identify causative pathogen(s) for</span>
+                        <h3 className="text-2xl md:text-3xl font-extrabold italic text-slate-900 leading-tight">
+                          {currentCard?.diseaseName}
+                        </h3>
                       </div>
                     )
                   ) : (
@@ -397,7 +461,6 @@ export default function Flashcards({
                         </div>
                         <div className="space-y-2 text-xs text-left text-slate-300 bg-slate-900/60 p-4 rounded-xl border border-white/5 max-h-[180px] overflow-y-auto">
                           <p className="leading-relaxed"><strong className="text-white">Description:</strong> {currentMicrobe?.description}</p>
-                          <p className="mt-2"><strong className="text-white">Classification:</strong> {currentMicrobe?.gramStatus} &bull; {currentMicrobe?.shape} ({currentMicrobe?.arrangement})</p>
                         </div>
                       </div>
                     ) : cardTypeMode === "NameToDiseases" ? (
@@ -412,7 +475,6 @@ export default function Flashcards({
                             {currentMicrobe?.diseases.map((d, index) => (
                               <li key={index}>
                                 <strong className="text-white text-[12px]">{d.name}</strong>
-                                {d.clinicalPearl && <p className="text-[10px] text-slate-400 italic mt-0.5">{d.clinicalPearl}</p>}
                               </li>
                             ))}
                           </ul>
@@ -425,38 +487,35 @@ export default function Flashcards({
                           <h4 className="text-xl font-bold italic text-white mt-1">{currentMicrobe?.name}</h4>
                         </div>
                         <div className="space-y-3 text-xs text-left text-slate-300 bg-slate-900/60 p-4 rounded-xl border border-white/5 max-h-[180px] overflow-y-auto">
-                          <span className="text-emerald-400 font-bold block text-[11px] uppercase tracking-wide mb-1.5">Targeted Therapies:</span>
-                          <div className="space-y-3.5 divide-y divide-white/10">
-                            {currentMicrobe?.diseases.map((d, idx) => (
-                              <div key={idx} className="pt-2 first:pt-0">
-                                <span className="font-semibold text-white block text-[12px]">{d.name}</span>
-                                <p className="mt-0.5 text-slate-300"><strong className="text-indigo-200">Tx:</strong> {d.treatment}</p>
-                                <p className="text-[11px] text-emerald-300 mt-0.5 font-sans">Route: <span className="bg-indigo-950 px-1.5 py-0.5 rounded font-mono uppercase text-[10px] text-white border border-white/5">{d.route}</span></p>
-                              </div>
-                            ))}
+                          <span className="text-emerald-400 font-bold block text-[11px] uppercase tracking-wide mb-1.5">Targeted Therapy:</span>
+                          <div className="pt-1">
+                            <span className="font-semibold text-white block text-[12px]">{currentDisease?.name}</span>
+                            <p className="mt-1.5 text-slate-300"><strong className="text-indigo-200">Treatment:</strong> {currentDisease?.treatment}</p>
+                            <p className="text-[11px] text-emerald-300 mt-1 font-sans">Route: <span className="bg-indigo-950 px-1.5 py-0.5 rounded font-mono uppercase text-[10px] text-white border border-white/5">{currentDisease?.route}</span></p>
                           </div>
                         </div>
                       </div>
-                    ) : cardTypeMode === "NameToCharacteristics" || cardTypeMode === "CharacteristicsToName" ? (
+                    ) : cardTypeMode === "CharacteristicsToName" ? (
                       <div className="space-y-4 w-full">
                         <div>
                           <span className="text-[10px] uppercase font-bold text-indigo-300 block">Pathogen Answer</span>
                           <h4 className="text-xl font-bold italic text-white mt-1">{currentMicrobe?.name}</h4>
                         </div>
-                        <div className="space-y-2 text-xs text-left text-slate-300 bg-slate-900/60 p-4 rounded-xl border border-white/5">
-                          <p><strong className="text-white">Profile:</strong> {currentMicrobe?.description}</p>
-                          <p><strong className="text-white">Diseases:</strong> {currentMicrobe?.diseases.map(d => `${d.name} (${d.route})`).join("; ")}</p>
-                        </div>
                       </div>
                     ) : (
-                      <div className="space-y-4 w-full">
-                        <div>
-                          <span className="text-[10px] uppercase font-bold text-indigo-300 block">Identified Causative Pathogen</span>
-                          <h4 className="text-xl font-bold italic text-white mt-1">{currentMicrobe?.name}</h4>
-                        </div>
-                        <div className="space-y-2 text-xs text-left text-slate-300 bg-slate-900/60 p-4 rounded-xl border border-white/5">
-                          <p><strong className="text-white">Classification:</strong> {currentMicrobe?.gramStatus} &bull; {currentMicrobe?.shape} &bull; {currentMicrobe?.arrangement}</p>
-                          <p><strong className="text-white">Diseases Managed:</strong> {currentMicrobe?.diseases.map(d => `${d.name} (Requires ${d.route})`).join("; ")}</p>
+                      <div className="space-y-4 w-full h-full flex flex-col">
+                        <div className="text-left w-full">
+                          <span className="text-[10px] uppercase font-bold text-indigo-300 block mb-2">Identified causative pathogen(s)</span>
+                          <div className="space-y-3 text-xs text-left text-slate-300 bg-slate-900/60 p-4 rounded-xl border border-white/5 max-h-[180px] overflow-y-auto">
+                            <ul className="space-y-2 min-h-0">
+                              {currentCard?.microbes?.map((m) => (
+                                <li key={m.id} className="flex items-start">
+                                  <span className="text-indigo-400 mr-2 mt-0.5">•</span>
+                                  <span className="text-white font-medium text-[15px]">{m.name}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         </div>
                       </div>
                     )
@@ -483,13 +542,13 @@ export default function Flashcards({
               onClick={handlePrevCard}
               className="bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-semibold px-4 py-2 rounded-xl text-xs transition-colors shadow-2xs"
             >
-              Previous Microbe
+              Previous Card
             </button>
             <button
               onClick={handleNextCard}
               className="bg-indigo-600 text-white hover:bg-indigo-700 font-semibold px-5 py-2 rounded-xl text-xs transition-colors flex items-center gap-1.5 shadow-sm"
             >
-              Next Microbe <ArrowRight className="h-3.5 w-3.5" />
+              Next Card <ArrowRight className="h-3.5 w-3.5" />
             </button>
           </div>
         </div>

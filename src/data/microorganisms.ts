@@ -30,7 +30,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "sa-ssti",
-        name: "Skin/Soft Tissue Infection (SSTI)",
+        name: "Cellulitis / SSTI",
         treatment: "MSSA: cephalexin or dicloxacillin; MRSA: TMP-SMX, doxycycline, or clindamycin",
         route: "PO",
         clinicalPearl: "Oral TMP-SMX or Doxycycline is preferred for uncomplicated CA-MRSA skin infections."
@@ -94,7 +94,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "ss-uti",
-        name: "Uncomplicated Urinary Tract Infection",
+        name: "Urinary Tract Infection (UTI)",
         treatment: "Nitrofurantoin, Amoxicillin-clavulanate, or TMP-SMX.",
         route: "PO",
         clinicalPearl: "Classic 'honeymoon cystitis' finding in young women; distinguished from S. epidermidis by novobiocin resistance."
@@ -112,7 +112,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "sp-cap",
-        name: "Community-Acquired Pneumonia (CAP)",
+        name: "Pneumonia",
         treatment: "Ceftriaxone + azithromycin or respiratory fluoroquinolone",
         route: "IV/PO",
         clinicalPearl: "Produces 'rusty' colored sputum. Key risk in splenectomy patients due to polysaccharide capsule."
@@ -158,7 +158,7 @@ export const microorganismsData: Microorganism[] = [
       },
       {
         id: "spy-cellulitis",
-        name: "Cellulitis",
+        name: "Cellulitis / SSTI",
         treatment: "Cephalexin or penicillin",
         route: "PO",
         clinicalPearl: "A classic cause of localized, spreading acute skin infections."
@@ -197,7 +197,7 @@ export const microorganismsData: Microorganism[] = [
       },
       {
         id: "sag-meningitis",
-        name: "Neonatal Meningitis",
+        name: "Meningitis",
         treatment: "Ampicillin + cefotaxime",
         route: "IV",
         clinicalPearl: "A principal cause of pediatric central nervous system infection in newborns."
@@ -222,7 +222,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "ef-uti",
-        name: "Urinary Tract Infection",
+        name: "Urinary Tract Infection (UTI)",
         treatment: "Ampicillin or nitrofurantoin",
         route: "PO",
         clinicalPearl: "Nitrofurantoin holds superb bladder concentrations but does not act in kidney parenchyma."
@@ -304,7 +304,7 @@ export const microorganismsData: Microorganism[] = [
       },
       {
         id: "smut-endocarditis",
-        name: "Endocarditis (rare)",
+        name: "Endocarditis",
         treatment: "Penicillin G or ceftriaxone",
         route: "IV",
         clinicalPearl: "Can cause subacute bacterial endocarditis on previously damaged/prosthetic heart valves."
@@ -509,14 +509,14 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "lm-neonatal",
-        name: "Neonatal Meningitis",
+        name: "Meningitis",
         treatment: "Ampicillin + gentamicin",
         route: "IV",
         clinicalPearl: "Always screen pregnant patients; Listeria is a classic neonatal meningitis driver alongside Group B Strep and E. coli."
       },
       {
         id: "lm-adult",
-        name: "Adult Meningitis",
+        name: "Meningitis",
         treatment: "Ampicillin ± gentamicin",
         route: "IV",
         clinicalPearl: "Requires empiric ampicillin addition for patients over 50 or immunocompromised due to high Listeria risk."
@@ -669,7 +669,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "lact-endocarditis",
-        name: "Endocarditis (rare)",
+        name: "Endocarditis",
         treatment: "Penicillin G ± gentamicin",
         route: "IV",
         clinicalPearl: "Usually highly benign and protective. Rare cause of endocarditis in severely immunocompromised patients."
@@ -769,7 +769,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "ec-uti",
-        name: "Uncomplicated Cystitis",
+        name: "Urinary Tract Infection (UTI)",
         treatment: "Nitrofurantoin, TMP-SMX, or fosfomycin",
         route: "PO",
         clinicalPearl: "Oral Nitrofurantoin is first-line. Safe in pregnancy (except at term). Avoid in pyelonephritis."
@@ -801,6 +801,13 @@ export const microorganismsData: Microorganism[] = [
         treatment: "Cefepime, piperacillin-tazobactam, or carbapenem depending on resistance",
         route: "IV",
         clinicalPearl: "Broad empiric coverage should be initiated quickly for systemic bacteremic signs."
+      },
+      {
+        id: "ec-meningitis",
+        name: "Meningitis",
+        treatment: "Ampicillin + Cefotaxime",
+        route: "IV",
+        clinicalPearl: "E. coli strains causing neonatal meningitis possess the K1 capsular antigen."
       }
     ]
   },
@@ -822,7 +829,7 @@ export const microorganismsData: Microorganism[] = [
       },
       {
         id: "kp-uti",
-        name: "Urinary Tract Infection",
+        name: "Urinary Tract Infection (UTI)",
         treatment: "Ceftriaxone or cefepime",
         route: "IV/PO",
         clinicalPearl: "A frequent culprit behind catheter-associated or complicated urosepsis."
@@ -854,7 +861,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "ko-uti",
-        name: "UTI",
+        name: "Urinary Tract Infection (UTI)",
         treatment: "Cefepime or ceftriaxone if susceptible",
         route: "IV/PO",
         clinicalPearl: "Indole-positive status reliably distinguishes it from K. pneumoniae."
@@ -879,7 +886,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "ecl-hap",
-        name: "Hospital-Acquired Pneumonia (HAP)",
+        name: "Pneumonia",
         treatment: "Cefepime or meropenem",
         route: "IV",
         clinicalPearl: "Cefepime resists hydrolysis by chromosomal AmpC beta-lactamases."
@@ -893,7 +900,7 @@ export const microorganismsData: Microorganism[] = [
       },
       {
         id: "ecl-uti",
-        name: "Complicated UTI",
+        name: "Urinary Tract Infection (UTI)",
         treatment: "Cefepime, fluoroquinolone, or carbapenem depending on resistance",
         route: "IV/PO",
         clinicalPearl: "Avoid simple third-generation cephalosporins (like Ceftriaxone) to prevent resistance emergence."
@@ -932,14 +939,14 @@ export const microorganismsData: Microorganism[] = [
       },
       {
         id: "sm-uti",
-        name: "UTI",
+        name: "Urinary Tract Infection (UTI)",
         treatment: "Cefepime or TMP-SMX if susceptible",
         route: "IV/PO",
         clinicalPearl: "Urine may appear red or pink due to the pathogen's characteristic prodigiosin pigment."
       },
       {
         id: "sm-endocarditis",
-        name: "Endocarditis (rare)",
+        name: "Endocarditis",
         treatment: "Cefepime or carbapenem + ID consult",
         route: "IV",
         clinicalPearl: "Associated historically with injection drug users; highly destructive on cardiac valves."
@@ -957,7 +964,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "pm-uncomplicated",
-        name: "Uncomplicated UTI",
+        name: "Urinary Tract Infection (UTI)",
         treatment: "TMP-SMX or ciprofloxacin",
         route: "PO",
         clinicalPearl: "Often fully sensitive to oral beta-lactams and common urinary agents."
@@ -971,7 +978,7 @@ export const microorganismsData: Microorganism[] = [
       },
       {
         id: "pm-cauti",
-        name: "Catheter-Associated UTI",
+        name: "Urinary Tract Infection (UTI)",
         treatment: "Ceftriaxone or cefepime",
         route: "IV",
         clinicalPearl: "Commonly forms stubborn biofilms on urine drainage catheters."
@@ -996,7 +1003,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "pv-uti",
-        name: "UTI",
+        name: "Urinary Tract Infection (UTI)",
         treatment: "Cefepime or fluoroquinolone",
         route: "IV/PO",
         clinicalPearl: "Indole-positive status signals resistance to ampicillin; requires fluoroquinolones or advanced cephalosporins."
@@ -1021,7 +1028,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "mm-uti",
-        name: "UTI",
+        name: "Urinary Tract Infection (UTI)",
         treatment: "Cefepime or piperacillin-tazobactam",
         route: "IV/PO",
         clinicalPearl: "Usually hospital-acquired; avoid simple earlier cephalosporins to prevent treatment failure."
@@ -1035,7 +1042,7 @@ export const microorganismsData: Microorganism[] = [
       },
       {
         id: "mm-wound",
-        name: "Wound Infection",
+        name: "Cellulitis / SSTI",
         treatment: "Cefepime if susceptible",
         route: "IV/PO",
         clinicalPearl: "Often occurs post-operatively following major abdominal or pelvic operations."
@@ -1060,7 +1067,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "cf-hap",
-        name: "Hospital-Acquired Pneumonia",
+        name: "Pneumonia",
         treatment: "Cefepime or meropenem",
         route: "IV",
         clinicalPearl: "AmpC carrier risking rapid active resistance if treated with ceftriaxone or ceftazidime alone."
@@ -1074,7 +1081,7 @@ export const microorganismsData: Microorganism[] = [
       },
       {
         id: "cf-uti",
-        name: "Complicated UTI",
+        name: "Urinary Tract Infection (UTI)",
         treatment: "Cefepime or fluoroquinolone if susceptible",
         route: "IV/PO",
         clinicalPearl: "Common in patients who have undergone urinary tract instrumentation or surgeries."
@@ -1099,7 +1106,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "ck-meningitis",
-        name: "Neonatal Meningitis",
+        name: "Meningitis",
         treatment: "Meropenem or cefepime (IV, prolonged course)",
         route: "IV",
         clinicalPearl: "Requires careful lumbar puncture and immediate initiation of broad CNS-penetrating agents."
@@ -1339,7 +1346,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "pa-hap-vap",
-        name: "Hospital-Acquired Pneumonia (HAP/VAP)",
+        name: "Pneumonia",
         treatment: "Cefepime, piperacillin-tazobactam, or meropenem",
         route: "IV",
         clinicalPearl: "Common in cystic fibrosis (biofilms) and severe burns; often double-covered empirically."
@@ -1353,7 +1360,7 @@ export const microorganismsData: Microorganism[] = [
       },
       {
         id: "pa-uti",
-        name: "Complicated UTI",
+        name: "Urinary Tract Infection (UTI)",
         treatment: "Cefepime or fluoroquinolone if susceptible",
         route: "IV/PO",
         clinicalPearl: "Avoid nitrofurantoin or simple first-generation cephalosporins; usually associated with urinary catheters."
@@ -1365,9 +1372,16 @@ export const microorganismsData: Microorganism[] = [
         route: "IV",
         clinicalPearl: "Requires immediate empiric IV coverage. Monotherapy with an antipseudomonal beta-lactam is standard."
       },
+            {
+        id: "pa-otitis-0",
+        name: "Malignant Otitis Externa",
+        treatment: "Ciprofloxacin",
+        route: "IV/PO",
+        clinicalPearl: "Ciprofloxacin is the only reliable oral choice against Pseudomonas. Swimmer's ear clinic rules."
+      },
       {
-        id: "pa-otitis",
-        name: "Malignant Otitis Externa & Folliculitis",
+        id: "pa-otitis-1",
+        name: "Folliculitis",
         treatment: "Ciprofloxacin",
         route: "IV/PO",
         clinicalPearl: "Ciprofloxacin is the only reliable oral choice against Pseudomonas. Swimmer's ear clinic rules."
@@ -1392,7 +1406,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "ab-vap",
-        name: "Ventilator-Associated Pneumonia (VAP)",
+        name: "Pneumonia",
         treatment: "Sulbactam-based therapy (ampicillin-sulbactam if susceptible); MDR: polymyxins (colistin) or cefiderocol",
         route: "IV",
         clinicalPearl: "Sulbactam has unique direct bactericidal efficacy against Acinetobacter, demanding huge therapeutic levels."
@@ -1406,7 +1420,7 @@ export const microorganismsData: Microorganism[] = [
       },
       {
         id: "ab-wound",
-        name: "Wound/Soft Tissue Infection",
+        name: "Cellulitis / SSTI",
         treatment: "Ampicillin-sulbactam or carbapenem if susceptible + source control",
         route: "IV",
         clinicalPearl: "Commonly contaminates war wounds or trauma sites; active source control is vital."
@@ -1527,7 +1541,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "vv-wound",
-        name: "Wound Infection / Necrotizing Skin Infection",
+        name: "Cellulitis / SSTI",
         treatment: "Doxycycline + ceftazidime",
         route: "IV",
         clinicalPearl: "Enters through cuts in warm brackish seawater. Demands rapid surgical debridement."
@@ -1740,7 +1754,7 @@ export const microorganismsData: Microorganism[] = [
       },
       {
         id: "lp-severe",
-        name: "Severe Pneumonia",
+        name: "Pneumonia",
         treatment: "Levofloxacin or azithromycin IV",
         route: "IV",
         clinicalPearl: "Requires intensive respiratory tracking and high-potency macrolide or quinolone coverage."
@@ -1970,9 +1984,16 @@ export const microorganismsData: Microorganism[] = [
     characteristics: ["Obligate intracellular (cannot make own ATP)", "Giemsa stain for inclusion bodies", "Lacks peptidoglycan cell wall"],
     description: "Intracellular pathogen exists as elementary bodies (infectious) & reticulate bodies (replicating). Drives non-gonococcal urethritis.",
     diseases: [
+            {
+        id: "ct-urethritis-0",
+        name: "Chlamydia Urethritis",
+        treatment: "Doxycycline (first-line) or Azithromycin (preferred in pregnancy).",
+        route: "PO",
+        clinicalPearl: "Often silent. Standard clinic protocol co-treats for Chlamydia and Gonorrhea jointly."
+      },
       {
-        id: "ct-urethritis",
-        name: "Chlamydia Urethritis & Trachoma",
+        id: "ct-urethritis-1",
+        name: "Trachoma",
         treatment: "Doxycycline (first-line) or Azithromycin (preferred in pregnancy).",
         route: "PO",
         clinicalPearl: "Often silent. Standard clinic protocol co-treats for Chlamydia and Gonorrhea jointly."
@@ -1990,7 +2011,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "cpn-cap",
-        name: "Atypical Community-Acquired Pneumonia",
+        name: "Atypical Pneumonia",
         treatment: "Doxycycline, Azithromycin, or Levofloxacin.",
         route: "PO",
         clinicalPearl: "Beta-lactam antibiotics have no target because of Chlamydia's unique lack of cell wall peptidoglycan."
@@ -2096,9 +2117,16 @@ export const microorganismsData: Microorganism[] = [
     characteristics: ["Facultative intracellular G-", "Warthin-Starry silver stain positive", "Spread by cat scratches/bites"],
     description: "Fastidious, silver-staining G- rod. Causes Cat Scratch Disease in immunocompetent, and vascular angiomatosis in AIDS patients.",
     diseases: [
+            {
+        id: "bh-catscratch-0",
+        name: "Cat Scratch Disease",
+        treatment: "Azithromycin (Cat Scratch) or Doxycycline (Bacillary Angiomatosis).",
+        route: "PO",
+        clinicalPearl: "Bacillary angiomatosis presents with benign bright red vascular skin nodules in AIDS patients; mimics Kaposi sarcoma."
+      },
       {
-        id: "bh-catscratch",
-        name: "Cat Scratch Disease & Bacillary Angiomatosis",
+        id: "bh-catscratch-1",
+        name: "Bacillary Angiomatosis",
         treatment: "Azithromycin (Cat Scratch) or Doxycycline (Bacillary Angiomatosis).",
         route: "PO",
         clinicalPearl: "Bacillary angiomatosis presents with benign bright red vascular skin nodules in AIDS patients; mimics Kaposi sarcoma."
@@ -2114,9 +2142,16 @@ export const microorganismsData: Microorganism[] = [
     characteristics: ["Vector: Body louse", "Warthin-Starry stain positive"],
     description: "Gram-negative rod behind 'Trench Fever'. Transmitted in poor hygienic conditions/homeless populations by body lice.",
     diseases: [
+            {
+        id: "bq-trench-0",
+        name: "Trench Fever",
+        treatment: "Doxycycline + Rifampin.",
+        route: "PO",
+        clinicalPearl: "Presents as recurring 5-day cyclic fevers, severe shin pains, and potential endocarditis on heart valves."
+      },
       {
-        id: "bq-trench",
-        name: "Trench Fever & Culture-Negative Endocarditis",
+        id: "bq-trench-1",
+        name: "Culture-Negative Endocarditis",
         treatment: "Doxycycline + Rifampin.",
         route: "PO",
         clinicalPearl: "Presents as recurring 5-day cyclic fevers, severe shin pains, and potential endocarditis on heart valves."
@@ -2132,9 +2167,16 @@ export const microorganismsData: Microorganism[] = [
     characteristics: ["Oxidase-positive", "Catalase-positive", "Bipolar safety-pin staining", "Acquired from animal bites (cats/dogs)"],
     description: "Small aerobic G- coccobacillus. Highly colonizes oral cavities of healthy domestic cats and dogs.",
     diseases: [
+            {
+        id: "pmul-wound-0",
+        name: "Rapid Bite Wound Cellulitis",
+        treatment: "Amoxicillin-clavulanate (Augmentin) or Ampicillin-sulbactam",
+        route: "IV/PO",
+        clinicalPearl: "Presents as rapid, extremely tender localized cellulitis starting within 24 hours of a domestic cat bite."
+      },
       {
-        id: "pmul-wound",
-        name: "Rapid Bite Wound Cellulitis / Osteomyelitis",
+        id: "pmul-wound-1",
+        name: "Osteomyelitis",
         treatment: "Amoxicillin-clavulanate (Augmentin) or Ampicillin-sulbactam",
         route: "IV/PO",
         clinicalPearl: "Presents as rapid, extremely tender localized cellulitis starting within 24 hours of a domestic cat bite."
@@ -2152,12 +2194,19 @@ export const microorganismsData: Microorganism[] = [
     characteristics: ["Anaerobic", "Bile-resistant", "Encapsulated with capsule causing direct abscesses"],
     description: "Strictly anaerobic G- rod. Dominant gut flora species. Trauma or surgical breaches spill it into peritoneum.",
     diseases: [
+            {
+        id: "bf-abscess-0",
+        name: "Intra-abdominal Abscess",
+        treatment: "Metronidazole, Piperacillin-tazobactam, or Carbapenems.",
+        route: "IV",
+        clinicalPearl: "Metronidazole holds superb anaerobic cover. Avoid cephalosporins (e.g., ceftriaxone) alone as they lack anaerobic coverage."
+      },
       {
-         id: "bf-abscess",
-         name: "Intra-abdominal Abscess & Peritonitis",
-         treatment: "Metronidazole, Piperacillin-tazobactam, or Carbapenems.",
-         route: "IV",
-         clinicalPearl: "Metronidazole holds superb anaerobic cover. Avoid cephalosporins (e.g., ceftriaxone) alone as they lack anaerobic coverage."
+        id: "bf-abscess-1",
+        name: "Peritonitis",
+        treatment: "Metronidazole, Piperacillin-tazobactam, or Carbapenems.",
+        route: "IV",
+        clinicalPearl: "Metronidazole holds superb anaerobic cover. Avoid cephalosporins (e.g., ceftriaxone) alone as they lack anaerobic coverage."
       }
     ]
   },
@@ -2170,9 +2219,16 @@ export const microorganismsData: Microorganism[] = [
     characteristics: ["Anaerobic", "Black pigment on blood agar", "Brick-red fluorescence under UV"],
     description: "Anaerobic G- rod colonizing the oral cavity and genital secretions.",
     diseases: [
+            {
+        id: "pmel-lung-0",
+        name: "Aspiration Pneumonia",
+        treatment: "Clindamycin or Ampicillin-sulbactam.",
+        route: "IV/PO",
+        clinicalPearl: "Classic cause of foul-smelling lung abscesses in alcoholics following aspiration of oral secretions."
+      },
       {
-        id: "pmel-lung",
-        name: "Aspiration Pneumonia & Periodontitis",
+        id: "pmel-lung-1",
+        name: "Periodontitis",
         treatment: "Clindamycin or Ampicillin-sulbactam.",
         route: "IV/PO",
         clinicalPearl: "Classic cause of foul-smelling lung abscesses in alcoholics following aspiration of oral secretions."
@@ -2188,9 +2244,16 @@ export const microorganismsData: Microorganism[] = [
     characteristics: ["Anaerobic", "Spindle or needle-shaped morphology", "Highly virulent outer membrane adhesins"],
     description: "Elongated, thin anaerobic G- rod causing severe gingival and metastatic deep neck abscesses.",
     diseases: [
+            {
+        id: "fn-abscess-0",
+        name: "Vincent's Angina",
+        treatment: "Penicillin G or Metronidazole or Clindamycin.",
+        route: "IV",
+        clinicalPearl: "Lemierre syndrome is a deep neck infection leading to septic thrombophlebitis of the internal jugular vein."
+      },
       {
-        id: "fn-abscess",
-        name: "Vincent's Angina & Lemierre Syndrome",
+        id: "fn-abscess-1",
+        name: "Lemierre Syndrome",
         treatment: "Penicillin G or Metronidazole or Clindamycin.",
         route: "IV",
         clinicalPearl: "Lemierre syndrome is a deep neck infection leading to septic thrombophlebitis of the internal jugular vein."
@@ -2206,9 +2269,16 @@ export const microorganismsData: Microorganism[] = [
     characteristics: ["Anaerobic", "SPS (Sodium polyanethol sulfonate) sensitive"],
     description: "Anaerobic G+ cocci. Part of normal oral, gut, and vaginal flora. Often found in mixed synergistic infections.",
     diseases: [
+            {
+        id: "pa-mixed-0",
+        name: "Pelvic Inflammatory Disease",
+        treatment: "Penicillin G, Metronidazole, or Clindamycin.",
+        route: "IV/PO",
+        clinicalPearl: "Frequently isolates alongside G- anaerobes in diabetic foot ulcers and pelvic organ abscesses."
+      },
       {
-        id: "pa-mixed",
-        name: "Pelvic Inflammatory Disease & Aspiration Abscess",
+        id: "pa-mixed-1",
+        name: "Aspiration Abscess",
         treatment: "Penicillin G, Metronidazole, or Clindamycin.",
         route: "IV/PO",
         clinicalPearl: "Frequently isolates alongside G- anaerobes in diabetic foot ulcers and pelvic organ abscesses."
@@ -2224,9 +2294,16 @@ export const microorganismsData: Microorganism[] = [
     characteristics: ["Anaerobic G+ cocci", "SPS resistant", "Produces gelatinase"],
     description: "Opportunistic anaerobic G+ coccus. Second most common Gram-positive anaerobe found in bone, skin, and prosthetic infections.",
     diseases: [
+            {
+        id: "fmag-bone-0",
+        name: "Prosthetic Joint Injury",
+        treatment: "Penicillin G, Ampicillin, or Metronidazole.",
+        route: "IV",
+        clinicalPearl: "Frequently present in decubitus ulcers and diabetic pressure sores; requires standard necrotic debridement."
+      },
       {
-        id: "fmag-bone",
-        name: "Prosthetic Joint Injury & Decubitus Ulcer Sepsis",
+        id: "fmag-bone-1",
+        name: "Decubitus Ulcer Sepsis",
         treatment: "Penicillin G, Ampicillin, or Metronidazole.",
         route: "IV",
         clinicalPearl: "Frequently present in decubitus ulcers and diabetic pressure sores; requires standard necrotic debridement."
@@ -2242,9 +2319,16 @@ export const microorganismsData: Microorganism[] = [
     characteristics: ["Anaerobic G- cocci", "Oxidase-negative", "Metabolizes lactate"],
     description: "Only major anaerobic G- coccus family in humans. Concentrated in plaque and mucosal membranes.",
     diseases: [
+            {
+        id: "vp-infection-0",
+        name: "Dental Plaque",
+        treatment: "Penicillin G or Clindamycin.",
+        route: "IV/PO",
+        clinicalPearl: "Highly protective oral colonizer that consumes toxic lactate, but acts as an opportunistic pathogen when aspirated."
+      },
       {
-        id: "vp-infection",
-        name: "Dental Plaque & Pulmonary Aspiration Sepsis",
+        id: "vp-infection-1",
+        name: "Pulmonary Aspiration Sepsis",
         treatment: "Penicillin G or Clindamycin.",
         route: "IV/PO",
         clinicalPearl: "Highly protective oral colonizer that consumes toxic lactate, but acts as an opportunistic pathogen when aspirated."
@@ -2280,9 +2364,16 @@ export const microorganismsData: Microorganism[] = [
     characteristics: ["HACEK family", "Bleach-like odor", "Pits/corrodes the agar"],
     description: "Fastidious G- rod in the HACEK group. Normal oral flora. Key driver of infection following human bites.",
     diseases: [
+            {
+        id: "ecorr-bite-0",
+        name: "Human Bite Wound / Fight Bite",
+        treatment: "Ampicillin-sulbactam, Ceftriaxone, or Penicillin G.",
+        route: "IV/PO",
+        clinicalPearl: "Presents as a hand infection ('fight bite') after punching someone in the teeth. Differentiated by bleach-like agar odor."
+      },
       {
-        id: "ecorr-bite",
-        name: "Human Bite Wound / Fight Bite & Endocarditis",
+        id: "ecorr-bite-1",
+        name: "Endocarditis",
         treatment: "Ampicillin-sulbactam, Ceftriaxone, or Penicillin G.",
         route: "IV/PO",
         clinicalPearl: "Presents as a hand infection ('fight bite') after punching someone in the teeth. Differentiated by bleach-like agar odor."
@@ -2316,9 +2407,16 @@ export const microorganismsData: Microorganism[] = [
     characteristics: ["Anaerobic G- rod", "Produces black colonies on blood agar", "Gingipain synthesis"],
     description: "Anaerobic G- rod. Chief etiological driver of severe chronic periodontal bone recession.",
     diseases: [
+            {
+        id: "pg-periodontitis-0",
+        name: "Gingivitis",
+        treatment: "Metronidazole, Amoxicillin, or Topical Chlorhexidine.",
+        route: "PO",
+        clinicalPearl: "Destroys bone and periodontal ligament through collagenase and protease release. Linked in research to alzheimer's."
+      },
       {
-        id: "pg-periodontitis",
-        name: "Gingivitis & Chronic Periodontitis",
+        id: "pg-periodontitis-1",
+        name: "Chronic Periodontitis",
         treatment: "Metronidazole, Amoxicillin, or Topical Chlorhexidine.",
         route: "PO",
         clinicalPearl: "Destroys bone and periodontal ligament through collagenase and protease release. Linked in research to alzheimer's."
@@ -2352,9 +2450,16 @@ export const microorganismsData: Microorganism[] = [
     characteristics: ["Oxidase-positive", "Beta-hemolytic", "Grows in fresh water"],
     description: "Gram-negative rod. Found in fresh or brackish water. Associated with wound cellulitis after fresh-water trauma.",
     diseases: [
+            {
+        id: "ah-cellulitis-0",
+        name: "Freshwater Wound Necrosis",
+        treatment: "Ciprofloxacin or Ceftriaxone.",
+        route: "IV/PO",
+        clinicalPearl: "Strong resemblance to Vibrio infections but differentiates by growing in zero-salt fresh water."
+      },
       {
-        id: "ah-cellulitis",
-        name: "Freshwater Wound Necrosis & Diarrhea",
+        id: "ah-cellulitis-1",
+        name: "Diarrhea",
         treatment: "Ciprofloxacin or Ceftriaxone.",
         route: "IV/PO",
         clinicalPearl: "Strong resemblance to Vibrio infections but differentiates by growing in zero-salt fresh water."
@@ -2374,7 +2479,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "mp-atypical",
-        name: "Walking Pneumonia & Erythema Multiforme",
+        name: "Atypical Pneumonia",
         treatment: "Azithromycin, Doxycycline, or Levofloxacin.",
         route: "PO",
         clinicalPearl: "Beta-lactams (e.g. penicillin) are totally useless because Mycoplasma has NO cell wall to target. High IgM titers can cause mild anemia."
@@ -2526,9 +2631,16 @@ export const microorganismsData: Microorganism[] = [
     characteristics: ["Oxidase-positive", "Catalase-positive", "Highly motile peritrichous flagella"],
     description: "Gram-negative rod commonly infecting wet hospital circuits, CF lungs, and oncology lines.",
     diseases: [
+            {
+        id: "ax-sepsis-0",
+        name: "Oncology Catheter Sepsis",
+        treatment: "Piperacillin-tazobactam or Meropenem.",
+        route: "IV",
+        clinicalPearl: "High environmental tolerance makes it a persistent challenge on wet sterile equipment."
+      },
       {
-        id: "ax-sepsis",
-        name: "Oncology Catheter Sepsis & CF exacerbation",
+        id: "ax-sepsis-1",
+        name: "CF exacerbation",
         treatment: "Piperacillin-tazobactam or Meropenem.",
         route: "IV",
         clinicalPearl: "High environmental tolerance makes it a persistent challenge on wet sterile equipment."
@@ -2578,7 +2690,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "smit-endocarditis",
-        name: "Subacute Endocarditis",
+        name: "Endocarditis",
         treatment: "Penicillin G ± gentamicin",
         route: "IV",
         clinicalPearl: "Frequently leaks into blood during dental scaling or in patients with severe mucositis."
@@ -2610,7 +2722,7 @@ export const microorganismsData: Microorganism[] = [
     diseases: [
       {
         id: "svir-endocarditis",
-        name: "Infective Endocarditis",
+        name: "Endocarditis",
         treatment: "Penicillin G ± gentamicin or ceftriaxone",
         route: "IV",
         clinicalPearl: "Primary driver of subacute bacterial endocarditis on abnormal or calcified native heart valves."

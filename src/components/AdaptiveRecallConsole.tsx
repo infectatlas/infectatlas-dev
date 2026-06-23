@@ -3,7 +3,7 @@ import AdaptiveQuestionEngine from "./AdaptiveQuestionEngine";
 import { Question, SessionStats } from "../types";
 import { generateQuestionPool } from "../utils/questionGenerator";
 import { 
-  Award, RefreshCw, AlertCircle, CheckCircle2, X, Play, Clock, 
+  Award, RefreshCw, AlertCircle, CheckCircle, X, Play, Clock, 
   HelpCircle, BookOpen, Target, Sparkles, Flame, Check, AlertTriangle
 } from "lucide-react";
 import { microorganismsData } from "../data/microorganisms";
@@ -255,7 +255,7 @@ export default function AdaptiveRecallConsole({
           onClick={handleCommitResults}
           className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-extrabold text-xs shadow-md transition flex items-center justify-center gap-1.5 cursor-pointer"
         >
-          <CheckCircle2 className="h-4.5 w-4.5" />
+          <CheckCircle className="h-4.5 w-4.5" />
           Update database & Complete Session
         </button>
       </div>

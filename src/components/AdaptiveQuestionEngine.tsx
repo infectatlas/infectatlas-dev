@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import { Question, SessionStats } from "../types";
 import { motion, AnimatePresence } from "motion/react";
 import { 
-  Brain, Clock, Sparkles, AlertCircle, CheckCircle2, 
+  Brain, Clock, Sparkles, AlertCircle, CheckCircle, 
   ArrowRight, Lightbulb, Activity, ArrowLeft, RefreshCw
 } from "lucide-react";
 import { microorganismsData, Microorganism } from "../data/microorganisms";
@@ -401,7 +401,7 @@ export default function AdaptiveQuestionEngine({
                     disabled={submitted}
                   >
                     <span className="text-xs leading-relaxed">{opt}</span>
-                    {submitted && isCorrectOption && <CheckCircle2 className="h-4.5 w-4.5 text-emerald-600 shrink-0 mt-0.5" />}
+                    {submitted && isCorrectOption && <CheckCircle className="h-4.5 w-4.5 text-emerald-600 shrink-0 mt-0.5" />}
                     {submitted && isSelected && !isCorrectOption && <AlertCircle className="h-4.5 w-4.5 text-rose-600 shrink-0 mt-0.5" />}
                   </button>
                 );
@@ -489,7 +489,7 @@ export default function AdaptiveQuestionEngine({
                       />
                       <span>{opt}</span>
                     </div>
-                    {submitted && isCorrectOption && <CheckCircle2 className="h-4.5 w-4.5 text-emerald-600 shrink-0" />}
+                    {submitted && isCorrectOption && <CheckCircle className="h-4.5 w-4.5 text-emerald-600 shrink-0" />}
                     {submitted && isSelected && !isCorrectOption && <AlertCircle className="h-4.5 w-4.5 text-rose-600 shrink-0" />}
                   </button>
                 );
@@ -523,7 +523,7 @@ export default function AdaptiveQuestionEngine({
             >
               <div className="flex items-start gap-3">
                 <div className={`p-1.5 rounded-full shrink-0 ${isCorrect ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
-                  {isCorrect ? <CheckCircle2 className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
+                  {isCorrect ? <CheckCircle className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
                 </div>
                 <div className="space-y-3 flex-1 text-left">
                   <div>

@@ -9,14 +9,14 @@
   --color-indigo-50: #EEF4FB;      /* Primary light background */
   --color-indigo-100: #DCE9F7;     /* Light border / badge accent */
   --color-indigo-505: #1B4474;     /* Accent midtone */
-  --color-indigo-600: #011E41;     /* Primary brand - Deep Navy */
-  --color-indigo-650: #011E41;     /* Mid-deep alignment */
-  --color-indigo-700: #022B5C;     /* Primary hover - Navy 700 */
-  --color-indigo-750: #022B5C;     /* Hover match */
-  --color-indigo-800: #01142B;     /* Deep footer / dark border */
-  --color-indigo-900: #011E41;     /* Deep Navy */
-  --color-indigo-955: #000B1A;     /* Soft black */
-  --color-indigo-950: #000B1A;     /* Dark slate navy */
+  --color-indigo-600: #0D254D;     /* Primary brand - Deep Navy */
+  --color-indigo-650: #0D254D;     /* Mid-deep alignment */
+  --color-indigo-700: #163B6B;     /* Primary hover - Navy 700 (Adjusted) */
+  --color-indigo-750: #163B6B;     /* Hover match (Adjusted) */
+  --color-indigo-800: #091A36;     /* Deep footer / dark border (Adjusted) */
+  --color-indigo-900: #0D254D;     /* Deep Navy */
+  --color-indigo-955: #050E1F;     /* Soft black (Adjusted) */
+  --color-indigo-950: #050E1F;     /* Dark slate navy (Adjusted) */
 
   /* Neutral Modern Slate Overrides */
   --color-slate-50: #F8FAFC;       /* Page background */

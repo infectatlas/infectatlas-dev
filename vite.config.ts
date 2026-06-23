@@ -79,7 +79,7 @@ Your response should follow a structured JSON format:
 Do NOT wrap the output in markdown code blocks like \`\`\`json. Return only the raw JSON.`;
 
               const response = await ai.models.generateContent({
-                model: "gemini-3.5-flash",
+                model: "gemini-1.5-flash",
                 contents: prompt,
                 config: {
                   responseMimeType: "application/json",

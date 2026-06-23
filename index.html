@@ -5,55 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>InfectAtlas - Medical Microorganism Study Tool</title>
     <link rel="icon" href="/favicon.ico?v=4" />
-    <meta name="theme-color" content="#6366f1" />
+    <meta name="theme-color" content="#0D254D" />
     <meta name="description" content="Master microbiology for clinical board exams with active recall flashcards, interactive multi-mode quizzes, and responsive medicine efficacy grids." />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4" />
     <link rel="manifest" href="/manifest.json?v=4" />
-    <!-- Immediate Inline PWA Service Worker Loader for flawless automated engine detection -->
-    <script>
-      if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-        let refreshing = false;
-        navigator.serviceWorker.addEventListener('controllerchange', () => {
-          if (!refreshing) {
-            refreshing = true;
-            console.log('[InfectAtlas PWA] Active Service Worker changed. Reloading page...');
-            window.location.reload();
-          }
-        });
-
-        const registerSW = () => {
-          navigator.serviceWorker.register('/sw.js')
-            .then((reg) => {
-              console.log('InfectAtlas PWA Service Worker registered successfully:', reg.scope);
-              
-              // Immediate check and active state trigger for testers
-              reg.addEventListener('updatefound', () => {
-                const newWorker = reg.installing;
-                if (newWorker) {
-                  newWorker.addEventListener('statechange', () => {
-                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                      console.log('[InfectAtlas PWA] New update discovered. Triggering immediate skipWaiting...');
-                      newWorker.postMessage({ type: 'SKIP_WAITING' });
-                    }
-                  });
-                }
-              });
-            })
-            .catch((err) => {
-              console.error('InfectAtlas Service Worker registration failed:', err);
-            });
-        };
-
-        if (document.readyState === 'complete' || document.readyState === 'interactive') {
-          registerSW();
-        } else {
-          window.addEventListener('load', registerSW);
-        }
-      }
-    </script>
   </head>
   <body>
     <div id="root"></div>

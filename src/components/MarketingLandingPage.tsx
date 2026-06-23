@@ -8,7 +8,7 @@ import {
   Pill, 
   BookOpen, 
   Scale, 
-  CheckCircle2, 
+  CheckCircle, 
   ChevronRight, 
   GraduationCap, 
   Clock,
@@ -518,7 +518,7 @@ export default function MarketingLandingPage() {
             
             <div className="flex items-start gap-3 p-2 group" id="trust-card-1">
               <div className="p-2 rounded-xl bg-indigo-50 text-indigo-600 shrink-0 border border-indigo-100">
-                <CheckCircle2 className="h-5 w-5" />
+                <CheckCircle className="h-5 w-5" />
               </div>
               <div>
                 <h3 className="font-extrabold text-slate-900 text-sm">90+ High-Yield Pathogens</h3>
@@ -530,7 +530,7 @@ export default function MarketingLandingPage() {
 
             <div className="flex items-start gap-3 p-2 group" id="trust-card-2">
               <div className="p-2 rounded-xl bg-emerald-50 text-emerald-600 shrink-0 border border-emerald-100">
-                <CheckCircle2 className="h-5 w-5" />
+                <CheckCircle className="h-5 w-5" />
               </div>
               <div>
                 <h3 className="font-extrabold text-slate-900 text-sm">IDSA-Aligned Regimens</h3>
@@ -542,7 +542,7 @@ export default function MarketingLandingPage() {
 
             <div className="flex items-start gap-3 p-2 group" id="trust-card-3">
               <div className="p-2 rounded-xl bg-indigo-50 text-indigo-600 shrink-0 border border-indigo-100">
-                <CheckCircle2 className="h-5 w-5" />
+                <CheckCircle className="h-5 w-5" />
               </div>
               <div>
                 <h3 className="font-extrabold text-slate-900 text-sm">Interactive Recall Exercises</h3>
@@ -554,7 +554,7 @@ export default function MarketingLandingPage() {
 
             <div className="flex items-start gap-3 p-2 group" id="trust-card-4">
               <div className="p-2 rounded-xl bg-amber-50 text-amber-600 shrink-0 border border-amber-100">
-                <CheckCircle2 className="h-5 w-5" />
+                <CheckCircle className="h-5 w-5" />
               </div>
               <div>
                 <h3 className="font-extrabold text-slate-900 text-sm">Built for Board Exams</h3>
