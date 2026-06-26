@@ -935,41 +935,43 @@ export default function MarketingLandingPage() {
       </section>
 
       {/* 8. FINAL CTA */}
-      <section id="final-cta-section" className="py-20 bg-gradient-to-br from-indigo-900 to-slate-900 text-white relative overflow-hidden text-center w-full">
-        
-        {/* Background decorative vector grids */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay">
-          <div className="absolute -top-12 -left-12 w-96 h-96 bg-indigo-505 rounded-full filter blur-xl"></div>
-          <div className="absolute -bottom-12 -right-12 w-96 h-96 bg-emerald-505 rounded-full filter blur-xl"></div>
-        </div>
-
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 space-y-6">
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight font-display italic">
-            Ready to remember microbiology instead of rereading it?
-          </h2>
-          <p className="text-indigo-200 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            Stop losing clinical boards points. Activate dynamic testing templates with first-choice guidelines coverages completely free.
-          </p>
+      <div className="px-4 py-8 sm:p-0 w-full bg-white">
+        <section id="final-cta-section" className="py-16 sm:py-20 bg-gradient-to-br from-indigo-900 to-slate-900 text-white relative overflow-hidden text-center rounded-3xl sm:rounded-none w-full shadow-lg sm:shadow-none">
           
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 pt-4 max-w-sm sm:max-w-none mx-auto">
-            <Link
-              to="/app"
-              className="bg-white text-indigo-950 font-bold text-[15px] py-3.5 px-8 rounded-xl shadow-md hover:bg-slate-50 hover:shadow-lg transition duration-150 focus:outline-[3px] focus:outline-white min-h-[48px] flex items-center justify-center gap-1.5"
-              id="final-cta-start"
-            >
-              <span>Start Studying Free</span>
-              <ArrowRight className="h-4 w-4 text-indigo-700" />
-            </Link>
-            <Link
-              to="/organisms"
-              className="bg-indigo-950/40 text-indigo-100 hover:text-white border border-indigo-500/30 hover:border-indigo-400 font-bold text-[15px] py-3.5 px-8 rounded-xl transition duration-150 focus:outline-none min-h-[48px] flex items-center justify-center"
-              id="final-cta-library"
-            >
-              Browse Reference Library
-            </Link>
+          {/* Background decorative vector grids */}
+          <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay">
+            <div className="absolute -top-12 -left-12 w-96 h-96 bg-indigo-505 rounded-full filter blur-xl"></div>
+            <div className="absolute -bottom-12 -right-12 w-96 h-96 bg-emerald-505 rounded-full filter blur-xl"></div>
           </div>
-        </div>
-      </section>
+
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 space-y-6">
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight font-display italic">
+              Ready to remember microbiology instead of rereading it?
+            </h2>
+            <p className="text-indigo-200 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+              Stop losing clinical boards points. Activate dynamic testing templates with first-choice guidelines coverages completely free.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 pt-4 max-w-sm sm:max-w-none mx-auto">
+              <Link
+                to="/app"
+                className="bg-white text-indigo-950 font-bold text-[15px] py-3.5 px-8 rounded-xl shadow-md hover:bg-slate-50 hover:shadow-lg transition duration-150 focus:outline-[3px] focus:outline-white min-h-[48px] flex items-center justify-center gap-1.5"
+                id="final-cta-start"
+              >
+                <span>Start Studying Free</span>
+                <ArrowRight className="h-4 w-4 text-indigo-700" />
+              </Link>
+              <Link
+                to="/organisms"
+                className="bg-indigo-950/40 text-indigo-100 hover:text-white border border-indigo-500/30 hover:border-indigo-400 font-bold text-[15px] py-3.5 px-8 rounded-xl transition duration-150 focus:outline-none min-h-[48px] flex items-center justify-center"
+                id="final-cta-library"
+              >
+                Browse Reference Library
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
 
       {/* 9. FOOTER */}
       <footer id="website-footer" className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">

@@ -218,7 +218,11 @@ export default function Dashboard({
             <div className="space-y-3 mt-3">
               {studyLists.length === 0 ? (
                 <div className="text-center text-slate-400 text-xs p-8 border border-dashed border-slate-100 rounded-xl">
-                  No custom lists created. Click **New List** above to organize your exam study focus!
+                  <p className="font-semibold mb-2 text-slate-500">No custom lists created. Get started in two simple steps:</p>
+                  <div className="inline-block text-left space-y-1">
+                    <p>1. Click <span className="font-bold text-slate-600">+ New List</span> above to name your study focus.</p>
+                    <p>2. Visit the <span className="font-bold text-indigo-600">Cross-Reference Catalog</span> tab and click <span className="font-bold text-slate-600">+</span> on any pathogen to add it to your list.</p>
+                  </div>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -254,8 +258,8 @@ export default function Dashboard({
                         )}
 
                         {list.pathogenIds.length === 0 && (
-                          <p className="text-[10px] text-slate-400 italic mt-2.5">
-                            Add pathogens to this list from the **Cross-Reference** tab catalog.
+                          <p className="text-[10px] text-slate-400 italic mt-2.5 leading-relaxed">
+                            Add pathogens to this list by clicking the + icon on any card in the Cross-Reference Catalog tab.
                           </p>
                         )}
                       </div>

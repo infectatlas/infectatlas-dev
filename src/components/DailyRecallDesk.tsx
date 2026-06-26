@@ -192,6 +192,27 @@ export default function DailyRecallDesk({
 
   const renderConsoleContent = (section: "queue" | "hydrate" | "all" = "all") => (
     <div className={section === "all" ? "p-5 space-y-5" : "p-5"}>
+      {(isUnified || section === "queue") && dueItems.length > 0 && (
+        <div className="bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 border border-indigo-200 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
+          <div className="space-y-1">
+            <span className="text-xs font-extrabold text-indigo-950 flex items-center gap-1.5">
+              <BrainCircuit className="h-4 w-4 text-indigo-600" />
+              {dueItems.length} Pathogen{dueItems.length === 1 ? "" : "s"} Due Today
+            </span>
+            <p className="text-[11px] text-slate-600 leading-normal">
+              Scheduled by your spaced repetition algorithm for optimal memory reconsolidation today.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => startSession(dueItems.map(i => i.pathogenId))}
+            className="shrink-0 inline-flex items-center justify-center gap-1.5 py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow-sm hover:shadow transition-all text-xs cursor-pointer"
+          >
+            <Play className="h-3 w-3 fill-current" />
+            Start Due Review ({dueItems.length})
+          </button>
+        </div>
+      )}
       {(section === "all" || section === "hydrate") && (
         /* Desk Hydrator Action Console */
         <div className="space-y-3">
@@ -311,15 +332,35 @@ export default function DailyRecallDesk({
       ) : (
         /* 1. Main Static Desk Dashboard Card */
         <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
-          {/* Clean Secondary-Card White Header */}
-          <div className="px-5 py-4 border-b border-slate-150 flex items-center justify-between">
-            <h2 className="text-sm font-semibold text-slate-800 flex items-center gap-2">
-              <BrainCircuit className="h-5 w-5 text-indigo-600" />
-              {renderSection === "hydrate" ? "Memory Hydration Desk" : "Adaptive Recall Console"}
-            </h2>
-            <span className="text-[10px] text-indigo-505 font-bold uppercase tracking-wider bg-indigo-50 py-0.5 px-2 rounded-md">
-              {dueItems.length} Due Today
-            </span>
+          {/* Unified Desk Dashboard Header Banner */}
+          <div className={`px-5 py-4 border-b border-slate-150 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 ${renderSection !== "hydrate" && dueItems.length > 0 ? "bg-gradient-to-r from-indigo-50/80 via-purple-50/50 to-pink-50/50" : "bg-slate-50/50"}`}>
+            <div className="space-y-1">
+              <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <BrainCircuit className="h-5 w-5 text-indigo-600" />
+                {renderSection === "hydrate" ? "Memory Hydration Desk" : "Adaptive Recall Console"}
+              </h2>
+              {renderSection !== "hydrate" && (
+                <p className="text-[11px] text-slate-600 sm:pl-7 leading-normal">
+                  {dueItems.length > 0
+                    ? `Scheduled by your spaced repetition algorithm (${dueItems.length} pathogen${dueItems.length === 1 ? "" : "s"} due today).`
+                    : "All scheduled spaced repetition reviews are caught up for today."}
+                </p>
+              )}
+            </div>
+            {renderSection !== "hydrate" && dueItems.length > 0 ? (
+              <button
+                type="button"
+                onClick={() => startSession(dueItems.map(i => i.pathogenId))}
+                className="shrink-0 inline-flex items-center justify-center gap-1.5 py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow-sm hover:shadow transition-all text-xs cursor-pointer sm:ml-0"
+              >
+                <Play className="h-3 w-3 fill-current" />
+                Start Due Review ({dueItems.length})
+              </button>
+            ) : (
+              <span className="text-[10px] font-bold uppercase tracking-wider py-0.5 px-2 rounded-md text-slate-400 bg-slate-100">
+                0 Due Today
+              </span>
+            )}
           </div>
 
           {renderConsoleContent(renderSection)}
