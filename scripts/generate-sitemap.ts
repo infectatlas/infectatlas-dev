@@ -23,7 +23,9 @@ const buildSitemapXml = (urls: { loc: string; lastmod: string }[]): string => {
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
 ${urlElements}
+
 </urlset>
 `;
 };
@@ -40,7 +42,9 @@ const buildSitemapIndexXml = (sitemaps: string[]): string => {
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
 ${sitemapElements}
+
 </sitemapindex>
 `;
 };
