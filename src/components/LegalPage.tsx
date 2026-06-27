@@ -29,7 +29,7 @@ export default function LegalPage({ initialTab }: LegalPageProps) {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-indigo-600 selection:text-white" id="legal-page-root">
+    <div className="min-h-[100dvh] bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-indigo-600 selection:text-white" id="legal-page-root">
       
       {/* STICKY NAVIGATION (MATCHES HOMEPAGE) */}
       <nav id="sticky-header" className="sticky top-0 z-50 w-full h-16 bg-white border-b border-slate-200">

@@ -30,7 +30,7 @@
   ],
   "icons": [
     {
-      "src": "/brain_pwa_icon.jpg",
+      "src": "/brain_circuit_pwa.jpg",
       "sizes": "1024x1024",
       "type": "image/jpeg",
       "purpose": "any maskable"
@@ -44,7 +44,7 @@
       "url": "/",
       "icons": [
         {
-          "src": "/brain_pwa_icon.jpg",
+          "src": "/brain_circuit_pwa.jpg",
           "sizes": "1024x1024",
           "type": "image/jpeg",
           "purpose": "any maskable"
@@ -58,7 +58,7 @@
       "url": "/",
       "icons": [
         {
-          "src": "/brain_pwa_icon.jpg",
+          "src": "/brain_circuit_pwa.jpg",
           "sizes": "1024x1024",
           "type": "image/jpeg",
           "purpose": "any maskable"
@@ -75,7 +75,7 @@
       },
       "icons": [
         {
-          "src": "/brain_pwa_icon.jpg",
+          "src": "/brain_circuit_pwa.jpg",
           "sizes": "1024x1024",
           "type": "image/jpeg",
           "purpose": "any maskable"
@@ -115,7 +115,7 @@
       "type": "application/json",
       "icons": [
         {
-          "src": "/brain_pwa_icon.jpg",
+          "src": "/brain_circuit_pwa.jpg",
           "sizes": "1024x1024",
           "type": "image/jpeg",
           "purpose": "any maskable"

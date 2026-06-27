@@ -427,7 +427,7 @@ export default function DailyRecallDesk({
                   const scrollTop = e.currentTarget.scrollTop;
                   setIsTheaterScrolled(scrollTop > 20);
                 }}
-                className="p-5 sm:p-7 flex-1 overflow-y-auto"
+                className="p-5 sm:p-7 flex-1 overflow-y-auto no-scrollbar"
               >
                 <AnimatePresence mode="wait">
                   {/* State 2: Active Recall adaptive console */}

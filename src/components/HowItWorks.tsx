@@ -34,7 +34,7 @@ export default function HowItWorks() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-indigo-600 selection:text-white" id="howitworks-root">
+    <div className="min-h-[100dvh] bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-indigo-600 selection:text-white" id="howitworks-root">
       
       {/* Sticky Navigation (Maintains identity consistency across legal/marketing pages) */}
       <nav id="sticky-header" className="sticky top-0 z-50 w-full h-16 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-shadow duration-200">
@@ -391,7 +391,7 @@ export default function HowItWorks() {
           ) : (
             <div className="space-y-4 animate-fade-in" id="sandbox-differentiate">
               {/* Category selector */}
-              <div className="flex gap-2.5 overflow-x-auto pb-1 relative z-10 scrollbar-none">
+              <div className="flex gap-2.5 overflow-x-auto pb-1 relative z-10 no-scrollbar">
                 <button
                   onClick={() => setDiffCategory("staph_strep")}
                   className={`px-3 py-1.5 text-xs font-bold rounded-lg border transition-all whitespace-nowrap cursor-pointer ${
@@ -420,29 +420,29 @@ export default function HowItWorks() {
                     <span className="font-mono text-[10px] uppercase text-indigo-400">Head-to-Head Decider Traits</span>
                   </div>
 
-                  <div className="space-y-3">
-                    <div className="grid grid-cols-3 pb-2 border-b border-slate-800 font-extrabold text-slate-400">
-                      <div>Biological Trait</div>
-                      <div>Staphylococcus</div>
-                      <div>Streptococcus</div>
+                  <div className="space-y-3 overflow-x-auto no-scrollbar">
+                    <div className="grid grid-cols-[1.2fr_1fr_1fr] min-w-[320px] pb-2 border-b border-slate-800 font-extrabold text-slate-400">
+                      <div>Trait</div>
+                      <div>Staph</div>
+                      <div>Strep</div>
                     </div>
 
-                    <div className="grid grid-cols-3 py-1 border-b border-slate-900 hover:bg-slate-900 p-1.5 rounded-md transition-colors">
-                      <div className="font-bold text-slate-300">Gram Organization</div>
-                      <div className="text-amber-300 font-bold font-mono">Clusters (grapes)</div>
-                      <div className="text-slate-400 font-mono">Chains / Pairs</div>
+                    <div className="grid grid-cols-[1.2fr_1fr_1fr] min-w-[320px] py-1 border-b border-slate-900 hover:bg-slate-900 p-1.5 rounded-md transition-colors">
+                      <div className="font-bold text-slate-300">Organization</div>
+                      <div className="text-amber-300 font-bold font-mono">Clusters</div>
+                      <div className="text-slate-400 font-mono">Chains</div>
                     </div>
 
-                    <div className="grid grid-cols-3 py-1 border-b border-slate-900 hover:bg-slate-900 p-1.5 rounded-md transition-colors">
-                      <div className="font-bold text-slate-300">Catalase enzyme</div>
-                      <div className="text-red-405 font-black font-mono">Positive (+)</div>
-                      <div className="text-slate-500 font-mono">Negative (-)</div>
+                    <div className="grid grid-cols-[1.2fr_1fr_1fr] min-w-[320px] py-1 border-b border-slate-900 hover:bg-slate-900 p-1.5 rounded-md transition-colors">
+                      <div className="font-bold text-slate-300">Catalase</div>
+                      <div className="text-red-405 font-black font-mono">Pos (+)</div>
+                      <div className="text-slate-500 font-mono">Neg (-)</div>
                     </div>
 
-                    <div className="grid grid-cols-3 py-1 hover:bg-slate-900 p-1.5 rounded-md transition-colors">
-                      <div className="font-bold text-slate-350">Major Pathogens</div>
-                      <div className="text-slate-205">S. aureus, S. epidermidis</div>
-                      <div className="text-slate-205">S. pyogenes, S. pneumoniae</div>
+                    <div className="grid grid-cols-[1.2fr_1fr_1fr] min-w-[320px] py-1 hover:bg-slate-900 p-1.5 rounded-md transition-colors">
+                      <div className="font-bold text-slate-350">Pathogens</div>
+                      <div className="text-slate-205">S. aureus</div>
+                      <div className="text-slate-205">S. pyogenes</div>
                     </div>
                   </div>
 
@@ -456,28 +456,28 @@ export default function HowItWorks() {
                     <span className="font-mono text-[10px] uppercase text-indigo-400">Head-to-Head Decider Traits</span>
                   </div>
 
-                  <div className="space-y-3">
-                    <div className="grid grid-cols-3 pb-2 border-b border-slate-800 font-extrabold text-slate-400">
-                      <div>Biological Trait</div>
+                  <div className="space-y-3 overflow-x-auto no-scrollbar">
+                    <div className="grid grid-cols-[1.2fr_1fr_1fr] min-w-[320px] pb-2 border-b border-slate-800 font-extrabold text-slate-400">
+                      <div>Trait</div>
                       <div>Legionella</div>
-                      <div>Mycoplasma pneumoniae</div>
+                      <div>Mycoplasma</div>
                     </div>
 
-                    <div className="grid grid-cols-3 py-1 border-b border-slate-900 hover:bg-slate-900 p-1.5 rounded-md transition-colors">
+                    <div className="grid grid-cols-[1.2fr_1fr_1fr] min-w-[320px] py-1 border-b border-slate-900 hover:bg-slate-900 p-1.5 rounded-md transition-colors">
                       <div className="font-bold text-slate-300">Cell Wall</div>
-                      <div className="text-slate-400">Poorly-stained Gram-rod</div>
-                      <div className="text-amber-300 font-bold">No cell wall (sterols)</div>
+                      <div className="text-slate-400">Gram-rod</div>
+                      <div className="text-amber-300 font-bold">None</div>
                     </div>
 
-                    <div className="grid grid-cols-3 py-1 border-b border-slate-900 hover:bg-slate-900 p-1.5 rounded-md transition-colors">
-                      <div className="font-bold text-slate-305">Systemic Signs</div>
-                      <div className="text-red-405 font-bold">Hyponatremia, Diarrhea</div>
-                      <div className="text-slate-300">Cold Agglutinins, Target Rash</div>
+                    <div className="grid grid-cols-[1.2fr_1fr_1fr] min-w-[320px] py-1 border-b border-slate-900 hover:bg-slate-900 p-1.5 rounded-md transition-colors">
+                      <div className="font-bold text-slate-305">Signs</div>
+                      <div className="text-red-405 font-bold">Hyponatremia</div>
+                      <div className="text-slate-300">Cold Agglutinins</div>
                     </div>
 
-                    <div className="grid grid-cols-3 py-1 hover:bg-slate-900 p-1.5 rounded-md transition-colors">
-                      <div className="font-bold text-slate-350">Culture Needs</div>
-                      <div className="text-slate-205 font-mono font-bold">Charcoal Yeast (BCYE)</div>
+                    <div className="grid grid-cols-[1.2fr_1fr_1fr] min-w-[320px] py-1 hover:bg-slate-900 p-1.5 rounded-md transition-colors">
+                      <div className="font-bold text-slate-350">Culture</div>
+                      <div className="text-slate-205 font-mono font-bold">BCYE</div>
                       <div className="text-slate-405 font-mono">Eaton Agar</div>
                     </div>
                   </div>

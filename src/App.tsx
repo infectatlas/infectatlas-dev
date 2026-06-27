@@ -567,7 +567,7 @@ function InnerApp() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-[#0f172a] flex flex-col font-sans" id="app-viewport">
+    <div className="min-h-[100dvh] bg-[#f8fafc] text-[#0f172a] flex flex-col font-sans overflow-x-hidden" id="app-viewport">
       {/* Principal Academic Header */}
       <header className={`bg-white border-b border-slate-200 sticky top-0 z-30 shadow-2xs transition-transform duration-300 ease-in-out ${showHeader ? "translate-y-0" : "-translate-y-full"}`}>
         <div className="max-w-7xl mx-auto px-3 py-2.5 sm:px-4 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-4">
