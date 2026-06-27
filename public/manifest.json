@@ -30,32 +30,10 @@
   ],
   "icons": [
     {
-      "src": "/app_icon_192.png?v=4",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/app_icon_512.png?v=4",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "/screenshot_mobile.png",
-      "sizes": "768x1376",
+      "src": "/brain_pwa_icon.jpg",
+      "sizes": "1024x1024",
       "type": "image/jpeg",
-      "form_factor": "narrow",
-      "label": "InfectAtlas mobile study cards active session"
-    },
-    {
-      "src": "/screenshot_desktop.png",
-      "sizes": "1376x768",
-      "type": "image/jpeg",
-      "form_factor": "wide",
-      "label": "InfectAtlas interactive antimicrobial and microorganism review board"
+      "purpose": "any maskable"
     }
   ],
   "shortcuts": [
@@ -66,9 +44,9 @@
       "url": "/",
       "icons": [
         {
-          "src": "/app_icon_192.png?v=4",
-          "sizes": "192x192",
-          "type": "image/png",
+          "src": "/brain_pwa_icon.jpg",
+          "sizes": "1024x1024",
+          "type": "image/jpeg",
           "purpose": "any maskable"
         }
       ]
@@ -80,9 +58,9 @@
       "url": "/",
       "icons": [
         {
-          "src": "/app_icon_192.png?v=4",
-          "sizes": "192x192",
-          "type": "image/png",
+          "src": "/brain_pwa_icon.jpg",
+          "sizes": "1024x1024",
+          "type": "image/jpeg",
           "purpose": "any maskable"
         }
       ]
@@ -97,9 +75,9 @@
       },
       "icons": [
         {
-          "src": "/app_icon_192.png?v=4",
-          "sizes": "192x192",
-          "type": "image/png",
+          "src": "/brain_pwa_icon.jpg",
+          "sizes": "1024x1024",
+          "type": "image/jpeg",
           "purpose": "any maskable"
         }
       ],
@@ -137,18 +115,10 @@
       "type": "application/json",
       "icons": [
         {
-          "src": "/app_icon_192.png?v=4",
-          "sizes": "192x192",
-          "type": "image/png",
-          "purpose": "any maskable"
-        }
-      ],
-      "screenshots": [
-        {
-          "src": "/screenshot_mobile.png",
-          "sizes": "768x1376",
+          "src": "/brain_pwa_icon.jpg",
+          "sizes": "1024x1024",
           "type": "image/jpeg",
-          "label": "InfectAtlas Active Card Panel"
+          "purpose": "any maskable"
         }
       ],
       "auth": false,

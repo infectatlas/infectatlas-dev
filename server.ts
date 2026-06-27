@@ -62,8 +62,14 @@ async function startServer() {
         });
       }
 
-      const ai = new GoogleGenAI(apiKey);
-      const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const ai = new GoogleGenAI({
+        apiKey: apiKey,
+        httpOptions: {
+          headers: {
+            'User-Agent': 'aistudio-build',
+          }
+        }
+      });
 
       const prompt = `You are a medical school exam writer (USMLE, COMLEX, or NCLEX style).
 Generate a multiple-choice clinical case vignette for: "${pathogenName}".
@@ -90,9 +96,12 @@ Your response should follow a structured JSON format:
 
 Do NOT wrap the output in markdown code blocks like \`\`\`json. Return only the raw JSON.`;
 
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      const text = response.text();
+      const response = await ai.models.generateContent({
+        model: "gemini-3.5-flash",
+        contents: prompt,
+      });
+
+      const text = response.text;
       
       res.setHeader('Content-Type', 'application/json');
       res.send(text);

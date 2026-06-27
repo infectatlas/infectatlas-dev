@@ -1062,7 +1062,7 @@ function InnerApp() {
               </div>
               
               <p className="text-xs text-slate-300 mt-1 leading-relaxed">
-                Install this study tool to get instant offline speed, full-screen clinical simulation reviews, and access your custom lists directly like a real store application.
+                Install on home screen for a better experience.
               </p>
 
               {isIOS ? (
