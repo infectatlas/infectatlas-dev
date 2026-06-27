@@ -14,8 +14,11 @@ import {
   Activity,
   AlertTriangle,
   RotateCcw,
-  X
+  X,
+  Target,
+  Sparkles
 } from "lucide-react";
+import { motion } from "motion/react";
 
 export default function HowItWorks() {
   const navigate = useNavigate();
@@ -42,7 +45,7 @@ export default function HowItWorks() {
           
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group focus:outline-indigo-600 rounded-lg p-1" id="nav-logo">
-            <div className="p-2 bg-indigo-600 text-white rounded-lg flex items-center justify-center transition-transform duration-200 group-hover:scale-105 shadow-sm shrink-0">
+            <div className="p-2 bg-[#001A3F] text-white rounded-lg flex items-center justify-center transition-transform duration-200 group-hover:scale-105 shadow-sm shrink-0">
               <BrainCircuit className="h-5 w-5" />
             </div>
             <div>
@@ -194,8 +197,13 @@ export default function HowItWorks() {
         </div>
 
         {/* SECTION: Why passive learning fails */}
-        <div className="bg-white rounded-2xl border border-red-100 shadow-3xs p-6 sm:p-8 space-y-6">
-          <div className="flex items-center gap-2.5 text-red-600">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-white rounded-2xl border border-rose-100 shadow-3xs p-6 sm:p-8 space-y-6"
+        >
+          <div className="flex items-center gap-2.5 text-rose-700/90">
             <AlertTriangle className="h-6 w-6 shrink-0" />
             <h2 className="text-lg sm:text-xl font-extrabold tracking-tight">
               Why traditional studying fails
@@ -220,15 +228,15 @@ export default function HowItWorks() {
             ))}
           </div>
 
-          <div className="bg-rose-50 border-l-4 border-rose-500 p-4.5 rounded-r-xl space-y-2">
-            <h4 className="text-xs font-black uppercase tracking-wider text-rose-800 font-mono">
+          <div className="bg-rose-50/50 border-l-4 border-rose-400/60 p-4.5 rounded-r-xl space-y-2">
+            <h4 className="text-[10px] font-black uppercase tracking-wider text-rose-800/80 font-mono">
               The Illusion of Competence
             </h4>
-            <div className="text-sm font-bold text-rose-950 leading-relaxed italic">
+            <div className="text-sm font-bold text-slate-800 leading-relaxed italic">
               "I've seen this before, so I know it."
             </div>
-            <p className="text-xs text-rose-800 leading-normal">
-              But <strong>recognition is not recall</strong>. And recall is what board exams and stressful clinical wards actually measure.
+            <p className="text-xs text-slate-600 leading-normal">
+              But <strong className="text-rose-700/80">recognition is not recall</strong>. And recall is what board exams and stressful clinical wards actually measure.
             </p>
           </div>
 
@@ -251,7 +259,7 @@ export default function HowItWorks() {
               That confusion is highly predictable — and completely fixable.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* INTERACTIVE STUDY SIMULATOR */}
         <div className="bg-slate-900 rounded-3xl p-6 sm:p-8 text-white border border-slate-800/80 shadow-2xl relative overflow-hidden space-y-6" id="interactive-simulator-container">
@@ -654,63 +662,91 @@ export default function HowItWorks() {
         </div>
 
         {/* SECTION: What makes us different */}
-        <div className="bg-slate-100 rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-4">
-          <h3 className="text-[11px] font-black uppercase tracking-wider text-slate-500 font-mono">
-            What makes InfectAtlas different
-          </h3>
-          <p className="text-slate-800 font-extrabold text-sm sm:text-base leading-relaxed">
-            Most online tools organize knowledge by topic. We organize it by clinical confusion. That is the core difference.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-            <div className="bg-white p-4.5 rounded-xl border border-slate-250">
-              <span className="text-[10px] uppercase font-black tracking-wider text-slate-400 block mb-1">Passively Taught:</span>
-              <p className="text-xs font-bold text-slate-600">"What is Staphylococcus aureus?"</p>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-slate-100 rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-6 shadow-sm relative overflow-hidden"
+        >
+          <div className="space-y-1 relative z-10">
+            <h3 className="text-[11px] font-black uppercase tracking-wider text-slate-500 font-mono">
+              What makes InfectAtlas different
+            </h3>
+            <p className="text-slate-800 font-extrabold text-sm sm:text-base leading-relaxed max-w-2xl">
+              Most online tools organize knowledge by topic. We organize it by clinical confusion. That is the core difference.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 relative z-10">
+            <div className="bg-white p-5 rounded-2xl border border-slate-250 shadow-3xs group transition-all hover:shadow-xs">
+              <span className="text-[10px] uppercase font-black tracking-wider text-slate-400 block mb-1.5 flex items-center gap-1.5">
+                <BookOpen className="h-3 w-3" /> Passively Taught:
+              </span>
+              <p className="text-xs font-bold text-slate-600 italic">"What is Staphylococcus aureus?"</p>
             </div>
-            <div className="bg-white p-4.5 rounded-xl border border-indigo-200 shadow-2xs">
-              <span className="text-[10px] uppercase font-black tracking-wider text-indigo-600 block mb-1">InfectAtlas Dynamic:</span>
-              <p className="text-xs font-bold text-indigo-900 font-sans">"Can you distinguish Staphylococcus from Streptococcus under exam pressure?"</p>
+            <div className="bg-indigo-600 p-5 rounded-2xl border border-indigo-500 shadow-md group transition-all hover:scale-[1.02]">
+              <span className="text-[10px] uppercase font-black tracking-wider text-indigo-200 block mb-1.5 flex items-center gap-1.5">
+                <Target className="h-3 w-3" /> InfectAtlas Dynamic:
+              </span>
+              <p className="text-xs font-bold text-white font-sans">"Can you distinguish Staphylococcus from Streptococcus under exam pressure?"</p>
             </div>
           </div>
-        </div>
+          
+          {/* Subtle connector to the next card */}
+          <div className="hidden sm:block absolute -bottom-6 left-1/2 -translate-x-1/2 w-px h-12 bg-gradient-to-b from-slate-200 to-transparent z-0" />
+        </motion.div>
 
         {/* SECTION: Actionables */}
-        <div className="space-y-4">
-          <h3 className="text-sm font-bold text-slate-900">What you can do inside InfectAtlas</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-4 bg-white border border-slate-200 rounded-xl space-y-1 hover:border-indigo-300 transition-colors">
-              <span className="text-sm font-extrabold text-slate-900 flex items-center gap-1.5">
-                Explore Organisms
-              </span>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                Understand and scan structures of high-yield clinical bacterial profiles quickly.
-              </p>
-            </div>
-            <div className="p-4 bg-white border border-slate-200 rounded-xl space-y-1 hover:border-indigo-300 transition-colors">
-              <span className="text-sm font-extrabold text-slate-900 flex items-center gap-1.5">
-                Compare Similar Pathogens
-              </span>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                Study direct differences between matching bugs to eliminate common exam pitfalls.
-              </p>
-            </div>
-            <div className="p-4 bg-white border border-slate-200 rounded-xl space-y-1 hover:border-indigo-300 transition-colors">
-              <span className="text-sm font-extrabold text-slate-900 flex items-center gap-1.5">
-                Take Instant Recall Quizzes
-              </span>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                Convert content checklists into interactive test sessions to strengthen recall.
-              </p>
-            </div>
-            <div className="p-4 bg-white border border-slate-200 rounded-xl space-y-1 hover:border-indigo-300 transition-colors">
-              <span className="text-sm font-extrabold text-slate-900 flex items-center gap-1.5">
-                Spaced Repetition Core
-              </span>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                Review cards timed dynamically to prevent forgetting curves from clearing out memory.
-              </p>
-            </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="space-y-6"
+        >
+          <div className="flex items-center gap-2 px-2">
+            <Sparkles className="h-4 w-4 text-indigo-600" />
+            <h3 className="text-sm font-black text-slate-900 uppercase tracking-tight">What you can do inside InfectAtlas</h3>
           </div>
-        </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {[
+              {
+                title: "Explore Organisms",
+                desc: "Understand and scan structures of high-yield clinical bacterial profiles quickly.",
+                icon: <Activity className="h-4 w-4" />
+              },
+              {
+                title: "Compare Similar Pathogens",
+                desc: "Study direct differences between matching bugs to eliminate common exam pitfalls.",
+                icon: <GitCompare className="h-4 w-4" />
+              },
+              {
+                title: "Take Instant Recall Quizzes",
+                desc: "Convert content checklists into interactive test sessions to strengthen recall.",
+                icon: <Zap className="h-4 w-4" />
+              },
+              {
+                title: "Spaced Repetition Core",
+                desc: "Review cards timed dynamically to prevent forgetting curves from clearing out memory.",
+                icon: <RotateCcw className="h-4 w-4" />
+              }
+            ].map((feature, idx) => (
+              <div key={idx} className="p-5 bg-white border border-slate-200 rounded-2xl space-y-3 hover:border-indigo-300 hover:shadow-sm transition-all group">
+                <div className="p-2 bg-slate-50 border border-slate-100 rounded-xl text-slate-500 group-hover:text-indigo-600 group-hover:bg-indigo-50 transition-colors w-fit">
+                  {feature.icon}
+                </div>
+                <div className="space-y-1">
+                  <span className="text-sm font-extrabold text-slate-900 block">
+                    {feature.title}
+                  </span>
+                  <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                    {feature.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* SECTION: CTA */}
         <div className="bg-indigo-600 text-white rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-md shadow-indigo-600/10">

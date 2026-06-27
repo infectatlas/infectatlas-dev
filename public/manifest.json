@@ -8,7 +8,7 @@
   "display": "standalone",
   "display_override": ["standalone", "window-controls-overlay", "minimal-ui"],
   "background_color": "#0f172a",
-  "theme_color": "#0D254D",
+  "theme_color": "#001A3F",
   "orientation": "portrait",
   "categories": ["education", "medical"],
   "lang": "en-US",
@@ -30,7 +30,7 @@
   ],
   "icons": [
     {
-      "src": "/brain_circuit_pwa.jpg",
+      "src": "/app_icon_v5.jpg",
       "sizes": "1024x1024",
       "type": "image/jpeg",
       "purpose": "any maskable"
@@ -44,7 +44,7 @@
       "url": "/",
       "icons": [
         {
-          "src": "/brain_circuit_pwa.jpg",
+          "src": "/app_icon_v5.jpg",
           "sizes": "1024x1024",
           "type": "image/jpeg",
           "purpose": "any maskable"
@@ -58,7 +58,7 @@
       "url": "/",
       "icons": [
         {
-          "src": "/brain_circuit_pwa.jpg",
+          "src": "/app_icon_v5.jpg",
           "sizes": "1024x1024",
           "type": "image/jpeg",
           "purpose": "any maskable"
@@ -75,7 +75,7 @@
       },
       "icons": [
         {
-          "src": "/brain_circuit_pwa.jpg",
+          "src": "/app_icon_v5.jpg",
           "sizes": "1024x1024",
           "type": "image/jpeg",
           "purpose": "any maskable"
@@ -115,7 +115,7 @@
       "type": "application/json",
       "icons": [
         {
-          "src": "/brain_circuit_pwa.jpg",
+          "src": "/app_icon_v5.jpg",
           "sizes": "1024x1024",
           "type": "image/jpeg",
           "purpose": "any maskable"

@@ -577,7 +577,7 @@ function InnerApp() {
               className="flex items-center gap-2.5 group text-left cursor-pointer focus:outline-hidden"
               title="Go to Progress Dashboard"
             >
-              <div className="p-2 bg-indigo-600 text-white rounded-lg shadow-sm group-hover:bg-indigo-700 transition-colors shrink-0">
+              <div className="p-2 bg-[#001A3F] text-white rounded-lg shadow-sm group-hover:bg-[#002A66] transition-colors shrink-0">
                 <BrainCircuit className="h-5 w-5" />
               </div>
               <div>
@@ -1044,7 +1044,7 @@ function InnerApp() {
           className="fixed bottom-4 right-4 left-4 md:left-auto md:max-w-md z-40 bg-slate-900 text-white rounded-xl shadow-2xl border border-indigo-550/35 p-4 transform transition-all duration-300"
         >
           <div className="flex items-start gap-3.5">
-            <div className="p-2.5 bg-indigo-600 rounded-lg shrink-0 text-white mt-0.5 shadow-inner">
+            <div className="p-2.5 bg-[#001A3F] rounded-lg shrink-0 text-white mt-0.5 shadow-inner">
               <BrainCircuit className="h-5 w-5" />
             </div>
             

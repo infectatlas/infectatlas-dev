@@ -35,7 +35,7 @@ export default function LegalPage({ initialTab }: LegalPageProps) {
       <nav id="sticky-header" className="sticky top-0 z-50 w-full h-16 bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5 group focus:outline-indigo-600 rounded-lg p-1" title="Back to Homepage">
-            <div className="p-2 bg-indigo-600 text-white rounded-lg flex items-center justify-center transition-transform duration-200 group-hover:scale-105 shadow-sm shrink-0">
+            <div className="p-2 bg-[#001A3F] text-white rounded-lg flex items-center justify-center transition-transform duration-200 group-hover:scale-105 shadow-sm shrink-0">
               <BrainCircuit className="h-5 w-5" />
             </div>
             <div>
