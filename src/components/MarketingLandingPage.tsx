@@ -22,6 +22,7 @@ import { microorganismsData } from "../data/microorganisms";
 import { diseasesData } from "../data/diseases";
 import { drugsData } from "../data/drugs";
 import { COMPARISONS_DATA } from "./ComparisonsSEO";
+import InteractiveSandbox from "./InteractiveSandbox";
 
 // Helper to convert microorganism name to web-safe slug
 const getPathogenSlug = (name: string): string => {
@@ -166,7 +167,7 @@ export default function MarketingLandingPage() {
   };
 
   return (
-    <div className="min-h-[100dvh] bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-indigo-600 selection:text-white" id="marketing-container">
+    <div className="min-h-[100dvh] bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-indigo-600 selection:text-white overflow-x-hidden" id="marketing-container">
       
       {/* 1. STICKY NAVIGATION */}
       <nav id="sticky-header" className="sticky top-0 z-50 w-full h-16 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-shadow duration-200">
@@ -404,107 +405,9 @@ export default function MarketingLandingPage() {
               </div>
             </div>
 
-            {/* Premium, Lightweight Static Visual (Card Cascade) */}
+            {/* Interactive Sandbox Preview */}
             <div className="lg:col-span-5 flex justify-center lg:justify-end" id="hero-visual-panel">
-              <div className="w-full max-w-[325px] sm:max-w-[350px] bg-gradient-to-b from-slate-900 via-indigo-950 to-slate-900 rounded-2xl border border-slate-800 shadow-2xl p-4.5 relative flex flex-col gap-3.5 text-white">
-                
-                {/* Header Decoration */}
-                <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                  <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 rounded-full bg-indigo-500 animate-pulse"></span>
-                    <span className="text-[10px] uppercase font-black text-indigo-200 tracking-wider font-mono">
-                      InfectAtlas Diagnostic Map
-                    </span>
-                  </div>
-                  <span className="text-[8.5px] px-2 py-0.5 font-bold uppercase rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                    Boards Scheme
-                  </span>
-                </div>
-
-                {/* Card Step 1: Pathogen */}
-                <div className="p-3 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 shadow-3xs flex flex-col gap-1.5 hover:border-indigo-400/30 transition-all">
-                  <div className="flex items-center justify-between gap-2.5">
-                    <span className="text-[9.5px] font-bold uppercase tracking-wider text-indigo-300">
-                      Step 1 • Pathogen Identified
-                    </span>
-                    <span className="text-[10px] sm:text-xs px-2.5 py-1 font-extrabold text-emerald-300 bg-emerald-500/10 rounded-lg border border-emerald-500/20 font-mono leading-none whitespace-nowrap shrink-0">
-                      Gram-Positive
-                    </span>
-                  </div>
-                  <div>
-                    <h4 className="text-[13px] font-extrabold text-white font-sans">
-                      Staphylococcus aureus
-                    </h4>
-                    <p className="text-[11px] text-slate-350 mt-1 leading-relaxed">
-                      Gram-positive cocci in clusters. Catalase positive, coagulase positive.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Connector Arrow 1 */}
-                <div className="flex justify-center -my-2">
-                  <div className="w-5.5 h-5.5 rounded-full bg-indigo-950 border border-white/10 flex items-center justify-center text-indigo-400 shadow-sm">
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Card Step 2: Disease */}
-                <div className="p-3 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 shadow-3xs flex flex-col gap-1.5 hover:border-indigo-400/30 transition-all">
-                  <div className="flex items-center justify-between gap-2.5">
-                    <span className="text-[9.5px] font-bold uppercase tracking-wider text-indigo-300">
-                      Step 2 • Clinical Presentation
-                    </span>
-                    <span className="text-[10px] sm:text-xs px-2.5 py-1 font-extrabold text-amber-300 bg-amber-500/10 rounded-lg border border-amber-500/20 font-mono leading-none whitespace-nowrap shrink-0">
-                      Skin & Soft Tissue
-                    </span>
-                  </div>
-                  <div>
-                    <h4 className="text-[13px] font-extrabold text-white font-sans">
-                      MRSA Cellulitis
-                    </h4>
-                    <p className="text-[11px] text-slate-350 mt-1 leading-relaxed">
-                      Unilateral spreading erythema, acute induration, warmth, and purulence.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Connector Arrow 2 */}
-                <div className="flex justify-center -my-2">
-                  <div className="w-5.5 h-5.5 rounded-full bg-indigo-950 border border-white/10 flex items-center justify-center text-indigo-400 shadow-sm">
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Card Step 3: Treatment */}
-                <div className="p-3 bg-emerald-950/20 backdrop-blur-md rounded-xl border border-emerald-500/20 shadow-3xs flex flex-col gap-1.5 hover:border-emerald-400/30 transition-all">
-                  <div className="flex items-center justify-between gap-2.5">
-                    <span className="text-[9.5px] font-bold uppercase tracking-wider text-emerald-400">
-                      Step 3 • Guideline Pharmacotherapy
-                    </span>
-                    <span className="text-[10px] sm:text-xs px-2.5 py-1 font-extrabold text-indigo-300 bg-indigo-500/10 rounded-lg border border-indigo-500/20 font-mono leading-none whitespace-nowrap shrink-0">
-                      Glycopeptide
-                    </span>
-                  </div>
-                  <div>
-                    <h4 className="text-[13px] font-extrabold text-emerald-305 font-sans">
-                      Vancomycin <span className="text-[11px] font-normal text-slate-300">(Empiric First-line)</span>
-                    </h4>
-                    <p className="text-[11px] text-slate-350 mt-1 leading-relaxed">
-                      Binds D-Ala-D-Ala terminals to block cell wall synthesis. Ideal for parenteral MRSA.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Bottom branding footer */}
-                <span className="text-[9px] text-center text-indigo-200/60 block mt-0.5 font-medium italic">
-                  Mapping pathogen characteristics directly to treatments.
-                </span>
-
-              </div>
+              <InteractiveSandbox />
             </div>
 
           </div>

@@ -25,7 +25,8 @@ import {
   ShieldCheck,
   ShieldAlert,
   Sparkles,
-  Award
+  Award,
+  X
 } from "lucide-react";
 import ActiveRecallDrawer from "./ActiveRecallDrawer";
 
@@ -85,6 +86,7 @@ export default function DrugsSEO() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedClass, setSelectedClass] = useState("all");
   const [activeCategory, setActiveCategory] = useState<"all" | "antibacterial" | "antiviral" | "antifungal">("all");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Dynamic Smart Header state on scroll
   const [showHeader, setShowHeader] = useState(true);
@@ -380,7 +382,7 @@ export default function DrugsSEO() {
             </Link>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-3">
             <button
               onClick={() => handleLaunchApp("dashboard")}
               className="bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg transition-all shadow-xs hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 min-h-[36px] cursor-pointer flex items-center gap-1.5"
@@ -389,7 +391,69 @@ export default function DrugsSEO() {
               <span>Study App</span>
             </button>
           </div>
+          
+          {/* Mobile Menu Button */}
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus:outline-indigo-600 min-w-[44px] min-h-[44px] flex items-center justify-center"
+            aria-label="Toggle navigation menu"
+          >
+            {isMobileMenuOpen ? <X className="h-6 w-6" /> : (
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
+            )}
+          </button>
         </div>
+
+        {/* Mobile Navigation Drawer */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden fixed top-16 left-0 right-0 bg-white border-b border-slate-200 shadow-xl z-50 animate-fade-in">
+            <div className="px-4 pt-3 pb-6 space-y-2 flex flex-col">
+              <Link 
+                to="/organisms" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="py-3 px-4 font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors text-base"
+              >
+                Organisms
+              </Link>
+              <Link 
+                to="/diseases" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="py-3 px-4 font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors text-base"
+              >
+                Diseases
+              </Link>
+              <Link 
+                to="/drugs" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="py-3 px-4 font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors text-base"
+              >
+                Drugs
+              </Link>
+              <Link 
+                to="/comparisons" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="py-3 px-4 font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors text-base"
+              >
+                Comparisons
+              </Link>
+              
+              <div className="pt-4 border-t border-slate-100 mt-2">
+                <button 
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    handleLaunchApp("dashboard");
+                  }}
+                  className="w-full py-3 text-center font-bold text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 min-h-[44px]"
+                >
+                  <Zap className="h-4 w-4 fill-white" />
+                  <span>Study App</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Main Container */}

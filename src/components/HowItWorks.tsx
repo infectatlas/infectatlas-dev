@@ -19,16 +19,11 @@ import {
   Sparkles
 } from "lucide-react";
 import { motion } from "motion/react";
+import InteractiveSandbox from "./InteractiveSandbox";
 
 export default function HowItWorks() {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  
-  // Interactive Sandbox state
-  const [activeSandboxTab, setActiveSandboxTab] = useState<"flashcard" | "differentiate">("flashcard");
-  const [demoFlip, setDemoFlip] = useState(false);
-  const [demoScore, setDemoScore] = useState<string | null>(null);
-  const [diffCategory, setDiffCategory] = useState<"staph_strep" | "legionella_mycoplasma">("staph_strep");
 
   const handleLaunchApp = (focusTask: string) => {
     localStorage.setItem("infectatlas_active_tab", focusTask);
@@ -37,7 +32,7 @@ export default function HowItWorks() {
   };
 
   return (
-    <div className="min-h-[100dvh] bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-indigo-600 selection:text-white" id="howitworks-root">
+    <div className="min-h-[100dvh] bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-indigo-600 selection:text-white overflow-x-hidden" id="howitworks-root">
       
       {/* Sticky Navigation (Maintains identity consistency across legal/marketing pages) */}
       <nav id="sticky-header" className="sticky top-0 z-50 w-full h-16 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-shadow duration-200">
@@ -262,241 +257,8 @@ export default function HowItWorks() {
         </motion.div>
 
         {/* INTERACTIVE STUDY SIMULATOR */}
-        <div className="bg-slate-900 rounded-3xl p-6 sm:p-8 text-white border border-slate-800/80 shadow-2xl relative overflow-hidden space-y-6" id="interactive-simulator-container">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl -z-1" />
-          
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="space-y-1">
-              <span className="px-2.5 py-0.5 text-[9px] uppercase font-black tracking-widest text-emerald-400 border border-emerald-500/20 bg-emerald-950/40 rounded-full font-mono">
-                Interactive Sandbox
-              </span>
-              <h2 className="text-xl sm:text-2xl font-black tracking-tight text-white leading-tight">
-                Try the Mechanics Live
-              </h2>
-              <p className="text-slate-400 text-xs font-semibold">
-                Click below to experience active memory retrieval right now.
-              </p>
-            </div>
-
-            {/* Selector Buttons */}
-            <div className="flex bg-slate-800 p-1 rounded-xl border border-slate-700/60 self-start sm:self-auto shrink-0">
-              <button
-                onClick={() => {
-                  setActiveSandboxTab("flashcard");
-                  setDemoFlip(false);
-                  setDemoScore(null);
-                }}
-                className={`px-3 py-1.5 text-xs font-extrabold rounded-lg transition-all ${
-                  activeSandboxTab === "flashcard"
-                    ? "bg-indigo-600 text-white shadow-xs"
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                Active Flashcard
-              </button>
-              <button
-                onClick={() => setActiveSandboxTab("differentiate")}
-                className={`px-3 py-1.5 text-xs font-extrabold rounded-lg transition-all ${
-                  activeSandboxTab === "differentiate"
-                    ? "bg-indigo-600 text-white shadow-xs"
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                Differentiate Trait
-              </button>
-            </div>
-          </div>
-
-          {activeSandboxTab === "flashcard" ? (
-            <div className="space-y-4 animate-fade-in" id="sandbox-flashcard">
-              {/* Card Container */}
-              <div 
-                onClick={() => setDemoFlip(!demoFlip)}
-                className={`bg-slate-950 p-5 sm:p-6 rounded-2xl border transition-all duration-300 cursor-pointer ${
-                  demoFlip ? "border-emerald-500/50 shadow-md shadow-emerald-950/20" : "border-slate-800 hover:border-indigo-500/65 hover:bg-slate-800/30"
-                }`}
-              >
-                <div className="flex justify-between items-center text-[10px] font-bold font-mono tracking-wider text-slate-500 mb-3 uppercase">
-                  <span>Front: Prompt</span>
-                  <span className="text-indigo-400 text-xs flex items-center gap-1 font-bold">
-                    <RotateCcw className="h-3 w-3 inline" /> Click card to flip
-                  </span>
-                </div>
-
-                {!demoFlip ? (
-                  <div className="space-y-4">
-                    <p className="text-slate-200 font-extrabold text-sm sm:text-base leading-relaxed">
-                      "A patient with a deep, rusty nail puncture presents with locks of jaw muscles. The bug is an obligate anaerobe that is spore-forming. Name the bug and its precise cellular toxin trigger."
-                    </p>
-                    <div className="flex gap-2">
-                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 bg-slate-800 text-slate-400 rounded">
-                        USMLE Step 1 High-Yield
-                      </span>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="space-y-3.5 animate-fade-in">
-                    <div className="space-y-1">
-                      <span className="text-emerald-400 text-xs font-black uppercase tracking-wider font-mono">
-                        Correct Answer:
-                      </span>
-                      <h4 className="text-lg font-black text-white">
-                        Clostridium tetani & Tetanospasmin
-                      </h4>
-                    </div>
-                    
-                    <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-                      The retrograde-transported toxin <strong className="text-white">Tetanospasmin</strong> cleaves <strong className="text-white font-mono">synaptobrevin (SNARE protein)</strong> inside inhibitory interneurons (Renshaw cells), blocking the release of <strong className="text-indigo-300">GABA & glycine</strong>.
-                    </p>
-                    <div className="bg-emerald-950/40 border border-emerald-500/20 p-2.5 rounded-lg text-xs text-emerald-300 italic">
-                      💡 <strong>Clinical Pearl:</strong> Contrast with <span className="underline">C. botulinum</span> which blocks acetylcholine release at the neuromuscular junction, leading to flaccid paralysis instead of spastic.
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Simulated Spaced Repetition Buttons */}
-              {demoFlip && (
-                <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 text-center space-y-3.5 animate-slide-up">
-                  <div className="text-[10.5px] font-black tracking-widest uppercase text-slate-400 font-mono">
-                    Self-Rate Your Active Retrieval:
-                  </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    <button
-                      onClick={() => setDemoScore("🔴 Assigned to repeat immediately (1 min)")}
-                      className="px-3 py-2 bg-red-950/80 hover:bg-red-900 border border-red-500/30 rounded-lg text-xs font-extrabold text-red-300 transition-colors cursor-pointer"
-                    >
-                      Forgot (1 min)
-                    </button>
-                    <button
-                      onClick={() => setDemoScore("🟡 Scheduled for repeat today (10 min)")}
-                      className="px-3 py-2 bg-amber-950/80 hover:bg-amber-900 border border-amber-500/30 rounded-lg text-xs font-extrabold text-amber-305 transition-colors cursor-pointer"
-                    >
-                      Hard (10 min)
-                    </button>
-                    <button
-                      onClick={() => setDemoScore("🟢 Scheduled for tomorrow (1 day)")}
-                      className="px-3 py-2 bg-emerald-955/80 hover:bg-emerald-900 border border-emerald-500/30 rounded-lg text-xs font-extrabold text-emerald-300 transition-colors cursor-pointer"
-                    >
-                      Good (1 day)
-                    </button>
-                    <button
-                      onClick={() => setDemoScore("🔵 Mastered! Scheduled in 4 days")}
-                      className="px-3 py-2 bg-blue-955/80 hover:bg-blue-900 border border-blue-500/30 rounded-lg text-xs font-extrabold text-blue-300 transition-colors cursor-pointer"
-                    >
-                      Easy (4 days)
-                    </button>
-                  </div>
-
-                  {demoScore && (
-                    <div className="text-xs font-bold text-indigo-300 font-mono py-1 animate-fade-in block">
-                      🔄 Spaced Repetition Logic: {demoScore}
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          ) : (
-            <div className="space-y-4 animate-fade-in" id="sandbox-differentiate">
-              {/* Category selector */}
-              <div className="flex gap-2.5 overflow-x-auto pb-1 relative z-10 no-scrollbar">
-                <button
-                  onClick={() => setDiffCategory("staph_strep")}
-                  className={`px-3 py-1.5 text-xs font-bold rounded-lg border transition-all whitespace-nowrap cursor-pointer ${
-                    diffCategory === "staph_strep"
-                      ? "bg-slate-800 border-slate-600 text-white"
-                      : "bg-slate-950 border-slate-800 text-slate-400 hover:text-white"
-                  }`}
-                >
-                  Staphylococcus vs Streptococcus
-                </button>
-                <button
-                  onClick={() => setDiffCategory("legionella_mycoplasma")}
-                  className={`px-3 py-1.5 text-xs font-bold rounded-lg border transition-all whitespace-nowrap cursor-pointer ${
-                    diffCategory === "legionella_mycoplasma"
-                      ? "bg-slate-800 border-slate-600 text-white"
-                      : "bg-slate-950 border-slate-800 text-slate-400 hover:text-white"
-                  }`}
-                >
-                  Legionella vs Mycoplasma
-                </button>
-              </div>
-
-              {diffCategory === "staph_strep" ? (
-                <div className="bg-slate-950 p-5 sm:p-6 rounded-2xl border border-slate-800 space-y-4 font-sans text-xs animate-fade-in">
-                  <div className="flex items-center gap-1 text-slate-400 font-bold mb-1">
-                    <span className="font-mono text-[10px] uppercase text-indigo-400">Head-to-Head Decider Traits</span>
-                  </div>
-
-                  <div className="space-y-3 overflow-x-auto no-scrollbar">
-                    <div className="grid grid-cols-[1.2fr_1fr_1fr] min-w-[320px] pb-2 border-b border-slate-800 font-extrabold text-slate-400">
-                      <div>Trait</div>
-                      <div>Staph</div>
-                      <div>Strep</div>
-                    </div>
-
-                    <div className="grid grid-cols-[1.2fr_1fr_1fr] min-w-[320px] py-1 border-b border-slate-900 hover:bg-slate-900 p-1.5 rounded-md transition-colors">
-                      <div className="font-bold text-slate-300">Organization</div>
-                      <div className="text-amber-300 font-bold font-mono">Clusters</div>
-                      <div className="text-slate-400 font-mono">Chains</div>
-                    </div>
-
-                    <div className="grid grid-cols-[1.2fr_1fr_1fr] min-w-[320px] py-1 border-b border-slate-900 hover:bg-slate-900 p-1.5 rounded-md transition-colors">
-                      <div className="font-bold text-slate-300">Catalase</div>
-                      <div className="text-red-405 font-black font-mono">Pos (+)</div>
-                      <div className="text-slate-500 font-mono">Neg (-)</div>
-                    </div>
-
-                    <div className="grid grid-cols-[1.2fr_1fr_1fr] min-w-[320px] py-1 hover:bg-slate-900 p-1.5 rounded-md transition-colors">
-                      <div className="font-bold text-slate-350">Pathogens</div>
-                      <div className="text-slate-205">S. aureus</div>
-                      <div className="text-slate-205">S. pyogenes</div>
-                    </div>
-                  </div>
-
-                  <div className="bg-indigo-950/40 border border-indigo-500/10 p-3 rounded-lg text-slate-300 sm:leading-relaxed">
-                    🎓 <strong>Clinical Trap:</strong> Catalase is the primary divider. Staph generates active bubbles in presence of hydrogen peroxide; Strep does not. This is card 01 on any exam!
-                  </div>
-                </div>
-              ) : (
-                <div className="bg-slate-950 p-5 sm:p-6 rounded-2xl border border-slate-800 space-y-4 font-sans text-xs animate-fade-in">
-                  <div className="flex items-center gap-1 text-slate-400 font-bold mb-1">
-                    <span className="font-mono text-[10px] uppercase text-indigo-400">Head-to-Head Decider Traits</span>
-                  </div>
-
-                  <div className="space-y-3 overflow-x-auto no-scrollbar">
-                    <div className="grid grid-cols-[1.2fr_1fr_1fr] min-w-[320px] pb-2 border-b border-slate-800 font-extrabold text-slate-400">
-                      <div>Trait</div>
-                      <div>Legionella</div>
-                      <div>Mycoplasma</div>
-                    </div>
-
-                    <div className="grid grid-cols-[1.2fr_1fr_1fr] min-w-[320px] py-1 border-b border-slate-900 hover:bg-slate-900 p-1.5 rounded-md transition-colors">
-                      <div className="font-bold text-slate-300">Cell Wall</div>
-                      <div className="text-slate-400">Gram-rod</div>
-                      <div className="text-amber-300 font-bold">None</div>
-                    </div>
-
-                    <div className="grid grid-cols-[1.2fr_1fr_1fr] min-w-[320px] py-1 border-b border-slate-900 hover:bg-slate-900 p-1.5 rounded-md transition-colors">
-                      <div className="font-bold text-slate-305">Signs</div>
-                      <div className="text-red-405 font-bold">Hyponatremia</div>
-                      <div className="text-slate-300">Cold Agglutinins</div>
-                    </div>
-
-                    <div className="grid grid-cols-[1.2fr_1fr_1fr] min-w-[320px] py-1 hover:bg-slate-900 p-1.5 rounded-md transition-colors">
-                      <div className="font-bold text-slate-350">Culture</div>
-                      <div className="text-slate-205 font-mono font-bold">BCYE</div>
-                      <div className="text-slate-405 font-mono">Eaton Agar</div>
-                    </div>
-                  </div>
-
-                  <div className="bg-indigo-950/40 border border-indigo-500/10 p-3 rounded-lg text-slate-300 sm:leading-relaxed">
-                    🎓 <strong>Clinical Trap:</strong> Because Mycoplasma completely lacks a peptidoglycan cell wall, penicillin or cephalosporin drugs have <strong>zero target</strong>. Throwing a beta-lactam at walking pneumonia is a lethal mistake!
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
+        <div className="flex justify-center w-full mx-auto" id="interactive-simulator-container">
+          <InteractiveSandbox />
         </div>
 
         {/* SECTION: The 4 layers */}
@@ -666,13 +428,14 @@ export default function HowItWorks() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-slate-100 rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-6 shadow-sm relative overflow-hidden"
+          className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-6 shadow-sm relative overflow-hidden"
         >
-          <div className="space-y-1 relative z-10">
-            <h3 className="text-[11px] font-black uppercase tracking-wider text-slate-500 font-mono">
-              What makes InfectAtlas different
-            </h3>
-            <p className="text-slate-800 font-extrabold text-sm sm:text-base leading-relaxed max-w-2xl">
+          <div className="space-y-2 relative z-10">
+            <div className="flex items-center gap-2">
+              <Target className="h-5 w-5 text-indigo-600" />
+              <h3 className="text-sm font-black text-slate-900 uppercase tracking-tight">What makes InfectAtlas different</h3>
+            </div>
+            <p className="text-slate-500 font-medium text-sm leading-relaxed max-w-2xl">
               Most online tools organize knowledge by topic. We organize it by clinical confusion. That is the core difference.
             </p>
           </div>
@@ -691,20 +454,22 @@ export default function HowItWorks() {
               <p className="text-xs font-bold text-white font-sans">"Can you distinguish Staphylococcus from Streptococcus under exam pressure?"</p>
             </div>
           </div>
-          
-          {/* Subtle connector to the next card */}
-          <div className="hidden sm:block absolute -bottom-6 left-1/2 -translate-x-1/2 w-px h-12 bg-gradient-to-b from-slate-200 to-transparent z-0" />
         </motion.div>
+
+        {/* Visual Connector */}
+        <div className="flex justify-center items-center py-6 relative opacity-50">
+           <div className="h-12 w-px bg-gradient-to-b from-slate-300 to-indigo-300" />
+        </div>
 
         {/* SECTION: Actionables */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="space-y-6"
+          className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-6 shadow-sm"
         >
-          <div className="flex items-center gap-2 px-2">
-            <Sparkles className="h-4 w-4 text-indigo-600" />
+          <div className="flex items-center gap-2">
+            <Layers className="h-5 w-5 text-indigo-600" />
             <h3 className="text-sm font-black text-slate-900 uppercase tracking-tight">What you can do inside InfectAtlas</h3>
           </div>
 
@@ -783,15 +548,15 @@ export default function HowItWorks() {
       <footer className="bg-white border-t border-slate-200/80 py-8 text-[11px] text-slate-400">
         <div className="max-w-7xl mx-auto px-4 text-center space-y-2">
           <p>&copy; 2026 InfectAtlas. Strictly for educational study and prep. IDSA-Aligned.</p>
-          <div className="flex justify-center gap-4 text-slate-500 font-bold">
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-slate-500 font-bold">
             <Link to="/" className="hover:underline hover:text-indigo-600">Home</Link>
-            <span>&bull;</span>
+            <span className="hidden sm:inline">&bull;</span>
             <Link to="/organisms" className="hover:underline hover:text-indigo-600">Organisms</Link>
-            <span>&bull;</span>
+            <span className="hidden sm:inline">&bull;</span>
             <Link to="/diseases" className="hover:underline hover:text-indigo-600">Diseases</Link>
-            <span>&bull;</span>
+            <span className="hidden sm:inline">&bull;</span>
             <Link to="/drugs" className="hover:underline hover:text-indigo-600">Drugs</Link>
-            <span>&bull;</span>
+            <span className="hidden sm:inline">&bull;</span>
             <Link to="/comparisons" className="hover:underline hover:text-indigo-600">Comparisons</Link>
           </div>
         </div>
