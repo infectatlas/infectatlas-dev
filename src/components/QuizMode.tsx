@@ -388,13 +388,15 @@ export default function QuizMode({
               className="bg-white p-5 rounded-2xl border border-slate-250 hover:border-indigo-500 hover:shadow-md cursor-pointer transition-all flex flex-col justify-between group"
             >
               <div>
-                <div className="bg-indigo-50 text-indigo-600 p-3 rounded-xl w-fit">
-                  <Brain className="h-5 w-5" />
+                <div className="flex items-center gap-4">
+                  <div className="bg-indigo-50 text-indigo-600 p-3 rounded-xl">
+                    <Brain className="h-5 w-5" />
+                  </div>
+                  <h3 className="text-base font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">
+                    Organism Recognition
+                  </h3>
                 </div>
-                <h3 className="text-base font-bold text-slate-800 mt-4 group-hover:text-indigo-600 transition-colors">
-                  Organism Recognition
-                </h3>
-                <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
+                <p className="text-xs text-slate-500 mt-4 leading-relaxed">
                   Identify the pathogen based solely on morphological features, Gram stain reactions, shapes, and biochem test profiles.
                 </p>
               </div>
@@ -412,13 +414,15 @@ export default function QuizMode({
               className="bg-white p-5 rounded-2xl border border-slate-250 hover:border-indigo-500 hover:shadow-md cursor-pointer transition-all flex flex-col justify-between group"
             >
               <div>
-                <div className="bg-purple-50 text-purple-600 p-3 rounded-xl w-fit">
-                  <BookOpen className="h-5 w-5" />
+                <div className="flex items-center gap-4">
+                  <div className="bg-purple-50 text-purple-600 p-3 rounded-xl">
+                    <BookOpen className="h-5 w-5" />
+                  </div>
+                  <h3 className="text-base font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">
+                    Disease Causative Agent Recall
+                  </h3>
                 </div>
-                <h3 className="text-base font-bold text-slate-800 mt-4 group-hover:text-indigo-600 transition-colors">
-                  Disease Causative Agent Recall
-                </h3>
-                <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
+                <p className="text-xs text-slate-500 mt-4 leading-relaxed">
                   Given specific diseases (e.g., Pneumonia, Necrotizing Fasciitis, Tabes Dorsalis), determine the causative pathogen.
                 </p>
               </div>
@@ -436,13 +440,15 @@ export default function QuizMode({
               className="bg-white p-5 rounded-2xl border border-slate-250 hover:border-indigo-500 hover:shadow-md cursor-pointer transition-all flex flex-col justify-between group"
             >
               <div>
-                <div className="bg-emerald-50 text-emerald-600 p-3 rounded-xl w-fit">
-                  <Activity className="h-5 w-5" />
+                <div className="flex items-center gap-4">
+                  <div className="bg-emerald-50 text-emerald-600 p-3 rounded-xl">
+                    <Activity className="h-5 w-5" />
+                  </div>
+                  <h3 className="text-base font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">
+                    Treatment Route Verification (IV / PO)
+                  </h3>
                 </div>
-                <h3 className="text-base font-bold text-slate-800 mt-4 group-hover:text-indigo-600 transition-colors">
-                  Treatment Route Verification (IV / PO)
-                </h3>
-                <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
+                <p className="text-xs text-slate-500 mt-4 leading-relaxed">
                   Test your clinic rules! Determine the exact drug and specific route matching the clinical severity (e.g., IV Cefazolin vs. PO Cephalexin).
                 </p>
               </div>
@@ -461,13 +467,15 @@ export default function QuizMode({
             >
               <div className="absolute top-0 right-0 p-8 w-24 h-24 bg-white/5 rounded-full blur-xl pointer-events-none" />
               <div className="relative z-10">
-                <div className="bg-white/10 text-indigo-300 p-3 rounded-xl w-fit border border-white/5">
-                  <Sparkles className="h-5 w-5" />
+                <div className="flex items-center gap-4">
+                  <div className="bg-white/10 text-indigo-300 p-3 rounded-xl border border-white/5">
+                    <Sparkles className="h-5 w-5" />
+                  </div>
+                  <h3 className="text-base font-bold group-hover:text-indigo-300 transition-colors">
+                    AI Boards-Style Clinical Vignettes
+                  </h3>
                 </div>
-                <h3 className="text-base font-bold mt-4 group-hover:text-indigo-300 transition-colors">
-                  AI Boards-Style Clinical Vignettes
-                </h3>
-                <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">
+                <p className="text-xs text-slate-300 mt-4 leading-relaxed">
                   Call on the server-side Gemini AI engine to draft random, highly realistic patient admission stories with lab diagnostic findings and test yourself on medical outcomes.
                 </p>
               </div>

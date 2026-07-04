@@ -76,26 +76,32 @@ export default function LandingPage({ onStartStudying }: LandingPageProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-          <div className="bg-slate-50 border border-slate-100 p-5 rounded-xl space-y-2.5">
-            <div className="h-8 w-8 rounded-lg bg-red-50 text-red-650 flex items-center justify-center font-bold text-sm">✕</div>
-            <h3 className="font-bold text-xs sm:text-sm text-slate-900 uppercase tracking-wide">Standard Memorization</h3>
+          <div className="bg-slate-50 border border-slate-100 p-5 rounded-xl space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="h-8 w-8 rounded-lg bg-red-50 text-red-650 flex items-center justify-center font-bold text-sm shrink-0">✕</div>
+              <h3 className="font-bold text-xs sm:text-sm text-slate-900 uppercase tracking-wide">Standard Memorization</h3>
+            </div>
             <p className="text-xs text-slate-600 leading-normal">
               Rote-learning isolated facts. You struggle to answer composite exam queries connecting Gram status to preferred therapy under clinical stress.
             </p>
           </div>
-          <div className="bg-indigo-50/55 border border-indigo-150 p-5 rounded-xl space-y-2.5 md:scale-[1.03] shadow-xs relative">
+          <div className="bg-indigo-50/55 border border-indigo-150 p-5 rounded-xl space-y-4 md:scale-[1.03] shadow-xs relative">
             <div className="absolute -top-3 right-4 bg-indigo-600 text-white text-[9px] font-extrabold uppercase px-2.5 py-0.5 rounded-full tracking-wider">
               Optimal
             </div>
-            <div className="h-8 w-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-sm">⚡</div>
-            <h3 className="font-bold text-xs sm:text-sm text-slate-900 uppercase tracking-wide">InfectAtlas Mapping</h3>
+            <div className="flex items-center gap-3">
+              <div className="h-8 w-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-sm shrink-0">⚡</div>
+              <h3 className="font-bold text-xs sm:text-sm text-slate-900 uppercase tracking-wide">InfectAtlas Mapping</h3>
+            </div>
             <p className="text-xs text-slate-600 leading-normal">
               A holistic <strong>Pathogen &rarr; Disease &rarr; Treatment</strong> loop. Learning a bug teaches you its clinical manifestation and treatment simultaneously.
             </p>
           </div>
-          <div className="bg-slate-50 border border-slate-100 p-5 rounded-xl space-y-2.5">
-            <div className="h-8 w-8 rounded-lg bg-red-50 text-red-650 flex items-center justify-center font-bold text-sm">✕</div>
-            <h3 className="font-bold text-xs sm:text-sm text-slate-900 uppercase tracking-wide">The "Exam-Day Panic"</h3>
+          <div className="bg-slate-50 border border-slate-100 p-5 rounded-xl space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="h-8 w-8 rounded-lg bg-red-50 text-red-650 flex items-center justify-center font-bold text-sm shrink-0">✕</div>
+              <h3 className="font-bold text-xs sm:text-sm text-slate-900 uppercase tracking-wide">The "Exam-Day Panic"</h3>
+            </div>
             <p className="text-xs text-slate-600 leading-normal">
               Forgetting drug resistance or empiric rules on Step 1, Step 2 CK, or NCLEX because your study aids lacked comparative visual grids.
             </p>
