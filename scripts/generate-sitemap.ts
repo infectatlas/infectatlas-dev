@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import { microorganismsData } from "../src/data/microorganisms";
+import { fungiData } from "../src/data/fungi";
 import { diseasesData } from "../src/data/diseases";
 import { drugsData } from "../src/data/drugs";
 
@@ -73,6 +74,21 @@ async function generate() {
   );
   console.log(`Generated sitemap-organisms.xml with ${organismUrls.length} entries.`);
 
+  // 1b. Fungi Sitemap
+  const fungiUrls = [
+    { loc: `${DOMAIN}/fungi`, lastmod: TODAY },
+    ...fungiData.map((f) => ({
+      loc: `${DOMAIN}/fungi/${getPathogenSlug(f.name)}`,
+      lastmod: TODAY,
+    })),
+  ];
+  fs.writeFileSync(
+    path.join(publicDir, "sitemap-fungi.xml"),
+    buildSitemapXml(fungiUrls),
+    "utf-8"
+  );
+  console.log(`Generated sitemap-fungi.xml with ${fungiUrls.length} entries.`);
+
   // 2. Diseases Sitemap
   const diseaseUrls = [
     { loc: `${DOMAIN}/diseases`, lastmod: TODAY },
@@ -129,6 +145,7 @@ async function generate() {
   // 5. Sitemap Index.xml
   const sitemapFiles = [
     "sitemap-organisms.xml",
+    "sitemap-fungi.xml",
     "sitemap-diseases.xml",
     "sitemap-drugs.xml",
     "sitemap-comparisons.xml",

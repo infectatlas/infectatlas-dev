@@ -11,6 +11,7 @@ import LandingPage from "./components/LandingPage";
 import MarketingLandingPage from "./components/MarketingLandingPage";
 import LegalPage from "./components/LegalPage";
 import OrganismsSEO from "./components/OrganismsSEO";
+import FungiSEO from "./components/FungiSEO";
 import DiseasesSEO from "./components/DiseasesSEO";
 import DrugsSEO from "./components/DrugsSEO";
 import ComparisonsSEO, { COMPARISONS_DATA } from "./components/ComparisonsSEO";
@@ -96,6 +97,7 @@ function InnerApp() {
       location.pathname !== "/terms" &&
       !location.pathname.startsWith("/app") && 
       !location.pathname.startsWith("/organisms") && 
+      !location.pathname.startsWith("/fungi") && 
       !location.pathname.startsWith("/diseases") && 
       !location.pathname.startsWith("/drugs")
     ) {
@@ -556,6 +558,10 @@ function InnerApp() {
 
   if (location.pathname.startsWith("/organisms")) {
     return <OrganismsSEO />;
+  }
+
+  if (location.pathname.startsWith("/fungi")) {
+    return <FungiSEO />;
   }
 
   if (location.pathname.startsWith("/diseases")) {

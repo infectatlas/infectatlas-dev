@@ -3,19 +3,23 @@
 
   <sitemap>
     <loc>https://infectatlas.com/sitemap-organisms.xml</loc>
-    <lastmod>2026-06-27</lastmod>
+    <lastmod>2026-07-11</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://infectatlas.com/sitemap-fungi.xml</loc>
+    <lastmod>2026-07-11</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://infectatlas.com/sitemap-diseases.xml</loc>
-    <lastmod>2026-06-27</lastmod>
+    <lastmod>2026-07-11</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://infectatlas.com/sitemap-drugs.xml</loc>
-    <lastmod>2026-06-27</lastmod>
+    <lastmod>2026-07-11</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://infectatlas.com/sitemap-comparisons.xml</loc>
-    <lastmod>2026-06-27</lastmod>
+    <lastmod>2026-07-11</lastmod>
   </sitemap>
 
 </sitemapindex>

@@ -1,3 +1,5 @@
+import PublicHeader from "./PublicHeader";
+import PublicFooter from "./PublicFooter";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { 
@@ -16,6 +18,7 @@ interface LegalPageProps {
 
 export default function LegalPage({ initialTab }: LegalPageProps) {
   const navigate = useNavigate();
+  const handleLaunchApp = (tab: string) => navigate("/app/" + tab);
   const location = useLocation();
   const [activeTab, setActiveTab] = useState<"privacy" | "terms">(initialTab);
 
@@ -32,38 +35,7 @@ export default function LegalPage({ initialTab }: LegalPageProps) {
     <div className="min-h-[100dvh] bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-indigo-600 selection:text-white" id="legal-page-root">
       
       {/* STICKY NAVIGATION (MATCHES HOMEPAGE) */}
-      <nav id="sticky-header" className="sticky top-0 z-50 w-full h-16 bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2.5 group focus:outline-indigo-600 rounded-lg p-1" title="Back to Homepage">
-            <div className="p-2 bg-[#001A3F] text-white rounded-lg flex items-center justify-center transition-transform duration-200 group-hover:scale-105 shadow-sm shrink-0">
-              <BrainCircuit className="h-5 w-5" />
-            </div>
-            <div>
-              <span className="font-extrabold text-slate-900 text-base sm:text-lg tracking-tight group-hover:text-indigo-600 transition-colors block leading-none font-sans">
-                InfectAtlas
-              </span>
-              <span className="text-[9px] sm:text-[10px] text-indigo-600 font-bold uppercase tracking-wider block mt-1 leading-none font-sans">
-                Medical Microbiology
-              </span>
-            </div>
-          </Link>
-          <div className="flex items-center gap-4">
-            <Link 
-              to="/" 
-              className="px-4 py-2 text-[14px] font-semibold text-slate-600 hover:text-indigo-600 focus:outline-indigo-600 rounded-lg transition-colors inline-flex items-center gap-1.5"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              <span>Back to Home</span>
-            </Link>
-            <Link 
-              to="/app" 
-              className="px-4 py-2 text-[14px] font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl transition-all shadow-sm"
-            >
-              Start Studying Free
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <PublicHeader handleLaunchApp={handleLaunchApp} />
 
       {/* DOCUMENT COMPONENT CARD */}
       <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-10 sm:py-16 space-y-8 animate-fade-in" id="legal-content-main">
@@ -222,16 +194,7 @@ export default function LegalPage({ initialTab }: LegalPageProps) {
       </main>
 
       {/* FOOTER (MATCHES HOMEPAGE) */}
-      <footer className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left space-y-6">
-          <p className="text-xs">
-            © 2026 InfectAtlas. All rights reserved. Built for medical training, clinical pharmacy, and boards prep.
-          </p>
-          <p className="text-[10px] text-slate-500 leading-normal max-w-2xl">
-            Educational use only. Not intended for clinical decision-making. Consult direct medical associations (such as CDC or WHO) and clinical guidelines for physical healthcare consultations.
-          </p>
-        </div>
-      </footer>
+      <PublicFooter />
 
     </div>
   );

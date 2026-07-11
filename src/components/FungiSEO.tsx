@@ -2,7 +2,7 @@ import PublicHeader from "./PublicHeader";
 import PublicFooter from "./PublicFooter";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
-import { microorganismsData, Microorganism } from "../data/microorganisms";
+import { fungiData, Fungus } from "../data/fungi";
 import { 
   ArrowLeft, 
   BrainCircuit, 
@@ -22,71 +22,97 @@ import {
 } from "lucide-react";
 import ActiveRecallDrawer from "./ActiveRecallDrawer";
 
-// Helper to convert microorganism name to a web-safe slug
+// Helper to convert microfungus name to a web-safe slug
 export const getPathogenSlug = (name: string): string => {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 };
 
 // Helper to get fully articulated SEO introductory hook paragraph
-export const getSEOIntroduction = (m: Microorganism): string => {
-  const defaultIntro = `${m.name} is a clinically significant ${m.gramStatus.toLowerCase()} ${m.shape} known to cause human infections such as ${m.diseases.map(d => d.name).slice(0, 3).join(", ")}. Understanding its microbiology structure, distinguishing biochemical tests, and guideline treatment choices is essential for board examination diagnostic questions and clinical practice.`;
+export const getSEOIntroduction = (m: Fungus): string => {
+  const defaultIntro = `${m.name} is a clinically significant ${m.type.toLowerCase()} known to cause human infections such as ${m.diseases.map(d => d.name).slice(0, 3).join(", ")}. Understanding its microbiology structure, distinguishing biochemical tests, and guideline treatment choices is essential for board examination diagnostic questions and clinical practice.`;
   
   const nameLower = m.name.toLowerCase();
-  if (nameLower.includes("staphylococcus aureus")) {
-    return "Staphylococcus aureus is a Gram-positive coccus that causes skin infections, bacteremia, endocarditis, pneumonia, and osteomyelitis. Learn key diagnostic features, MRSA versus MSSA treatment strategies, and high-yield board review concepts.";
+  if (nameLower.includes("candida albicans")) {
+    return "Candida albicans is an opportunistic dimorphic fungus (forms germ tubes at 37°C). It is part of the normal human microbiome but can cause opportunistic mucosal or invasive infections. Learn key diagnostic features, antifungal treatment strategies, and high-yield board review concepts.";
   }
-  if (nameLower.includes("clostridioides difficile")) {
-    return "Clostridioides difficile is a spore-forming, toxin-producing Gram-positive anaerobic bacillus that is a major cause of antibiotic-associated diarrhea and pseudomembranous colitis. Master identification assays, severity classification guidelines, and oral vancomycin vs fidaxomicin treatment routes.";
+  if (nameLower.includes("aspergillus fumigatus")) {
+    return "Aspergillus fumigatus is a ubiquitous mold found in decaying vegetation. It branches at acute angles (45°) and causes varied diseases from allergic responses to severe invasive infections in immunocompromised individuals.";
   }
-  if (nameLower.includes("pseudomonas aeruginosa")) {
-    return "Pseudomonas aeruginosa is an opportunistic Gram-negative bacillus characterized as lactose non-fermenting, oxidase-positive, and pigment-producing. It commonly causes hospital-acquired pneumonia, hot tub folliculitis, swimmer's ear, and osteomyelitis in IV drug users.";
+  if (nameLower.includes("cryptococcus neoformans")) {
+    return "Cryptococcus neoformans is a heavily encapsulated yeast found in soil and pigeon guano. Acquired via inhalation, it typically causes meningoencephalitis in immunocompromised hosts, heavily tested on board exams with India ink stains.";
   }
-  if (nameLower.includes("escherichia coli")) {
-    return "Escherichia coli is a Gram-negative bacillus, lactose-fermenting enteroflora of the bowel. It is the leading cause of urinary tract infections (UTIs) and neonatal meningitis, and contains strains like EHEC causing Hemolytic Uremic Syndrome (HUS).";
+  if (nameLower.includes("histoplasma capsulatum")) {
+    return "Histoplasma capsulatum is a dimorphic fungus endemic to the Ohio and Mississippi River valleys. Associated with bird and bat droppings, it presents as intracellular yeasts within macrophages and causes pulmonary or disseminated histoplasmosis.";
   }
-  if (nameLower.includes("streptococcus pneumoniae")) {
-    return "Streptococcus pneumoniae is a lancet-shaped, Gram-positive diplococcus that is alpha-hemolytic and optochin-sensitive. It is the premier etiology of community-acquired pneumonia, otitis media, meningitis, and sinusitis in adults.";
+  if (nameLower.includes("coccidioides immitis")) {
+    return "Coccidioides immitis is a dimorphic fungus endemic to the Southwestern US and Mexico. It forms spherules containing endospores in tissues and is the causative agent of Valley Fever.";
   }
-  if (nameLower.includes("neisseria meningitidis")) {
-    return "Neisseria meningitidis is a kidney-bean shaped, Gram-negative diplococcus that ferments both glucose and maltose. It causes severe meningococcemia and CSF meningitis, popularized by purpuric skin lesions and Waterhouse-Friderichsen syndrome.";
+  if (nameLower.includes("epidermophyton species")) {
+    return "Epidermophyton species are dermatophytes causing superficial skin and nail infections via keratin digestion. E. floccosum is the primary human pathogen in this genus, known for causing tinea cruris.";
+  }
+  if (nameLower.includes("fusarium species")) {
+    return "Fusarium species are opportunistic molds known for angioinvasion. They cause localized infections in healthy hosts and severe, disseminated infections in immunocompromised patients, often with positive blood cultures.";
+  }
+  if (nameLower.includes("talaromyces marneffei")) {
+    return "Talaromyces marneffei is a thermally dimorphic fungus endemic to Southeast Asia. It is a major opportunistic pathogen in patients with advanced HIV/AIDS, often presenting with fever, skin lesions, and lymphadenopathy.";
+  }
+  if (nameLower.includes("paracoccidioides brasiliensis")) {
+    return "Paracoccidioides brasiliensis is a dimorphic fungus endemic to Latin America, particularly Brazil. It typically presents with chronic pulmonary symptoms, lymphadenopathy, and characteristic 'captain's wheel' budding yeasts.";
+  }
+  if (nameLower.includes("scedosporium species")) {
+    return "Scedosporium species are opportunistic molds found in soil and water. They are significant pathogens in transplant recipients and near-drowning victims, often requiring voriconazole due to intrinsic resistance.";
   }
   
   return defaultIntro;
 };
 
-export const getPathogenSynonyms = (m: Microorganism): string[] => {
+export const getPathogenSynonyms = (m: Fungus): string[] => {
   const nameLower = m.name.toLowerCase();
   const idLower = m.id.toLowerCase();
   
-  if (nameLower.includes("staphylococcus aureus") || idLower.includes("s-aureus")) {
-    return ["S. aureus", "Staph aureus", "MRSA", "MSSA", "Golden Staph"];
+  if (nameLower.includes("candida albicans")) {
+    return ["C. albicans", "Thrush yeast"];
   }
-  if (nameLower.includes("clostridioides difficile") || idLower.includes("c-diff") || idLower.includes("c-difficile")) {
-    return ["Clostridium difficile", "C. diff", "C. difficile", "Pseudomembranous colitis bacillus"];
+  if (nameLower.includes("aspergillus fumigatus")) {
+    return ["A. fumigatus"];
   }
-  if (nameLower.includes("pseudomonas aeruginosa") || idLower.includes("p-aeruginosa")) {
-    return ["P. aeruginosa", "Pseudomonas", "Blue-green pigment bacilli"];
+  if (nameLower.includes("cryptococcus neoformans")) {
+    return ["C. neoformans", "Encapsulated yeast"];
   }
-  if (nameLower.includes("escherichia coli") || idLower.includes("e-coli")) {
-    return ["E. coli", "Uropathogenic Escherichia coli (UPEC)", "EHEC", "ETEC", "STEC"];
+  if (nameLower.includes("pneumocystis jirovecii")) {
+    return ["P. jirovecii", "PCP", "Pneumocystis carinii"];
   }
-  if (nameLower.includes("streptococcus pneumoniae") || idLower.includes("s-pneumoniae")) {
-    return ["Pneumococcus", "S. pneumoniae", "Lancet-shaped diplococci"];
+  if (nameLower.includes("histoplasma capsulatum")) {
+    return ["H. capsulatum", "Histoplasma"];
   }
-  if (nameLower.includes("neisseria meningitidis") || idLower.includes("n-meningitidis")) {
-    return ["Meningococcus", "N. meningitidis", "Meningococcal coccus"];
+  if (nameLower.includes("coccidioides immitis")) {
+    return ["C. immitis", "Valley Fever fungus"];
   }
-  if (nameLower.includes("streptococcus pyogenes") || idLower.includes("s-pyogenes")) {
-    return ["Group A Streptococcus", "GAS", "S. pyogenes", "Flesh-eating bacteria"];
+  if (nameLower.includes("blastomyces dermatitidis")) {
+    return ["B. dermatitidis", "Blastomyces"];
   }
-  if (nameLower.includes("streptococcus agalactiae") || idLower.includes("s-agalactiae")) {
-    return ["Group B Streptococcus", "GBS", "S. agalactiae", "Neonatal sepsis Streptococcus"];
+  if (nameLower.includes("sporothrix schenckii")) {
+    return ["S. schenckii", "Rose gardener's disease"];
   }
-  if (nameLower.includes("enterococcus") || idLower.includes("faecalis") || idLower.includes("faecium")) {
-    return ["VRE (Vancomycin-Resistant Enterococcus)", "Group D Strep", "E. faecalis", "E. faecium"];
+  if (nameLower.includes("malassezia furfur")) {
+    return ["M. furfur", "Tinea versicolor"];
   }
-  
-  // Generic abbreviation fallback
+  if (nameLower.includes("epidermophyton species")) {
+    return ["E. floccosum"];
+  }
+  if (nameLower.includes("fusarium species")) {
+    return ["Fusarium"];
+  }
+  if (nameLower.includes("talaromyces marneffei")) {
+    return ["T. marneffei", "Penicillium marneffei"];
+  }
+  if (nameLower.includes("paracoccidioides brasiliensis")) {
+    return ["P. brasiliensis", "South American Blastomycosis"];
+  }
+  if (nameLower.includes("scedosporium species")) {
+    return ["Scedosporium"];
+  }
+
   const parts = m.name.split(" ");
   if (parts.length >= 2) {
     const abbreviated = `${parts[0].charAt(0)}. ${parts[1]}`;
@@ -200,7 +226,7 @@ export const getPathogenReferences = (pathogenId: string, name: string): Pathoge
       {
         type: "Public Health Consensus",
         source: "FDA Foodborne Pathogen standards",
-        citation: "FDA Bad Bug Book: Foodborne Pathogenic Microorganisms and Natural Toxins. Second Edition.",
+        citation: "FDA Bad Bug Book: Foodborne Pathogenic Funguss and Natural Toxins. Second Edition.",
         url: "https://www.fda.gov/food/foodborne-pathogens/bad-bug-book-second-edition"
       },
       {
@@ -273,9 +299,9 @@ export const getPathogenReferences = (pathogenId: string, name: string): Pathoge
   ];
 };
 
-export const getPathogenStyles = (gramStatus: string) => {
-  switch (gramStatus) {
-    case "Gram-positive":
+export const getPathogenStyles = (type: string) => {
+  switch (type) {
+    case "Yeast":
       return {
         bannerBg: "from-emerald-50/50 via-white to-emerald-50/30",
         lightBorder: "border-emerald-100",
@@ -284,7 +310,7 @@ export const getPathogenStyles = (gramStatus: string) => {
         accentLine: "border-l-emerald-500",
         hover: "hover:border-emerald-300 hover:shadow-emerald-50/40",
       };
-    case "Gram-negative":
+    case "Mold":
       return {
         bannerBg: "from-rose-50/50 via-white to-rose-50/30",
         lightBorder: "border-rose-100",
@@ -293,8 +319,8 @@ export const getPathogenStyles = (gramStatus: string) => {
         accentLine: "border-l-rose-500",
         hover: "hover:border-rose-300 hover:shadow-rose-50/40",
       };
-    case "Spirochete":
-    case "Acid-fast":
+    case "Dimorphic":
+    case "Dermatophyte":
       return {
         bannerBg: "from-purple-50/50 via-white to-purple-50/30",
         lightBorder: "border-purple-100",
@@ -315,7 +341,7 @@ export const getPathogenStyles = (gramStatus: string) => {
   }
 };
 
-export default function OrganismsSEO() {
+export default function FungiSEO() {
   const navigate = useNavigate();
   const location = useLocation();
   const { slug: routeSlug } = useParams<{ slug?: string }>();
@@ -328,7 +354,7 @@ export default function OrganismsSEO() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerEntityId, setDrawerEntityId] = useState("");
   const [drawerEntityName, setDrawerEntityName] = useState("");
-  const [drawerEntityType, setDrawerEntityType] = useState<"organism" | "disease" | "drug">("organism");
+  const [drawerEntityType, setDrawerEntityType] = useState<"fungus" | "disease" | "drug">("fungus");
 
   // Dynamic Smart Header state on scroll
   const [showHeader, setShowHeader] = useState(true);
@@ -357,14 +383,14 @@ export default function OrganismsSEO() {
   }, []);
   
   // Resolve slug from router params, or fallback to parsing the location pathname directly
-  const slug = routeSlug || (location.pathname.startsWith("/organisms/") ? location.pathname.substring("/organisms/".length) : undefined);
+  const slug = routeSlug || (location.pathname.startsWith("/fungi/") ? location.pathname.substring("/fungi/".length) : undefined);
 
   // Determine if we are viewing the general directory or a specific pathogen detail page
   const isDetailView = !!slug;
 
-  // Find microorganism by slug or by its ID as a fallback
+  // Find microfungus by slug or by its ID as a fallback
   const pathogen = isDetailView
-    ? microorganismsData.find(
+    ? fungiData.find(
         (m) => getPathogenSlug(m.name) === slug || m.id.toLowerCase() === slug?.toLowerCase()
       )
     : undefined;
@@ -415,17 +441,17 @@ export default function OrganismsSEO() {
         canonicalTag.setAttribute('rel', 'canonical');
         document.head.appendChild(canonicalTag);
       }
-      canonicalTag.setAttribute('href', `https://infectatlas.com/organisms/${getPathogenSlug(pathogen.name)}`);
+      canonicalTag.setAttribute('href', `https://infectatlas.com/fungi/${getPathogenSlug(pathogen.name)}`);
       
       // 2. High-Yield "Frequently Asked Questions" (FAQ) Schema.org Microdata + MedicalWebPage Graph
       const mainDisease = pathogen.diseases[0];
       const qaList = [
         {
           "@type": "Question",
-          "name": `Is ${pathogen.name} Gram-positive or Gram-negative?`,
+          "name": `Is ${pathogen.name} Yeast or Mold?`,
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": `${pathogen.name} is classified as a ${pathogen.gramStatus} ${pathogen.shape || "bacterium"}. It typically presents as ${pathogen.arrangement || "individual cellular structures"} in microbiological morphology.`
+            "text": `${pathogen.name} is classified as a ${pathogen.type} ${pathogen.morphology || "fungus"}. It typically presents as ${pathogen.morphology} in microbiological morphology.`
           }
         },
         {
@@ -454,8 +480,8 @@ export default function OrganismsSEO() {
         "@graph": [
           {
             "@type": "MedicalWebPage",
-            "@id": `https://infectatlas.com/organisms/${getPathogenSlug(pathogen.name)}#webpage`,
-            "url": `https://infectatlas.com/organisms/${getPathogenSlug(pathogen.name)}`,
+            "@id": `https://infectatlas.com/fungi/${getPathogenSlug(pathogen.name)}#webpage`,
+            "url": `https://infectatlas.com/fungi/${getPathogenSlug(pathogen.name)}`,
             "name": pageTitle,
             "description": metaDesc,
             "aspect": ["microbiology", "diagnosis", "antimicrobial treatment", "clinical guidelines"],
@@ -482,7 +508,7 @@ export default function OrganismsSEO() {
           },
           {
             "@type": "FAQPage",
-            "@id": `https://infectatlas.com/organisms/${getPathogenSlug(pathogen.name)}#faq`,
+            "@id": `https://infectatlas.com/fungi/${getPathogenSlug(pathogen.name)}#faq`,
             "mainEntity": qaList
           }
         ]
@@ -506,28 +532,28 @@ export default function OrganismsSEO() {
         
         const descTag = document.querySelector('meta[name="description"]');
         if (descTag) {
-          descTag.setAttribute('content', "Comprehensive reference guide of clinically critical Gram-positive, Gram-negative, Spirochete, and atypical human pathogens with treatment guidelines.");
+          descTag.setAttribute('content', "Comprehensive reference guide of clinically critical Yeast, Mold, Dimorphic, and atypical human pathogens with treatment guidelines.");
         }
 
         const canonical = document.querySelector('link[rel="canonical"]');
         if (canonical) {
-          canonical.setAttribute('href', "https://infectatlas.com/organisms");
+          canonical.setAttribute('href', "https://infectatlas.com/fungi");
         }
       };
     } else {
-      document.title = "High-Yield Medical Microorganisms & Pathogens Catalog | InfectAtlas Library";
+      document.title = "High-Yield Medical Funguss & Pathogens Catalog | InfectAtlas Library";
       
       const directorySchema = {
         "@context": "https://schema.org",
         "@type": "MedicalWebPage",
-        "name": "InfectAtlas Public Microorganism Reference Library",
-        "description": "Comprehensive reference guide of clinically critical Gram-positive, Gram-negative, Spirochete, and atypical human pathogens with treatment guidelines.",
+        "name": "InfectAtlas Public Fungus Reference Library",
+        "description": "Comprehensive reference guide of clinically critical Yeast, Mold, Dimorphic, and atypical human pathogens with treatment guidelines.",
         "mainEntity": {
           "@type": "ItemList",
-          "itemListElement": microorganismsData.map((m, index) => ({
+          "itemListElement": fungiData.map((m, index) => ({
             "@type": "ListItem",
             "position": index + 1,
-            "url": `https://infectatlas.com/organisms/${getPathogenSlug(m.name)}`,
+            "url": `https://infectatlas.com/fungi/${getPathogenSlug(m.name)}`,
             "name": m.name
           }))
         }
@@ -551,7 +577,7 @@ export default function OrganismsSEO() {
         metaDescriptionTag.setAttribute('name', 'description');
         document.head.appendChild(metaDescriptionTag);
       }
-      metaDescriptionTag.setAttribute('content', "Comprehensive reference guide of clinically critical Gram-positive, Gram-negative, Spirochete, and atypical human pathogens with treatment guidelines.");
+      metaDescriptionTag.setAttribute('content', "Comprehensive reference guide of clinically critical Yeast, Mold, Dimorphic, and atypical human pathogens with treatment guidelines.");
 
       let canonicalTag = document.querySelector('link[rel="canonical"]');
       if (!canonicalTag) {
@@ -559,7 +585,7 @@ export default function OrganismsSEO() {
         canonicalTag.setAttribute('rel', 'canonical');
         document.head.appendChild(canonicalTag);
       }
-      canonicalTag.setAttribute('href', "https://infectatlas.com/organisms");
+      canonicalTag.setAttribute('href', "https://infectatlas.com/fungi");
 
       return () => {
         const script = document.getElementById("directory-jsonld-schema");
@@ -578,7 +604,7 @@ export default function OrganismsSEO() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleTriggerRecall = (type: "organism" | "disease" | "drug", id: string, name: string) => {
+  const handleTriggerRecall = (type: "fungus" | "disease" | "drug", id: string, name: string) => {
     setDrawerEntityType(type);
     setDrawerEntityId(id);
     setDrawerEntityName(name);
@@ -594,29 +620,28 @@ export default function OrganismsSEO() {
   };
 
   // Internal visual linking list builder
-  const getRelatedPathogens = (current: Microorganism): Microorganism[] => {
-    return microorganismsData
-      .filter((m) => m.id !== current.id && m.gramStatus === current.gramStatus)
+  const getRelatedPathogens = (current: Fungus): Fungus[] => {
+    return fungiData
+      .filter((m) => m.id !== current.id && m.type === current.type)
       .slice(0, 2);
   };
 
   // Group directory list by gram status for rich index grouping
   const groupPathogensByGram = () => {
-    const groups: Record<string, Microorganism[]> = {
-      "Gram-positive": [],
-      "Gram-negative": [],
-      "Spirochete & Acid-fast": [],
-      "Atypical & Others": []
+    const groups: Record<string, Fungus[]> = {
+      "Yeast": [],
+      "Mold": [],
+      "Dimorphic & Dermatophyte": []
     };
 
-    microorganismsData.forEach((m) => {
+    fungiData.forEach((m) => {
       // Search term filtration check
       const query = searchTerm.toLowerCase().trim();
       if (query) {
         const matchesQuery = 
           m.name.toLowerCase().includes(query) ||
           m.description.toLowerCase().includes(query) ||
-          m.gramStatus.toLowerCase().includes(query) ||
+          m.type.toLowerCase().includes(query) ||
           m.characteristics.some(c => c.toLowerCase().includes(query)) ||
           m.diseases.some(d => d.name.toLowerCase().includes(query) || d.treatment.toLowerCase().includes(query));
         
@@ -625,20 +650,17 @@ export default function OrganismsSEO() {
 
       // Gram status filter check
       if (selectedGram !== "all") {
-        if (selectedGram === "gram-positive" && m.gramStatus !== "Gram-positive") return;
-        if (selectedGram === "gram-negative" && m.gramStatus !== "Gram-negative") return;
-        if (selectedGram === "spirochete-acid-fast" && m.gramStatus !== "Spirochete" && m.gramStatus !== "Acid-fast") return;
-        if (selectedGram === "atypical-others" && (m.gramStatus === "Gram-positive" || m.gramStatus === "Gram-negative" || m.gramStatus === "Spirochete" || m.gramStatus === "Acid-fast")) return;
+        if (selectedGram === "yeast" && m.type !== "Yeast") return;
+        if (selectedGram === "mold" && m.type !== "Mold") return;
+        if (selectedGram === "dimorphic-dermatophyte" && m.type !== "Dimorphic" && m.type !== "Dermatophyte") return;
       }
 
-      if (m.gramStatus === "Gram-positive") {
-        groups["Gram-positive"].push(m);
-      } else if (m.gramStatus === "Gram-negative") {
-        groups["Gram-negative"].push(m);
-      } else if (m.gramStatus === "Spirochete" || m.gramStatus === "Acid-fast") {
-        groups["Spirochete & Acid-fast"].push(m);
-      } else {
-        groups["Atypical & Others"].push(m);
+      if (m.type === "Yeast") {
+        groups["Yeast"].push(m);
+      } else if (m.type === "Mold") {
+        groups["Mold"].push(m);
+      } else if (m.type === "Dimorphic" || m.type === "Dermatophyte") {
+        groups["Dimorphic & Dermatophyte"].push(m);
       }
     });
 
@@ -663,11 +685,11 @@ export default function OrganismsSEO() {
             </div>
             <h2 className="text-lg font-bold text-slate-900">Pathogen Reference Not Found</h2>
             <p className="text-xs text-slate-500 leading-relaxed">
-              We couldn\'t find a microorganism matching the key "<strong className="text-slate-800">{slug}</strong>" in the reference library.
+              We couldn\'t find a microfungus matching the key "<strong className="text-slate-800">{slug}</strong>" in the reference library.
             </p>
             <div className="pt-2">
               <Link
-                to="/organisms"
+                to="/fungi"
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 hover:text-indigo-500 hover:underline"
               >
                 <ArrowLeft className="h-4 w-4" />
@@ -685,7 +707,7 @@ export default function OrganismsSEO() {
               {/* Back navigation */}
               <div>
                 <Link
-                  to="/organisms"
+                  to="/fungi"
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-550 hover:text-slate-800 tracking-tight"
                 >
                   <ArrowLeft className="h-3.5 w-3.5" />
@@ -697,16 +719,16 @@ export default function OrganismsSEO() {
               <div className="space-y-5">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className={`px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-bold shadow-3xs uppercase tracking-wide border ${
-                    pathogen.gramStatus === "Gram-positive"
+                    pathogen.type === "Yeast"
                       ? "bg-purple-50 text-purple-700 border-purple-200"
-                      : pathogen.gramStatus === "Gram-negative"
+                      : pathogen.type === "Mold"
                       ? "bg-pink-50 text-pink-700 border-pink-200"
                       : "bg-amber-50 text-amber-700 border-amber-200"
                   }`}>
-                    {pathogen.gramStatus}
+                    {pathogen.type}
                   </span>
                   <span className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-medium border border-slate-200 bg-white text-slate-600 capitalize">
-                    {pathogen.shape} {pathogen.arrangement ? `• ${pathogen.arrangement}` : ""}
+                    
                   </span>
                 </div>
 
@@ -756,7 +778,7 @@ export default function OrganismsSEO() {
                     </p>
                   </div>
                   <button
-                    onClick={() => handleTriggerRecall("organism", pathogen.id, pathogen.name)}
+                    onClick={() => handleTriggerRecall("fungus", pathogen.id, pathogen.name)}
                     className="w-full sm:w-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs rounded-lg shadow-sm transition-all shrink-0 cursor-pointer flex items-center justify-center gap-1.5"
                   >
                     <Activity className="h-4 w-4" />
@@ -848,13 +870,13 @@ export default function OrganismsSEO() {
                   {getRelatedPathogens(pathogen).map((related) => (
                     <Link
                       key={related.id}
-                      to={`/organisms/${getPathogenSlug(related.name)}`}
+                      to={`/fungi/${getPathogenSlug(related.name)}`}
                       className="p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-300 transition-all shadow-3xs group flex flex-col justify-between cursor-pointer"
                     >
                       <div>
                         <div className="flex items-center justify-between gap-2 mb-1.5">
                           <span className="text-[10px] font-bold uppercase text-slate-400">
-                            {related.gramStatus} {related.shape}
+                            {related.type}
                           </span>
                           <span className="text-[10px] text-indigo-600 font-bold group-hover:underline transition-all inline-flex items-center gap-0.5">
                             Study <ExternalLink className="h-2.5 w-2.5" />
@@ -981,7 +1003,7 @@ export default function OrganismsSEO() {
                   </h4>
                   <div className="space-y-2.5">
                     <button
-                      onClick={() => handleTriggerRecall("organism", pathogen.id, pathogen.name)}
+                      onClick={() => handleTriggerRecall("fungus", pathogen.id, pathogen.name)}
                       className="w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs rounded-xl shadow-md transition-all cursor-pointer hover:scale-[1.01] flex items-center justify-center gap-2 font-sans"
                     >
                       <Activity className="h-4 w-4 text-white" />
@@ -989,7 +1011,7 @@ export default function OrganismsSEO() {
                     </button>
                     
                     <button
-                      onClick={() => handleTriggerRecall("organism", pathogen.id, pathogen.name)}
+                      onClick={() => handleTriggerRecall("fungus", pathogen.id, pathogen.name)}
                       className="w-full py-2.5 px-4 bg-white/10 hover:bg-white/15 text-white border border-white/20 font-bold text-xs rounded-xl transition-all cursor-pointer flex items-center justify-center gap-2 font-sans"
                     >
                       <BookmarkPlus className="h-4 w-4 text-emerald-400" />
@@ -1052,10 +1074,9 @@ export default function OrganismsSEO() {
                 <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 w-full flex-nowrap scrollbar-none">
                   {[
                     { id: "all", name: "All Pathogens", color: "bg-indigo-600 text-white shadow-md border-indigo-400 hover:bg-indigo-500 hover:shadow-indigo-500/10" },
-                    { id: "gram-positive", name: "Gram-Positive Bacteria", color: "bg-emerald-600 text-white shadow-md border-emerald-400 hover:bg-emerald-500 hover:shadow-emerald-500/10" },
-                    { id: "gram-negative", name: "Gram-Negative Bacteria", color: "bg-rose-600 text-white shadow-md border-rose-450 hover:bg-rose-500 hover:shadow-rose-500/10" },
-                    { id: "spirochete-acid-fast", name: "Spirochetes & Acid-fast", color: "bg-purple-600 text-white shadow-md border-purple-400 hover:bg-purple-500 hover:shadow-purple-500/10" },
-                    { id: "atypical-others", name: "Atypicals & Others", color: "bg-amber-600 text-white shadow-md border-amber-400 hover:bg-amber-505 hover:shadow-amber-500/10" }
+                    { id: "yeast", name: "Yeast", color: "bg-emerald-600 text-white shadow-md border-emerald-400 hover:bg-emerald-500 hover:shadow-emerald-500/10" },
+                    { id: "mold", name: "Mold", color: "bg-rose-600 text-white shadow-md border-rose-450 hover:bg-rose-500 hover:shadow-rose-500/10" },
+                    { id: "dimorphic-dermatophyte", name: "Dimorphics & Dermatophyte", color: "bg-purple-600 text-white shadow-md border-purple-400 hover:bg-purple-500 hover:shadow-purple-500/10" }
                   ].map((cat) => {
                     const isActive = selectedGram === cat.id;
                     return (
@@ -1082,7 +1103,7 @@ export default function OrganismsSEO() {
               {Object.keys(groupedPathogens).filter(k => groupedPathogens[k].length > 0).map((groupName) => {
                 const pathogens = groupedPathogens[groupName];
                 const sample = pathogens[0];
-                const styles = getPathogenStyles(sample.gramStatus);
+                const styles = getPathogenStyles(sample.type);
                 
                 return (
                   <section key={groupName} className="space-y-6">
@@ -1103,7 +1124,7 @@ export default function OrganismsSEO() {
                       </div>
                       <div className="shrink-0 flex items-center">
                         <span className={`${styles.pill} text-[10px] font-black uppercase px-2.5 py-1 rounded-full border shadow-3xs`}>
-                          {pathogens.length} Microorganisms
+                          {pathogens.length} Funguss
                         </span>
                       </div>
                     </div>
@@ -1111,17 +1132,17 @@ export default function OrganismsSEO() {
                     {/* Corridor Cards Grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                       {pathogens.map((m) => {
-                        const mStyles = getPathogenStyles(m.gramStatus);
+                        const mStyles = getPathogenStyles(m.type);
                         return (
                           <Link
                             key={m.id}
-                            to={`/organisms/${getPathogenSlug(m.name)}`}
+                            to={`/fungi/${getPathogenSlug(m.name)}`}
                             className={`p-6 bg-white border border-slate-250 border-l-4 ${mStyles.accentLine} rounded-2xl ${mStyles.hover} transition-all flex flex-col justify-between group cursor-pointer shadow-3xs`}
                           >
                             <div className="space-y-4">
                               <div className="flex items-center justify-between">
                                 <span className={`${mStyles.pill} border text-[9px] font-black uppercase px-2 py-0.5 rounded-md shadow-3xs`}>
-                                  {m.gramStatus} • {m.shape}
+                                  {m.type}
                                 </span>
                                 <span className="text-[10px] text-indigo-600 font-extrabold group-hover:underline transition-all flex items-center gap-0.5 whitespace-nowrap">
                                   Micro Pearls
@@ -1158,7 +1179,7 @@ export default function OrganismsSEO() {
 
             {Object.keys(groupedPathogens).filter(k => groupedPathogens[k].length > 0).length === 0 && (
               <div className="max-w-sm mx-auto text-center py-10 space-y-3 bg-white border border-slate-200 rounded-2xl p-6 shadow-3xs">
-                <p className="text-xs font-bold text-slate-850">No matching microorganisms found.</p>
+                <p className="text-xs font-bold text-slate-850">No matching microfungi found.</p>
                 <p className="text-[11px] text-slate-500 leading-normal">
                   Try adjusting your keywords or clearing the filter category in the header.
                 </p>

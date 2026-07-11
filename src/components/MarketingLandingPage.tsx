@@ -1,3 +1,5 @@
+import PublicHeader from "./PublicHeader";
+import PublicFooter from "./PublicFooter";
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { 
@@ -16,7 +18,7 @@ import {
   BrainCircuit,
   Heart,
   ClipboardList,
-  Zap
+  Zap, Bug
 } from "lucide-react";
 import { microorganismsData } from "../data/microorganisms";
 import { diseasesData } from "../data/diseases";
@@ -170,128 +172,7 @@ export default function MarketingLandingPage() {
     <div className="min-h-[100dvh] bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-indigo-600 selection:text-white overflow-x-hidden" id="marketing-container">
       
       {/* 1. STICKY NAVIGATION */}
-      <nav id="sticky-header" className="sticky top-0 z-50 w-full h-16 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-shadow duration-200">
-        <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between relative">
-          
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group focus:outline-indigo-600 rounded-lg p-1" id="nav-logo">
-            <div className="p-2 bg-[#001A3F] text-white rounded-lg flex items-center justify-center transition-transform duration-200 group-hover:scale-105 shadow-sm shrink-0">
-              <BrainCircuit className="h-5 w-5" />
-            </div>
-            <div>
-              <span className="font-extrabold text-slate-900 text-base sm:text-lg tracking-tight hover:text-indigo-600 transition-colors block leading-none">
-                InfectAtlas
-              </span>
-              <span className="text-[9px] sm:text-[10px] text-indigo-600 font-bold uppercase tracking-wider block mt-1 leading-none">
-                Medical Microbiology
-              </span>
-            </div>
-          </Link>
-
-          {/* Center Links (Desktop only) */}
-          <div className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2" id="nav-links">
-            <Link 
-              to="/organisms" 
-              className="px-4 py-2 text-[14px] font-semibold text-slate-600 hover:text-indigo-600 focus:outline-indigo-600 rounded-lg transition-colors"
-            >
-              Organisms
-            </Link>
-            <Link 
-              to="/diseases" 
-              className="px-4 py-2 text-[14px] font-semibold text-slate-600 hover:text-indigo-600 focus:outline-indigo-600 rounded-lg transition-colors"
-            >
-              Diseases
-            </Link>
-            <Link 
-              to="/drugs" 
-              className="px-4 py-2 text-[14px] font-semibold text-slate-600 hover:text-indigo-600 focus:outline-indigo-600 rounded-lg transition-colors"
-            >
-              Drugs
-            </Link>
-            <Link 
-              to="/comparisons" 
-              className="px-4 py-2 text-[14px] font-semibold text-slate-600 hover:text-indigo-600 focus:outline-indigo-600 rounded-lg transition-colors"
-            >
-              Comparisons
-            </Link>
-          </div>
-
-          {/* Right CTA (Desktop) */}
-          <div className="hidden md:flex items-center gap-3" id="nav-right">
-            <button
-              onClick={() => handleLaunchApp("dashboard")}
-              className="bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg transition-all shadow-xs hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 min-h-[36px] cursor-pointer flex items-center gap-1.5"
-              id="cta-nav-start"
-            >
-              <Zap className="h-3.5 w-3.5 fill-white" />
-              <span>Study App</span>
-            </button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button 
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus:outline-indigo-600 min-w-[44px] min-h-[44px] flex items-center justify-center"
-            aria-label="Toggle navigation menu"
-            id="mobile-menu-trigger"
-          >
-            {isMobileMenuOpen ? <X className="h-6 w-6" /> : (
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-              </svg>
-            )}
-          </button>
-        </div>
-
-        {/* Mobile Navigation Drawer */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden fixed top-16 left-0 right-0 bg-white border-b border-slate-200 shadow-xl z-50 animate-fade-in" id="mobile-menu-drawer">
-            <div className="px-4 pt-3 pb-6 space-y-2 flex flex-col">
-              <Link 
-                to="/organisms" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="py-3 px-4 font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors text-base"
-              >
-                Organisms
-              </Link>
-              <Link 
-                to="/diseases" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="py-3 px-4 font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors text-base"
-              >
-                Diseases
-              </Link>
-              <Link 
-                to="/drugs" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="py-3 px-4 font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors text-base"
-              >
-                Drugs
-              </Link>
-              <Link 
-                to="/comparisons" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="py-3 px-4 font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors text-base"
-              >
-                Comparisons
-              </Link>
-              
-              <div className="pt-4 border-t border-slate-100 mt-2">
-                <button 
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    handleLaunchApp("dashboard");
-                  }}
-                  className="w-full py-3 text-center font-bold text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 min-h-[44px]"
-                >
-                  <Zap className="h-4 w-4 fill-white" />
-                  <span>Study App</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-      </nav>      {/* 2. HERO SECTION */}
+      <PublicHeader handleLaunchApp={handleLaunchApp} />      {/* 2. HERO SECTION */}
       <section id="hero-section" className="relative py-16 lg:py-24 bg-gradient-to-b from-white via-indigo-50/15 to-slate-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center lg:items-start">
@@ -573,7 +454,7 @@ export default function MarketingLandingPage() {
                 </div>
                 <div>
                   <h3 className="font-extrabold text-slate-900 text-sm group-hover:text-indigo-600 transition-colors">
-                    Pathogens Directory
+                    Bacteria Directory
                   </h3>
                   <p className="text-slate-550 text-xs mt-1.5 leading-relaxed font-medium">
                     Explore high-yield bacterial pathogens, Gram statuses, biochemistry arrangements, and physical profiles.
@@ -584,7 +465,31 @@ export default function MarketingLandingPage() {
                 to="/organisms" 
                 className="inline-flex items-center gap-1 text-xs font-bold text-indigo-600 hover:underline pt-2 group-hover:gap-1.5 transition-all text-left"
               >
-                <span>Browse Organisms</span>
+                <span>Browse Bacteria</span>
+                <ChevronRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+
+            {/* Library Card: Fungi */}
+            <div className="bg-slate-50/50 p-5 rounded-2xl border border-slate-200 hover:border-indigo-400 hover:bg-white transition-all duration-200 flex flex-col justify-between h-56 group" id="lib-card-fungi">
+              <div className="space-y-3">
+                <div className="p-2 bg-emerald-50 text-emerald-600 rounded-lg border border-emerald-100 inline-block">
+                  <Bug className="h-4 w-4" />
+                </div>
+                <div>
+                  <h3 className="font-extrabold text-slate-900 text-sm group-hover:text-emerald-600 transition-colors">
+                    Fungi Directory
+                  </h3>
+                  <p className="text-slate-550 text-xs mt-1.5 leading-relaxed font-medium">
+                    Explore high-yield fungal pathogens, dimorphic transitions, spore morphologies, and clinical profiles.
+                  </p>
+                </div>
+              </div>
+              <Link 
+                to="/fungi" 
+                className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 hover:underline pt-2 group-hover:gap-1.5 transition-all text-left"
+              >
+                <span>Browse Fungi</span>
                 <ChevronRight className="h-3.5 w-3.5" />
               </Link>
             </div>
@@ -877,136 +782,7 @@ export default function MarketingLandingPage() {
       </div>
 
       {/* 9. FOOTER */}
-      <footer id="website-footer" className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-          
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            
-            {/* Branding Column */}
-            <div className="space-y-4 md:col-span-1">
-              <div className="flex items-center gap-2">
-                <div className="p-1.5 bg-indigo-600 text-white rounded-lg inline-flex items-center justify-center">
-                  <BrainCircuit className="h-4 w-4" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-extrabold text-white text-[15px] tracking-tight leading-none">
-                    InfectAtlas
-                  </span>
-                  <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider block mt-0.5 leading-none">
-                    Medical Microbiology
-                  </span>
-                </div>
-              </div>
-              <p className="text-xs text-slate-450 leading-relaxed">
-                The interactive map of medical microbiology. Unifying active recall study guides and evidence-based diagnostic references.
-              </p>
-            </div>
-
-            {/* Links Columns */}
-            <div className="space-y-3">
-              <h4 className="text-white text-xs font-bold uppercase tracking-wider font-mono">
-                Study Directory
-              </h4>
-              <ul className="space-y-2 text-xs">
-                <li>
-                  <Link to="/app" className="hover:text-white hover:underline transition-colors">
-                    Study App Home
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/app/flashcards" className="hover:text-white hover:underline transition-colors">
-                    Active Flashcards
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/app/quiz" className="hover:text-white hover:underline transition-colors">
-                    Clinical Quizzes
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/app/dashboard" className="hover:text-white hover:underline transition-colors">
-                    Performance Dashboard
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div className="space-y-3">
-              <h4 className="text-white text-xs font-bold uppercase tracking-wider font-mono">
-                Reference Library
-              </h4>
-              <ul className="space-y-2 text-xs">
-                <li>
-                  <Link to="/organisms" className="hover:text-white hover:underline transition-colors">
-                    Bacterial Pathogens
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/diseases" className="hover:text-white hover:underline transition-colors">
-                    Clinical Disease Profiles
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/drugs" className="hover:text-white hover:underline transition-colors">
-                    Antimicrobials Spectra
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/comparisons" className="hover:text-white hover:underline transition-colors">
-                    Diagnostic Comparisons
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/how-it-works" className="hover:text-white hover:underline transition-colors">
-                    Methodology: How It Works
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div className="space-y-3">
-              <h4 className="text-white text-xs font-bold uppercase tracking-wider font-mono">
-                Legal & Governance
-              </h4>
-              <ul className="space-y-2 text-xs">
-                <li>
-                  <Link to="/privacy" className="hover:text-white hover:underline transition-colors" id="footer-privacy-link">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/terms" className="hover:text-white hover:underline transition-colors" id="footer-terms-link">
-                    Terms of Service & Disclaimer
-                  </Link>
-                </li>
-                <li className="text-slate-500 font-mono text-[10.5px] mt-4 flex items-center gap-1.5">
-                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
-                  <span>Version 1.4.0 (MDD)</span>
-                </li>
-              </ul>
-            </div>
-
-          </div>
-
-          {/* Disclaimer & Copyright */}
-          <div className="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-left">
-            <div className="space-y-1 sm:max-w-xl">
-              <span className="text-[10px] font-black uppercase text-indigo-400 tracking-wider font-mono block">
-                Clinical Disclaimer Notice
-              </span>
-              <p className="text-[10px] text-slate-500 leading-normal">
-                Educational usage alignment only. Not intended for direct clinical patient decision-making, hospital diagnostics, prescription, or therapeutic recommendations. Always consult active professional clinical guidelines and institutional drug formularies.
-              </p>
-            </div>
-            <div className="text-left sm:text-right shrink-0">
-              <span className="text-xs text-slate-500 block">
-                &copy; 2026 InfectAtlas. Built-for-purpose medical education.
-              </span>
-            </div>
-          </div>
-
-        </div>
-      </footer>
+      <PublicFooter />
 
     </div>
   );

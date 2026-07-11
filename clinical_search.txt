@@ -1,0 +1,176 @@
+src/components/SearchEngine.tsx:        {/* Morphology & Clinical Overview simplified */}
+src/components/SearchEngine.tsx:            <h5 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Clinical Profile</h5>
+src/components/SearchEngine.tsx:        {/* Clinical Pearls */}
+src/components/SearchEngine.tsx:              <span className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider block">Clinical Studypoint</span>
+src/components/SearchEngine.tsx:              Clinical Cross-Reference Engine
+src/components/OrganismsSEO.tsx:  type: "Clinical Guideline" | "Public Health Consensus" | "Landmark Review Article" | "Standard Textbook";
+src/components/OrganismsSEO.tsx:        type: "Clinical Guideline",
+src/components/OrganismsSEO.tsx:        citation: "Liu C, et al. Clinical Practice Guidelines by the Infectious Diseases Society of America (IDSA) for the Treatment of Methicillin-Resistant Staphylococcus aureus Infections in Adults and Children. Clinical Infectious Diseases, 2011.",
+src/components/OrganismsSEO.tsx:        citation: "CDC Laboratory and Clinical Guidance for Prevention and Control of Staphylococcus aureus and MRSA Transmission.",
+src/components/OrganismsSEO.tsx:        type: "Clinical Guideline",
+src/components/OrganismsSEO.tsx:        citation: "Johnson S, et al. Clinical Practice Guideline by the Infectious Diseases Society of America (IDSA) and Society for Healthcare Epidemiology of America (SHEA): 2021 Focused Update Guidelines on Management of Clostridioides difficile Infection in Adults. Clinical Infectious Diseases, 2021.",
+src/components/OrganismsSEO.tsx:        type: "Clinical Guideline",
+src/components/OrganismsSEO.tsx:        citation: "Tamma PD, et al. Infectious Diseases Society of America 2023 Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections. Clinical Infectious Diseases, 2023.",
+src/components/OrganismsSEO.tsx:        type: "Clinical Guideline",
+src/components/OrganismsSEO.tsx:        citation: "Gupta K, et al. International Clinical Practice Guidelines for the Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women: A 2010 Update by the IDSA and the European Society for Microbiology and Infectious Diseases.",
+src/components/OrganismsSEO.tsx:        type: "Clinical Guideline",
+src/components/OrganismsSEO.tsx:      type: "Clinical Guideline",
+src/components/OrganismsSEO.tsx:      citation: `Guideline standards and pathogen-specific treatment directives for human infections caused by ${name}. IDSA Clinical Practice Library, 2023.`,
+src/components/OrganismsSEO.tsx:            "text": `Standard guideline antimicrobial treatment suggests: ${mainDisease.treatment}. ${mainDisease.clinicalPearl ? `Clinical Pearl: ${mainDisease.clinicalPearl}` : ""}`
+src/components/OrganismsSEO.tsx:      {/* Pristine Clinical Reference Header */}
+src/components/OrganismsSEO.tsx:            {/* Left/Middle Column: Clinical Literature */}
+src/components/OrganismsSEO.tsx:                  {/* Standardized Clinical Nomenclature Indicators / Buzzwords field to capture long-tail query volumes */}
+src/components/OrganismsSEO.tsx:                  <strong className="text-slate-700">Clinical Overview:</strong> {pathogen.description}
+src/components/OrganismsSEO.tsx:                    Guideline-Aligned Clinical Conditions & Pharmacotherapy
+src/components/OrganismsSEO.tsx:                              💡 Clinical Pearl / Boards Yield Indicator:
+src/components/OrganismsSEO.tsx:                          ref.type === "Clinical Guideline" 
+src/components/OrganismsSEO.tsx:                          <span>Verify Source / Clinical Guideline Library</span>
+src/components/OrganismsSEO.tsx:                  <span>Clinical references correspond with standard CDC & IDSA peer protocols.</span>
+src/components/OrganismsSEO.tsx:                    Review Terms of Clinical Use
+src/components/OrganismsSEO.tsx:                    Clinical Reference Catalog
+src/components/OrganismsSEO.tsx:                            Clinical reference modules of the {groupName} category.
+src/components/AntimicrobialGrid.tsx:    "cefazolin": { status: "intermediate", explanation: "Clinically active, but contraindicated in pneumococcal meningitis due to poor CSF penetration." },
+src/components/AntimicrobialGrid.tsx:                <h4 className="text-xs uppercase tracking-wider font-bold text-slate-500 mb-2">Therapeutic Clinical Logic</h4>
+src/components/LandingPage.tsx:            <div className="text-xs text-slate-400 font-medium mt-0.5">Clinical Vignettes</div>
+src/components/LandingPage.tsx:            <h3 className="font-bold text-sm text-slate-900 uppercase tracking-wider">Clinical Board Practice</h3>
+src/components/LandingPage.tsx:            Stop Guessing on Clinical Vignettes. <br />
+src/components/DrugsSEO.tsx:                  <button onClick={() => scrollToSection("pearls")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">Clinical Pearls</button>
+src/components/DrugsSEO.tsx:                  <button onClick={() => scrollToSection("relationships")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-650 shrink-0 cursor-pointer border border-slate-200/50">Clinical Cross-links</button>
+src/components/DrugsSEO.tsx:                  {/* Section: Clinical Pearls */}
+src/components/DrugsSEO.tsx:                      Academic & Clinical Study Pearls (USMLE / COMLEX / NCLEX)
+src/components/DrugsSEO.tsx:                {/* Right-Hand Clinical Info & Links Sidebar */}
+src/components/DrugsSEO.tsx:                      Clinical Rapid-Review
+src/components/DrugsSEO.tsx:                  {/* Related Entities Map (Clinical Relationships) */}
+src/components/DrugsSEO.tsx:                      Educational Clinical Standard
+src/components/DrugsSEO.tsx:                      Clinical Reference Compendium
+src/components/ComparisonsSEO.tsx:  category: "Microbial Resistance" | "Antimicrobial Pharmacology" | "Clinical Diagnosis" | "Microbial Morphology";
+src/components/ComparisonsSEO.tsx:    category: "Clinical Diagnosis",
+src/components/ComparisonsSEO.tsx:        attribute: "Clinical Onset",
+src/components/ComparisonsSEO.tsx:    category: "Clinical Diagnosis",
+src/components/ComparisonsSEO.tsx:        attribute: "Clinical Primary Target Sites",
+src/components/ComparisonsSEO.tsx:    category: "Clinical Diagnosis",
+src/components/ComparisonsSEO.tsx:        attribute: "Major Clinical Settings",
+src/components/ComparisonsSEO.tsx:        attribute: "Clinical Manifestations",
+src/components/ComparisonsSEO.tsx:        attribute: "Clinical Disease Effect",
+src/components/ComparisonsSEO.tsx:    category: "Clinical Diagnosis",
+src/components/ComparisonsSEO.tsx:        attribute: "Major Clinical Settings",
+src/components/ComparisonsSEO.tsx:    category: "Clinical Diagnosis",
+src/components/ComparisonsSEO.tsx:    category: "Clinical Diagnosis",
+src/components/ComparisonsSEO.tsx:    intro: "These three Gram-negative pathogens represent major causes of invasive, bloody diarrhea (dysentery). Clinical boards test their biochemical differences, animal reservoirs, and neurologic post-infectious manifestations.",
+src/components/ComparisonsSEO.tsx:        attribute: "Key Clinical Syndromes",
+src/components/ComparisonsSEO.tsx:    category: "Clinical Diagnosis",
+src/components/ComparisonsSEO.tsx:    category: "Clinical Diagnosis",
+src/components/ComparisonsSEO.tsx:    category: "Clinical Diagnosis",
+src/components/ComparisonsSEO.tsx:    category: "Clinical Diagnosis",
+src/components/ComparisonsSEO.tsx:    category: "Clinical Diagnosis",
+src/components/ComparisonsSEO.tsx:    category: "Clinical Diagnosis",
+src/components/ComparisonsSEO.tsx:        attribute: "Primary Clinical Manifestations",
+src/components/ComparisonsSEO.tsx:    category: "Clinical Diagnosis",
+src/components/ComparisonsSEO.tsx:        attribute: "Primary Clinical Symptoms",
+src/components/ComparisonsSEO.tsx:    category: "Clinical Diagnosis",
+src/components/ComparisonsSEO.tsx:        attribute: "Clinical Association",
+src/components/ComparisonsSEO.tsx:        attribute: "Primary Clinical Setting",
+src/components/ComparisonsSEO.tsx:      document.title = "High-Yield Medical Comparisons & Clinical Differentials | InfectAtlas";
+src/components/ComparisonsSEO.tsx:                    Clinical Reference Compendium
+src/components/ComparisonsSEO.tsx:                    High-Yield Clinical Comparisons
+src/components/ComparisonsSEO.tsx:                    { id: "clinical", name: "Clinical Diagnosis", color: "bg-amber-600 text-white border-amber-500 shadow-md shadow-amber-650/10 hover:bg-amber-500" },
+src/components/ComparisonsSEO.tsx:                            c.category === "Clinical Diagnosis" ? "bg-amber-50 text-amber-700 border-amber-100" :
+src/components/ComparisonsSEO.tsx:                <span>Back to Clinical Comparisons</span>
+src/components/ComparisonsSEO.tsx:                  <span className="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-widest">Linked Clinical Profiles:</span>
+src/components/ComparisonsSEO.tsx:                {/* Linked Clinical Profiles for Side B */}
+src/components/ComparisonsSEO.tsx:                  <span className="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-widest">Linked Clinical Profiles:</span>
+src/components/ComparisonsSEO.tsx:            {/* Deep Clinical Points Comparison Table */}
+src/components/ComparisonsSEO.tsx:            {/* Clinical Pearls & High-Yield traps boxes */}
+src/components/ComparisonsSEO.tsx:              {/* Clinical Pearls info container */}
+src/components/ComparisonsSEO.tsx:                    Clinical Board Pearls
+src/components/ComparisonsSEO.tsx:            {/* Interactive Clinical Case Vignette Module (Board Simulation Sandbox) */}
+src/components/QuizMode.tsx:                  Clinical Knowledge Exam Practice
+src/components/QuizMode.tsx:                    AI Boards-Style Clinical Vignettes
+src/components/QuizMode.tsx:              Clinical Assessment
+src/components/LegalModal.tsx:              Terms & Clinical Disclaimer
+src/components/LegalModal.tsx:                  <li>Clinical consultation.</li>
+src/components/LegalModal.tsx:                  <li>Clinical vignettes;</li>
+src/components/LegalModal.tsx:                  <li>Clinical outcomes;</li>
+src/components/AdaptiveQuestionEngine.tsx:                  {/* Highlighted Clinical Pearl */}
+src/components/AdaptiveQuestionEngine.tsx:                        High-Yield Clinical Pearl
+src/components/DiseasesSEO.tsx:  type: "Clinical Guideline" | "Public Health Consensus" | "Landmark Review Article" | "Standard Textbook";
+src/components/DiseasesSEO.tsx:        type: "Clinical Guideline",
+src/components/DiseasesSEO.tsx:        type: "Clinical Guideline",
+src/components/DiseasesSEO.tsx:        citation: "Tunkel AR, et al. Practice Guidelines for the Management of Bacterial Meningitis. Clinical Infectious Diseases, 2004.",
+src/components/DiseasesSEO.tsx:        type: "Clinical Guideline",
+src/components/DiseasesSEO.tsx:        citation: "Stevens DL, et al. Practice Guidelines for the Diagnosis and Management of Skin and Soft Tissue Infections. Clinical Infectious Diseases, 2014.",
+src/components/DiseasesSEO.tsx:        citation: "CDC Guidance for MRSA and Streptococcal Skin Infections Management in Clinical Settings.",
+src/components/DiseasesSEO.tsx:        source: "JAMA Clinical Review",
+src/components/DiseasesSEO.tsx:        type: "Clinical Guideline",
+src/components/DiseasesSEO.tsx:        type: "Clinical Guideline",
+src/components/DiseasesSEO.tsx:        source: "ESC Clinical Practice Panel",
+src/components/DiseasesSEO.tsx:        type: "Clinical Guideline",
+src/components/DiseasesSEO.tsx:        citation: "Gupta K, et al. International Clinical Practice Guidelines for the Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women. Clinical Infectious Diseases, 2011.",
+src/components/DiseasesSEO.tsx:        source: "JAMA Clinical Review",
+src/components/DiseasesSEO.tsx:      type: "Clinical Guideline",
+src/components/DiseasesSEO.tsx:      citation: `Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of ${name} and related systemic syndromes. Clinical Infectious Diseases, 2021.`,
+src/components/DiseasesSEO.tsx:      citation: `Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for ${name}. Lancet Infect Dis, 2022; 22(8):e214-e226.`,
+src/components/DiseasesSEO.tsx:      citation: `Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of ${name}. 21st Edition, McGraw Hill Professional.`,
+src/components/DiseasesSEO.tsx:          "name": "Clinical Reference Catalog",
+src/components/DiseasesSEO.tsx:          "name": "Clinical Infectious Diseases",
+src/components/DiseasesSEO.tsx:      document.title = "High-Yield Clinical Infectious Diseases Reference Guide | InfectAtlas Catalog";
+src/components/DiseasesSEO.tsx:        "name": "High-Yield Clinical Infectious Diseases Reference Guide | InfectAtlas",
+src/components/DiseasesSEO.tsx:      {/* Pristine Clinical Reference Header */}
+src/components/DiseasesSEO.tsx:                        Clinical Risk Factors
+src/components/DiseasesSEO.tsx:                {/* Clinical Presentation section */}
+src/components/DiseasesSEO.tsx:                      Clinical Presentation & Pathology
+src/components/DiseasesSEO.tsx:                {/* Clinical Pearls with high engagement board highlights */}
+src/components/DiseasesSEO.tsx:                    Board Review Clinical Pearls
+src/components/DiseasesSEO.tsx:                            ref.type === "Clinical Guideline" 
+src/components/DiseasesSEO.tsx:                            <span>Verify Source / Clinical Guideline Library</span>
+src/components/DiseasesSEO.tsx:                    <span>Clinical publication values conform with current AMA & CDC academic reference guides.</span>
+src/components/DiseasesSEO.tsx:                      Review Terms of Clinical Use
+src/components/DiseasesSEO.tsx:                      Clinical Reference Catalog
+src/components/MarketingLandingPage.tsx:          badgeText: "Clinical Infection",
+src/components/MarketingLandingPage.tsx:              Clinical Reference Library
+src/components/MarketingLandingPage.tsx:                    Clinical Disease profiles
+src/components/MarketingLandingPage.tsx:                  Clinical Infection Category
+src/components/MarketingLandingPage.tsx:              <span>Clinical Residents & Trainees</span>
+src/components/PublicFooter.tsx:                  Clinical Quizzes
+src/components/PublicFooter.tsx:                  Clinical Disease Profiles
+src/components/FungiSEO.tsx:  type: "Clinical Guideline" | "Public Health Consensus" | "Landmark Review Article" | "Standard Textbook";
+src/components/FungiSEO.tsx:        type: "Clinical Guideline",
+src/components/FungiSEO.tsx:        citation: "Liu C, et al. Clinical Practice Guidelines by the Infectious Diseases Society of America (IDSA) for the Treatment of Methicillin-Resistant Staphylococcus aureus Infections in Adults and Children. Clinical Infectious Diseases, 2011.",
+src/components/FungiSEO.tsx:        citation: "CDC Laboratory and Clinical Guidance for Prevention and Control of Staphylococcus aureus and MRSA Transmission.",
+src/components/FungiSEO.tsx:        type: "Clinical Guideline",
+src/components/FungiSEO.tsx:        citation: "Johnson S, et al. Clinical Practice Guideline by the Infectious Diseases Society of America (IDSA) and Society for Healthcare Epidemiology of America (SHEA): 2021 Focused Update Guidelines on Management of Clostridioides difficile Infection in Adults. Clinical Infectious Diseases, 2021.",
+src/components/FungiSEO.tsx:        type: "Clinical Guideline",
+src/components/FungiSEO.tsx:        citation: "Tamma PD, et al. Infectious Diseases Society of America 2023 Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections. Clinical Infectious Diseases, 2023.",
+src/components/FungiSEO.tsx:        type: "Clinical Guideline",
+src/components/FungiSEO.tsx:        citation: "Gupta K, et al. International Clinical Practice Guidelines for the Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women: A 2010 Update by the IDSA and the European Society for Microbiology and Infectious Diseases.",
+src/components/FungiSEO.tsx:        type: "Clinical Guideline",
+src/components/FungiSEO.tsx:      type: "Clinical Guideline",
+src/components/FungiSEO.tsx:      citation: `Guideline standards and pathogen-specific treatment directives for human infections caused by ${name}. IDSA Clinical Practice Library, 2023.`,
+src/components/FungiSEO.tsx:            "text": `Standard guideline antimicrobial treatment suggests: ${mainDisease.treatment}. ${mainDisease.clinicalPearl ? `Clinical Pearl: ${mainDisease.clinicalPearl}` : ""}`
+src/components/FungiSEO.tsx:      {/* Pristine Clinical Reference Header */}
+src/components/FungiSEO.tsx:            {/* Left/Middle Column: Clinical Literature */}
+src/components/FungiSEO.tsx:                  {/* Standardized Clinical Nomenclature Indicators / Buzzwords field to capture long-tail query volumes */}
+src/components/FungiSEO.tsx:                  <strong className="text-slate-700">Clinical Overview:</strong> {pathogen.description}
+src/components/FungiSEO.tsx:                    Guideline-Aligned Clinical Conditions & Pharmacotherapy
+src/components/FungiSEO.tsx:                              💡 Clinical Pearl / Boards Yield Indicator:
+src/components/FungiSEO.tsx:                          ref.type === "Clinical Guideline" 
+src/components/FungiSEO.tsx:                          <span>Verify Source / Clinical Guideline Library</span>
+src/components/FungiSEO.tsx:                  <span>Clinical references correspond with standard CDC & IDSA peer protocols.</span>
+src/components/FungiSEO.tsx:                    Review Terms of Clinical Use
+src/components/FungiSEO.tsx:                    Clinical Reference Catalog
+src/components/FungiSEO.tsx:                            Clinical reference modules of the {groupName} category.
+src/components/LegalPage.tsx:              {activeTab === "privacy" ? "Privacy Policy" : "Terms & Clinical Disclaimer"}
+src/components/LegalPage.tsx:              Terms & Clinical Disclaimer
+src/data/drugs.ts:      "Clinical screen for symptoms of serotonin syndromic state (clonus, hyperreflexia, agitation)."
+src/data/diseases.ts:    clinicalPresentation: "Clinical features range from mild, self-limiting watery stools to life-threatening toxic megacolon. Diarrhea is characteristically watery, voluminous, foul-smelling, and classically described as containing mucous but rarely gross blood. Accompanying findings include abdominal distention, severe cramping pain, fever up to 38.5C (higher in systemic complications), dehydration, and tachycardia. Severe systemic colitis is identified by a white blood cell count >= 15,000 cells/microL or serum creatinine level > 1.5 mg/dL.",
+src/data/diseases.ts:    clinicalPresentation: "Clinical symptoms correspond to intense leptomeningeal inflammation and increased intracranial pressure. Typical symptoms are nuchal rigidity, high fever, and sudden changes in consciousness. Kernig's sign (pain on passive knee extension when hip is flexed to 90 degrees) and Brudzinski's sign (involuntary hip/knee flexion when neck is passively flexed) are highly specific clinical indicators on physical examination. A petechial, purpuric skin rash on the trunk or lower extremities is a hallmark of Neisseria meningitidis infection.",
+src/data/diseases.ts:    overview: "Infective Endocarditis is a localized, microbial infection of the endocardial surface of the heart, most frequently affecting native or prosthetic valve leaflets. Clinically spearheaded by Staphylococcus aureus (highly destructive; acute) and viridans group Streptococci (subacute), patients present with persistent bacteremic fevers, new heart murmurs, and vascular/immunologic phenomena. Diagnosis utilizes the standardized modified Duke Criteria, while treatment demands prolonged, targeted bactericidal intravenous antibiotic courses.",
+src/data/diseases.ts:    clinicalPresentation: "Clinical findings center on rapid local inflammation. The lower extremity is the most frequent site of unilateral cellulitis. On physical examination, skin presents as erythematous, edematous, warm, and tender to light touch. Lymphangitic streaking (red linear bands tracking proximally toward regional nodes) indicates lymphatic dissemination. Non-purulent cellulitis presents without drainable fluid, while purulent SSTI displays fluctuant nodules (abscesses), pustules, or open ulcerated wounds.",
+src/data/diseases.ts:    diagnosticApproach: "Clinical suspicion should prompt immediate surgical consultation; imaging must never delay surgical intervention. A CT scan of the affected area is highly specific, displaying gas bubbles within the deep fascial planes. The LRINEC score utilizes C-reactive protein, white blood cells, hemoglobin, sodium, creatinine, and glucose to grade high risk of necrotizing fasciitis, but direct surgical opening revealing 'dishwater pus' and lack of resistance to blunt dissection is diagnostic.",
+src/data/diseases.ts:    clinicalPresentation: "Clinical features are often systemic and intense, dominated by sudden rigors (uncontrollable shivering), high-grade fevers, and bounding pulses. Patients can display cold, clammy skin or peripheral warm vasodilation depending on sepsis stage. Altered neurological sensorium or unexplained delirium are common sentinel events in geriatric patients.",
+src/data/diseases.ts:    clinicalPresentation: "Unlike typical cystitis, CAUTI patients rarely complain of dysuria or frequency because the catheter drains urine directly. Clinical presentation is primarily systemic: sudden fevers, leukocytosis, and worsening mental status in bedridden patients. Examination displays costovertebral tenderness on percussion, or pelvic tenderness.",
+src/data/diseases.ts:    diagnosticApproach: "The Sequential Organ Failure Assessment (SOFA) score is used to define organ damage. A rise of >= 2 points indicates organ failure (based on PaO2, platelets, bilirubin, MAP, Glasgow Coma Scale, and creatinine). Clinically, the Quick SOFA (qSOFA) utilizes: (1) Altered mental status, (2) Respiratory rate >= 22 breaths/min, and (3) Systolic blood pressure <= 100 mmHg.",
+src/App.tsx:            <span>Reference criteria: Clinically aligned IDSA rules</span>
+src/utils/questionGenerator.ts:          explanation: `For ${microbeName} presenting as ${d.name}, the clinical standard of care is ${d.treatment} administered via the ${d.route} route. Clinical Pearl: ${d.clinicalPearl || "Always check localized epidemiological resistance characteristics."}`
+src/utils/questionGenerator.ts:    // 10. Clinical Vignette (Deterministic Template based on Pathology target)
+src/utils/questionGenerator.ts:        const promptVignette = `A patient presents with signs and symptoms consistent with ${d.name}. Clinical evaluation demonstrates noteworthy pathology, and the attending team orders local microscopic staining. Lab culture shows ${m.gramStatus.toLowerCase()} cells exhibiting a ${m.shape.toLowerCase()} appearance arranged primarily in ${m.arrangement && m.arrangement !== "None" ? m.arrangement.toLowerCase() : "the typical arrangement"}. ${charClues} The clinical pearl associated with this presentation states: "${d.clinicalPearl || "Preferred drug choice hinges on resistance profile."}"`;
