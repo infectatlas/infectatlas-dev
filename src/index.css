@@ -31,6 +31,7 @@
   --color-slate-600: #475569;      /* Body text key */
   --color-slate-750: #1E293B;      /* Card titles / subheadings */
   --color-slate-800: #192231;      /* Deep elements */
+  --color-slate-850: #131C2E;      /* Rich dark slate text */
   --color-slate-900: #0F172A;      /* Primary high-contrast headings */
   --color-slate-930: #0F172A;      /* Title alignment match */
 
@@ -39,27 +40,73 @@
   --color-emerald-100: #D1FAE5;
   --color-emerald-600: #059669;
   --color-emerald-700: #047857;
+  --color-emerald-850: #064E3B;    /* Rich readable deep emerald */
 
   --color-amber-50: #FFFBEB;
   --color-amber-100: #FEF3C7;
   --color-amber-600: #D97706;
   --color-amber-605: #D97706;
   --color-amber-700: #B45309;
+  --color-amber-850: #742A08;      /* Rich readable deep amber */
 
   --color-rose-50: #FFF5F5;
   --color-rose-100: #FEE2E2;
   --color-rose-700: #BE123C;
+  --color-rose-850: #7C112E;      /* Rich readable deep rose */
 
   --color-teal-50: #F0FDFA;
   --color-teal-100: #CCFBF1;
   --color-teal-600: #0D9488;
   --color-teal-700: #0F766E;
+  --color-teal-850: #0D524C;      /* Rich readable deep teal */
+
+  /* Extra categories for card indices and badges to guarantee visual consistency */
+  --color-purple-50: #FAF5FF;
+  --color-purple-100: #F3E8FF;
+  --color-purple-700: #7E22CE;
+  --color-purple-850: #4A1068;
+
+  --color-sky-50: #F0F9FF;
+  --color-sky-100: #E0F2FE;
+  --color-sky-700: #0369A1;
+  --color-sky-850: #084E71;
+
+  --color-pink-50: #FDF2F8;
+  --color-pink-100: #FCE7F3;
+  --color-pink-700: #BE185D;
+  --color-pink-850: #7A113D;
+
+  --color-orange-50: #FFF7ED;
+  --color-orange-100: #FFEDD5;
+  --color-orange-700: #C2410C;
+  --color-orange-850: #751A05;
+
+  --color-indigo-850: #0A1C3B;     /* Beautiful high-contrast indigo */
 }
 
 @utility no-scrollbar {
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+@utility custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #94a3b8;
   }
 }
 

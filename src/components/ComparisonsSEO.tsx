@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PublicHeader from "./PublicHeader";
 import PublicFooter from "./PublicFooter";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { treatmentChoicesData } from "../data/treatmentChoices";
 import {
   Layers,
   ArrowLeft,
@@ -20,14 +21,15 @@ import {
   Database,
   Search,
   Zap,
-  X
+  X,
+  ChevronDown
 } from "lucide-react";
 
 interface ComparisonModule {
   slug: string;
   title: string;
   subtitle: string;
-  category: "Microbial Resistance" | "Antimicrobial Pharmacology" | "Clinical Diagnosis" | "Microbial Morphology";
+  category: "Microbial Resistance" | "Antimicrobial Pharmacology" | "Clinical Diagnosis" | "Microbial Morphology" | "Treatment Choice";
   badgeColor: string;
   intro: string;
   leftTitle: string;
@@ -47,7 +49,7 @@ interface ComparisonModule {
   };
 }
 
-export const COMPARISONS_DATA: ComparisonModule[] = [
+const BASE_COMPARISONS_DATA: ComparisonModule[] = [
   {
     slug: "mrsa-vs-mssa",
     title: "MRSA vs. MSSA",
@@ -1370,13 +1372,53 @@ export const COMPARISONS_DATA: ComparisonModule[] = [
   }
 ];
 
+export const COMPARISONS_DATA: ComparisonModule[] = [
+  ...BASE_COMPARISONS_DATA,
+  ...(treatmentChoicesData as unknown as ComparisonModule[])
+];
+
 const normalizeCategory = (category: string) => {
   const c = category.trim().toLowerCase();
   if (c.includes("diagnosis")) return "clinical";
   if (c.includes("morphology")) return "morphology";
   if (c.includes("pharmacology")) return "pharmacology";
   if (c.includes("resistance")) return "resistance";
+  if (c.includes("treatment")) return "treatment";
   return "other";
+};
+
+const getPathogenPath = (slug: string) => {
+  if (slug === "cryptococcus-neoformans") return `/fungi/${slug}`;
+  return `/organisms/${slug}`;
+};
+
+const getSlugLabel = (slug: string) => {
+  if (slug === "catheter-associated-urinary-tract-infection") return "CA-UTI";
+  if (slug === "community-acquired-pneumonia") return "CAP (Pneumonia)";
+  if (slug === "cellulitis-and-skin-infections") return "SSTIs / Cellulitis";
+  if (slug === "sepsis") return "Sepsis";
+  if (slug === "e-coli") return "E. coli";
+  if (slug === "s-saprophyticus") return "S. saprophyticus";
+  if (slug === "k-pneumoniae") return "K. pneumoniae";
+  if (slug === "streptococcus-pneumoniae") return "S. pneumoniae";
+  if (slug === "mycoplasma-pneumoniae") return "M. pneumoniae";
+  if (slug === "staphylococcus-aureus") return "S. aureus (MRSA)";
+  if (slug === "cryptococcus-neoformans") return "C. neoformans";
+  
+  return slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+};
+
+const getDrugLink = (name: string) => {
+  const n = name.toLowerCase();
+  if (n.includes("nitrofurantoin")) return "/drugs/nitrofurantoin";
+  if (n.includes("ciprofloxacin")) return "/drugs/ciprofloxacin";
+  if (n.includes("amoxicillin")) return "/drugs/amoxicillin";
+  if (n.includes("azithromycin")) return "/drugs/azithromycin";
+  if (n.includes("vancomycin")) return "/drugs/vancomycin";
+  if (n.includes("linezolid")) return "/drugs/linezolid";
+  if (n.includes("amphotericin")) return "/drugs/amphotericin-b";
+  if (n.includes("fluconazole")) return "/drugs/fluconazole";
+  return null;
 };
 
 export default function ComparisonsSEO() {
@@ -1384,6 +1426,7 @@ export default function ComparisonsSEO() {
   const location = useLocation();
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
+  const [showDeepDive, setShowDeepDive] = useState(false);
 
   const handleLaunchApp = (focusTask: string) => {
     localStorage.setItem("infectatlas_active_tab", focusTask);
@@ -1439,6 +1482,7 @@ export default function ComparisonsSEO() {
   useEffect(() => {
     setSelectedQuizOption(null);
     setQuizSubmitted(false);
+    setShowDeepDive(false);
 
     if (isIndexView) {
       document.title = "High-Yield Medical Comparisons & Clinical Differentials | InfectAtlas";
@@ -1537,7 +1581,8 @@ export default function ComparisonsSEO() {
                     { id: "clinical", name: "Clinical Diagnosis", color: "bg-amber-600 text-white border-amber-500 shadow-md shadow-amber-650/10 hover:bg-amber-500" },
                     { id: "morphology", name: "Microbial Morphology", color: "bg-purple-600 text-white border-purple-500 shadow-md shadow-purple-650/10 hover:bg-purple-500" },
                     { id: "pharmacology", name: "Antimicrobial Pharmacology", color: "bg-emerald-600 text-white border-emerald-500 shadow-md shadow-emerald-650/10 hover:bg-emerald-500" },
-                    { id: "resistance", name: "Microbial Resistance", color: "bg-rose-600 text-white border-rose-500 shadow-md shadow-rose-650/10 hover:bg-rose-500" }
+                    { id: "resistance", name: "Microbial Resistance", color: "bg-rose-600 text-white border-rose-500 shadow-md shadow-rose-650/10 hover:bg-rose-500" },
+                    { id: "treatment", name: "Treatment Choice", color: "bg-sky-600 text-white border-sky-500 shadow-md shadow-sky-650/10 hover:bg-sky-500" }
                   ].map((cat) => {
                     const isActive = activeCategory === cat.id;
                     return (
@@ -1615,6 +1660,7 @@ export default function ComparisonsSEO() {
                             c.category === "Microbial Resistance" ? "bg-rose-50 text-rose-700 border-rose-100" :
                             c.category === "Antimicrobial Pharmacology" ? "bg-emerald-50 text-emerald-700 border-emerald-100" :
                             c.category === "Clinical Diagnosis" ? "bg-amber-50 text-amber-700 border-amber-100" :
+                            c.category === "Treatment Choice" ? "bg-sky-50 text-sky-700 border-sky-100" :
                             "bg-indigo-50 text-indigo-700 border-indigo-100"
                           } tracking-wider`}>
                             {c.category}
@@ -1716,14 +1762,14 @@ export default function ComparisonsSEO() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               
               {/* Side navigation drawer/corridor */}
-              <div className="lg:col-span-4 space-y-4 md:sticky md:top-24">
+              <div className="lg:col-span-4 space-y-4 md:sticky md:top-24 order-2 lg:order-1">
                 <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-3xs">
                   <h2 className="text-xs font-black uppercase tracking-wider text-slate-400 mb-4 pb-2 border-b border-slate-100 flex items-center gap-1.5">
                     <Scale className="h-4 w-4 text-slate-400" />
                     Comparison Corridor
                   </h2>
               
-              <div className="space-y-2.5">
+              <div className="space-y-2.5 max-h-[480px] overflow-y-auto custom-scrollbar pr-1.5">
                 {COMPARISONS_DATA.map((c) => {
                   const isActive = c.slug === item.slug;
                   return (
@@ -1779,134 +1825,358 @@ export default function ComparisonsSEO() {
           </div>
 
           {/* Active View focus components */}
-          <div className="lg:col-span-8 space-y-8">
+          <div className="lg:col-span-8 space-y-8 order-1 lg:order-2">
             
-            {/* Split Comparison Cards layout */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              
-              {/* Left Column focus card */}
-              <div className="bg-white border border-slate-250 border-t-4 border-t-indigo-500 rounded-2xl p-6 shadow-3xs flex flex-col justify-between">
-                <div className="space-y-3">
-                  <span className="px-2.5 py-0.5 bg-indigo-50 text-indigo-700 font-extrabold text-[9px] uppercase rounded-full border border-indigo-100 tracking-wider">
-                    Attribute Target A
-                  </span>
-                  <h3 className="text-xl font-extrabold text-slate-900 tracking-tight leading-none italic font-sans">
-                    {item.leftTitle}
-                  </h3>
-                  <p className="text-xs text-slate-500 leading-relaxed">
-                    Key diagnostic reference profiles, therapeutics, and spectrum criteria parameters.
-                  </p>
-                </div>
-                {/* Specific link parameters based on slug to guide traffic */}
-                <div className="pt-4 mt-6 border-t border-slate-100/80">
-                  <span className="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-widest">Linked Clinical Profiles:</span>
-                  <div className="flex flex-wrap gap-2">
-                    {item.slug === "mrsa-vs-mssa" && (
-                      <Link to="/organisms/staphylococcus-aureus" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                        S. aureus <ExternalLink className="h-2.5 w-2.5" />
-                      </Link>
-                    )}
-                    {item.slug === "vancomycin-vs-linezolid" && (
-                      <Link to="/drugs/vancomycin" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                        Vancomycin <ExternalLink className="h-2.5 w-2.5" />
-                      </Link>
-                    )}
-                    {item.slug === "cellulitis-vs-erysipelas" && (
-                      <Link to="/organisms/staphylococcus-aureus" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                        S. aureus <ExternalLink className="h-2.5 w-2.5" />
-                      </Link>
-                    )}
-                    {item.slug === "gram-positive-vs-gram-negative" && (
-                      <Link to="/organisms/staphylococcus-aureus" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                        S. aureus (G-Pos) <ExternalLink className="h-2.5 w-2.5" />
-                      </Link>
-                    )}
-                    {item.slug === "bactericidal-vs-bacteriostatic" && (
-                      <Link to="/drugs/vancomycin" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                        Beta-lactams (Cidal) <ExternalLink className="h-2.5 w-2.5" />
-                      </Link>
-                    )}
+            {item.category === "Treatment Choice" ? (
+              <>
+                {/* Treatment Choice Visual Summary Card */}
+                <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 space-y-6 shadow-3xs relative overflow-hidden animate-fade-in" id="treatment-choice-summary">
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-sky-500/5 rounded-full blur-3xl pointer-events-none -z-0" />
+                  
+                  {/* Header */}
+                  <div className="space-y-2 relative z-10">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="bg-sky-50 border border-sky-100 text-sky-700 font-extrabold text-[9px] uppercase px-3 py-1 rounded-full tracking-wider leading-none shadow-3xs">
+                        Treatment Choice
+                      </span>
+                      <span className="bg-slate-50 border border-slate-100 text-slate-500 font-extrabold text-[9px] uppercase px-3 py-1 rounded-full tracking-wider leading-none">
+                        Board-Yield Reasoning
+                      </span>
+                    </div>
+                    <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-tight">
+                      {item.title.includes(":") ? item.title.split(":")[0].trim() + ": " : ""}Why is {(item as any).preferredTreatment.name} preferred over {(item as any).alternativeTreatment.name}?
+                    </h2>
+                    <p className="text-xs text-slate-500 font-semibold leading-relaxed">
+                      Quick educational reasoning breakdown for {item.title.split(":")[0] || "this clinical scenario"}.
+                    </p>
+                  </div>
+
+                  {/* Split Reasons Columns */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 relative z-10">
+                    
+                    {/* Preferred Column */}
+                    <div className="bg-emerald-50/20 border border-emerald-100/70 rounded-2xl p-5 md:p-6 space-y-4 shadow-3xs">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm" />
+                        <h3 className="text-xs sm:text-sm font-black uppercase tracking-wider text-emerald-800">
+                          Why {(item as any).preferredTreatment.name}?
+                        </h3>
+                      </div>
+                      <ul className="space-y-3">
+                        {(item as any).preferredTreatment.reasons.map((reason: string, rIdx: number) => (
+                          <li key={rIdx} className="flex items-start gap-3 text-xs sm:text-[13px] text-slate-700 font-medium leading-relaxed">
+                            <span className="text-emerald-600 font-black text-base leading-none shrink-0 mt-0.5">✓</span>
+                            <span>{reason}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Alternative Column */}
+                    <div className="bg-slate-50/40 border border-slate-150 rounded-2xl p-5 md:p-6 space-y-4 shadow-3xs">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2.5 h-2.5 rounded-full bg-slate-400 shadow-sm" />
+                        <h3 className="text-xs sm:text-sm font-black uppercase tracking-wider text-slate-700">
+                          Why {(item as any).alternativeTreatment.name} Isn't Preferred
+                        </h3>
+                      </div>
+                      <ul className="space-y-3">
+                        {(item as any).alternativeTreatment.reasonsNotPreferred.map((reason: string, rIdx: number) => (
+                          <li key={rIdx} className="flex items-start gap-3 text-xs sm:text-[13px] text-slate-700 font-medium leading-relaxed">
+                            <span className="text-slate-400 font-extrabold text-base leading-none shrink-0 mt-0.5">•</span>
+                            <span>{reason}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                  </div>
+
+                  {/* High-Yield Board Pearl Callout */}
+                  <div className="bg-sky-50/50 border border-sky-100 rounded-2xl p-5 md:p-6 space-y-2.5 relative z-10 shadow-3xs">
+                    <div className="flex items-center gap-2 text-sky-900">
+                      <BrainCircuit className="h-4.5 w-4.5 text-sky-600 shrink-0" />
+                      <h4 className="text-[10px] font-black uppercase tracking-wider text-sky-850">
+                        High-Yield Pearl
+                      </h4>
+                    </div>
+                    <p className="text-xs sm:text-[13px] text-slate-750 leading-relaxed font-semibold">
+                      {(item as any).boardPearl}
+                    </p>
                   </div>
                 </div>
-              </div>
 
-              {/* Right Column focus card */}
-              <div className="bg-white border border-slate-250 border-t-4 border-t-emerald-500 rounded-2xl p-6 shadow-3xs flex flex-col justify-between">
-                <div className="space-y-3">
-                  <span className="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 font-extrabold text-[9px] uppercase rounded-full border border-emerald-100 tracking-wider">
-                    Attribute Target B
-                  </span>
-                  <h3 className="text-xl font-extrabold text-slate-900 tracking-tight leading-none italic font-sans">
-                    {item.rightTitle}
-                  </h3>
-                  <p className="text-xs text-slate-500 leading-relaxed">
-                    Key diagnostic reference profiles, therapeutics, and spectrum criteria parameters.
-                  </p>
+                {/* Optional Deep Dive Section */}
+                <div className="border-t border-slate-200 pt-8 mt-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div>
+                      <h3 className="text-base sm:text-lg font-black text-slate-900 tracking-tight flex items-center gap-2">
+                        <Scale className="h-4.5 w-4.5 text-indigo-600 shrink-0" />
+                        Detailed Drug Comparison <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">(Optional)</span>
+                      </h3>
+                      <p className="text-xs text-slate-500 font-semibold leading-relaxed">
+                        Pharmacology Deep Dive for students who want more depth.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setShowDeepDive(!showDeepDive)}
+                      className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-xs font-black rounded-xl transition-all cursor-pointer inline-flex items-center gap-1.5 shadow-3xs hover:scale-[1.015]"
+                    >
+                      <span>{showDeepDive ? "Hide Pharmacology Deep Dive" : "Show Pharmacology Deep Dive"}</span>
+                      <ChevronDown className={`h-4 w-4 text-slate-500 transition-transform duration-250 ${showDeepDive ? "rotate-180" : ""}`} />
+                    </button>
+                  </div>
+
+                  {showDeepDive && (
+                    <div className="space-y-8 animate-fade-in">
+                      {/* Split Comparison Cards layout */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Left Column focus card */}
+                        <div className="bg-white border border-slate-250 border-t-4 border-t-indigo-500 rounded-2xl p-6 shadow-3xs flex flex-col justify-between">
+                          <div className="space-y-3">
+                            <span className="px-2.5 py-0.5 bg-indigo-50 text-indigo-700 font-extrabold text-[9px] uppercase rounded-full border border-indigo-100 tracking-wider">
+                              Attribute Target A
+                            </span>
+                            <h3 className="text-xl font-extrabold text-slate-900 tracking-tight leading-none italic font-sans">
+                              {item.leftTitle}
+                            </h3>
+                            <p className="text-xs text-slate-500 leading-relaxed">
+                              Key diagnostic reference profiles, therapeutics, and spectrum criteria parameters.
+                            </p>
+                          </div>
+                          <div className="pt-4 mt-6 border-t border-slate-100/80">
+                            <span className="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-widest">Linked Clinical Profiles:</span>
+                            <div className="flex flex-wrap gap-2">
+                              {(item as any).preferredTreatment && (() => {
+                                const drugLink = getDrugLink((item as any).preferredTreatment.name);
+                                return drugLink ? (
+                                  <Link to={drugLink} className="text-xs font-bold text-indigo-650 hover:underline bg-indigo-50 border border-indigo-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                                    {(item as any).preferredTreatment.name} <ExternalLink className="h-2.5 w-2.5" />
+                                  </Link>
+                                ) : null;
+                              })()}
+
+                              {(item as any).linkedDiseases?.map((disSlug: string) => (
+                                <Link key={disSlug} to={`/diseases/${disSlug}`} className="text-xs font-bold text-slate-600 hover:underline bg-slate-50 border border-slate-200 px-2 py-0.5 rounded flex items-center gap-0.5">
+                                  {getSlugLabel(disSlug)} <ExternalLink className="h-2.5 w-2.5" />
+                                </Link>
+                              ))}
+
+                              {(item as any).linkedPathogens?.map((patSlug: string) => (
+                                <Link key={patSlug} to={getPathogenPath(patSlug)} className="text-xs font-bold text-emerald-700 hover:underline bg-emerald-50 border border-emerald-150 px-2 py-0.5 rounded flex items-center gap-0.5">
+                                  {getSlugLabel(patSlug)} <ExternalLink className="h-2.5 w-2.5" />
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Right Column focus card */}
+                        <div className="bg-white border border-slate-250 border-t-4 border-t-emerald-500 rounded-2xl p-6 shadow-3xs flex flex-col justify-between">
+                          <div className="space-y-3">
+                            <span className="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 font-extrabold text-[9px] uppercase rounded-full border border-emerald-100 tracking-wider">
+                              Attribute Target B
+                            </span>
+                            <h3 className="text-xl font-extrabold text-slate-900 tracking-tight leading-none italic font-sans">
+                              {item.rightTitle}
+                            </h3>
+                            <p className="text-xs text-slate-500 leading-relaxed">
+                              Key diagnostic reference profiles, therapeutics, and spectrum criteria parameters.
+                            </p>
+                          </div>
+                          <div className="pt-4 mt-6 border-t border-slate-100/80">
+                            <span className="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-widest">Linked Clinical Profiles:</span>
+                            <div className="flex flex-wrap gap-2">
+                              {(item as any).alternativeTreatment && (() => {
+                                const drugLink = getDrugLink((item as any).alternativeTreatment.name);
+                                return drugLink ? (
+                                  <Link to={drugLink} className="text-xs font-bold text-emerald-700 hover:underline bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                                    {(item as any).alternativeTreatment.name} <ExternalLink className="h-2.5 w-2.5" />
+                                  </Link>
+                                ) : null;
+                              })()}
+
+                              {(item as any).linkedDiseases?.map((disSlug: string) => (
+                                <Link key={disSlug} to={`/diseases/${disSlug}`} className="text-xs font-bold text-slate-600 hover:underline bg-slate-50 border border-slate-200 px-2 py-0.5 rounded flex items-center gap-0.5">
+                                  {getSlugLabel(disSlug)} <ExternalLink className="h-2.5 w-2.5" />
+                                </Link>
+                              ))}
+
+                              {(item as any).linkedPathogens?.map((patSlug: string) => (
+                                <Link key={patSlug} to={getPathogenPath(patSlug)} className="text-xs font-bold text-emerald-700 hover:underline bg-emerald-50 border border-emerald-150 px-2 py-0.5 rounded flex items-center gap-0.5">
+                                  {getSlugLabel(patSlug)} <ExternalLink className="h-2.5 w-2.5" />
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Deep Clinical Points Comparison Table */}
+                      <div className="bg-white border border-slate-250 rounded-2xl overflow-hidden shadow-3xs">
+                        <div className="p-5 border-b border-slate-200 bg-slate-50 flex items-center gap-2">
+                          <Scale className="h-5 w-5 text-indigo-600" />
+                          <h3 className="font-extrabold text-sm sm:text-base text-slate-800 uppercase tracking-wider">
+                            Side-By-Side Diagnostic Grid
+                          </h3>
+                        </div>
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-left border-collapse text-xs sm:text-sm">
+                            <thead>
+                              <tr className="bg-slate-100 border-b border-slate-200 text-slate-500 font-bold uppercase text-[10px] tracking-wider">
+                                <th className="p-4 w-1/4">Attribute</th>
+                                <th className="p-4 w-3/8 text-indigo-600 font-extrabold">{item.leftTitle}</th>
+                                <th className="p-4 w-3/8 text-emerald-700 font-extrabold">{item.rightTitle}</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100">
+                              {item.comparisonPoints.map((pt, i) => (
+                                <tr key={i} className="hover:bg-slate-50/50 transition-colors">
+                                  <td className="p-4 font-black text-slate-800 font-sans tracking-tight bg-slate-50/40">{pt.attribute}</td>
+                                  <td className="p-4 text-slate-700 leading-relaxed font-semibold">{pt.leftValue}</td>
+                                  <td className="p-4 text-slate-700 leading-relaxed font-semibold">{pt.rightValue}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-                {/* Linked Clinical Profiles for Side B */}
-                <div className="pt-4 mt-6 border-t border-slate-100/80">
-                  <span className="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-widest">Linked Clinical Profiles:</span>
-                  <div className="flex flex-wrap gap-2">
-                    {item.slug === "mrsa-vs-mssa" && (
-                      <Link to="/drugs/vancomycin" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                        Nafcillin <ExternalLink className="h-2.5 w-2.5" />
-                      </Link>
-                    )}
-                    {item.slug === "vancomycin-vs-linezolid" && (
-                      <Link to="/drugs/linezolid" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                        Linezolid <ExternalLink className="h-2.5 w-2.5" />
-                      </Link>
-                    )}
-                    {item.slug === "cellulitis-vs-erysipelas" && (
-                      <Link to="/organisms/streptococcus-pyogenes" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                        S. pyogenes <ExternalLink className="h-2.5 w-2.5" />
-                      </Link>
-                    )}
-                    {item.slug === "gram-positive-vs-gram-negative" && (
-                      <Link to="/organisms/pseudomonas-aeruginosa" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                        Pseudomonas (G-Neg) <ExternalLink className="h-2.5 w-2.5" />
-                      </Link>
-                    )}
-                    {item.slug === "bactericidal-vs-bacteriostatic" && (
-                      <Link to="/drugs/linezolid" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                        Linezolid (Static) <ExternalLink className="h-2.5 w-2.5" />
-                      </Link>
-                    )}
+              </>
+            ) : (
+              <>
+                {/* Default Non-Collapsible Category Layout */}
+                {/* Split Comparison Cards layout */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  
+                  {/* Left Column focus card */}
+                  <div className="bg-white border border-slate-250 border-t-4 border-t-indigo-500 rounded-2xl p-6 shadow-3xs flex flex-col justify-between">
+                    <div className="space-y-3">
+                      <span className="px-2.5 py-0.5 bg-indigo-50 text-indigo-700 font-extrabold text-[9px] uppercase rounded-full border border-indigo-100 tracking-wider">
+                        Attribute Target A
+                      </span>
+                      <h3 className="text-xl font-extrabold text-slate-900 tracking-tight leading-none italic font-sans">
+                        {item.leftTitle}
+                      </h3>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Key diagnostic reference profiles, therapeutics, and spectrum criteria parameters.
+                      </p>
+                    </div>
+                    {/* Specific link parameters based on slug to guide traffic */}
+                    <div className="pt-4 mt-6 border-t border-slate-100/80">
+                      <span className="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-widest">Linked Clinical Profiles:</span>
+                      <div className="flex flex-wrap gap-2">
+                        {item.slug === "mrsa-vs-mssa" && (
+                          <Link to="/organisms/staphylococcus-aureus" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                            S. aureus <ExternalLink className="h-2.5 w-2.5" />
+                          </Link>
+                        )}
+                        {item.slug === "vancomycin-vs-linezolid" && (
+                          <Link to="/drugs/vancomycin" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                            Vancomycin <ExternalLink className="h-2.5 w-2.5" />
+                          </Link>
+                        )}
+                        {item.slug === "cellulitis-vs-erysipelas" && (
+                          <Link to="/organisms/staphylococcus-aureus" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                            S. aureus <ExternalLink className="h-2.5 w-2.5" />
+                          </Link>
+                        )}
+                        {item.slug === "gram-positive-vs-gram-negative" && (
+                          <Link to="/organisms/staphylococcus-aureus" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                            S. aureus (G-Pos) <ExternalLink className="h-2.5 w-2.5" />
+                          </Link>
+                        )}
+                        {item.slug === "bactericidal-vs-bacteriostatic" && (
+                          <Link to="/drugs/vancomycin" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                            Beta-lactams (Cidal) <ExternalLink className="h-2.5 w-2.5" />
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Column focus card */}
+                  <div className="bg-white border border-slate-250 border-t-4 border-t-emerald-500 rounded-2xl p-6 shadow-3xs flex flex-col justify-between">
+                    <div className="space-y-3">
+                      <span className="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 font-extrabold text-[9px] uppercase rounded-full border border-emerald-100 tracking-wider">
+                        Attribute Target B
+                      </span>
+                      <h3 className="text-xl font-extrabold text-slate-900 tracking-tight leading-none italic font-sans">
+                        {item.rightTitle}
+                      </h3>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Key diagnostic reference profiles, therapeutics, and spectrum criteria parameters.
+                      </p>
+                    </div>
+                    {/* Linked Clinical Profiles for Side B */}
+                    <div className="pt-4 mt-6 border-t border-slate-100/80">
+                      <span className="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-widest">Linked Clinical Profiles:</span>
+                      <div className="flex flex-wrap gap-2">
+                        {item.slug === "mrsa-vs-mssa" && (
+                          <Link to="/drugs/vancomycin" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                            Nafcillin <ExternalLink className="h-2.5 w-2.5" />
+                          </Link>
+                        )}
+                        {item.slug === "vancomycin-vs-linezolid" && (
+                          <Link to="/drugs/linezolid" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                            Linezolid <ExternalLink className="h-2.5 w-2.5" />
+                          </Link>
+                        )}
+                        {item.slug === "cellulitis-vs-erysipelas" && (
+                          <Link to="/organisms/streptococcus-pyogenes" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                            S. pyogenes <ExternalLink className="h-2.5 w-2.5" />
+                          </Link>
+                        )}
+                        {item.slug === "gram-positive-vs-gram-negative" && (
+                          <Link to="/organisms/pseudomonas-aeruginosa" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                            Pseudomonas (G-Neg) <ExternalLink className="h-2.5 w-2.5" />
+                          </Link>
+                        )}
+                        {item.slug === "bactericidal-vs-bacteriostatic" && (
+                          <Link to="/drugs/linezolid" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                            Linezolid (Static) <ExternalLink className="h-2.5 w-2.5" />
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* Deep Clinical Points Comparison Table */}
+                <div className="bg-white border border-slate-250 rounded-2xl overflow-hidden shadow-3xs">
+                  <div className="p-5 border-b border-slate-200 bg-slate-50 flex items-center gap-2">
+                    <Scale className="h-5 w-5 text-indigo-600" />
+                    <h3 className="font-extrabold text-sm sm:text-base text-slate-800 uppercase tracking-wider">
+                      Side-By-Side Diagnostic Grid
+                    </h3>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse text-xs sm:text-sm">
+                      <thead>
+                        <tr className="bg-slate-100 border-b border-slate-200 text-slate-500 font-bold uppercase text-[10px] tracking-wider">
+                          <th className="p-4 w-1/4">Attribute</th>
+                          <th className="p-4 w-3/8 text-indigo-600 font-extrabold">{item.leftTitle}</th>
+                          <th className="p-4 w-3/8 text-emerald-700 font-extrabold">{item.rightTitle}</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {item.comparisonPoints.map((pt, i) => (
+                          <tr key={i} className="hover:bg-slate-50/50 transition-colors">
+                            <td className="p-4 font-black text-slate-800 font-sans tracking-tight bg-slate-50/40">{pt.attribute}</td>
+                            <td className="p-4 text-slate-700 leading-relaxed font-semibold">{pt.leftValue}</td>
+                            <td className="p-4 text-slate-700 leading-relaxed font-semibold">{pt.rightValue}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
-              </div>
-
-            </div>
-
-            {/* Deep Clinical Points Comparison Table */}
-            <div className="bg-white border border-slate-250 rounded-2xl overflow-hidden shadow-3xs">
-              <div className="p-5 border-b border-slate-200 bg-slate-50 flex items-center gap-2">
-                <Scale className="h-5 w-5 text-indigo-600" />
-                <h3 className="font-extrabold text-sm sm:text-base text-slate-800 uppercase tracking-wider">
-                  Side-By-Side Diagnostic Grid
-                </h3>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse text-xs sm:text-sm">
-                  <thead>
-                    <tr className="bg-slate-100 border-b border-slate-200 text-slate-500 font-bold uppercase text-[10px] tracking-wider">
-                      <th className="p-4 w-1/4">Attribute</th>
-                      <th className="p-4 w-3/8 text-indigo-600 font-extrabold">{item.leftTitle}</th>
-                      <th className="p-4 w-3/8 text-emerald-700 font-extrabold">{item.rightTitle}</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100">
-                    {item.comparisonPoints.map((pt, i) => (
-                      <tr key={i} className="hover:bg-slate-50/50 transition-colors">
-                        <td className="p-4 font-black text-slate-800 font-sans tracking-tight bg-slate-50/40">{pt.attribute}</td>
-                        <td className="p-4 text-slate-700 leading-relaxed font-semibold">{pt.leftValue}</td>
-                        <td className="p-4 text-slate-700 leading-relaxed font-semibold">{pt.rightValue}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+              </>
+            )}
 
             {/* Clinical Pearls & High-Yield traps boxes */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

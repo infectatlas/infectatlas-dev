@@ -22,7 +22,7 @@ export default function PublicFooter() {
                 </span>
               </div>
             </div>
-            <p className="text-xs text-slate-450 leading-relaxed">
+            <p className="text-xs text-slate-400 leading-relaxed">
               The interactive map of medical microbiology. Unifying active recall study guides and evidence-based diagnostic references.
             </p>
           </div>
@@ -69,6 +69,16 @@ export default function PublicFooter() {
               <li>
                 <Link to="/fungi" className="hover:text-white hover:underline transition-colors">
                   Fungal Pathogens
+                </Link>
+              </li>
+              <li>
+                <Link to="/viruses" className="hover:text-white hover:underline transition-colors">
+                  Viral Pathogens
+                </Link>
+              </li>
+              <li>
+                <Link to="/parasites" className="hover:text-white hover:underline transition-colors">
+                  Parasitic Pathogens
                 </Link>
               </li>
               <li>

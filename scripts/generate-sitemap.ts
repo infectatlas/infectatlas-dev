@@ -2,6 +2,8 @@ import * as fs from "fs";
 import * as path from "path";
 import { microorganismsData } from "../src/data/microorganisms";
 import { fungiData } from "../src/data/fungi";
+import { virusesData } from "../src/data/viruses";
+import { parasitesData } from "../src/data/parasites";
 import { diseasesData } from "../src/data/diseases";
 import { drugsData } from "../src/data/drugs";
 
@@ -89,6 +91,40 @@ async function generate() {
   );
   console.log(`Generated sitemap-fungi.xml with ${fungiUrls.length} entries.`);
 
+  
+  // 1c. Viruses Sitemap
+  const virusUrls = [
+    { loc: `${DOMAIN}/viruses`, lastmod: TODAY },
+    ...virusesData.map((v) => ({
+      loc: `${DOMAIN}/viruses/${getPathogenSlug(v.name)}`,
+      lastmod: TODAY,
+    })),
+  ];
+
+  fs.writeFileSync(
+    path.join(publicDir, "sitemap-viruses.xml"),
+    buildSitemapXml(virusUrls),
+    "utf-8"
+  );
+  console.log(`Generated sitemap-viruses.xml with ${virusUrls.length} entries.`);
+
+  
+  // 1d. Parasites Sitemap
+  const parasiteUrls = [
+    { loc: `${DOMAIN}/parasites`, lastmod: TODAY },
+    ...parasitesData.map((p) => ({
+      loc: `${DOMAIN}/parasites/${getPathogenSlug(p.name)}`,
+      lastmod: TODAY,
+    })),
+  ];
+
+  fs.writeFileSync(
+    path.join(publicDir, "sitemap-parasites.xml"),
+    buildSitemapXml(parasiteUrls),
+    "utf-8"
+  );
+  console.log(`Generated sitemap-parasites.xml with ${parasiteUrls.length} entries.`);
+
   // 2. Diseases Sitemap
   const diseaseUrls = [
     { loc: `${DOMAIN}/diseases`, lastmod: TODAY },
@@ -146,6 +182,8 @@ async function generate() {
   const sitemapFiles = [
     "sitemap-organisms.xml",
     "sitemap-fungi.xml",
+    "sitemap-viruses.xml",
+    "sitemap-parasites.xml",
     "sitemap-diseases.xml",
     "sitemap-drugs.xml",
     "sitemap-comparisons.xml",

@@ -41,6 +41,18 @@ export default function PublicHeader({ handleLaunchApp, showHeader = true }: Pub
             Fungi
           </Link>
           <Link
+            to="/viruses"
+            className="px-4 py-2 text-[14px] font-semibold text-slate-600 hover:text-indigo-600 focus:outline-indigo-600 rounded-lg transition-colors"
+          >
+            Viruses
+          </Link>
+          <Link
+            to="/parasites"
+            className="px-4 py-2 text-[14px] font-semibold text-slate-600 hover:text-indigo-600 focus:outline-indigo-600 rounded-lg transition-colors"
+          >
+            Parasites
+          </Link>
+          <Link
             to="/diseases"
             className="px-4 py-2 text-[14px] font-semibold text-slate-600 hover:text-indigo-600 focus:outline-indigo-600 rounded-lg transition-colors"
           >
@@ -100,6 +112,20 @@ export default function PublicHeader({ handleLaunchApp, showHeader = true }: Pub
               className="py-3 px-4 font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors text-base"
             >
               Fungi
+            </Link>
+            <Link
+              to="/viruses"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="py-3 px-4 font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors text-base"
+            >
+              Viruses
+            </Link>
+            <Link
+              to="/parasites"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="py-3 px-4 font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors text-base"
+            >
+              Parasites
             </Link>
             <Link
               to="/diseases"

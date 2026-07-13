@@ -213,7 +213,7 @@ export default function Flashcards({
         
         <div className="relative z-10 flex flex-col gap-1.5">
           <div className="space-y-2">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white leading-tight">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white leading-tight font-display">
               Active Recall Study Flashcards
             </h2>
 
@@ -352,7 +352,19 @@ export default function Flashcards({
           </div>
 
           {/* Flashcard Component Deck */}
-          <div className="perspective-1000 min-h-[300px] h-full relative cursor-pointer" onClick={handleFlip}>
+          <div
+            className="perspective-1000 min-h-[300px] h-full relative cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-3xl"
+            onClick={handleFlip}
+            onKeyDown={(e) => {
+              if (e.key === " " || e.key === "Enter") {
+                e.preventDefault();
+                handleFlip();
+              }
+            }}
+            role="button"
+            tabIndex={0}
+            aria-label="Flashcard. Press space or enter to flip card."
+          >
             <AnimatePresence mode="popLayout">
               <motion.div
                 key={`${currentCard?.id}-${isFlipped}-${cardTypeMode}`}

@@ -1,0 +1,148 @@
+Name | ID
+Staphylococcus aureus | s-aureus
+Staphylococcus epidermidis | s-epidermidis
+Staphylococcus saprophyticus | s-saprophyticus
+Streptococcus pneumoniae | s-pneumoniae
+Streptococcus pyogenes (Group A) | s-pyogenes
+Streptococcus agalactiae (Group B) | s-agalactiae
+Enterococcus faecalis | e-faecalis
+Enterococcus faecium | e-faecium
+Streptococcus bovis (S. gallolyticus) | s-bovis
+Streptococcus mutans | s-mutans
+Clostridioides difficile | c-difficile
+Clostridium tetani | c-tetani
+Clostridium botulinum | c-botulinum
+Clostridium perfringens | c-perfringens
+Bacillus anthracis | b-anthracis
+Bacillus cereus | b-cereus
+Listeria monocytogenes | l-monocytogenes
+Corynebacterium diphtheriae | c-diphtheriae
+Nocardia asteroides | n-asteroides
+Actinomyces israelii | a-israelii
+Cutibacterium acnes | c-acnes
+Lactobacillus spp. | lacto-spp
+Neisseria meningitidis | n-meningitidis
+Neisseria gonorrhoeae | n-gonorrhoeae
+Escherichia coli | e-coli
+Klebsiella pneumoniae | k-pneumoniae
+Klebsiella oxytoca | k-oxytoca
+Enterobacter cloacae | e-cloacae
+Serratia marcescens | s-marcescens
+Proteus mirabilis | p-mirabilis
+Proteus vulgaris | p-vulgaris
+Morganella morganii | m-morganii
+Citrobacter freundii | c-freundii
+Citrobacter koseri | c-koseri
+Salmonella enterica Typhi | s-typhi
+Salmonella enterica Paratyphi | s-paratyphi
+Non-typhoidal Salmonella | s-nontyphoidal
+Shigella sonnei | s-sonnei
+Shigella flexneri | s-flexneri
+Shigella dysenteriae | s-dysenteriae
+Pseudomonas aeruginosa | p-aeruginosa
+Acinetobacter baumannii | a-baumannii
+Campylobacter jejuni | c-jejuni
+Campylobacter coli | c-coli
+Vibrio cholerae | v-cholerae
+Vibrio vulnificus | v-vulnificus
+Vibrio parahaemolyticus | v-parahaemolyticus
+Yersinia pestis | y-pestis
+Yersinia enterocolitica | y-enterocolitica
+Haemophilus influenzae | h-influenzae
+Bordetella pertussis | b-pertussis
+Legionella pneumophila | l-pneumophila
+Helicobacter pylori | h-pylori
+Brucella melitensis | b-melitensis
+Brucella abortus | b-abortus
+Francisella tularensis | f-tularensis
+Treponema pallidum | t-pallidum
+Borrelia burgdorferi | b-burgdorferi
+Leptospira interrogans | l-interrogans
+Chlamydia trachomatis | c-trachomatis
+Chlamydia pneumoniae | c-pneumoniae
+Coxiella burnetii | c-burnetii
+Rickettsia rickettsii | r-rickettsii
+Rickettsia prowazekii | r-prowazekii
+Ehrlichia chaffeensis | e-chaffeensis
+Anaplasma phagocytophilum | a-phagocytophilum
+Bartonella henselae | b-henselae
+Bartonella quintana | b-quintana
+Pasteurella multocida | p-multocida
+Bacteroides fragilis | b-fragilis
+Prevotella melaninogenica | p-melaninogenica
+Fusobacterium nucleatum | f-nucleatum
+Peptostreptococcus anaerobius | p-anaerobius
+Finegoldia magna | f-magna
+Veillonella parvula | v-parvula
+Bifidobacterium spp. | bif-spp
+Eikenella corrodens | e-corrodens
+Aggregatibacter actinomycetemcomitans | a-actinomycete
+Porphyromonas gingivalis | p-gingivalis
+Tannerella forsythia | t-forsythia
+Aeromonas hydrophila | a-hydrophila
+Mycoplasma pneumoniae | myco-pneumoniae
+Ureaplasma urealyticum | u-urealyticum
+Mycobacterium tuberculosis | m-tuberculosis
+Mycobacterium leprae | m-leprae
+Mycobacterium avium-intracellulare (MAC) | m-avium
+Burkholderia cepacia | b-cepacia
+Stenotrophomonas maltophilia | s-maltophilia
+Achromobacter xylosoxidans | a-xylosoxidans
+Gardnerella vaginalis | g-vaginalis
+Streptococcus mitis | s-mitis
+Streptococcus viridans group | s-viridans-gp
+Candida albicans | candida-albicans
+Aspergillus fumigatus | aspergillus-fumigatus
+Cryptococcus neoformans | cryptococcus-neoformans
+Pneumocystis jirovecii | pneumocystis-jirovecii
+Histoplasma capsulatum | histoplasma-capsulatum
+Coccidioides immitis | coccidioides-immitis
+Blastomyces dermatitidis | blastomyces-dermatitidis
+Rhizopus species | rhizopus-spp
+Sporothrix schenckii | sporothrix-schenckii
+Malassezia furfur | malassezia-furfur
+Trichophyton species | trichophyton-spp
+Microsporum species | microsporum-spp
+Epidermophyton species | epidermophyton-spp
+Fusarium species | fusarium-spp
+Talaromyces marneffei | talaromyces-marneffei
+Paracoccidioides brasiliensis | paracoccidioides-brasiliensis
+Scedosporium species | scedosporium-spp
+Herpes Simplex Virus 1 (HSV-1) | hsv-1
+Herpes Simplex Virus 2 (HSV-2) | hsv-2
+Varicella-Zoster Virus (VZV) | vzv
+Epstein-Barr Virus (EBV) | ebv
+Cytomegalovirus (CMV) | cmv
+Human Herpesvirus 6 (HHV-6) | hhv-6
+Influenza A Virus | influenza-a
+Respiratory Syncytial Virus (RSV) | rsv
+Rhinovirus | rhinovirus
+Adenovirus | adenovirus
+Rotavirus | rotavirus
+Norovirus | norovirus
+Human Papillomavirus (HPV) | hpv
+Hepatitis A Virus (HAV) | hepa
+Hepatitis B Virus (HBV) | hepb
+Hepatitis C Virus (HCV) | hepc
+Human Immunodeficiency Virus (HIV) | hiv
+Severe Acute Respiratory Syndrome Coronavirus 2 (SARS-CoV-2) | sars-cov-2
+Rabies Virus | rabies
+Measles Virus (Rubeola) | measles
+Mumps Virus | mumps
+Rubella Virus (German Measles) | rubella
+Parvovirus B19 | parvovirus-b19
+Plasmodium falciparum | plasmodium-falciparum
+Plasmodium vivax / ovale | plasmodium-vivax
+Giardia lamblia | giardia-lamblia
+Entamoeba histolytica | entamoeba-histolytica
+Trichomonas vaginalis | trichomonas-vaginalis
+Toxoplasma gondii | toxoplasma-gondii
+Cryptosporidium species | cryptosporidium
+Leishmania species | leishmania
+Enterobius vermicularis | enterobius-vermicularis
+Ascaris lumbricoides | ascaris-lumbricoides
+Strongyloides stercoralis | strongyloides-stercoralis
+Ancylostoma / Necator | hookworms
+Taenia solium | taenia-solium
+Schistosoma species | schistosoma
+Sarcoptes scabiei | sarcoptes-scabiei

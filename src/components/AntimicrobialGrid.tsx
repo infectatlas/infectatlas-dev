@@ -503,7 +503,7 @@ export default function AntimicrobialGrid() {
         
         <div className="relative z-10 flex flex-col gap-1.5">
           <div className="space-y-2">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white leading-tight">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white leading-tight font-display">
               Interactive Empiric Antimicrobial Grid
             </h2>
 

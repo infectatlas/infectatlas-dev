@@ -367,7 +367,7 @@ export default function QuizMode({
             
             <div className="relative z-10 flex flex-col gap-1.5">
               <div className="space-y-2">
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white leading-tight">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white leading-tight font-display">
                   Clinical Knowledge Exam Practice
                 </h2>
 
@@ -488,12 +488,12 @@ export default function QuizMode({
           {/* Config parameters (Active static quiz length option) */}
           <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-600">
             <span>Configure standard static quiz dimensions:</span>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2 justify-center">
               {[5, 10, 15].map((count) => (
                 <button
                   key={count}
                   onClick={() => setQuizLength(count)}
-                  className={`px-3 py-1.5 rounded-lg border font-semibold ${
+                  className={`px-4 py-2.5 sm:px-3 sm:py-1.5 rounded-lg border font-semibold min-h-[40px] text-xs transition-all ${
                     quizLength === count
                       ? "bg-indigo-600 text-white border-indigo-600"
                       : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"
@@ -546,9 +546,9 @@ export default function QuizMode({
                 let btnStyles = "bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100/50 hover:border-slate-350";
                 if (hasAnswered) {
                   if (isCorrectIndex) {
-                    btnStyles = "bg-emerald-50 border-emerald-550 text-emerald-900 font-semibold shadow-xs";
+                    btnStyles = "bg-emerald-50 border-emerald-500 text-emerald-900 font-semibold shadow-xs";
                   } else if (isSelected) {
-                    btnStyles = "bg-rose-50 border-rose-550 text-rose-900 font-semibold";
+                    btnStyles = "bg-rose-50 border-rose-500 text-rose-900 font-semibold";
                   } else {
                     btnStyles = "bg-slate-50/50 border-slate-200 text-slate-400 opacity-60";
                   }
@@ -644,7 +644,7 @@ export default function QuizMode({
             {hasAnswered && (
               <button
                 onClick={handleNextQuestion}
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-xl text-xs transition-colors shadow-sm flex items-center justify-center gap-1.5"
+                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 sm:py-2.5 rounded-xl text-xs transition-colors shadow-sm flex items-center justify-center gap-1.5 min-h-[44px]"
               >
                 {activeQuestionIndex < questions.length - 1 ? (
                   <>Next Question <ChevronRight className="h-4 w-4" /></>
@@ -756,9 +756,9 @@ export default function QuizMode({
                   let btnStyles = "bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100/50 hover:border-slate-350";
                   if (hasAnswered) {
                     if (isCorrect) {
-                      btnStyles = "bg-emerald-50 border-emerald-550 text-emerald-900 font-semibold";
+                      btnStyles = "bg-emerald-50 border-emerald-500 text-emerald-900 font-semibold";
                     } else if (isSelected) {
-                      btnStyles = "bg-rose-50 border-rose-550 text-rose-900 font-semibold";
+                      btnStyles = "bg-rose-50 border-rose-500 text-rose-900 font-semibold";
                     } else {
                       btnStyles = "bg-slate-50/50 border-slate-200 text-slate-400 opacity-60";
                     }

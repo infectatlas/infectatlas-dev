@@ -46,9 +46,13 @@ export interface Disease {
   faqs: FAQItem[];
   relatedDiseases: RelatedDiseaseItem[];
   relatedOrganisms: { name: string; slug: string }[];
+  hostFactors?: string[];
+  relatedComparisons?: { name: string; slug: string }[];
 }
 
-export const diseasesData: Disease[] = [
+import { expansionDiseases } from "./diseasesExpansion";
+
+const BASE_DISEASES: Disease[] = [
   {
     id: "community-acquired-pneumonia",
     name: "Community-Acquired Pneumonia (CAP)",
@@ -66,17 +70,17 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Streptococcus pneumoniae",
-        slug: "streptococcus-pneumoniae",
+        slug: "s-pneumoniae",
         role: "The leading bacterial etiology of CAP across all age groups. Gram-positive, lancet-shaped diplococci that produce alpha-hemolysis and are optochin-sensitive. Standard cause of lobar pneumonia with 'rust-colored' sputum."
       },
       {
         name: "Haemophilus influenzae",
-        slug: "haemophilus-influenzae",
+        slug: "h-influenzae",
         role: "A Gram-negative coccobacillus commonly complicating pneumonia in patients with underlying chronic obstructive pulmonary disease (COPD) or bronchiectasis."
       },
       {
         name: "Mycoplasma pneumoniae",
-        slug: "mycoplasma-pneumoniae",
+        slug: "myco-pneumoniae",
         role: "An atypical organism lacking a peptidoglycan cell wall (unstainable on Gram stain). Causes 'walking pneumonia' in young adults, characterized by dry cough, pharyngitis, and systemic extrapulmonary complaints."
       }
     ],
@@ -142,9 +146,9 @@ export const diseasesData: Disease[] = [
       }
     ],
     relatedOrganisms: [
-      { name: "Streptococcus pneumoniae", slug: "streptococcus-pneumoniae" },
-      { name: "Pseudomonas aeruginosa", slug: "pseudomonas-aeruginosa" },
-      { name: "Staphylococcus aureus", slug: "staphylococcus-aureus" }
+      { name: "Streptococcus pneumoniae", slug: "s-pneumoniae" },
+      { name: "Pseudomonas aeruginosa", slug: "p-aeruginosa" },
+      { name: "Staphylococcus aureus", slug: "s-aureus" }
     ]
   },
   {
@@ -164,7 +168,7 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Clostridioides difficile",
-        slug: "clostridioides-difficile",
+        slug: "c-difficile",
         role: "An obligate anaerobic, spore-forming, Gram-positive bacillus which overgrows when normal colonic microflora is diminished by antibiotics. Secretes Toxin A (enterotoxin initiating fluid loss) and Toxin B (cytotoxin causing cellular death)."
       }
     ],
@@ -249,17 +253,17 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Escherichia coli",
-        slug: "escherichia-coli",
+        slug: "e-coli",
         role: "The absolute dominant Gram-negative uropathogen responsible for 80% of all UTIs. Contains fimbriae (pili) which bind to uroepithelial mannose receptors, preventing evacuation during bladder clearance."
       },
       {
         name: "Staphylococcus saprophyticus",
-        slug: "staphylococcus-saprophyticus",
+        slug: "s-saprophyticus",
         role: "A Gram-positive, novobiocin-resistant, coagulase-negative staph. Causes 10-15% of acute cystitis cases in sexually active young women."
       },
       {
         name: "Proteus mirabilis",
-        slug: "proteus-mirabilis",
+        slug: "p-mirabilis",
         role: "Gram-negative bacillus characterized by swarming motility. Secretes urease, splitting urea into ammonia, elevating urine pH (>7) and classically precipitating struvite bladder stones."
       }
     ],
@@ -327,7 +331,7 @@ export const diseasesData: Disease[] = [
     relatedOrganisms: [
       { name: "Escherichia coli", slug: "escherichia-coli" },
       { name: "Staphylococcus saprophyticus", slug: "staphylococcus-saprophyticus" },
-      { name: "Proteus mirabilis", slug: "proteus-mirabilis" }
+      { name: "Proteus mirabilis", slug: "p-mirabilis" }
     ]
   },
   {
@@ -347,17 +351,17 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Streptococcus pneumoniae",
-        slug: "streptococcus-pneumoniae",
+        slug: "s-pneumoniae",
         role: "The overall leading cause of bacterial meningitis in adults of all ages. Lancet-shaped Gram-positive diplococci. Often associated with concomitant otitis media, sinusitis, or pneumonia."
       },
       {
         name: "Neisseria meningitidis",
-        slug: "neisseria-meningitidis",
+        slug: "n-meningitidis",
         role: "Gram-negative, kidney bean-shaped diplococci. Transmitted via respiratory droplets. Causes rapid, epidemic meningococcal meningitis, primarily in adolescents and young adults in close living arrangements."
       },
       {
         name: "Listeria monocytogenes",
-        slug: "listeria-monocytogenes",
+        slug: "l-monocytogenes",
         role: "Gram-positive, rod-shaped motile anaerobe. Multiplies at cold temperatures. Requires coverage in neonates, elderly (>50 years), and immunocompromised individuals due to cell-mediated immunity deficits."
       }
     ],
@@ -422,7 +426,7 @@ export const diseasesData: Disease[] = [
       }
     ],
     relatedOrganisms: [
-      { name: "Streptococcus pneumoniae", slug: "streptococcus-pneumoniae" },
+      { name: "Streptococcus pneumoniae", slug: "s-pneumoniae" },
       { name: "Neisseria meningitidis", slug: "neisseria-meningitidis" }
     ]
   },
@@ -443,12 +447,12 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Staphylococcus aureus",
-        slug: "staphylococcus-aureus",
+        slug: "s-aureus",
         role: "The leading etiology of acute infective endocarditis. Exhibits high virulence, rapidly destroying previously normal native valves (classically the tricuspid valve in the setting of IV drug use)."
       },
       {
         name: "Staphylococcus epidermidis",
-        slug: "staphylococcus-epidermidis",
+        slug: "s-epidermidis",
         role: "Frequently infects prosthetic heart heart valves, colonizing the hardware via extensive biofilm production. Highly novobiocin-sensitive."
       }
     ],
@@ -513,8 +517,8 @@ export const diseasesData: Disease[] = [
       }
     ],
     relatedOrganisms: [
-      { name: "Staphylococcus aureus", slug: "staphylococcus-aureus" },
-      { name: "Staphylococcus epidermidis", slug: "staphylococcus-epidermidis" }
+      { name: "Staphylococcus aureus", slug: "s-aureus" },
+      { name: "Staphylococcus epidermidis", slug: "s-epidermidis" }
     ]
   },
   {
@@ -534,12 +538,12 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Streptococcus pyogenes",
-        slug: "streptococcus-pyogenes",
+        slug: "s-pyogenes",
         role: "Group A Streptococcus. The most common bacterial cause of non-purulent cellulitis. Gram-positive cocci in chains, beta-hemolytic. Secretes streptolysin and hyaluronidase enzymes, allowing rapid lateral subcutaneous tissue spread."
       },
       {
         name: "Staphylococcus aureus",
-        slug: "staphylococcus-aureus",
+        slug: "s-aureus",
         role: "The primary etiology of purulent skin infections, wound complications, and localized abscesses. Can be MSSA or MRSA. Propagates localized tissue destruction with focal pus collection."
       }
     ],
@@ -604,7 +608,7 @@ export const diseasesData: Disease[] = [
       }
     ],
     relatedOrganisms: [
-      { name: "Staphylococcus aureus", slug: "staphylococcus-aureus" },
+      { name: "Staphylococcus aureus", slug: "s-aureus" },
       { name: "Pseudomonas aeruginosa", slug: "pseudomonas-aeruginosa" }
     ]
   },
@@ -625,12 +629,12 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Streptococcus pyogenes",
-        slug: "streptococcus-pyogenes",
+        slug: "s-pyogenes",
         role: "The principal pathogen in Type II necrotizing fasciitis. Expresses M protein (resists phagocytosis) and secretes streptococcal pyrogenic exotoxins that act as superantigens, triggering massive cytokine storms."
       },
       {
         name: "Clostridium perfringens",
-        slug: "clostridium-perfringens",
+        slug: "c-perfringens",
         role: "An obligate anaerobic, spore-forming rod causing gas gangrene, secreting alpha-toxin (lecithinase) which splits cell membranes, causing gas production, crepitus, and massive myonecrosis."
       }
     ],
@@ -668,7 +672,7 @@ export const diseasesData: Disease[] = [
       { name: "Gas Gangrene", slug: "gas-gangrene", description: "Anaerobic direct muscle infection precipitating subcutaneous gas bubbles and necrosis." }
     ],
     relatedOrganisms: [
-      { name: "Streptococcus pyogenes", slug: "streptococcus-pyogenes" }
+      { name: "Streptococcus pyogenes", slug: "s-pyogenes" }
     ]
   },
   {
@@ -687,12 +691,12 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Pseudomonas aeruginosa",
-        slug: "pseudomonas-aeruginosa",
+        slug: "p-aeruginosa",
         role: "The premier Gram-negative rod causing nosocomial respiratory failure. Produces biofilms on respiratory tube hardware and expresses multiple efflux pumps conferring resistance."
       },
       {
         name: "Staphylococcus aureus",
-        slug: "staphylococcus-aureus",
+        slug: "s-aureus",
         role: "The prime Gram-positive etiology. MRSA strains express the mecA gene altering penicillin-binding proteins, requiring high-dose Glycopeptide or Oxazolidinone coverage."
       }
     ],
@@ -730,8 +734,8 @@ export const diseasesData: Disease[] = [
       { name: "Community-Acquired Pneumonia", slug: "community-acquired-pneumonia", description: "Pneumonia contracted outside the clinical or nursing home environment." }
     ],
     relatedOrganisms: [
-      { name: "Pseudomonas aeruginosa", slug: "pseudomonas-aeruginosa" },
-      { name: "Staphylococcus aureus", slug: "staphylococcus-aureus" }
+      { name: "Pseudomonas aeruginosa", slug: "p-aeruginosa" },
+      { name: "Staphylococcus aureus", slug: "s-aureus" }
     ]
   },
   {
@@ -751,7 +755,7 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Escherichia coli",
-        slug: "escherichia-coli",
+        slug: "e-coli",
         role: "The absolute dominant Gram-negative pathogen. Adheres to renal collecting duct cells via P-fimbriae (pyelonephritis-associated fimbriae)."
       }
     ],
@@ -808,12 +812,12 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Staphylococcus aureus",
-        slug: "staphylococcus-aureus",
+        slug: "s-aureus",
         role: "A critical blood isolate. Staphylococcus aureus bacteremia (SAB) is never considered a contaminant and possesses a high risk for metastatic seeding (osteomyelitis, endocarditis), requiring a minimum of 14 days of IV therapy."
       },
       {
         name: "Staphylococcus epidermidis",
-        slug: "staphylococcus-epidermidis",
+        slug: "s-epidermidis",
         role: "The primary agent of catheter-associated bloodstream infections. Often represents skin contamination in a single bottle; multiple positive bottles confirm active biofilm disease."
       }
     ],
@@ -851,8 +855,8 @@ export const diseasesData: Disease[] = [
       { name: "Infective Endocarditis", slug: "infective-endocarditis", description: "Vascular structural heart infection representing continuous bacteremic seeding." }
     ],
     relatedOrganisms: [
-      { name: "Staphylococcus aureus", slug: "staphylococcus-aureus" },
-      { name: "Staphylococcus epidermidis", slug: "staphylococcus-epidermidis" }
+      { name: "Staphylococcus aureus", slug: "s-aureus" },
+      { name: "Staphylococcus epidermidis", slug: "s-epidermidis" }
     ]
   },
   {
@@ -871,7 +875,7 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Staphylococcus aureus",
-        slug: "staphylococcus-aureus",
+        slug: "s-aureus",
         role: "The principal pathogen. Adheres to bone matrix (collagen-binding proteins) and can survive intracellularly inside osteoblasts, escaping antibiotic penetration."
       }
     ],
@@ -909,7 +913,7 @@ export const diseasesData: Disease[] = [
       { name: "Septic Arthritis", slug: "septic-arthritis", description: "Direct suppurative pyogenic bacterial invasion of the joint space." }
     ],
     relatedOrganisms: [
-      { name: "Staphylococcus aureus", slug: "staphylococcus-aureus" }
+      { name: "Staphylococcus aureus", slug: "s-aureus" }
     ]
   },
   {
@@ -928,7 +932,7 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Staphylococcus aureus",
-        slug: "staphylococcus-aureus",
+        slug: "s-aureus",
         role: "The leading pyogenic cause. Possesses surface proteins that bind to sialoprotein within joint articular cartilage, provoking rapid leukocyte infiltration and destructive enzyme release."
       }
     ],
@@ -966,7 +970,7 @@ export const diseasesData: Disease[] = [
       { name: "Osteomyelitis", slug: "osteomyelitis", description: "Bacterial bone cortical matrix destruction often flanking a septic joint." }
     ],
     relatedOrganisms: [
-      { name: "Staphylococcus aureus", slug: "staphylococcus-aureus" }
+      { name: "Staphylococcus aureus", slug: "s-aureus" }
     ]
   },
   {
@@ -985,12 +989,12 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Bacteroides fragilis",
-        slug: "bacteroides-fragilis",
+        slug: "b-fragilis",
         role: "An obligate anaerobic Gram-negative rod. The dominant anaerobe causing intra-abdominal abscess formation. Expresses a capsular polysaccharide that directly stimulates T-cell mediated abscess encapsulation."
       },
       {
         name: "Escherichia coli",
-        slug: "escherichia-coli",
+        slug: "e-coli",
         role: "The principal aerobic Gram-negative bacillus translocating from the intestinal lumen, causing rapid early bacteremia and hyper-inflammatory responses."
       }
     ],
@@ -1047,7 +1051,7 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Neisseria gonorrhoeae",
-        slug: "neisseria-gonorrhoeae",
+        slug: "n-gonorrhoeae",
         role: "A Gram-negative, intracellular diplococcus. Highly purulent pathogen invading the tubal epithelium, triggering scarring and local visual abscess."
       }
     ],
@@ -1085,7 +1089,7 @@ export const diseasesData: Disease[] = [
       { name: "Urethritis", slug: "urethritis", description: "Lower urogenital tract mucosal infection causing painful dysuria or discharge." }
     ],
     relatedOrganisms: [
-      { name: "Neisseria gonorrhoeae", slug: "neisseria-gonorrhoeae" }
+      { name: "Neisseria gonorrhoeae", slug: "n-gonorrhoeae" }
     ]
   },
   {
@@ -1104,7 +1108,7 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Neisseria gonorrhoeae",
-        slug: "neisseria-gonorrhoeae",
+        slug: "n-gonorrhoeae",
         role: "Gram-negative, kidney bean-shaped intracellular diplococcus. Attaches to urethral columnar cells via pili and Opa proteins, causing dense neutrophilic suppuration."
       }
     ],
@@ -1137,7 +1141,7 @@ export const diseasesData: Disease[] = [
       { name: "Pelvic Inflammatory Disease", slug: "pelvic-inflammatory-disease", description: "Ascending reproductive tract infection secondary to untreated urethritis." }
     ],
     relatedOrganisms: [
-      { name: "Neisseria gonorrhoeae", slug: "neisseria-gonorrhoeae" }
+      { name: "Neisseria gonorrhoeae", slug: "n-gonorrhoeae" }
     ]
   },
   {
@@ -1156,7 +1160,7 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Streptococcus pneumoniae",
-        slug: "streptococcus-pneumoniae",
+        slug: "s-pneumoniae",
         role: "The primary etiology. Gram-positive diplococci, optochin-sensitive. Conjugate pneumococcal vaccines (PCV13/20) have significantly lowered rates of classic strains."
       }
     ],
@@ -1189,7 +1193,7 @@ export const diseasesData: Disease[] = [
       { name: "Myoclonus / Mastoiditis", slug: "mastoiditis", description: "Invasive suppurative bony complication of the mastoid air cells flanking untreated AOM." }
     ],
     relatedOrganisms: [
-      { name: "Streptococcus pneumoniae", slug: "streptococcus-pneumoniae" }
+      { name: "Streptococcus pneumoniae", slug: "s-pneumoniae" }
     ]
   },
   {
@@ -1208,7 +1212,7 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Streptococcus pneumoniae",
-        slug: "streptococcus-pneumoniae",
+        slug: "s-pneumoniae",
         role: "The principal pathogen. Gram-positive diplococcus. Pneumococci colonize nasopharyngeal mucosa and migrate into sinus drainage portals when ostia are blocked."
       }
     ],
@@ -1241,7 +1245,7 @@ export const diseasesData: Disease[] = [
       { name: "Acute Otitis Media", slug: "acute-otitis-media", description: "Secondary middle ear infection after sinus or eustachian tube blockage." }
     ],
     relatedOrganisms: [
-      { name: "Streptococcus pneumoniae", slug: "streptococcus-pneumoniae" }
+      { name: "Streptococcus pneumoniae", slug: "s-pneumoniae" }
     ]
   },
   {
@@ -1260,7 +1264,7 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Streptococcus pyogenes",
-        slug: "streptococcus-pyogenes",
+        slug: "s-pyogenes",
         role: "Group A Streptococcus. Gram-positive, beta-hemolytic cocci on blood agar. Produces Streptolysin O/S and pyrogenic toxins, predisposing to scarlet fever."
       }
     ],
@@ -1293,7 +1297,7 @@ export const diseasesData: Disease[] = [
       { name: "Rheumatic Heart Disease", slug: "rheumatic-heart-disease", description: "Chronic valvular scarring secondary to auto-immune cross-reactivity from untreated Strep throat." }
     ],
     relatedOrganisms: [
-      { name: "Streptococcus pyogenes", slug: "streptococcus-pyogenes" }
+      { name: "Streptococcus pyogenes", slug: "s-pyogenes" }
     ]
   },
   {
@@ -1312,7 +1316,7 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Staphylococcus aureus",
-        slug: "staphylococcus-aureus",
+        slug: "s-aureus",
         role: "The absolute dominant cause. Invades surgical incisions from skin flora or hospital environments, establishing toxic biofilms."
       }
     ],
@@ -1345,7 +1349,7 @@ export const diseasesData: Disease[] = [
       { name: "Cellulitis & Skin/Soft Tissue Infections", slug: "cellulitis-and-skin-infections", description: "Spreading dermis infection lacking surgical incisional scars." }
     ],
     relatedOrganisms: [
-      { name: "Staphylococcus aureus", slug: "staphylococcus-aureus" }
+      { name: "Staphylococcus aureus", slug: "s-aureus" }
     ]
   },
   {
@@ -1364,12 +1368,12 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Proteus mirabilis",
-        slug: "proteus-mirabilis",
+        slug: "p-mirabilis",
         role: "Highly mobile Gram-negative rod. Secretes urease, raising urine pH and forming struvite encrustations within the catheter eyelets, blocking outflow."
       },
       {
         name: "Pseudomonas aeruginosa",
-        slug: "pseudomonas-aeruginosa",
+        slug: "p-aeruginosa",
         role: "The premier multi-drug resistant Gram-negative rod, establishing deep biofilms along the catheter surfaces."
       }
     ],
@@ -1422,12 +1426,12 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Staphylococcus epidermidis",
-        slug: "staphylococcus-epidermidis",
+        slug: "s-epidermidis",
         role: "The principal pathogen overall. Uses polysaccharide intercellular adhesin (PIA) to form a thick biofilm coating on the synthetic catheter catheter material."
       },
       {
         name: "Staphylococcus aureus",
-        slug: "staphylococcus-aureus",
+        slug: "s-aureus",
         role: "A critical isolate. Staphylococcus aureus CLABSIs are associated with high rates of valvular endocarditis and septic thromboembolism."
       }
     ],
@@ -1460,8 +1464,8 @@ export const diseasesData: Disease[] = [
       { name: "Bacteremia & Bloodstream Infection", slug: "bacteremia", description: "Bloodstream infection without catheter devices." }
     ],
     relatedOrganisms: [
-      { name: "Staphylococcus epidermidis", slug: "staphylococcus-epidermidis" },
-      { name: "Staphylococcus aureus", slug: "staphylococcus-aureus" }
+      { name: "Staphylococcus epidermidis", slug: "s-epidermidis" },
+      { name: "Staphylococcus aureus", slug: "s-aureus" }
     ]
   },
   {
@@ -1480,12 +1484,12 @@ export const diseasesData: Disease[] = [
     causativePathogens: [
       {
         name: "Escherichia coli",
-        slug: "escherichia-coli",
+        slug: "e-coli",
         role: "The principal Gram-negative cause of urosepsis. Gram-negative lipopolysaccharides (LPS) contain Lipid A, which binds to host TLR-4, launching massive cytokine release."
       },
       {
         name: "Staphylococcus aureus",
-        slug: "staphylococcus-aureus",
+        slug: "s-aureus",
         role: "The leading Gram-positive cause, expressing toxic shock syndrome toxin-1 (TSST-1) or enterotoxins acting as superantigens."
       }
     ],
@@ -1526,6 +1530,453 @@ export const diseasesData: Disease[] = [
       { name: "Escherichia coli", slug: "escherichia-coli" },
       { name: "Pseudomonas aeruginosa", slug: "pseudomonas-aeruginosa" }
     ]
+  },
+  {
+    id: "cryptococcal-meningitis",
+    name: "Cryptococcal Meningitis",
+    slug: "cryptococcal-meningitis",
+    alternateSlugs: ["cryptococcal-meningitis"],
+    metaDescription: "Learn Cryptococcal Meningitis symptoms, causes, Cryptococcus neoformans identification, India ink assay, and standard Amphotericin B + Flucytosine therapy.",
+    overview: "Cryptococcal Meningitis is a subacute, highly fatal fungal infection of the central nervous system that primarily affects immunocompromised individuals, especially those with advanced HIV/AIDS (CD4 count < 100/µL). Caused by the encapsulated yeast Cryptococcus neoformans, it presents with gradual onset of fever, headache, meningismus, and altered mental status. Diagnosis is confirmed by cerebrospinal fluid (CSF) analysis demonstrating elevated opening pressure, positive India ink stain, or cryptococcal antigen detection. Standard treatment involves induction with Amphotericin B and Flucytosine, followed by consolidation and maintenance with Fluconazole.",
+    quickFacts: {
+      commonPathogens: ["Cryptococcus neoformans", "Cryptococcus gattii"],
+      riskFactors: ["Advanced HIV/AIDS (CD4 < 100 cells/µL)", "Chronic corticosteroid use", "Solid organ transplantation", "Hematologic malignancies"],
+      hallmarkSymptoms: ["Subacute headache of increasing intensity", "Low-grade fever", "Nausea, vomiting, and photophobia", "Altered mental status or cranial nerve palsies"],
+      diagnosticApproach: ["Lumbar puncture (elevated opening pressure > 200 mm H2O)", "CSF Cryptococcal Antigen (CrAg) lateral flow assay", "India ink stain of CSF (clear halos)", "Fungal culture on Sabouraud dextrose agar"]
+    },
+    clinicalPresentation: "Cryptococcal meningitis typically presents as a subacute headache and fever developing over several weeks, rather than the hyperacute presentation of bacterial meningitis. Meningeal signs (nuchal rigidity, Kernig's, and Brudzinski's) are frequently absent in severely immunocompromised individuals due to a lack of robust host inflammatory response. As intracranial pressure rises due to fungal capsular clogging of arachnoid villi, patients may manifest cranial nerve palsies (characteristically CN VI), confusion, lethargy, and papilledema.",
+    causativePathogens: [
+      {
+        name: "Cryptococcus neoformans",
+        slug: "cryptococcus-neoformans",
+        role: "An opportunistic heavily encapsulated budding yeast found in bird/pigeon guano. Enters via inhalation, disseminates hematogenously to the meninges."
+      }
+    ],
+    diagnosticApproach: "Lumbar puncture is the cornerstone of diagnosis and must be performed when suspected unless contraindicated by focal mass effects. Classic cerebrospinal fluid (CSF) findings include an elevated opening pressure (often >250 mm H2O), mild lymphocytic pleocytosis, elevated protein, and low glucose. India ink staining reveals a characteristic clear halo of the thick polysaccharide capsule surrounding the budding yeast, but the CSF cryptococcal antigen (CrAg) test is the diagnostic gold standard with >98% sensitivity. Fungal cultures confirm viability and species.",
+    treatmentPrinciples: "Therapy is divided into three distinct phases to maximize fungal clearance and prevent relapse: 1) Induction Phase: At least 2 weeks of Liposomal Amphotericin B combined with oral Flucytosine. 2) Consolidation Phase: High-dose Fluconazole (400–800 mg daily) for 8 weeks. 3) Maintenance Phase: Low-dose Fluconazole (200 mg daily) for at least one year. Repeated lumbar punctures may be required to control raised intracranial pressure (ICP > 200 mm H2O or if symptomatic).",
+    clinicalPearls: [
+      "Board Examination Clue: Look for an HIV-infected patient with CD4 < 100/µL, a subacute headache, and a CSF India ink stain demonstrating round yeast with a thick capsule.",
+      "Always measure opening pressure during lumbar puncture; serial therapeutic taps or a lumbar drain are required if the pressure is >250 mm H2O to prevent blindness and herniation.",
+      "Flucytosine is associated with significant bone marrow suppression (leukopenia, thrombocytopenia). Monitor CBC levels closely.",
+      "Never start antiretroviral therapy (ART) immediately in treatment-naïve HIV patients with cryptococcal meningitis; delay ART by 2 to 6 weeks to avoid fatal Immune Reconstitution Inflammatory Syndrome (IRIS)."
+    ],
+    relatedAntibiotics: [
+      {
+        name: "Amphotericin B",
+        slug: "amphotericin-b",
+        role: "Polyene antifungal; binds to ergosterol in the fungal cell membrane, creating pores that leak intracellular ions, leading to cell death."
+      },
+      {
+        name: "Fluconazole",
+        slug: "fluconazole",
+        role: "Triazole antifungal; inhibits 14-alpha-demethylase, blocking ergosterol synthesis. Highly bioavailable and penetrates the blood-brain barrier."
+      }
+    ],
+    differentialDiagnoses: [
+      "Tuberculous Meningitis (subacute course, lymphocytic predominance, but AFB or PCR positive)",
+      "Viral Meningitis (typically acute course, normal CSF glucose, negative CrAg)",
+      "Toxoplasmosis (focal neurological deficits, ring-enhancing lesions on brain MRI)",
+      "Primary CNS Lymphoma (solitary or multiple mass lesions on imaging in advanced HIV)"
+    ],
+    faqs: [
+      {
+        question: "Why is Flucytosine added to Amphotericin B in the induction phase?",
+        answer: "Combination therapy with Amphotericin B and Flucytosine is associated with faster CSF sterilization (higher rate of fungal clearance) and a significant reduction in mortality compared to Amphotericin B monotherapy. Flucytosine penetrates the blood-brain barrier exceptionally well."
+      },
+      {
+        question: "How is elevated intracranial pressure managed in these patients?",
+        answer: "Elevated intracranial pressure is managed with serial daily lumbar punctures to drain CSF until the pressure stabilizes (<200 mm H2O). If repeated punctures are insufficient, temporary lumbar drains or permanent ventriculoperitoneal (VP) shunts may be placed. Acetazolamide or corticosteroids are contraindicated."
+      }
+    ],
+    relatedDiseases: [
+      { name: "Acute Bacterial Meningitis", slug: "acute-bacterial-meningitis", description: "An acute, hyperinflammatory bacterial infection of the leptomeninges, presenting with high fever, neck stiffness, and neutrophilic CSF pleocytosis." }
+    ],
+    relatedOrganisms: [
+      { name: "Cryptococcus neoformans", slug: "cryptococcus-neoformans" }
+    ],
+    hostFactors: ["Opportunistic Infection", "HIV/AIDS (CD4 < 100)", "Organ transplant"],
+    relatedComparisons: [
+      { name: "Viral vs. Bacterial Meningitis CSF Findings", slug: "viral-vs-bacterial-meningitis" }
+    ]
+  },
+  {
+    id: "candidemia",
+    name: "Candidemia & Invasive Candidiasis",
+    slug: "candidemia",
+    alternateSlugs: ["candidemia", "invasive-candidiasis"],
+    metaDescription: "Learn Candidemia symptoms, risk factors (TPN, central lines), diagnostics (Beta-D-glucan, eye exams), and Echinocandin therapy guidelines.",
+    overview: "Candidemia is a severe, life-threatening fungal bloodstream infection, and is the most common form of invasive candidiasis. Typically arising in hospitalized, critically ill, or immunocompromised patients with central venous catheters, it presents with fever unresponsive to broad-spectrum antibacterial therapies, chills, and progressive septic shock. Candida albicans is the chief causative species, though non-albicans species (like C. glabrata, C. parapsilosis, and C. auris) are increasingly isolated. Empirical first-line therapy relies on Echinocandins (e.g., Caspofungin or Micafungin) due to high efficacy and low rates of resistance.",
+    quickFacts: {
+      commonPathogens: ["Candida albicans", "Candida glabrata", "Candida tropicalis", "Candida parapsilosis", "Candida krusei", "Candida auris"],
+      riskFactors: ["Central venous catheters / PICC lines", "Total parenteral nutrition (TPN)", "Broad-spectrum antibacterial therapy", "Recent abdominal surgery", "Neutropenia", "ICU stay > 72 hours"],
+      hallmarkSymptoms: ["Fever and chills refractory to antibiotics", "Signs of systemic inflammatory response (tachycardia, tachypnea)", "Hypotension and septic shock", "Endophthalmitis (visual changes, floaters)"],
+      diagnosticApproach: ["Blood cultures (~50% sensitivity)", "Serum Beta-D-Glucan assay", "T2Candida magnetic resonance assay", "Ophthalmologic dilated eye exam (to rule out endophthalmitis)"]
+    },
+    clinicalPresentation: "Candidemia presents as fever, leukocytosis, and progressive sepsis in a patient already receiving broad-spectrum antibacterials. Localizing symptoms are often absent unless hematogenous dissemination occurs. Dissemination can lead to microabscesses in various organs, skin lesions (erythematous macronodular rash), renal involvement (candiduria), splenic abscesses, and osteomyelitis. Ophthalmologic involvement (Candida endophthalmitis) is common and can lead to permanent blindness if untreated, presenting as white, fluffy chorioretinal lesions on dilated fundoscopy.",
+    causativePathogens: [
+      {
+        name: "Candida albicans",
+        slug: "candida-albicans",
+        role: "The most common yeast pathogen. Forms budding yeasts and pseudohyphae at 20°C and true hyphae (germ tubes) at 37°C. Generally highly sensitive to fluconazole."
+      }
+    ],
+    diagnosticApproach: "Diagnosis historically relies on blood cultures, although they detect only about 50% of cases and can take several days. A serum (1,3)-Beta-D-Glucan assay is a helpful adjunctive pan-fungal biomarker. Rapid PCR-based assays and T2Magnetic Resonance (T2Candida) can identify Candida species directly from whole blood in hours. All patients with candidemia must undergo a dilated ophthalmologic examination within 1 week of diagnosis to rule out ocular dissemination.",
+    treatmentPrinciples: "First-line empiric therapy for candidemia in adults is an Echinocandin administered intravenously. Once the species is identified as Candida albicans and the patient is clinically stable, de-escalation to oral Fluconazole is indicated. Central venous catheters must be removed as soon as possible, as Candida readily forms biofilms on plastic surfaces. Therapy is continued for at least 14 days after the first negative blood culture, provided there are no metastatic complications.",
+    clinicalPearls: [
+      "Board Exam Alert: Candidemia in a patient receiving Total Parenteral Nutrition (TPN) via a central line is a classic question. The high lipid and glucose content of TPN promotes yeast proliferation and biofilm formation.",
+      "Candida krusei is intrinsically resistant to Fluconazole; Candida glabrata has dose-dependent or high-level resistance. Always use an Echinocandin first until susceptibilities are known.",
+      "A dilated fundoscopic exam is mandatory for ALL patients with positive Candida blood cultures, as endophthalmitis requires longer therapy.",
+      "Never ignore a single positive blood culture for Candida as a 'contaminant'; it always represents true infection requiring treatment."
+    ],
+    relatedAntibiotics: [
+      {
+        name: "Micafungin",
+        slug: "micafungin",
+        role: "Echinocandin antifungal; inhibits 1,3-beta-D-glucan synthase, disrupting fungal cell wall synthesis. Highly fungicidal against Candida."
+      },
+      {
+        name: "Fluconazole",
+        slug: "fluconazole",
+        role: "Triazole antifungal; highly active against C. albicans, used for de-escalation once susceptibilities are confirmed."
+      }
+    ],
+    differentialDiagnoses: [
+      "Bacterial Sepsis (treated with antibacterials, blood cultures positive for bacteria)",
+      "Catheter-Associated Bacteremia (S. aureus or Coagulase-negative Staph, distinguished by culture)",
+      "Invasive Aspergillosis (rarely positive in blood cultures, galactomannan positive)"
+    ],
+    faqs: [
+      {
+        question: "Why is Fluconazole avoided as initial empiric therapy for candidemia?",
+        answer: "Echinocandins are preferred because they are fungicidal (whereas azoles are fungistatic) and provide reliable coverage against non-albicans species like Candida glabrata and Candida krusei, which have high rates of fluconazole resistance."
+      },
+      {
+        question: "What is the significance of Candida in urine cultures (candiduria)?",
+        answer: "Candiduria is common in catheterized patients and often represents colonization rather than infection. Asymptomatic candiduria generally does not require treatment except in neutropenic patients or those undergoing urologic procedures."
+      }
+    ],
+    relatedDiseases: [
+      { name: "Sepsis & Septic Shock", slug: "sepsis", description: "Systemic inflammatory dysfunction caused by an dysregulated host response to infection." }
+    ],
+    relatedOrganisms: [
+      { name: "Candida albicans", slug: "candida-albicans" }
+    ]
+  },
+  {
+    id: "aspergillosis",
+    name: "Invasive Pulmonary Aspergillosis (IPA)",
+    slug: "aspergillosis",
+    alternateSlugs: ["aspergillosis", "invasive-aspergillosis"],
+    metaDescription: "Learn Invasive Pulmonary Aspergillosis (IPA) signs, CT halo signs, galactomannan testing, and first-line Voriconazole antifungal therapy.",
+    overview: "Invasive Pulmonary Aspergillosis (IPA) is a rapidly progressive and highly lethal opportunistic fungal infection of the lungs. It occurs almost exclusively in severely immunocompromised patients, particularly those with prolonged neutropenia or post-transplant immunosuppression. Caused by inhalation of airborne conidia of the environmental mold Aspergillus fumigatus, it leads to angioinvasion, tissue infarction, and necrosis. Empirical therapy is initiated promptly with Voriconazole, which has demonstrated superior efficacy and survival outcomes compared to Amphotericin B.",
+    quickFacts: {
+      commonPathogens: ["Aspergillus fumigatus", "Aspergillus flavus", "Aspergillus niger"],
+      riskFactors: ["Severe, prolonged neutropenia (ANC < 500 cells/µL)", "High-dose corticosteroid therapy", "Allogeneic hematopoietic stem cell transplantation", "Advanced HIV/AIDS"],
+      hallmarkSymptoms: ["Fever unresponsive to broad-spectrum antibacterials", "Pleuritic chest pain", "Cough (often non-productive)", "Hemoptysis (due to blood vessel invasion)"],
+      diagnosticApproach: ["High-resolution chest CT (nodules with surrounding ground-glass 'halo sign')", "Serum and Bronchoalveolar lavage (BAL) Galactomannan assay", "Fungal staining and culture of BAL fluid", "Lung biopsy (septate, acute-angle 45° branching hyphae)"]
+    },
+    clinicalPresentation: "The clinical presentation in neutropenic patients is characterized by fever refractory to antibacterial agents, dry cough, dyspnea, and pleuritic chest pain. Because Aspergillus is angioinvasive, it dissects through blood vessel walls, causing focal thrombosis and tissue infarction, which can manifest as sudden hemoptysis. In non-neutropenic patients on steroids, the presentation is more insidious and can mimic chronic bacterial pneumonia.",
+    causativePathogens: [
+      {
+        name: "Aspergillus fumigatus",
+        slug: "aspergillus-fumigatus",
+        role: "A rapidly growing mold with septate hyphae branching at acute 45-degree angles. Widely distributed in the environment."
+      }
+    ],
+    diagnosticApproach: "Computed tomography (CT) of the chest is highly sensitive; the 'halo sign' (a zone of ground-glass attenuation surrounding a pulmonary nodule) represents focal hemorrhage and is highly suggestive in neutropenic hosts. Direct detection of galactomannan (a cell-wall component of Aspergillus) in serum or bronchoalveolar lavage (BAL) fluid has high diagnostic utility. Definitive diagnosis requires histological demonstration of tissue invasion by septate, acute-angle branching hyphae along with positive fungal cultures.",
+    treatmentPrinciples: "First-line therapy is Voriconazole, administered intravenously or orally. Voriconazole is superior to standard Amphotericin B in clinical trials, providing higher response rates and survival. For refractory or intolerant cases, alternative therapies include Isavuconazole, Liposomal Amphotericin B, or combination therapy with an Echinocandin (e.g., Caspofungin). Treatment is prolonged, typically lasting at least 6 to 12 weeks or until immunocompromised status resolves.",
+    clinicalPearls: [
+      "Board Exam High-Yield: Know the difference between the three forms of Aspergillus lung disease: 1) Allergic Bronchopulmonary Aspergillosis (ABPA, hypersensitivity, IgE-mediated, seen in asthma/cystic fibrosis); 2) Aspergilloma (fungus ball colonizing an existing TB cavity); 3) Invasive Pulmonary Aspergillosis (angioinvasive, systemic, seen in neutropenics).",
+      "The 'halo sign' on CT is transient, typically lasting only the first 5-10 days of infection, before progressing to the 'air crescent sign' as neutropenia resolves.",
+      "Voriconazole is notorious for transient visual disturbances (enhanced brightness, blurred vision), elevated liver enzymes, and neurological toxicity (hallucinations). It requires therapeutic drug monitoring.",
+      "Aspergillus hyphae are septate and branch at 45° angles. This contrasts with Mucor/Rhizopus species, which are non-septate and branch at wide 90° angles."
+    ],
+    relatedAntibiotics: [
+      {
+        name: "Voriconazole",
+        slug: "voriconazole",
+        role: "Second-generation triazole; blocks ergosterol synthesis. The undisputed first-line agent for invasive aspergillosis."
+      },
+      {
+        name: "Amphotericin B",
+        slug: "amphotericin-b",
+        role: "Polyene; used as salvage therapy or for patients who cannot tolerate triazoles."
+      }
+    ],
+    differentialDiagnoses: [
+      "Mucormycosis (distinguished by broad, non-septate, right-angle hyphae; requires amphotericin)",
+      "Pneumocystis Pneumonia (PCP, bilateral ground-glass opacities, diagnosed with silver stain)",
+      "Bacterial Abscess or Nocardiosis (bacterial pathogens, acid-fast or gram stain positive)",
+      "Pulmonary Infarction / PE (wedged defect on CT, normal galactomannan)"
+    ],
+    faqs: [
+      {
+        question: "What is the significance of the Galactomannan assay?",
+        answer: "Galactomannan is a polysaccharide constituent of the Aspergillus cell wall. During active invasive growth, it is released into the blood and alveolar spaces. Testing BAL fluid has higher sensitivity than serum testing, especially in non-neutropenic hosts."
+      },
+      {
+        question: "Why is Voriconazole preferred over Amphotericin B for IPA?",
+        answer: "In a landmark clinical trial, Voriconazole demonstrated significantly higher success rates (53% vs. 32%) and a 20% absolute reduction in 12-week mortality compared to Amphotericin B. It also has a much better safety profile, avoiding severe nephrotoxicity."
+      }
+    ],
+    relatedDiseases: [
+      { name: "Community-Acquired Pneumonia", slug: "community-acquired-pneumonia", description: "Acute infection of the lung parenchyma acquired in the community setting." }
+    ],
+    relatedOrganisms: [
+      { name: "Aspergillus fumigatus", slug: "aspergillus-fumigatus" }
+    ]
+  },
+  {
+    id: "genital-herpes",
+    name: "Genital Herpes",
+    slug: "genital-herpes",
+    alternateSlugs: ["genital-herpes"],
+    metaDescription: "Learn Genital Herpes symptoms, latency, HSV-1 vs HSV-2 differences, PCR diagnostics, and oral nucleoside analog (Valacyclovir) treatment.",
+    overview: "Genital Herpes is a extremely common sexually transmitted viral infection of the genitourinary tract. It is most frequently caused by Herpes Simplex Virus Type 2 (HSV-2), though Herpes Simplex Virus Type 1 (HSV-1) is increasingly isolated due to changing sexual practices. It is characterized by painful, vesicular eruptions on an erythematous base that rupture to form shallow ulcers, accompanied by systemic symptoms during primary episodes. The virus establishes lifelong latency in the sacral nerve ganglia, leading to periodic, typically milder recurrences. Antiviral nucleoside analogs, such as Valacyclovir or Acyclovir, are the pillars of therapy to reduce symptom duration and viral shedding.",
+    quickFacts: {
+      commonPathogens: ["Herpes Simplex Virus Type 2 (HSV-2)", "Herpes Simplex Virus Type 1 (HSV-1)"],
+      riskFactors: ["Unprotected sexual intercourse", "Multiple sexual partners", "History of other sexually transmitted infections", "Immunosuppression"],
+      hallmarkSymptoms: ["Painful, grouped fluid-filled vesicles on the genitals or perineum", "Shallow, painful ulcers following vesicle rupture", "Tender bilateral inguinal lymphadenopathy", "Fever, headache, and myalgias during the primary episode"],
+      diagnosticApproach: ["PCR assay of lesion swab", "Viral culture (lower sensitivity)", "Tzanck smear (multinucleated giant cells)", "Type-specific serology"]
+    },
+    clinicalPresentation: "A primary episode of genital herpes classically presents 2 to 12 days after exposure with severe local pain, pruritus, dysuria, and a vaginal or urethral discharge. Multiple bilateral grouped vesicles appear on the labia, penis, perineum, or buttocks, rapidly progressing to exquisite painful, non-indurated ulcers. Systemic symptoms—fever, headache, malaise, and meningismus—coincide with viremia. In contrast, recurrent episodes are milder, unilateral, preceded by a prodrome (tingling or burning), and resolve faster due to pre-existing host immunity.",
+    causativePathogens: [
+      {
+        name: "Herpes Simplex Virus 2 (HSV-2)",
+        slug: "hsv-2",
+        role: "An enveloped double-stranded DNA virus of the Herpesviridae family. Establishes latency in the sacral sensory ganglia."
+      }
+    ],
+    diagnosticApproach: "Lesion swab PCR is the diagnostic method of choice, possessing superior sensitivity (>95%) compared to viral culture. Sampling should ideally target early vesicular or moist ulcer fluid. Histopathology or a Tzanck smear showing multinucleated giant cells with intranuclear Cowdry A inclusion bodies is a classic teaching tool but lacks sensitivity and cannot distinguish HSV-1, HSV-2, or VZV.",
+    treatmentPrinciples: "Therapy relies on antiviral nucleoside analogs (Valacyclovir, Acyclovir, or Famciclovir). Primary episodes are treated for 7-10 days to abbreviate viral shedding and pain. Recurrent episodes can be managed with episodic therapy (initiated during prodrome) or daily suppressive therapy (for patients with >= 6 recurrences/year). Suppressive therapy significantly reduces transmission risk to uninfected partners. Intravenous acyclovir is reserved for severe, disseminated, or neurological complications.",
+    clinicalPearls: [
+      "Board Exam High-Yield: Distinguish between genital ulcer presentations: Genital Herpes (painful, grouped vesicles), Syphilis (painless chancre), Chancroid (painful, purulent ulcer), and Lymphogranuloma Venereum (painless vesicle followed by painful inguinal buboes).",
+      "Valacyclovir is a prodrug of acyclovir with superior oral bioavailability, allowing for less frequent dosing (e.g., twice daily vs. five times daily for acyclovir) and higher patient compliance.",
+      "Neonatal herpes is a devastating complication. If active genital lesions are present at the onset of labor, a Cesarean delivery is mandatory to prevent transmission.",
+      "HSV-2 can cause a benign, self-limiting recurrent lymphocytic meningitis known as Mollaret's meningitis."
+    ],
+    relatedAntibiotics: [
+      {
+        name: "Valacyclovir",
+        slug: "valacyclovir",
+        role: "Oral prodrug of acyclovir; converted by hepatic first-pass metabolism, inhibiting viral DNA polymerase."
+      },
+      {
+        name: "Acyclovir",
+        slug: "acyclovir",
+        role: "Guanosine analog; selectively phosphorylated by viral thymidine kinase, terminating viral DNA elongation."
+      }
+    ],
+    differentialDiagnoses: [
+      "Primary Syphilis (painless, single ulcer/chancre with clean base and indurated borders)",
+      "Chancroid (painful, deep, exudative ulcer with ragged margins; Haemophilus ducreyi)",
+      "Aphthous ulcers (non-infectious, typically oral but can be genital)",
+      "Contact dermatitis (itchy, history of allergen exposure, no viral symptoms)"
+    ],
+    faqs: [
+      {
+        question: "How does suppressive antiviral therapy affect viral transmission?",
+        answer: "Daily suppressive therapy with Valacyclovir reduces the frequency of genital herpes recurrences by 70–80% and reduces the risk of transmission to a susceptible partner by up to 50%. It works by suppressing asymptomatic viral shedding, which occurs even in the absence of active lesions."
+      },
+      {
+        question: "Why is G6PD screening not required for acyclovir?",
+        answer: "Acyclovir is a nucleoside analog that has no oxidant-stress properties and does not cause hemolysis. This contrasts with drugs like Primaquine or Dapsone which can trigger severe hemolytic anemia in G6PD-deficient individuals."
+      }
+    ],
+    relatedDiseases: [
+      { name: "Urethritis", slug: "urethritis", description: "Inflammation of the urethra commonly presenting as dysuria and discharge, often caused by STIs." }
+    ],
+    relatedOrganisms: [
+      { name: "Herpes Simplex Virus 2 (HSV-2)", slug: "hsv-2" }
+    ]
+  },
+  {
+    id: "influenza",
+    name: "Acute Influenza",
+    slug: "influenza",
+    alternateSlugs: ["influenza", "flu"],
+    metaDescription: "Learn Acute Influenza clinical signs, rapid molecular PCR assays, drift vs shift pathogenesis, and Oseltamivir (Tamiflu) antiviral guidelines.",
+    overview: "Influenza is an acute, highly contagious respiratory viral infection caused by Influenza A or B viruses. Characterized by sudden onset of high fevers, dry cough, severe myalgias, headache, and sore throat, it can lead to severe primary viral pneumonia or secondary bacterial infections in high-risk groups (elderly, infants, pregnant women, and chronic cardiopulmonary patients). Diagnosis is typically made using rapid molecular assays. First-line antiviral therapy utilizes neuraminidase inhibitors like Oseltamivir, which is most effective when initiated within 48 hours of symptom onset.",
+    quickFacts: {
+      commonPathogens: ["Influenza A Virus", "Influenza B Virus"],
+      riskFactors: ["Age >= 65 or < 2 years", "Pregnancy and up to 2 weeks postpartum", "Chronic medical conditions (COPD, asthma, CHF, diabetes)", "Severe immunosuppression", "Morbid obesity (BMI >= 40)"],
+      hallmarkSymptoms: ["Abrupt onset of high fever and shaking chills", "Myalgias and arthralgias (severe muscle aches)", "Dry, hacking cough", "Sore throat and rhinorrhea"],
+      diagnosticApproach: ["Rapid Molecular Assay (RT-PCR) of nasopharyngeal swab", "Rapid Influenza Diagnostic Test (RIDT; low sensitivity)", "Direct fluorescent antibody staining", "Viral culture (for surveillance)"]
+    },
+    clinicalPresentation: "Influenza is distinguished from the common cold by its explosive onset. A patient can often name the exact hour they fell ill. Symptoms peak in 2 to 4 days, with fevers reaching 104°F, marked prostration, retro-orbital headache, and diffuse muscle aches. Pulmonary examination is usually unremarkable in uncomplicated cases. In high-risk patients, a secondary bacterial pneumonia (classically caused by S. pneumoniae, S. aureus, or H. influenzae) may develop, marked by temporary improvement followed by a recurrence of high fever, productive sputum, and lobar infiltrates.",
+    causativePathogens: [
+      {
+        name: "Influenza A Virus",
+        slug: "influenza-a",
+        role: "Enveloped, segmented negative-sense single-stranded RNA virus. Capable of genetic drift and antigenic shift (leading to pandemics)."
+      }
+    ],
+    diagnosticApproach: "While diagnosis in a typical epidemic season can be made clinically, objective testing is recommended for hospitalized or high-risk patients. Nasopharyngeal swabs are the specimen of choice. Rapid molecular assays (isothermal nucleic acid amplification or RT-PCR) have replaced older rapid antigen tests (RIDTs) due to superior sensitivity (>95% vs. 50-70%). RIDTs have a high false-negative rate, meaning a negative antigen test cannot rule out influenza.",
+    treatmentPrinciples: "Neuraminidase inhibitors (Oseltamivir orally, Zanamivir inhaled, or Peramivir IV) or the cap-dependent endonuclease inhibitor Baloxavir marboxil are the main antivirals. Treatment is highly recommended for any patient with confirmed or suspected influenza who is hospitalized, has severe or progressive illness, or is at high risk for complications. For uncomplicated outpatients, antivirals should be started within 48 hours to shorten symptom duration by 1 to 1.5 days. Supportive care (hydration, antipyretics) is the standard for healthy, low-risk individuals.",
+    clinicalPearls: [
+      "Board Exam High-Yield: A patient with influenza who improves, then suddenly deteriorates with high fever, dyspnea, and purulent sputum has secondary bacterial pneumonia. S. aureus is a classic culprit, often presenting as a necrotizing pneumonia with cavitations.",
+      "Antigenic Drift is caused by point mutations in Hemagglutinin or Neuraminidase genes, leading to yearly epidemics. Antigenic Shift occurs through gene reassortment of segmented RNA strands between different strains (e.g., human and avian), leading to novel strains and global pandemics.",
+      "Oseltamivir is associated with transient gastrointestinal adverse effects (nausea, vomiting). Baloxavir marboxil is administered as a single oral dose, matching the efficacy of a 5-day oseltamivir course.",
+      "Aspirin should be strictly avoided in children with influenza due to the risk of Reye's syndrome (acute encephalopathy and fulminant hepatic microvesicular steatosis)."
+    ],
+    relatedAntibiotics: [
+      {
+        name: "Oseltamivir",
+        slug: "oseltamivir",
+        role: "Neuraminidase inhibitor (prodrug); prevents release of viral progeny from infected host cells, stopping viral spread."
+      }
+    ],
+    differentialDiagnoses: [
+      "COVID-19 (similar onset; distinguished by rapid antigen or molecular PCR testing)",
+      "Common Cold (rhinovirus/coronavirus; gradual onset, no high fever, minimal myalgias)",
+      "Mycoplasma Pneumonia (gradual onset, persistent dry cough, extrapulmonary signs)",
+      "Bacterial Sepsis (extreme neutrophilic leukocytosis, lack of viral prodrome)"
+    ],
+    faqs: [
+      {
+        question: "Why is annual influenza vaccination necessary?",
+        answer: "Annual vaccination is required because of antigenic drift—the accumulation of minor point mutations in viral surface proteins (hemagglutinin and neuraminidase) that allow the virus to evade host antibodies generated by previous infection or vaccination. In addition, vaccine-induced antibody levels decline over several months."
+      },
+      {
+        question: "Can antivirals be given after the 48-hour symptom window?",
+        answer: "Yes. While antivirals are most effective when started within 48 hours of symptom onset, observational studies show they still provide clinical benefit (including reduced mortality and shorter hospitalization) when started later in patients with severe, progressive, or complicated illness, or those who are hospitalized."
+      }
+    ],
+    relatedDiseases: [
+      { name: "Community-Acquired Pneumonia", slug: "community-acquired-pneumonia", description: "Acute infection of the lung parenchyma, which can occur as a primary viral process or secondary bacterial complication." }
+    ],
+    relatedOrganisms: [
+      { name: "Influenza Virus", slug: "influenza" }
+    ]
+  },
+  {
+    id: "malaria",
+    name: "Severe Malaria (Plasmodium falciparum)",
+    slug: "malaria",
+    alternateSlugs: ["malaria", "falciparum-malaria"],
+    metaDescription: "Learn Severe Malaria symptoms, parasite cytoadherence pathogenesis, blood smear diagnostics, and first-line intravenous Artesunate therapy guidelines.",
+    overview: "Severe Malaria is a medical emergency caused by the protozoan parasite Plasmodium falciparum, transmitted through the bite of infected female Anopheles mosquitoes. Unlike other Plasmodium species, P. falciparum infects erythrocytes of all ages, resulting in high parasitemia. It causes erythrocytes to express adhesive proteins (pfEMP1), leading to microvascular obstruction, tissue ischemia, and severe organ dysfunction. Hallmark features of severe malaria include cerebral malaria (coma), severe hemolytic anemia, acute kidney injury, and lactic acidosis. First-line treatment for severe malaria is intravenous Artesunate, which has significantly lower mortality than older regimens like quinidine.",
+    quickFacts: {
+      commonPathogens: ["Plasmodium falciparum", "Plasmodium vivax", "Plasmodium ovale", "Plasmodium malariae", "Plasmodium knowlesi"],
+      riskFactors: ["Travel to endemic areas without prophylaxis", "Lack of pre-existing immunity (young children, pregnant women, travelers)", "Asplenia or hyposplenia", "Pregnancy"],
+      hallmarkSymptoms: ["Irregular, high-grade fevers and shaking chills (rigors)", "Altered mental status or coma (cerebral malaria)", "Severe pallor and jaundice (due to hemolysis)", "Dyspnea and hyperventilation (due to lactic acidosis or ARDS)"],
+      diagnosticApproach: ["Thick blood smear", "Thin blood smear", "Rapid Diagnostic Tests (RDTs detecting HRP-2)", "PCR (highly sensitive but rarely available)"]
+    },
+    clinicalPresentation: "Patients with severe malaria present with prostration, altered consciousness, seizures, respiratory distress, or cardiovascular collapse. On physical exam, they exhibit high fevers, severe pallor, scleral icterus (hemolytic jaundice), hepatosplenomegaly, and petechiae. Cerebral malaria is defined by coma persisting for >1 hour after a seizure, caused by parasitized RBCs cytoadhering to brain capillary endothelium, leading to ischemia. Metabolic acidosis, renal failure, and non-cardiogenic pulmonary edema (ARDS) can develop rapidly.",
+    causativePathogens: [
+      {
+        name: "Plasmodium falciparum",
+        slug: "plasmodium-falciparum",
+        role: "The most lethal malaria species. Erythrocytes demonstrate multiple ring forms, delicate ring structures, and pathognomonic crescent-shaped (banana-shaped) gametocytes."
+      }
+    ],
+    diagnosticApproach: "The diagnostic standard remains microscopic evaluation of Giemsa-stained thick and thin blood smears. Thick smears concentrate the blood and are used to screen for parasites; thin smears are used to identify the species and calculate the parasite density (percentage of infected RBCs). Rapid diagnostic tests (RDTs) are highly useful in resource-limited settings. A negative smear does not completely rule out malaria; if clinical suspicion is high, smears should be repeated every 12 to 24 hours for up to 72 hours.",
+    treatmentPrinciples: "Severe malaria is treated with intravenous Artesunate for a minimum of 24 hours, followed by a complete course of an oral artemisinin-based combination therapy (ACT, such as Artemether-lumefantrine) once the patient can tolerate oral intake. For uncomplicated chloroquine-resistant P. falciparum, oral ACTs are the standard. Uncomplicated P. vivax or P. ovale is treated with chloroquine (if sensitive) plus Primaquine to eradicate dormant hypnozoites in the liver, after confirming normal G6PD activity.",
+    clinicalPearls: [
+      "Always check glucose levels in patients with severe malaria; hypoglycemia is common due to parasite consumption of glucose and quinine/artesunate stimulation of pancreatic insulin release.",
+      "G6PD Deficiency: Primaquine and Tafenoquine can cause life-threatening intravascular hemolysis in G6PD-deficient patients. G6PD enzyme activity testing is mandatory prior to administration.",
+      "P. falciparum trophozoites and schizonts are sequestered in deep capillaries, so only early ring forms and gametocytes are typically seen in peripheral blood smears. P. vivax/ovale smears demonstrate enlarged RBCs with Schüffner's dots.",
+      "Malaria prophylaxis must be tailored to regional resistance patterns. Atovaquone-proguanil or Doxycycline are excellent choices for chloroquine-resistant areas."
+    ],
+    relatedAntibiotics: [
+      {
+        name: "Artemether-lumefantrine",
+        slug: "artemether-lumefantrine",
+        role: "First-line oral ACT; artemether rapidly reduces parasite biomass, while lumefantrine eradicates residual parasites."
+      }
+    ],
+    differentialDiagnoses: [
+      "Bacterial Meningitis (distinguished by lumbar puncture, neutrophilic pleocytosis)",
+      "Typhoid Fever (Salmonella enterica; stepwise fever, bradycardia, rose spots, sterile smears)",
+      "Leptospirosis (animal contact, conjunctival suffusion, renal/hepatic failure)",
+      "Yellow Fever or Dengue (viral symptoms, severe retro-orbital pain, negative smears)"
+    ],
+    faqs: [
+      {
+        question: "What is the cellular mechanism of P. falciparum virulence?",
+        answer: "P. falciparum expresses a surface protein called Plasmodium falciparum erythrocyte membrane protein 1 (pfEMP1). This protein binds to adhesion molecules (like CD36 and ICAM-1) on the vascular endothelium of host capillaries, a process called cytoadherence. This leads to sequestration of parasitized RBCs in organs, microvascular clogging, tissue hypoxia, and severe complications like cerebral malaria."
+      },
+      {
+        question: "Why is Artesunate preferred over Quinidine?",
+        answer: "Artesunate is associated with a significantly lower mortality rate (35-40% relative reduction), does not require continuous cardiac telemetry monitoring (unlike quinidine, which causes QT prolongation and arrhythmias), and does not cause severe refractory hypoglycemia."
+      }
+    ],
+    relatedDiseases: [
+      { name: "Sepsis & Septic Shock", slug: "sepsis", description: "Systemic organ dysfunction from a dysregulated host response, which shares many pathophysiological pathways with severe malaria." }
+    ],
+    relatedOrganisms: [
+      { name: "Plasmodium falciparum", slug: "plasmodium-falciparum" }
+    ]
+  },
+  {
+    id: "hepatitis-c",
+    name: "Chronic Hepatitis C",
+    slug: "hepatitis-c",
+    alternateSlugs: ["hepatitis-c", "hcv"],
+    metaDescription: "Learn Chronic Hepatitis C symptoms, risk factors, viral polymerase quasispecies drift, PCR diagnostics, and modern Direct-Acting Antiviral (DAA) cure guidelines.",
+    overview: "Chronic Hepatitis C is a slowly progressive bloodborne viral infection of the liver caused by the Hepatitis C Virus (HCV). Acquired primarily through percutaneous exposure (e.g., intravenous drug use, blood transfusions prior to 1992), it is asymptomatic in over 75% of acute cases but transitions to chronic infection in 75–85% of individuals. Over decades, chronic inflammation can lead to liver fibrosis, cirrhosis, portal hypertension, and hepatocellular carcinoma. Diagnosis is initiated with HCV antibody testing and confirmed by quantitative HCV RNA PCR. Modern treatment has been revolutionized by Direct-Acting Antivirals (DAAs), which achieve a cure rate (>95% Sustained Viable Response) in 8 to 12 weeks with oral well-tolerated therapy.",
+    quickFacts: {
+      commonPathogens: ["Hepatitis C Virus (Genotypes 1 through 6)"],
+      riskFactors: ["Intravenous drug abuse (sharing needles)", "Receipt of blood transfusions or organ transplants before 1992", "Needlestick injuries in healthcare settings", "Perinatal transmission from infected mothers"],
+      hallmarkSymptoms: ["Often completely asymptomatic for decades", "Fatigue and generalized malaise", "Right upper quadrant abdominal discomfort", "Jaundice, ascites, and encephalopathy (late-stage decompensated cirrhosis)"],
+      diagnosticApproach: ["HCV antibody screening", "Quantitative HCV RNA PCR", "Genotypic testing (historical)", "Non-invasive fibrosis assessment (FibroScan or FIB-4 score)"]
+    },
+    clinicalPresentation: "The acute phase of Hepatitis C is rarely clinically apparent. Chronic infection is also insidious, with patients remaining asymptomatic or complaining of non-specific fatigue until advanced liver disease develops. Once cirrhosis is established, physical findings include spider angiomas, palmar erythema, splenomegaly, caput medusae, and gynecomastia. Decompensated cirrhosis manifests as ascites (fluid accumulation), asterixis and confusion (hepatic encephalopathy), and bleeding esophageal varices due to portal hypertension.",
+    causativePathogens: [
+      {
+        name: "Hepatitis C Virus",
+        slug: "hepc",
+        role: "An enveloped, single-stranded positive-sense RNA virus of the Flaviviridae family. It lacks proofreading activity in its RNA polymerase, leading to extreme antigenic variation."
+      }
+    ],
+    diagnosticApproach: "Screening begins with an HCV IgG antibody test. If positive, it must be followed by a reflex quantitative HCV RNA polymerase chain reaction (PCR) to differentiate resolved infection from active chronic infection. Liver biopsy was historically the gold standard for staging fibrosis, but has been replaced by non-invasive modalities such as transient elastography (FibroScan) or serum biomarkers (FIB-4 or APRI scores).",
+    treatmentPrinciples: "Modern therapy utilizes combination pangenotypic Direct-Acting Antiviral (DAA) regimens for 8 to 12 weeks. These regimens target non-structural viral proteins (NS3/4A protease, NS5A replication complex, and NS5B RNA polymerase) to stop viral replication. A cure is defined as Sustained Virologic Response (SVR12), meaning undetectable HCV RNA 12 weeks after completing therapy. Prior to starting DAAs, patients must be screened for Hepatitis B (HBV) coinfection, as DAA therapy can trigger HBV reactivation.",
+    clinicalPearls: [
+      "Board Exam Classic: HCV lacks a 3'-to-5' exonuclease proofreading activity in its virion-encoded RNA polymerase. This leads to frequent replication errors and the creation of multiple 'quasispecies' in a single patient, preventing the development of an effective vaccine.",
+      "Direct-Acting Antivirals (DAAs) have completely replaced the old interferon-alpha and ribavirin regimens, which had low cure rates (~50%) and severe systemic toxicities.",
+      "Extrahepatic Manifestations: Chronic HCV is strongly associated with high-yield autoimmune conditions: Mixed Cryoglobulinemia (purpura, arthralgias, renal failure), Membranoproliferative Glomerulonephritis (MPGN), Porphyria Cutanea Tarda (blistering skin lesions on sun-exposed hands), and Lichen Planus.",
+      "HBV Reactivation: Always check Hepatitis B surface antigen (HBsAg) and core antibody (anti-HBc) before starting DAAs. Direct suppression of HCV replication allows latent HBV to rapidly replicate, which can cause fulminant liver failure."
+    ],
+    relatedAntibiotics: [
+      {
+        name: "Sofosbuvir-Velpatasvir",
+        slug: "sofosbuvir-velpatasvir",
+        role: "Epclusa. Pangenotypic DAA; Sofosbuvir is a nucleotide NS5B polymerase inhibitor, while Velpatasvir is an NS5A inhibitor."
+      },
+      {
+        name: "Glecaprevir-Pibrentasvir",
+        slug: "glecaprevir-pibrentasvir",
+        role: "Mavyret. Pangenotypic DAA; Glecaprevir is an NS3/4A protease inhibitor, while Pibrentasvir is an NS5A inhibitor."
+      }
+    ],
+    differentialDiagnoses: [
+      "Chronic Hepatitis B (HBsAg positive, HBV DNA positive)",
+      "Non-Alcoholic Fatty Liver Disease (NAFLD/NASH; metabolic syndrome, hepatic steatosis on imaging, negative viral markers)",
+      "Alcoholic Hepatitis (AST:ALT ratio > 2:1, history of heavy alcohol abuse)",
+      "Autoimmune Hepatitis (elevated IgG, positive ANA or anti-smooth muscle antibodies)"
+    ],
+    faqs: [
+      {
+        question: "What are the drug classes of Direct-Acting Antivirals (DAAs)?",
+        answer: "DAAs belong to three primary classes: 1) NS3/4A Protease Inhibitors (suffix '-previr') which block viral polyprotein cleavage; 2) NS5A Inhibitors (suffix '-asvir') which target a protein critical for viral assembly and replication; and 3) NS5B Polymerase Inhibitors (suffix '-buvir') which act as chain terminators of viral RNA synthesis."
+      },
+      {
+        question: "Can a patient become reinfected with HCV after being cured?",
+        answer: "Yes. Successful treatment resulting in Sustained Virologic Response (SVR) does not confer immunity against future HCV infection. Patients with ongoing risk factors can easily be reinfected. Reinfection is diagnosed by a positive HCV RNA PCR test in a patient who previously achieved SVR."
+      }
+    ],
+    relatedDiseases: [
+      { name: "Intra-Abdominal Infection", slug: "intra-abdominal-infection", description: "Infections of the peritoneal cavity, which can complicate advanced liver cirrhosis (e.g. Spontaneous Bacterial Peritonitis)." }
+    ],
+    relatedOrganisms: [
+      { name: "Hepatitis C Virus", slug: "hepc" }
+    ]
   }
 ];
+
+export const diseasesData: Disease[] = [
+  ...BASE_DISEASES,
+  ...expansionDiseases
+];
+
 

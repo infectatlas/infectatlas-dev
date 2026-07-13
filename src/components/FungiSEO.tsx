@@ -21,6 +21,7 @@ import {
   X
 } from "lucide-react";
 import ActiveRecallDrawer from "./ActiveRecallDrawer";
+import { DynamicRelatedContent, IntelligentLearningPath, ContinueLearningHistory } from "./GraphRecommendationEngine";
 
 // Helper to convert microfungus name to a web-safe slug
 export const getPathogenSlug = (name: string): string => {
@@ -126,175 +127,84 @@ export interface PathogenReference {
   citation: string;
   url?: string;
   source: string;
-}
-
-export const getPathogenReferences = (pathogenId: string, name: string): PathogenReference[] => {
+}export const getPathogenReferences = (pathogenId: string, name: string): PathogenReference[] => {
   const id = pathogenId.toLowerCase();
   
-  if (id.includes("aureus") || id.includes("staph")) {
+  if (id.includes("candida") || id.includes("albicans")) {
     return [
       {
         type: "Clinical Guideline",
-        source: "IDSA MRSA Guidelines",
-        citation: "Liu C, et al. Clinical Practice Guidelines by the Infectious Diseases Society of America (IDSA) for the Treatment of Methicillin-Resistant Staphylococcus aureus Infections in Adults and Children. Clinical Infectious Diseases, 2011.",
-        url: "https://academic.oup.com/cid/article/52/3/e18/306714"
-      },
-      {
-        type: "Public Health Consensus",
-        source: "CDC Staphylococcus Guidelines",
-        citation: "CDC Laboratory and Clinical Guidance for Prevention and Control of Staphylococcus aureus and MRSA Transmission.",
-        url: "https://www.cdc.gov/mrsa/index.html"
-      },
-      {
-        type: "Landmark Review Article",
-        source: "NEJM Review",
-        citation: "Lowy FD. Staphylococcus aureus Infections. N Engl J Med 1998; 339:520-532.",
-        url: "https://www.nejm.org/doi/full/10.1056/NEJM199808203390806"
-      },
-      {
-        type: "Standard Textbook",
-        source: "Harrison's Principles of Internal Medicine",
-        citation: "Snydman DR. Staphylococcal Infections. 21st Edition, Chapter 142, McGraw Hill.",
-      }
-    ];
-  }
-
-  if (id.includes("diff")) {
-    return [
-      {
-        type: "Clinical Guideline",
-        source: "IDSA / SHEA C. diff Guidelines",
-        citation: "Johnson S, et al. Clinical Practice Guideline by the Infectious Diseases Society of America (IDSA) and Society for Healthcare Epidemiology of America (SHEA): 2021 Focused Update Guidelines on Management of Clostridioides difficile Infection in Adults. Clinical Infectious Diseases, 2021.",
-        url: "https://academic.oup.com/cid/article/73/5/e1029/6298582"
-      },
-      {
-        type: "Public Health Consensus",
-        source: "CDC C. difficile Surveillance",
-        citation: "CDC Clostridioides difficile Infection Prevention and Control Recommendations for Healthcare Settings.",
-        url: "https://www.cdc.gov/cdiff/index.html"
+        source: "IDSA Candidiasis Guidelines",
+        citation: "Pappas PG, et al. Clinical Practice Guidelines for the Management of Candidiasis: 2016 Update by the Infectious Diseases Society of America. Clin Infect Dis. 2016.",
+        url: "https://academic.oup.com/cid/article/62/4/e1/2462830"
       },
       {
         type: "Landmark Review Article",
         source: "NEJM Review Paper",
-        citation: "Loo VG, et al. A Dominated Clostridioides difficile Strain in Hospital-Acquired Diarrhea. N Engl J Med 2005; 353:2442-2449.",
-        url: "https://www.nejm.org/doi/full/10.1056/NEJMoa051047"
-      },
-      {
-        type: "Standard Textbook",
-        source: "Sherris Medical Microbiology",
-        citation: "Ryan KJ. Spore-Forming Anaerobic Bacilli: Clostridium and Clostridioides. 8th Edition, Chapter 29, McGraw Hill.",
+        citation: "Kullberg BJ, Arendrup MC. Invasive Candidiasis. N Engl J Med 2015; 373:1445-1456.",
+        url: "https://www.nejm.org/doi/full/10.1056/NEJMra1315399"
       }
     ];
   }
 
-  if (id.includes("pseudomonas") || id.includes("aeruginosa")) {
+  if (id.includes("aspergillus") || id.includes("fumigatus")) {
     return [
       {
         type: "Clinical Guideline",
-        source: "IDSA AMR Guidelines",
-        citation: "Tamma PD, et al. Infectious Diseases Society of America 2023 Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections. Clinical Infectious Diseases, 2023.",
-        url: "https://www.idsociety.org/practice-guidelines/amr-guidance-v3.0/"
-      },
-      {
-        type: "Public Health Consensus",
-        source: "CDC Antimicrobial Resistance Threat Report",
-        citation: "CDC Antibiotic Resistance Threats in the United States: Multidrug-Resistant Pseudomonas aeruginosa Standards.",
-        url: "https://www.cdc.gov/drugresistance/index.html"
+        source: "IDSA Aspergillosis Guidelines",
+        citation: "Patterson TF, et al. Practice Guidelines for the Diagnosis and Management of Aspergillosis: 2016 Update by the Infectious Diseases Society of America. Clin Infect Dis. 2016.",
+        url: "https://academic.oup.com/cid/article/63/4/e1/2194775"
       },
       {
         type: "Landmark Review Article",
-        source: "Nature Reviews Microbiology",
-        citation: "Moradali MF, et al. Pseudomonas aeruginosa Lifestyle: Membrane and Aerobic Pathogenicity Factors. Nat Rev Microbiol, 2017.",
-        url: "https://www.nature.com/articles/nrmicro.2016.142"
-      },
-      {
-        type: "Standard Textbook",
-        source: "Kelsey & Webster Academic Microbiology",
-        citation: "Kelsey JH. Opportunistic Nonfermenting Pathogens. 11th Edition, Chapter 18, Academic Press.",
+        source: "Clinical Microbiology Reviews",
+        citation: "Latge JP. Aspergillus fumigatus and Aspergillosis. Clin Microbiol Rev 1999; 12(2):310-350.",
+        url: "https://journals.asm.org/doi/10.1128/CMR.12.2.310"
       }
     ];
   }
 
-  if (id.includes("coli") || id.includes("escherichia")) {
+  if (id.includes("cryptococcus") || id.includes("neoformans")) {
     return [
       {
         type: "Clinical Guideline",
-        source: "IDSA Uncomplicated UTI Guidelines",
-        citation: "Gupta K, et al. International Clinical Practice Guidelines for the Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women: A 2010 Update by the IDSA and the European Society for Microbiology and Infectious Diseases.",
-        url: "https://academic.oup.com/cid/article/52/5/e103/388284"
-      },
-      {
-        type: "Public Health Consensus",
-        source: "FDA Foodborne Pathogen standards",
-        citation: "FDA Bad Bug Book: Foodborne Pathogenic Funguss and Natural Toxins. Second Edition.",
-        url: "https://www.fda.gov/food/foodborne-pathogens/bad-bug-book-second-edition"
-      },
-      {
-        type: "Landmark Review Article",
-        source: "Lancet Infectious Diseases Review",
-        citation: "Nataro JP, Kaper JB. Diarrheagenic Escherichia coli. Clin Microbiol Rev 1998; 11:142-201.",
-        url: "https://journals.asm.org/doi/10.1128/CMR.11.1.142"
-      },
-      {
-        type: "Standard Textbook",
-        source: "Robbins & Cotran Pathologic Basis of Disease",
-        citation: "Turner JR. The Gastrointestinal Tract & Enteric Pathogen Responses. 10th Edition, Elsevier Saunders.",
-      }
-    ];
-  }
-
-  if (id.includes("pneumoniae") || id.includes("pneumo")) {
-    return [
-      {
-        type: "Clinical Guideline",
-        source: "IDSA / ATS Guidelines",
-        citation: "Metlay JP, et al. Diagnosis and Treatment of Adults with Community-acquired Pneumonia. American Journal of Respiratory and Critical Care Medicine, 2019.",
-        url: "https://www.atsjournals.org/doi/full/10.1164/rccm.201908-1581ST"
-      },
-      {
-        type: "Public Health Consensus",
-        source: "CDC Vaccine Bluebook Standards",
-        citation: "Pneumococcal Disease Epidemiology and Prevention of Vaccine-Preventable Diseases. CDC Pink Book.",
-        url: "https://www.cdc.gov/vaccines/pubs/pinkbook/pneumo.html"
+        source: "IDSA Cryptococcal Guidelines",
+        citation: "Perfect JR, et al. Clinical Practice Guidelines for the Management of Cryptococcal Disease: 2010 Update by the Infectious Diseases Society of America. Clin Infect Dis. 2010.",
+        url: "https://academic.oup.com/cid/article/50/3/291/343053"
       },
       {
         type: "Landmark Review Article",
         source: "Nature Reviews Disease Primers",
-        citation: "Weiser JN, et al. Streptococcus pneumoniae: Transmission, Colonization and Disease. Nat Rev Microbiol, 2018.",
-        url: "https://www.nature.com/articles/s41579-018-0001-8"
-      },
-      {
-        type: "Standard Textbook",
-        source: "Mandell, Douglas, and Bennett's Principles",
-        citation: "Musher DM. Streptococcus pneumoniae. 9th Edition, Chapter 197, Elsevier Saunders.",
+        citation: "Perfect JR, et al. Cryptococcosis. Nat Rev Dis Primers. 2021.",
+        url: "https://www.nature.com/articles/s41572-021-00272-1"
       }
     ];
   }
 
-  // Fallback high-yield academic references
+  // Fallback high-yield academic references for Fungi
   return [
     {
       type: "Clinical Guideline",
-      source: "IDSA Empiric Guidelines Panel",
-      citation: `Guideline standards and pathogen-specific treatment directives for human infections caused by ${name}. IDSA Clinical Practice Library, 2023.`,
+      source: "IDSA Mycology Guidelines Panel",
+      citation: `Guideline standards and pathogen-specific treatment directives for human fungal infections caused by ${name}. IDSA Clinical Practice Library, 2024.`,
       url: "https://www.idsociety.org"
     },
     {
       type: "Public Health Consensus",
-      source: "CDC Pathology Reference Center",
-      citation: `Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of ${name}. CDC Reference Portal.`,
-      url: "https://www.cdc.gov"
+      source: "CDC Fungal Diseases Center",
+      citation: `Infectious Fungal Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of ${name}. CDC Reference Portal.`,
+      url: "https://www.cdc.gov/fungal/"
     },
     {
       type: "Landmark Review Article",
-      source: "Lancet Pathogen Reviews",
-      citation: `Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for ${name}. Lancet Infect Dis, 2022.`,
+      source: "Lancet Infectious Diseases Mycology",
+      citation: `Deconstruction of fungal cell wall biochemistry, spore survival, and modern antifungal resistance pipelines for ${name}. Lancet Infect Dis, 2023.`,
       url: "https://www.thelancet.com/journals/laninf/home"
     },
     {
       type: "Standard Textbook",
       source: "Harrison's Principles of Internal Medicine",
-      citation: `Pathogenesis, Laboratory Identification, and Therapy of ${name} Associated Infections. 21st Edition, McGraw-Hill Education.`,
+      citation: `Pathogenesis, Laboratory Identification, and Antifungal Therapy of ${name} Associated Mycoses. 21st Edition, McGraw-Hill Education.`,
     }
   ];
 };
@@ -347,7 +257,7 @@ export default function FungiSEO() {
   const { slug: routeSlug } = useParams<{ slug?: string }>();
   
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedGram, setSelectedGram] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Contextual Active Recall Drawer
@@ -399,30 +309,30 @@ export default function FungiSEO() {
   useEffect(() => {
     if (isDetailView && pathogen) {
       // 1. Dynamic Search-Intent Title (Aim for 50-70 characters)
-      let pageTitle = `${pathogen.name}: Diagnosis, Shapes & High-Yield Treatments | InfectAtlas`;
+      let pageTitle = `${pathogen.name}: Fungal Morphology, Spores & Antifungal Treatment | InfectAtlas`;
       const nameLower = pathogen.name.toLowerCase();
-      if (nameLower.includes("staphylococcus aureus")) {
-        pageTitle = "Staphylococcus aureus: Symptoms, Diseases, Treatment & MRSA vs MSSA | InfectAtlas";
-      } else if (nameLower.includes("clostridioides difficile")) {
-        pageTitle = "Clostridioides difficile: C. diff Symptoms, Diagnosis & Treatment | InfectAtlas";
-      } else if (nameLower.includes("pseudomonas aeruginosa")) {
-        pageTitle = "Pseudomonas aeruginosa: Infections, Resistance & Treatments | InfectAtlas";
-      } else if (nameLower.includes("streptococcus pneumoniae")) {
-        pageTitle = "Streptococcus pneumoniae: Symptoms, Infections & Treatments | InfectAtlas";
-      } else if (nameLower.includes("escherichia coli")) {
-        pageTitle = "Escherichia coli: Symptoms, UTI, HUS & Empirical Treatment | InfectAtlas";
+      if (nameLower.includes("candida albicans")) {
+        pageTitle = "Candida albicans: Yeast vs Mold, Thrush Symptoms, Antifungals | InfectAtlas";
+      } else if (nameLower.includes("aspergillus fumigatus")) {
+        pageTitle = "Aspergillus fumigatus: Acute Branching, Aspergillosis & Treatment | InfectAtlas";
+      } else if (nameLower.includes("cryptococcus neoformans")) {
+        pageTitle = "Cryptococcus neoformans: Encapsulated Yeast, Meningitis, India Ink | InfectAtlas";
+      } else if (nameLower.includes("histoplasma capsulatum")) {
+        pageTitle = "Histoplasma capsulatum: Dimorphic Fungus, Valley Fevers, Treatment | InfectAtlas";
+      } else if (nameLower.includes("coccidioides immitis")) {
+        pageTitle = "Coccidioides immitis: Spherules, Valley Fever symptoms, Antifungals | InfectAtlas";
       }
       document.title = pageTitle;
 
       // 2. High-Yield Meta Description under 160 characters with synonyms included
       const synonyms = getPathogenSynonyms(pathogen).slice(0, 2).join(", ");
-      let metaDesc = `Learn ${pathogen.name} (${synonyms}) identification, diagnostic shapes, therapy choices, and high-yield board review concepts for USMLE, NCLEX, and NAPLEX.`;
-      if (nameLower.includes("staphylococcus aureus")) {
-        metaDesc = "Learn Staphylococcus aureus identification, common infections, MRSA vs MSSA treatment, clinical pearls, and board-review concepts for USMLE, NCLEX, COMLEX, and NAPLEX.";
-      } else if (nameLower.includes("clostridioides difficile")) {
-        metaDesc = "Master Clostridioides difficile (C. diff) identification, toxin assays, oral vancomycin vs fidaxomicin treatment, and high-yield board exam questions.";
-      } else if (nameLower.includes("pseudomonas aeruginosa")) {
-        metaDesc = "Study Pseudomonas aeruginosa clinical manifestations, distinguishing biochemical tests, and anti-pseudomonal beta-lactam susceptibility guidelines.";
+      let metaDesc = `Learn ${pathogen.name} (${synonyms}) identification, yeast/mold morphology, antifungal therapy, and high-yield board review concepts for USMLE, NCLEX, and NAPLEX.`;
+      if (nameLower.includes("candida albicans")) {
+        metaDesc = "Master Candida albicans germ tube identification, mucosal vs systemic thrush, antifungal regimens, clinical pearls, and board exam concepts.";
+      } else if (nameLower.includes("aspergillus fumigatus")) {
+        metaDesc = "Study Aspergillus fumigatus acute branching septate hyphae, ABPA diagnosis, voriconazole guidelines, and high-yield board-review concepts.";
+      } else if (nameLower.includes("cryptococcus neoformans")) {
+        metaDesc = "Learn Cryptococcus neoformans latex agglutination, India ink stains, amphotericin B plus flucytosine treatment, and high-yield clinical facts.";
       }
 
       // Update or create meta tag for description
@@ -626,8 +536,8 @@ export default function FungiSEO() {
       .slice(0, 2);
   };
 
-  // Group directory list by gram status for rich index grouping
-  const groupPathogensByGram = () => {
+  // Group directory list by category for rich index grouping
+  const groupPathogensByCategory = () => {
     const groups: Record<string, Fungus[]> = {
       "Yeast": [],
       "Mold": [],
@@ -648,11 +558,11 @@ export default function FungiSEO() {
         if (!matchesQuery) return;
       }
 
-      // Gram status filter check
-      if (selectedGram !== "all") {
-        if (selectedGram === "yeast" && m.type !== "Yeast") return;
-        if (selectedGram === "mold" && m.type !== "Mold") return;
-        if (selectedGram === "dimorphic-dermatophyte" && m.type !== "Dimorphic" && m.type !== "Dermatophyte") return;
+      // Category filter check
+      if (selectedCategory !== "all") {
+        if (selectedCategory === "yeast" && m.type !== "Yeast") return;
+        if (selectedCategory === "mold" && m.type !== "Mold") return;
+        if (selectedCategory === "dimorphic-dermatophyte" && m.type !== "Dimorphic" && m.type !== "Dermatophyte") return;
       }
 
       if (m.type === "Yeast") {
@@ -667,7 +577,7 @@ export default function FungiSEO() {
     return groups;
   };
 
-  const groupedPathogens = groupPathogensByGram();
+  const groupedPathogens = groupPathogensByCategory();
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans animate-fade-in" id="seo-root">
@@ -959,6 +869,11 @@ export default function FungiSEO() {
                 </div>
               </div>
 
+              {/* Graph-driven Intelligent Learning Experience widgets */}
+              <IntelligentLearningPath entityType="pathogen" idOrSlug={pathogen.id} />
+              <DynamicRelatedContent entityType="pathogen" idOrSlug={pathogen.id} />
+              <ContinueLearningHistory />
+
             </div>
 
             {/* Right Column: Dynamic Conversion Funnel Sidebar */}
@@ -1042,10 +957,10 @@ export default function FungiSEO() {
                     Clinical Reference Catalog
                   </span>
                   <h1 className="text-2xl sm:text-3xl font-black tracking-tight leading-tight">
-                    Medical Microbiology Library
+                    Fungi Reference Library
                   </h1>
                   <p className="text-xs text-slate-400 leading-relaxed font-medium">
-                    Deconstruct clinical Human Pathogens, Gram-staining characteristics, clinical manifestations, and IDSA-aligned treatment choices. Click on any pathogen below to explore deep-dive clinical pearls.
+                    Deconstruct clinical Yeast and Mold pathogens, fungal morphology, spore characteristics, clinical manifestations, and IDSA-aligned treatment choices. Click on any pathogen below to explore deep-dive clinical pearls.
                   </p>
                 </div>
 
@@ -1053,7 +968,7 @@ export default function FungiSEO() {
                   <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400 group-focus-within:text-indigo-455 transition-colors" />
                   <input
                     type="text"
-                    placeholder="Search pathogens, Gram stain, characteristics, diseases..."
+                    placeholder="Search fungi, yeast, mold, morphology, characteristics, diseases..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="w-full pl-10 pr-10 py-3 bg-slate-800/70 border border-slate-700/80 hover:border-slate-600 focus:bg-slate-950/90 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/25 focus:border-indigo-400 transition-all text-white placeholder:text-slate-400 shadow-sm"
@@ -1078,11 +993,11 @@ export default function FungiSEO() {
                     { id: "mold", name: "Mold", color: "bg-rose-600 text-white shadow-md border-rose-450 hover:bg-rose-500 hover:shadow-rose-500/10" },
                     { id: "dimorphic-dermatophyte", name: "Dimorphics & Dermatophyte", color: "bg-purple-600 text-white shadow-md border-purple-400 hover:bg-purple-500 hover:shadow-purple-500/10" }
                   ].map((cat) => {
-                    const isActive = selectedGram === cat.id;
+                    const isActive = selectedCategory === cat.id;
                     return (
                       <button
                         key={cat.id}
-                        onClick={() => setSelectedGram(cat.id)}
+                        onClick={() => setSelectedCategory(cat.id)}
                         className={`text-[10px] sm:text-[11px] font-extrabold px-3.5 py-2.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 shrink-0 border group ${
                           isActive
                             ? cat.color
@@ -1184,7 +1099,7 @@ export default function FungiSEO() {
                   Try adjusting your keywords or clearing the filter category in the header.
                 </p>
                 <button
-                  onClick={() => { setSearchTerm(""); setSelectedGram("all"); }}
+                  onClick={() => { setSearchTerm(""); setSelectedCategory("all"); }}
                   className="mt-2 text-xs font-extrabold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 py-2 px-4 rounded-xl transition-colors cursor-pointer"
                 >
                   Reset Directory

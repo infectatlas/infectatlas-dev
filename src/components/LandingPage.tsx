@@ -234,7 +234,7 @@ export default function LandingPage({ onStartStudying }: LandingPageProps) {
         
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-5 space-y-4">
-            <span className="text-[10px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-550/15 border border-indigo-500/20 px-2.5 py-1 rounded-full w-max">
+            <span className="text-[10px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-600/15 border border-indigo-500/20 px-2.5 py-1 rounded-full w-max">
               Interactive Preview
             </span>
             <h2 className="text-xl sm:text-2xl font-bold tracking-tight">Active Recall Live Deck</h2>

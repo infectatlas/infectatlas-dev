@@ -1226,5 +1226,495 @@ export const drugsData: Drug[] = [
       { id: "cryptococcal-meningitis", name: "Cryptococcal Meningitis", relation: "First-Line Treatment" },
       { id: "mucormycosis", name: "Invasive Mucormycosis", relation: "First-Line Treatment" }
     ]
+  },
+  {
+    id: "ampicillin",
+    name: "Ampicillin",
+    slug: "ampicillin",
+    category: "antibacterial",
+    drugClass: "Aminopenicillin (Beta-Lactam)",
+    mechanismOfAction: "Binds to and inhibits penicillin-binding proteins (PBPs), specifically transpeptidases, in the bacterial cell wall. This halts peptidoglycan cross-linking, causing cell wall instability and autolysin-mediated osmotic lysis.",
+    spectrumOfActivity: [
+      "Gram-positive cocci (Streptococcus pneumoniae, Streptococcus pyogenes, Enterococcus faecalis).",
+      "Gram-positive rods (Listeria monocytogenes).",
+      "Some Gram-negative rods (Proteus mirabilis, Haemophilus influenzae, Escherichia coli)."
+    ],
+    commonIndications: [
+      "Empiric treatment for neonatal sepsis and meningitis (paired with Gentamicin).",
+      "Listeria monocytogenes meningitis or bacteremia.",
+      "Enterococcal infections (endocarditis, UTI)."
+    ],
+    adverseEffects: [
+      "Hypersensitivity reactions (maculopapular rash, urticaria, anaphylaxis).",
+      "Gastrointestinal distress: Diarrhea and nausea.",
+      "Interstitial nephritis.",
+      "Non-allergic ampicillin rash in patients with mononucleosis (EBV)."
+    ],
+    contraindications: [
+      "Severe immediate hypersensitivity (e.g., anaphylaxis) to penicillins or cephalosporins."
+    ],
+    monitoringConsiderations: [
+      "Renal function (BUN and serum creatinine) for dosage adjustment in renal impairment.",
+      "Complete blood count (CBC) with prolonged therapy to monitor for neutropenia."
+    ],
+    clinicalPearls: [
+      "Oral ampicillin is poorly absorbed compared to amoxicillin; therefore, ampicillin is primarily used intravenously (IV). Amoxicillin is preferred for oral outpatient therapy.",
+      "Essential component of empiric neonatal sepsis coverage specifically because it targets Listeria monocytogenes, which cephalosporins fail to cover."
+    ],
+    relatedPathogens: [
+      { id: "s-pyogenes", name: "Streptococcus pyogenes", relation: "Primary Target" },
+      { id: "s-agalactiae", name: "Streptococcus agalactiae", relation: "Primary Target" }
+    ],
+    relatedDiseases: [
+      { id: "neonatal-sepsis", name: "Neonatal Sepsis", relation: "First-Line Treatment" },
+      { id: "acute-bacterial-meningitis", name: "Acute Bacterial Meningitis", relation: "Empirical Choice" }
+    ]
+  },
+  {
+    id: "mupirocin",
+    name: "Mupirocin",
+    slug: "mupirocin",
+    category: "antibacterial",
+    drugClass: "Topical Isoleucyl-tRNA Synthetase Inhibitor",
+    mechanismOfAction: "Reversibly binds to bacterial isoleucyl-transfer RNA (tRNA) synthetase, preventing the incorporation of isoleucine into nascent polypeptide chains, thereby halting bacterial protein and RNA synthesis.",
+    spectrumOfActivity: [
+      "Excellent Gram-positive coverage, including Staphylococcus aureus (including MRSA) and Streptococcus pyogenes."
+    ],
+    commonIndications: [
+      "Topical treatment of impetigo.",
+      "Eradication of nasal colonization of MRSA in patients and healthcare workers."
+    ],
+    adverseEffects: [
+      "Local application site reactions: Burning, stinging, pruritus, or erythema."
+    ],
+    contraindications: [
+      "Known hypersensitivity to mupirocin or polyethylene glycol (PEG) ointment bases."
+    ],
+    monitoringConsiderations: [
+      "Visual inspection of localized skin lesions for clinical resolution or hypersensitivity dermatitis."
+    ],
+    clinicalPearls: [
+      "Mupirocin is strictly a topical agent; systemic administration is impossible due to rapid metabolic inactivation to monic acid.",
+      "Highly effective for MRSA nasal decolonization, helping to reduce the spread of MRSA in ICU and surgical settings."
+    ],
+    relatedPathogens: [
+      { id: "s-aureus", name: "Staphylococcus aureus", relation: "Primary Target" },
+      { id: "s-pyogenes", name: "Streptococcus pyogenes", relation: "Primary Target" }
+    ],
+    relatedDiseases: [
+      { id: "impetigo", name: "Impetigo", relation: "First-Line Treatment" }
+    ]
+  },
+  {
+    id: "terbinafine",
+    name: "Terbinafine",
+    slug: "terbinafine",
+    category: "antifungal",
+    drugClass: "Allylamine Squalene Epoxidase Inhibitor",
+    mechanismOfAction: "Inhibits squalene epoxidase, a key enzyme in fungal ergosterol biosynthesis. This leads to a toxic accumulation of squalene inside fungal cells and a deficiency in ergosterol, disrupting cell membrane integrity and causing fungal cell death.",
+    spectrumOfActivity: [
+      "Dermatophytes (Trichophyton, Microsporum, Epidermophyton).",
+      "Some Candida species (fungistatically active only)."
+    ],
+    commonIndications: [
+      "Onychomycosis (fungal nail infection).",
+      "Tinea pedis, tinea cruris, and tinea corporis (athlete's foot, jock itch, ringworm)."
+    ],
+    adverseEffects: [
+      "Hepatotoxicity: Elevated transaminases or rare acute liver failure.",
+      "Taste disturbances: Dysgeusia or ageusia (which can occasionally be permanent).",
+      "Gastrointestinal distress: Nausea, diarrhea, and dyspepsia.",
+      "Neutropenia."
+    ],
+    contraindications: [
+      "Chronic or active hepatic disease.",
+      "Hypersensitivity to terbinafine."
+    ],
+    monitoringConsiderations: [
+      "Baseline and periodic liver function tests (ALT, AST) are mandatory for oral therapy.",
+      "Complete blood count (CBC) if treated for greater than 6 weeks in immunocompromised hosts."
+    ],
+    clinicalPearls: [
+      "Highly lipophilic and keratophilic, allowing the drug to concentrate in nails, hair, and stratum corneum, remaining active long after therapy is discontinued.",
+      "Oral terbinafine is the gold standard first-line therapy for onychomycosis, but patients must be cautioned about the risk of taste alterations and liver toxicity."
+    ],
+    relatedPathogens: [
+      { id: "trichophyton-spp", name: "Trichophyton species", relation: "Primary Target" }
+    ],
+    relatedDiseases: [
+      { id: "dermatophytosis", name: "Dermatophytosis", relation: "First-Line Treatment" }
+    ]
+  },
+  {
+    id: "ofloxacin",
+    name: "Ofloxacin",
+    slug: "ofloxacin",
+    category: "antibacterial",
+    drugClass: "Fluoroquinolone DNA Gyrase Inhibitor",
+    mechanismOfAction: "Inhibits bacterial DNA gyrase (topoisomerase II) and topoisomerase IV, preventing DNA replication, transcription, repair, and recombination, leading to double-stranded DNA breaks and rapid cell death.",
+    spectrumOfActivity: [
+      "Gram-negative enterics (Escherichia coli, Klebsiella pneumoniae, Proteus species).",
+      "Atypical pathogens (Chlamydia trachomatis, Mycoplasma).",
+      "Some Gram-positive organisms."
+    ],
+    commonIndications: [
+      "Uncomplicated urinary tract infections (cystitis).",
+      "Chronic bacterial prostatitis.",
+      "Otic solution for otitis externa or otitis media with tympanostomy tubes.",
+      "Ophthalmic solution for bacterial conjunctivitis."
+    ],
+    adverseEffects: [
+      "Tendonitis and tendon rupture (especially Achilles tendon).",
+      "QTc interval prolongation.",
+      "Peripheral neuropathy.",
+      "Aortic aneurysm rupture.",
+      "Dysglycemia (hypoglycemia or hyperglycemia).",
+      "CNS effects: Hallucinations, confusion, or seizures."
+    ],
+    contraindications: [
+      "History of hypersensitivity to fluoroquinolones.",
+      "Concomitant use of tizanidine."
+    ],
+    monitoringConsiderations: [
+      "Electrocardiogram (ECG) for QTc interval duration in high-risk patients.",
+      "Renal function for dosage adjustment in renal impairment."
+    ],
+    clinicalPearls: [
+      "Like ciprofloxacin, ofloxacin has excellent Gram-negative coverage but lacks strong Streptococcus pneumoniae activity, meaning it is NOT a 'respiratory quinolone'.",
+      "Widely utilized as ear drops (otic) because it is non-ototoxic, unlike aminoglycoside-containing ear drops which cannot be used if the tympanic membrane is perforated."
+    ],
+    relatedPathogens: [
+      { id: "e-coli", name: "Escherichia coli", relation: "Primary Target" }
+    ],
+    relatedDiseases: [
+      { id: "uncomplicated-urinary-tract-infection", name: "Uncomplicated Urinary Tract Infection (Cystitis)", relation: "Alternative Option" },
+      { id: "acute-prostatitis", name: "Acute Prostatitis", relation: "First-Line Treatment" }
+    ]
+  },
+  {
+    id: "micafungin",
+    name: "Micafungin",
+    slug: "micafungin",
+    category: "antifungal",
+    drugClass: "Echinocandin Beta-1,3-D-Glucan Synthase Inhibitor",
+    mechanismOfAction: "Non-competitively inhibits the enzyme beta-1,3-D-glucan synthase, halting the synthesis of beta-1,3-D-glucan, an essential structural component of the fungal cell wall. This leads to cell wall instability, osmotic lysis, and fungal cell death.",
+    spectrumOfActivity: [
+      "Excellent fungicidal activity against Candida species (including azole-resistant C. glabrata and C. krusei).",
+      "Fungistatic activity against Aspergillus species (targeting active hyphal tips)."
+    ],
+    commonIndications: [
+      "First-line therapy for candidemia and invasive candidiasis.",
+      "Treatment of esophageal candidiasis.",
+      "Prophylaxis of Candida infections in hematopoietic stem cell transplant recipients."
+    ],
+    adverseEffects: [
+      "Infusion-related histamine reactions: Rash, pruritus, and facial swelling.",
+      "Hepatotoxicity: Elevated transaminases.",
+      "Electrolyte imbalances: Hypokalemia and hypomagnesemia.",
+      "Hemolytic anemia."
+    ],
+    contraindications: [
+      "Known hypersensitivity to micafungin or the echinocandin class."
+    ],
+    monitoringConsiderations: [
+      "Liver function panels (AST, ALT, Bilirubin) periodically.",
+      "Serum electrolytes (potassium, magnesium).",
+      "Complete blood count (CBC) to monitor for hemolytic anemia."
+    ],
+    clinicalPearls: [
+      "Unlike fluconazole, echinocandins like micafungin are NOT excreted in active form in the urine. Therefore, micafungin is completely useless for treating fungal urinary tract infections (Candida cystitis).",
+      "First-line empirical therapy for systemic candidemia over azoles, particularly in hemodynamically unstable or recently azole-exposed patients."
+    ],
+    relatedPathogens: [
+      { id: "c-albicans", name: "Candida albicans", relation: "Primary Target" }
+    ],
+    relatedDiseases: [
+      { id: "candidemia", name: "Candidemia & Invasive Candidiasis", relation: "First-Line Treatment" },
+      { id: "esophageal-candidiasis", name: "Esophageal Candidiasis", relation: "First-Line Treatment" }
+    ]
+  },
+  {
+    id: "valacyclovir",
+    name: "Valacyclovir",
+    slug: "valacyclovir",
+    category: "antiviral",
+    drugClass: "Nucleoside Analog DNA Polymerase Inhibitor",
+    mechanismOfAction: "An L-valine ester prodrug that is rapidly converted to acyclovir via first-pass intestinal and hepatic metabolism. Acyclovir is monophosphorylated by viral thymidine kinase, then further phosphorylated by host kinases to acyclovir triphosphate, which competitively inhibits viral DNA polymerase and acts as a DNA chain terminator.",
+    spectrumOfActivity: [
+      "Herpes Simplex Virus 1 (HSV-1).",
+      "Herpes Simplex Virus 2 (HSV-2).",
+      "Varicella-Zoster Virus (VZV)."
+    ],
+    commonIndications: [
+      "Herpes zoster (shingles).",
+      "Treatment and suppression of genital herpes.",
+      "Herpes labialis (cold sores)."
+    ],
+    adverseEffects: [
+      "Headache and nausea.",
+      "Nephrotoxicity: Obstructive crystalline nephropathy (seen with high doses and dehydration).",
+      "Thrombotic Microangiopathy (TTP/HUS) reported in immunocompromised patients on high doses."
+    ],
+    contraindications: [
+      "Hypersensitivity to valacyclovir, acyclovir, or any component of the formulation."
+    ],
+    monitoringConsiderations: [
+      "Renal function (Serum Creatinine, BUN) in elderly or renally impaired patients.",
+      "Assessment of fluid hydration status."
+    ],
+    clinicalPearls: [
+      "Valacyclovir has 3- to 5-fold higher oral bioavailability than oral acyclovir, achieving blood levels equivalent to intravenous acyclovir and allowing for much less frequent oral dosing (e.g., three times daily for shingles compared to five times daily for acyclovir).",
+      "Instruct patients to maintain high fluid intake during therapy to prevent acyclovir crystal precipitation in the renal tubules, which causes acute kidney injury."
+    ],
+    relatedPathogens: [
+      { id: "hsv-1", name: "Herpes Simplex Virus 1 (HSV-1)", relation: "Primary Target" },
+      { id: "hsv-2", name: "Herpes Simplex Virus 2 (HSV-2)", relation: "Primary Target" },
+      { id: "vzv", name: "Varicella-Zoster Virus (VZV)", relation: "Primary Target" }
+    ],
+    relatedDiseases: [
+      { id: "genital-herpes", name: "Genital Herpes", relation: "First-Line Treatment" },
+      { id: "herpes-zoster", name: "Herpes Zoster (Shingles)", relation: "First-Line Treatment" }
+    ]
+  },
+  {
+    id: "tmp-smx",
+    name: "TMP-SMX (Trimethoprim-Sulfamethoxazole)",
+    slug: "tmp-smx",
+    category: "antibacterial",
+    drugClass: "Folic Acid Synthesis Inhibitor (Sulfonamide + Trimethoprim)",
+    mechanismOfAction: "Dual-step sequential blockade: Sulfamethoxazole competitively inhibits dihydropteroate synthase (DHPS), blocking the incorporation of PABA into dihydropteroic acid. Trimethoprim inhibits dihydrofolate reductase (DHFR), blocking the reduction of dihydrofolate to tetrahydrofolate. This halts bacterial purine and DNA synthesis.",
+    spectrumOfActivity: [
+      "Gram-positive cocci (Staphylococcus aureus, including MRSA; Streptococcus pneumoniae).",
+      "Gram-negative rods (Escherichia coli, Proteus, Klebsiella, Shigella, Salmonella).",
+      "Opportunistic pathogens (Pneumocystis jirovecii, Nocardia, Toxoplasma gondii)."
+    ],
+    commonIndications: [
+      "Uncomplicated urinary tract infections (cystitis).",
+      "Pneumocystis jirovecii pneumonia (PJP) treatment and prophylaxis.",
+      "MRSA skin and soft tissue infections.",
+      "Toxoplasmosis prophylaxis."
+    ],
+    adverseEffects: [
+      "Severe hypersensitivity: Stevens-Johnson Syndrome (SJS) and Toxic Epidermal Necrolysis (TEN).",
+      "Hyperkalemia (trimethoprim blocks renal amiloride-sensitive sodium channels).",
+      "Nephrotoxicity (interstitial nephritis or pseudo-renal failure due to inhibition of creatinine secretion).",
+      "Hemolytic anemia in G6PD deficiency.",
+      "Megaloblastic anemia (folate deficiency)."
+    ],
+    contraindications: [
+      "Megaloblastic anemia due to folate deficiency.",
+      "History of drug-induced immune thrombocytopenia with sulfonamides.",
+      "Pregnancy at term (risk of kernicterus in the newborn)."
+    ],
+    monitoringConsiderations: [
+      "Serum potassium and creatinine levels.",
+      "Complete blood count (CBC) for bone marrow suppression.",
+      "Liver function panels."
+    ],
+    clinicalPearls: [
+      "TMP-SMX is the drug of choice for Pneumocystis jirovecii pneumonia (PJP) in immunocompromised patients, acting both as therapy and primary/secondary prophylaxis.",
+      "Can cause a false elevation in serum creatinine because trimethoprim inhibits the tubular secretion of creatinine without actually lowering the glomerular filtration rate (GFR)."
+    ],
+    relatedPathogens: [
+      { id: "s-aureus", name: "Staphylococcus aureus (MRSA)", relation: "Primary Target" },
+      { id: "pneumocystis-jirovecii", name: "Pneumocystis jirovecii", relation: "Primary Target" }
+    ],
+    relatedDiseases: [
+      { id: "uncomplicated-urinary-tract-infection", name: "Uncomplicated Urinary Tract Infection (Cystitis)", relation: "First-Line Treatment" },
+      { id: "pneumocystis-pneumonia", name: "Pneumocystis Pneumonia (PCP)", relation: "First-Line Treatment" }
+    ]
+  },
+  {
+    id: "isoniazid",
+    name: "Isoniazid",
+    slug: "isoniazid",
+    category: "antibacterial",
+    drugClass: "Mycolic Acid Synthesis Inhibitor (Anti-mycobacterial)",
+    mechanismOfAction: "A prodrug activated by mycobacterial catalase-peroxidase (KatG). Once activated, it binds to and inhibits inhA (enoyl-ACP reductase), an enzyme critical for the synthesis of mycolic acids, which are essential components of the mycobacterial cell wall, leading to cell death.",
+    spectrumOfActivity: [
+      "Mycobacterium tuberculosis (highly selective bactericidal activity against active replicating bacilli)."
+    ],
+    commonIndications: [
+      "Active pulmonary and extrapulmonary tuberculosis (part of the first-line RIPE regimen).",
+      "Latent tuberculosis infection (LTBI) monotherapy or in combination with rifapentine."
+    ],
+    adverseEffects: [
+      "Hepatotoxicity: Drug-induced hepatitis (risk increases with age and concurrent alcohol use).",
+      "Peripheral neuropathy (due to drug-induced pyridoxine [Vitamin B6] deficiency).",
+      "Drug-induced Lupus Erythematosus (DILE; associated with slow acetylator phenotype).",
+      "Sideroblastic anemia."
+    ],
+    contraindications: [
+      "Active acute liver disease.",
+      "History of severe hypersensitivity or severe hepatic injury with previous isoniazid use."
+    ],
+    monitoringConsiderations: [
+      "Baseline and periodic liver enzymes (AST, ALT, Bilirubin) monthly.",
+      "Assessment for symptoms of peripheral neuropathy (numbness, tingling)."
+    ],
+    clinicalPearls: [
+      "Isoniazid is metabolized by hepatic N-acetyltransferase 2 (NAT2). 'Slow acetylators' have significantly higher plasma drug levels, putting them at much greater risk for peripheral neuropathy and drug-induced lupus.",
+      "To prevent peripheral neuropathy, oral Isoniazid must always be co-prescribed with Pyridoxine (Vitamin B6) supplementation, especially in pregnant women, diabetics, alcoholics, or malnourished patients."
+    ],
+    relatedPathogens: [
+      { id: "m-tuberculosis", name: "Mycobacterium tuberculosis", relation: "Primary Target" }
+    ],
+    relatedDiseases: [
+      { id: "tuberculosis", name: "Tuberculosis (TB)", relation: "First-Line Treatment" }
+    ]
+  },
+  {
+    id: "artemether-lumefantrine",
+    name: "Artemether-Lumefantrine",
+    slug: "artemether-lumefantrine",
+    category: "antiparasitic",
+    drugClass: "Artemisinin-based Combination Therapy (ACT)",
+    mechanismOfAction: "Artemether is rapidly metabolized to dihydroartemisinin, which interacts with intra-parasitic iron (heme) inside the erythrocyte food vacuole, generating toxic free radicals that damage parasite proteins and membranes. Lumefantrine inhibits the formation of beta-hematin (hemozoin), preventing the detoxification of toxic free heme.",
+    spectrumOfActivity: [
+      "Plasmodium falciparum (including multi-drug resistant strains).",
+      "Plasmodium vivax, Plasmodium ovale, Plasmodium malariae (erythrocytic blood stages)."
+    ],
+    commonIndications: [
+      "First-line treatment of uncomplicated Plasmodium falciparum malaria."
+    ],
+    adverseEffects: [
+      "QTc interval prolongation.",
+      "Headache and dizziness.",
+      "Gastrointestinal distress: Anorexia, nausea, vomiting, or abdominal pain.",
+      "Myalgia and arthralgia."
+    ],
+    contraindications: [
+      "Known hypersensitivity to artemether, lumefantrine, or artemisinins.",
+      "Severe pre-existing cardiac conduction block or QTc prolongation."
+    ],
+    monitoringConsiderations: [
+      "Electrocardiogram (ECG) for QTc interval in patients with risk factors.",
+      "Parasite clearance monitoring via serial blood smears."
+    ],
+    clinicalPearls: [
+      "Global first-line standard of care (ACT) for uncomplicated P. falciparum malaria contracted in chloroquine-resistant regions.",
+      "Must be taken with fatty foods or milk to dramatically increase the systemic absorption of lumefantrine, ensuring therapeutic levels to prevent late clinical relapse."
+    ],
+    relatedPathogens: [
+      { id: "plasmodium-falciparum", name: "Plasmodium falciparum", relation: "Primary Target" }
+    ],
+    relatedDiseases: [
+      { id: "malaria", name: "Severe Malaria (Plasmodium falciparum)", relation: "First-Line Treatment" }
+    ]
+  },
+  {
+    id: "sofosbuvir-velpatasvir",
+    name: "Sofosbuvir-Velpatasvir",
+    slug: "sofosbuvir-velpatasvir",
+    category: "antiviral",
+    drugClass: "Direct-Acting Antiviral (DAA) Combination (NS5B + NS5A Inhibitor)",
+    mechanismOfAction: "Sofosbuvir is a uridine nucleotide analog prodrug that undergoes cellular phosphorylation to active triphosphate, which is incorporated into viral RNA by NS5B polymerase, causing chain termination. Velpatasvir inhibits the NS5A replication complex protein, blocking viral replication and assembly.",
+    spectrumOfActivity: [
+      "Hepatitis C Virus (HCV; pangenotypic coverage for genotypes 1, 2, 3, 4, 5, and 6)."
+    ],
+    commonIndications: [
+      "Treatment of chronic Hepatitis C Virus infection in adults and pediatric patients, with or without compensated cirrhosis."
+    ],
+    adverseEffects: [
+      "Headache and fatigue.",
+      "Gastrointestinal distress: Nausea and diarrhea.",
+      "Severe bradycardia when co-administered with amiodarone.",
+      "Reactivation of Hepatitis B Virus (HBV) in co-infected patients."
+    ],
+    contraindications: [
+      "Severe hypersensitivity to sofosbuvir, velpatasvir, or any component of the formulation."
+    ],
+    monitoringConsiderations: [
+      "Hepatitis B surface antigen (HBsAg) and core antibody (HBcAb) screening before treatment initiation (mandatory to prevent HBV reactivation).",
+      "HCV RNA levels to assess sustained virologic response (SVR)."
+    ],
+    clinicalPearls: [
+      "The first single-tablet, once-daily pangenotypic regimen for HCV, achieving cure rates (SVR12) greater than 95-98% across all major genotypes.",
+      "Co-administration with amiodarone is strictly contraindicated due to a high risk of fatal, symptomatic bradycardia; sofosbuvir levels can also be lowered by acid suppressors (PPIs), reducing efficacy."
+    ],
+    relatedPathogens: [
+      { id: "hepc", name: "Hepatitis C Virus", relation: "Primary Target" }
+    ],
+    relatedDiseases: [
+      { id: "hepatitis-c", name: "Hepatitis C", relation: "First-Line Treatment" }
+    ]
+  },
+  {
+    id: "glecaprevir-pibrentasvir",
+    name: "Glecaprevir-Pibrentasvir",
+    slug: "glecaprevir-pibrentasvir",
+    category: "antiviral",
+    drugClass: "Direct-Acting Antiviral (DAA) Combination (NS3/4A Protease + NS5A Inhibitor)",
+    mechanismOfAction: "Glecaprevir is an NS3/4A protease inhibitor that binds to and blocks the viral protease, preventing polyprotein cleavage essential for viral replication. Pibrentasvir is an NS5A inhibitor that targets the NS5A replication complex protein, preventing viral RNA replication and virion assembly.",
+    spectrumOfActivity: [
+      "Hepatitis C Virus (HCV; pangenotypic coverage for genotypes 1, 2, 3, 4, 5, and 6)."
+    ],
+    commonIndications: [
+      "Treatment of chronic Hepatitis C Virus infection, particularly suited for patients without cirrhosis in a short 8-week course, or patients with severe renal impairment (including dialysis)."
+    ],
+    adverseEffects: [
+      "Headache and fatigue.",
+      "Nausea.",
+      "Pruritus.",
+      "Risk of Hepatitis B Virus reactivation."
+    ],
+    contraindications: [
+      "Severe hepatic impairment (Child-Pugh Class C).",
+      "Co-administration with rifampin, atorvastatin, or ethinyl estradiol-containing oral contraceptives."
+    ],
+    monitoringConsiderations: [
+      "HBV screening prior to therapy to prevent viral reactivation.",
+      "Hepatic panels in patients with pre-existing cirrhosis.",
+      "HCV RNA load."
+    ],
+    clinicalPearls: [
+      "Unique among DAAs because it is completely excreted via biliary pathways, making it highly safe and the preferred choice for HCV patients with severe chronic kidney disease or on hemodialysis.",
+      "A standard course is highly effective in just 8 weeks for treatment-naive, non-cirrhotic patients, compared to 12 weeks for other regimens."
+    ],
+    relatedPathogens: [
+      { id: "hepc", name: "Hepatitis C Virus", relation: "Primary Target" }
+    ],
+    relatedDiseases: [
+      { id: "hepatitis-c", name: "Hepatitis C", relation: "First-Line Treatment" }
+    ]
+  },
+  {
+    id: "paxlovid",
+    name: "Paxlovid",
+    slug: "paxlovid",
+    category: "antiviral",
+    drugClass: "SARS-CoV-2 Protease Inhibitor Combination (Nirmatrelvir + Ritonavir)",
+    mechanismOfAction: "Nirmatrelvir is a peptidomimetic inhibitor of the SARS-CoV-2 main protease (Mpro or 3CLpro), blocking the cleavage of viral polyproteins essential for viral replication. Ritonavir is a potent CYP3A4 inhibitor that is added purely as a pharmacokinetic enhancer ('booster') to stop nirmatrelvir's rapid hepatic metabolism, maintaining therapeutic drug levels.",
+    spectrumOfActivity: [
+      "SARS-CoV-2 (including major variants like Omicron)."
+    ],
+    commonIndications: [
+      "Treatment of mild-to-moderate COVID-19 in adults and pediatric patients (12 years of age and older) who are at high risk for progression to severe COVID-19, hospitalization, or death."
+    ],
+    adverseEffects: [
+      "Dysgeusia (altered, metallic, or bitter taste; highly common).",
+      "Diarrhea.",
+      "Increased blood pressure.",
+      "Myalgia."
+    ],
+    contraindications: [
+      "Co-administration with highly CYP3A-dependent drugs where elevated levels are life-threatening (e.g., amiodarone, ergotamines, midazolam, simvastatin, sildenafil).",
+      "Hypersensitivity to nirmatrelvir or ritonavir."
+    ],
+    monitoringConsiderations: [
+      "Renal function (eGFR) for dosage adjustment (mandatory dose reduction for eGFR 30-50 mL/min; contraindicated if eGFR < 30 mL/min).",
+      "Hepatic panels in patients with severe liver disease.",
+      "Comprehensive medication list review for drug-drug interactions."
+    ],
+    clinicalPearls: [
+      "Paxlovid is a powerhouse for preventing COVID-19 hospitalizations, but it is a pharmacokinetic landmine. Ritonavir is a profound, irreversible inhibitor of CYP3A4, requiring careful checking and temporary cessation of many home medications (such as statins or calcium channel blockers).",
+      "Must be initiated within 5 days of COVID-19 symptom onset to provide clinical benefit, as viral replication peaks early in the course of the disease."
+    ],
+    relatedPathogens: [
+      { id: "sars-cov-2", name: "SARS-CoV-2", relation: "Primary Target" }
+    ],
+    relatedDiseases: [
+      { id: "covid-19", name: "COVID-19", relation: "First-Line Treatment" }
+    ]
   }
 ];

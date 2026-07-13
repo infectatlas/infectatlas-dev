@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { Microorganism, microorganismsData } from "../data/microorganisms";
-import { Search, Info, Award, ShieldAlert, Plus, Check } from "lucide-react";
+import { Search, Info, Award, ShieldAlert, Plus, Check, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface SearchEngineProps {
@@ -117,6 +118,16 @@ function MicrobeDetails({
             </div>
           </div>
         )}
+
+        {/* Open dedicated pathogen page link */}
+        <div className="pt-2">
+          <Link
+            to={`/organisms/${microbe.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`}
+            className="w-full flex items-center justify-center gap-1.5 py-3 px-4 bg-indigo-600 hover:bg-indigo-550 text-white font-extrabold text-xs rounded-xl shadow-3xs transition-all active:scale-[0.99] cursor-pointer"
+          >
+            Open Full Pathogen Chapter <ExternalLink className="h-3.5 w-3.5" />
+          </Link>
+        </div>
       </div>
     </div>
   );
@@ -165,7 +176,7 @@ export default function SearchEngine({
         
         <div className="relative z-10 flex flex-col gap-1.5">
           <div className="space-y-2">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white leading-tight">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white leading-tight font-display">
               Clinical Cross-Reference Engine
             </h2>
 
@@ -183,6 +194,7 @@ export default function SearchEngine({
           <input
             id="pathogen-search-input"
             type="text"
+            aria-label="Search pathogens database"
             placeholder="Search by microbe name, disease, characteristics, or drug (e.g., 'VRE', 'pneumonia', 'meropenem')"
             className="w-full pl-9 pr-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all text-slate-800"
             value={searchTerm}
@@ -193,6 +205,7 @@ export default function SearchEngine({
         <div className="md:col-span-3">
           <select
             id="gram-filter"
+            aria-label="Filter by Gram status"
             className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:bg-white text-slate-700"
             value={selectedGram}
             onChange={(e) => setSelectedGram(e.target.value)}
@@ -208,6 +221,7 @@ export default function SearchEngine({
         <div className="md:col-span-3">
           <select
             id="shape-filter"
+            aria-label="Filter by shape"
             className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:bg-white text-slate-700"
             value={selectedShape}
             onChange={(e) => setSelectedShape(e.target.value)}
@@ -246,7 +260,20 @@ export default function SearchEngine({
                       setSelectedMicrobe(microbe);
                     }
                   }}
-                  className={`p-3.5 rounded-xl border transition-all cursor-pointer flex flex-col justify-between ${
+                  onKeyDown={(e) => {
+                    if (e.key === " " || e.key === "Enter") {
+                      e.preventDefault();
+                      if (selectedMicrobe?.id === microbe.id) {
+                        setSelectedMicrobe(null);
+                      } else {
+                        setSelectedMicrobe(microbe);
+                      }
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Select pathogen ${microbe.name}`}
+                  className={`p-3.5 rounded-xl border transition-all cursor-pointer flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${
                     isSelected
                       ? "bg-indigo-50/70 border-indigo-400 shadow-xs"
                       : "bg-white border-slate-200 hover:border-slate-300 hover:shadow-xs"

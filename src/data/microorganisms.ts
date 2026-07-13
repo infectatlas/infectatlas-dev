@@ -2742,5 +2742,23 @@ export const microorganismsData: Microorganism[] = [
         clinicalPearl: "Endogenous spread following gum barrier breakage."
       }
     ]
+  },
+  {
+    id: "s-anginosus",
+    name: "Streptococcus anginosus",
+    gramStatus: "Gram-positive",
+    shape: "Cocci",
+    arrangement: "Chains",
+    characteristics: ["Catalase-negative", "Alpha/Beta/Gamma-hemolytic"],
+    description: "Part of the S. milleri group; highly pyogenic microaerophilic organism with a propensity for abscess formation.",
+    diseases: [
+      {
+        id: "sa-abscess",
+        name: "Brain Abscess",
+        treatment: "Surgical drainage + Ceftriaxone + Metronidazole",
+        route: "IV",
+        clinicalPearl: "Commonly associated with mixed aerobic/anaerobic flora."
+      }
+    ]
   }
 ];

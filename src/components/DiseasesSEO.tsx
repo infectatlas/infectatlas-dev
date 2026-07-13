@@ -3,6 +3,12 @@ import PublicFooter from "./PublicFooter";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
 import { diseasesData, Disease } from "../data/diseases";
+import { treatmentChoicesData } from "../data/treatmentChoices";
+import { fungiData } from "../data/fungi";
+import { virusesData } from "../data/viruses";
+import { parasitesData } from "../data/parasites";
+import { drugsData } from "../data/drugs";
+import { COMPARISONS_DATA } from "./ComparisonsSEO";
 import { 
   ArrowLeft, 
   BrainCircuit, 
@@ -26,9 +32,12 @@ import {
   Wind,
   Brain,
   Droplets,
+  Eye,
+  Baby,
   X
 } from "lucide-react";
 import ActiveRecallDrawer from "./ActiveRecallDrawer";
+import { DynamicRelatedContent, IntelligentLearningPath, ContinueLearningHistory } from "./GraphRecommendationEngine";
 
 // Helper to convert disease name to web-safe slug
 export const getDiseaseSlug = (name: string): string => {
@@ -38,6 +47,48 @@ export const getDiseaseSlug = (name: string): string => {
 // Helper for organism slugs
 export const getOrganismSlug = (name: string): string => {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+};
+
+// Helper for dynamic organism path checking
+export const getOrganismLinkPath = (name: string): string => {
+  const normName = name.toLowerCase().trim();
+  const slug = getOrganismSlug(name);
+  
+  // Check Fungi
+  if (fungiData.some(f => f.name.toLowerCase().trim() === normName || f.id.toLowerCase() === slug)) {
+    const found = fungiData.find(f => f.name.toLowerCase().trim() === normName || f.id.toLowerCase() === slug);
+    return `/fungi/${found ? found.id : slug}`;
+  }
+  
+  // Check Viruses
+  if (virusesData.some(v => v.name.toLowerCase().trim() === normName || v.id.toLowerCase() === slug)) {
+    const found = virusesData.find(v => v.name.toLowerCase().trim() === normName || v.id.toLowerCase() === slug);
+    return `/viruses/${found ? found.id : slug}`;
+  }
+  
+  // Check Parasites
+  if (parasitesData.some(p => p.name.toLowerCase().trim() === normName || p.id.toLowerCase() === slug)) {
+    const found = parasitesData.find(p => p.name.toLowerCase().trim() === normName || p.id.toLowerCase() === slug);
+    return `/parasites/${found ? found.id : slug}`;
+  }
+  
+  // Fallback to bacteria / general organisms
+  return `/organisms/${slug}`;
+};
+
+// Helper to resolve drug link if it exists
+export const getDrugLinkPath = (name: string): string | null => {
+  const normName = name.toLowerCase().trim();
+  const matched = drugsData.find(d => 
+    d.name.toLowerCase().trim() === normName || 
+    d.slug.toLowerCase() === normName ||
+    normName.includes(d.name.toLowerCase()) ||
+    d.name.toLowerCase().includes(normName)
+  );
+  if (matched) {
+    return `/drugs/${matched.slug}`;
+  }
+  return null;
 };
 
 export interface MedicalReference {
@@ -235,13 +286,15 @@ export interface SystemInfo {
 
 export const SYSTEMS_LIST = [
   { id: "all", name: "All Systems", iconName: "book" },
-  { id: "respiratory", name: "Respiratory Infections", iconName: "wind" },
-  { id: "gastrointestinal", name: "Gastrointestinal", iconName: "beaker" },
-  { id: "urinary", name: "Genitourinary & Pelvic", iconName: "droplets" },
-  { id: "cns", name: "CNS Infections", iconName: "brain" },
-  { id: "cardiovascular", name: "Sepsis & Cardiovascular", iconName: "heart" },
-  { id: "skin-soft-tissue", name: "Skin & Soft Tissue", iconName: "activity" },
-  { id: "bone-joint", name: "Musculoskeletal & Bone", iconName: "layers" },
+  { id: "respiratory", name: "Respiratory Diseases", iconName: "wind" },
+  { id: "neurologic", name: "Neurologic Diseases", iconName: "brain" },
+  { id: "genitourinary", name: "Genitourinary Diseases", iconName: "droplets" },
+  { id: "gastrointestinal", name: "Gastrointestinal Diseases", iconName: "beaker" },
+  { id: "cardiovascular", name: "Cardiovascular & Bloodstream Diseases", iconName: "heart" },
+  { id: "skin-soft-tissue", name: "Skin & Soft Tissue Diseases", iconName: "activity" },
+  { id: "bone-joint", name: "Bone & Joint Diseases", iconName: "layers" },
+  { id: "ophthalmology", name: "Ophthalmology & Ocular Diseases", iconName: "eye" },
+  { id: "obstetric-neonatal", name: "Obstetric & Neonatal Diseases", iconName: "baby" },
 ];
 
 export const getDiseaseSystem = (diseaseId: string): SystemInfo => {
@@ -250,38 +303,83 @@ export const getDiseaseSystem = (diseaseId: string): SystemInfo => {
     "hospital-acquired-pneumonia",
     "acute-bacterial-sinusitis",
     "streptococcal-pharyngitis",
-    "acute-otitis-media"
+    "acute-otitis-media",
+    "aspergillosis",
+    "influenza",
+    "tuberculosis",
+    "pertussis",
+    "covid-19",
+    "pneumocystis-pneumonia"
   ];
   const gastrointestinalIds = [
     "pseudomembranous-colitis",
-    "intra-abdominal-infection"
+    "intra-abdominal-infection",
+    "hepatitis-c",
+    "acute-bacterial-gastroenteritis",
+    "viral-gastroenteritis",
+    "giardiasis",
+    "amebiasis"
   ];
-  const urinaryIds = [
+  const genitourinaryIds = [
     "uncomplicated-urinary-tract-infection",
     "pyelonephritis",
     "urethritis",
     "catheter-associated-urinary-tract-infection",
-    "pelvic-inflammatory-disease"
+    "pelvic-inflammatory-disease",
+    "genital-herpes",
+    "vulvovaginal-candidiasis",
+    "trichomoniasis"
   ];
-  const cnsIds = [
-    "acute-bacterial-meningitis"
+  const neurologicIds = [
+    "acute-bacterial-meningitis",
+    "cryptococcal-meningitis",
+    "viral-meningitis",
+    "hsv-encephalitis",
+    "brain-abscess",
+    "cerebral-toxoplasmosis"
   ];
   const cardiovascularIds = [
     "infective-endocarditis",
     "bacteremia",
     "central-line-associated-bloodstream-infection",
-    "sepsis"
+    "sepsis",
+    "candidemia",
+    "malaria",
+    "prosthetic-valve-endocarditis",
+    "lyme-carditis"
   ];
   const skinIds = [
     "cellulitis-and-skin-infections",
     "necrotizing-fasciitis",
-    "surgical-site-infection"
+    "surgical-site-infection",
+    "impetigo",
+    "erysipelas",
+    "herpes-zoster",
+    "dermatophytosis"
+  ];
+  const boneJointIds = [
+    "osteomyelitis",
+    "septic-arthritis",
+    "prosthetic-joint-infection"
+  ];
+  const ophthalmologyIds = [
+    "bacterial-conjunctivitis",
+    "viral-conjunctivitis",
+    "herpes-keratitis",
+    "endophthalmitis"
+  ];
+  const obstetricNeonatalIds = [
+    "neonatal-sepsis",
+    "congenital-cmv",
+    "congenital-toxoplasmosis",
+    "neonatal-hsv",
+    "group-b-streptococcus-gbs"
   ];
 
   if (respiratoryIds.includes(diseaseId)) {
     return {
       id: "respiratory",
-      name: "Respiratory Infections",
+      name: "Respiratory Diseases",
       slug: "respiratory",
       iconName: "wind",
       colorClass: "sky",
@@ -298,7 +396,7 @@ export const getDiseaseSystem = (diseaseId: string): SystemInfo => {
   if (gastrointestinalIds.includes(diseaseId)) {
     return {
       id: "gastrointestinal",
-      name: "Gastrointestinal Infections",
+      name: "Gastrointestinal Diseases",
       slug: "gastrointestinal",
       iconName: "beaker",
       colorClass: "emerald",
@@ -312,15 +410,15 @@ export const getDiseaseSystem = (diseaseId: string): SystemInfo => {
     };
   }
 
-  if (urinaryIds.includes(diseaseId)) {
+  if (genitourinaryIds.includes(diseaseId)) {
     return {
-      id: "urinary",
-      name: "Genitourinary & Pelvic",
-      slug: "urinary",
+      id: "genitourinary",
+      name: "Genitourinary Diseases",
+      slug: "genitourinary",
       iconName: "droplets",
       colorClass: "amber",
       bannerClass: "from-amber-500/10 to-indigo-50/20 border-amber-100/50",
-      badgeClass: "bg-amber-50 text-amber-800 border-amber-100",
+      badgeClass: "bg-amber-50 text-amber-850 border-amber-100",
       borderClass: "border-amber-200",
       accentBorder: "border-l-4 border-l-amber-500",
       hoverClass: "hover:border-amber-300 hover:shadow-amber-500/10",
@@ -329,11 +427,11 @@ export const getDiseaseSystem = (diseaseId: string): SystemInfo => {
     };
   }
 
-  if (cnsIds.includes(diseaseId)) {
+  if (neurologicIds.includes(diseaseId)) {
     return {
-      id: "cns",
-      name: "Central Nervous System",
-      slug: "cns",
+      id: "neurologic",
+      name: "Neurologic Diseases",
+      slug: "neurologic",
       iconName: "brain",
       colorClass: "purple",
       bannerClass: "from-purple-500/10 to-indigo-50/20 border-purple-100/50",
@@ -349,7 +447,7 @@ export const getDiseaseSystem = (diseaseId: string): SystemInfo => {
   if (cardiovascularIds.includes(diseaseId)) {
     return {
       id: "cardiovascular",
-      name: "Sepsis & Cardiovascular",
+      name: "Cardiovascular & Bloodstream Diseases",
       slug: "cardiovascular",
       iconName: "heart",
       colorClass: "rose",
@@ -366,7 +464,7 @@ export const getDiseaseSystem = (diseaseId: string): SystemInfo => {
   if (skinIds.includes(diseaseId)) {
     return {
       id: "skin-soft-tissue",
-      name: "Skin & Soft Tissue",
+      name: "Skin & Soft Tissue Diseases",
       slug: "skin-soft-tissue",
       iconName: "activity",
       colorClass: "teal",
@@ -380,9 +478,43 @@ export const getDiseaseSystem = (diseaseId: string): SystemInfo => {
     };
   }
 
+  if (ophthalmologyIds.includes(diseaseId)) {
+    return {
+      id: "ophthalmology",
+      name: "Ophthalmology & Ocular Diseases",
+      slug: "ophthalmology",
+      iconName: "eye",
+      colorClass: "indigo",
+      bannerClass: "from-indigo-500/10 to-indigo-50/20 border-indigo-100/50",
+      badgeClass: "bg-indigo-50 text-indigo-700 border-indigo-100",
+      borderClass: "border-indigo-200",
+      accentBorder: "border-l-4 border-l-indigo-500",
+      hoverClass: "hover:border-indigo-300 hover:shadow-indigo-500/10",
+      textClass: "text-indigo-700",
+      tagLabel: "Ophthalmology / Ocular"
+    };
+  }
+
+  if (obstetricNeonatalIds.includes(diseaseId)) {
+    return {
+      id: "obstetric-neonatal",
+      name: "Obstetric & Neonatal Diseases",
+      slug: "obstetric-neonatal",
+      iconName: "baby",
+      colorClass: "pink",
+      bannerClass: "from-pink-500/10 to-indigo-50/20 border-pink-100/50",
+      badgeClass: "bg-pink-50 text-pink-700 border-pink-100",
+      borderClass: "border-pink-200",
+      accentBorder: "border-l-4 border-l-pink-500",
+      hoverClass: "hover:border-pink-300 hover:shadow-pink-500/10",
+      textClass: "text-pink-700",
+      tagLabel: "Obstetric / Neonatal"
+    };
+  }
+
   return {
     id: "bone-joint",
-    name: "Musculoskeletal & Bone",
+    name: "Bone & Joint Diseases",
     slug: "bone-joint",
     iconName: "layers",
     colorClass: "orange",
@@ -412,6 +544,10 @@ export const renderSystemIcon = (iconName: string, className = "h-5 w-5") => {
       return <Activity className={className} />;
     case "layers":
       return <Layers className={className} />;
+    case "eye":
+      return <Eye className={className} />;
+    case "baby":
+      return <Baby className={className} />;
     default:
       return <BookOpen className={className} />;
   }
@@ -461,7 +597,7 @@ export const getSystemStyle = (colorClass: string) => {
         lightBorder: "border-purple-100",
         hover: "hover:border-purple-300 hover:shadow-purple-100/40",
         accentLine: "border-l-purple-500",
-        accentText: "text-purple-650"
+        accentText: "text-purple-700"
       };
     case "rose":
       return {
@@ -485,6 +621,28 @@ export const getSystemStyle = (colorClass: string) => {
         accentLine: "border-l-teal-500",
         accentText: "text-teal-600"
       };
+    case "indigo":
+      return {
+        bg: "bg-indigo-50/40",
+        border: "border-indigo-500",
+        text: "text-indigo-850",
+        pill: "bg-indigo-50 text-indigo-700 border-indigo-101",
+        lightBorder: "border-indigo-100",
+        hover: "hover:border-indigo-300 hover:shadow-indigo-100/40",
+        accentLine: "border-l-indigo-500",
+        accentText: "text-indigo-600"
+      };
+    case "pink":
+      return {
+        bg: "bg-pink-50/40",
+        border: "border-pink-500",
+        text: "text-pink-850",
+        pill: "bg-pink-50 text-pink-700 border-pink-101",
+        lightBorder: "border-pink-100",
+        hover: "hover:border-pink-300 hover:shadow-pink-100/40",
+        accentLine: "border-l-pink-500",
+        accentText: "text-pink-600"
+      };
     default:
       return {
         bg: "bg-orange-50/40",
@@ -493,7 +651,7 @@ export const getSystemStyle = (colorClass: string) => {
         pill: "bg-orange-50 text-orange-700 border-orange-101",
         lightBorder: "border-orange-100",
         hover: "hover:border-orange-300 hover:shadow-orange-100/40",
-        accentLine: "border-l-orange-550",
+        accentLine: "border-l-orange-500",
         accentText: "text-orange-600"
       };
   }
@@ -811,6 +969,11 @@ export default function DiseasesSEO() {
                     <span className="bg-slate-100 border border-slate-200 text-slate-600 font-extrabold text-[9px] uppercase px-2.5 py-1 rounded-full">
                       {system!.tagLabel}
                     </span>
+                    {disease.hostFactors && disease.hostFactors.map((hf, i) => (
+                      <span key={i} className="bg-rose-50 border border-rose-200 text-rose-700 font-extrabold text-[9px] uppercase px-2.5 py-1 rounded-full flex items-center gap-1 shadow-2xs">
+                        🏷️ {hf}
+                      </span>
+                    ))}
                   </div>
 
                   <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-sans">
@@ -948,7 +1111,7 @@ export default function DiseasesSEO() {
                             {cp.name}
                           </h3>
                           <Link
-                            to={`/organisms/${getOrganismSlug(cp.name)}`}
+                            to={getOrganismLinkPath(cp.name)}
                             className="text-[10px] text-indigo-650 font-bold hover:underline flex items-center gap-0.5 whitespace-nowrap cursor-pointer"
                           >
                             Organism Details <ExternalLink className="h-2.5 w-2.5" />
@@ -983,20 +1146,182 @@ export default function DiseasesSEO() {
                 </div>
 
                 {/* Treatment Principles */}
-                <div className="space-y-3" id="treatment">
+                <div className="space-y-4" id="treatment">
                   <div className="flex items-center gap-2">
                     <Table className="h-4.5 w-4.5 text-indigo-505" />
-                    <h2 className="text-lg font-extrabold text-slate-900 tracking-tight">
+                    <h2 className="text-lg font-extrabold text-slate-900 tracking-tight font-display">
                       Empirical and Directed Pharmacological Principles
                     </h2>
                   </div>
-                  <div className="prose max-w-none text-sm text-slate-600 leading-relaxed font-normal space-y-3">
-                    <p>{disease.treatmentPrinciples}</p>
+
+                  {/* High-Yield Pharmacotherapy Summary Card */}
+                  <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-5 space-y-4 shadow-3xs">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/60 pb-3">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-indigo-950 flex items-center gap-1.5">
+                        <Table className="h-4 w-4 text-indigo-600" />
+                        Quick-Reference Pharmacotherapy Matrix
+                      </span>
+                      <span className="text-[9px] bg-indigo-100 border border-indigo-200 text-indigo-700 px-2.5 py-0.5 rounded font-extrabold uppercase w-max">
+                        First-Line vs. Alternatives
+                      </span>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      {/* Preferred / First Line */}
+                      <div className="space-y-3">
+                        <span className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider flex items-center gap-1.5">
+                          <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse-subtle" />
+                          Preferred / First-Line Regimen
+                        </span>
+                        <div className="space-y-2">
+                          {disease.relatedAntibiotics.filter(ab => 
+                            ab.role.toLowerCase().includes("first-line") || 
+                            ab.role.toLowerCase().includes("preferred") || 
+                            ab.role.toLowerCase().includes("primary") || 
+                            (!ab.role.toLowerCase().includes("alternative") && !ab.role.toLowerCase().includes("second") && !ab.role.toLowerCase().includes("resistant"))
+                          ).map((ab, i) => {
+                            const drugLink = getDrugLinkPath(ab.name);
+                            return (
+                              <div key={i} className="p-3 bg-white border border-emerald-100 rounded-xl flex flex-col gap-1 shadow-3xs hover:border-emerald-200 transition-all">
+                                {drugLink ? (
+                                  <Link to={drugLink} className="font-extrabold text-emerald-700 hover:underline inline-flex items-center gap-1 text-xs italic">
+                                    {ab.name} <ExternalLink className="h-2.5 w-2.5" />
+                                  </Link>
+                                ) : (
+                                  <span className="font-extrabold text-slate-800 text-xs italic">{ab.name}</span>
+                                )}
+                                <span className="text-[10.5px] text-slate-500 font-semibold leading-relaxed">{ab.role}</span>
+                              </div>
+                            );
+                          })}
+                          {disease.relatedAntibiotics.filter(ab => 
+                            ab.role.toLowerCase().includes("first-line") || 
+                            ab.role.toLowerCase().includes("preferred") || 
+                            ab.role.toLowerCase().includes("primary") || 
+                            (!ab.role.toLowerCase().includes("alternative") && !ab.role.toLowerCase().includes("second") && !ab.role.toLowerCase().includes("resistant"))
+                          ).length === 0 && (
+                            <p className="text-xs text-slate-400 italic">Refer to primary clinical guidelines below.</p>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Alternatives */}
+                      <div className="space-y-3">
+                        <span className="text-[10px] font-bold text-amber-850 uppercase tracking-wider flex items-center gap-1.5">
+                          <span className="h-2 w-2 rounded-full bg-amber-500" />
+                          Alternative / Secondary Regimen
+                        </span>
+                        <div className="space-y-2">
+                          {disease.relatedAntibiotics.filter(ab => 
+                            ab.role.toLowerCase().includes("alternative") || 
+                            ab.role.toLowerCase().includes("second") || 
+                            ab.role.toLowerCase().includes("resistant")
+                          ).map((ab, i) => {
+                            const drugLink = getDrugLinkPath(ab.name);
+                            return (
+                              <div key={i} className="p-3 bg-white border border-amber-100 rounded-xl flex flex-col gap-1 shadow-3xs hover:border-amber-200 transition-all">
+                                {drugLink ? (
+                                  <Link to={drugLink} className="font-extrabold text-amber-800 hover:underline inline-flex items-center gap-1 text-xs italic">
+                                    {ab.name} <ExternalLink className="h-2.5 w-2.5" />
+                                  </Link>
+                                ) : (
+                                  <span className="font-extrabold text-slate-850 text-xs italic">{ab.name}</span>
+                                )}
+                                <span className="text-[10.5px] text-slate-550 font-semibold leading-relaxed">{ab.role}</span>
+                              </div>
+                            );
+                          })}
+                          {disease.relatedAntibiotics.filter(ab => 
+                            ab.role.toLowerCase().includes("alternative") || 
+                            ab.role.toLowerCase().includes("second") || 
+                            ab.role.toLowerCase().includes("resistant")
+                          ).length === 0 && (
+                            <p className="text-xs text-slate-400 italic font-medium">No alternative agents listed. See clinical guidelines below.</p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="prose max-w-none text-sm text-slate-650 leading-relaxed font-normal space-y-3">
+                    <p className="font-medium text-slate-650">{disease.treatmentPrinciples}</p>
                     <p className="italic text-xs text-slate-400">
-                      Note: Always corroborate treatment planning with institutional antibiograms, clinical pharmacist assessment, and primary national clinical consensus guidelines (e.g., IDSA/ATS).
+                      Note: Always corroborate treatment planning with localized antibiograms, clinical pharmacist assessment, and primary national clinical consensus guidelines (e.g., IDSA/ATS).
                     </p>
                   </div>
                 </div>
+
+                {/* Treatment Choice Clinical Reasoning Block */}
+                {(() => {
+                  const matchedChoice = treatmentChoicesData.find(tc => 
+                    tc.linkedDiseases.includes(disease.id) || 
+                    tc.linkedDiseases.includes(disease.slug)
+                  );
+                  if (!matchedChoice) return null;
+                  return (
+                    <div className="bg-sky-50/50 border border-sky-100 rounded-2xl p-5 md:p-6 space-y-4 animate-fade-in" id="treatment-choice-reasoning">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div className="space-y-1">
+                          <span className="bg-sky-100 border border-sky-250 text-sky-800 font-extrabold text-[10px] uppercase px-2.5 py-1 rounded-full tracking-wider leading-none inline-block shadow-3xs">
+                            Treatment Choice
+                          </span>
+                          <h3 className="text-base font-black text-slate-900 tracking-tight flex items-center gap-2">
+                            <BrainCircuit className="h-4.5 w-4.5 text-sky-600 shrink-0" />
+                            {matchedChoice.title.includes(":") ? matchedChoice.title.split(":")[0].trim() + ": " : ""}Why is {matchedChoice.preferredTreatment.name} Preferred over {matchedChoice.alternativeTreatment.name}?
+                          </h3>
+                        </div>
+                        <Link
+                          to={`/${matchedChoice.slug}`}
+                          className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-sky-600 hover:bg-sky-500 text-white text-xs font-extrabold rounded-xl shadow-sm hover:shadow-md transition-all self-start sm:self-center cursor-pointer border border-sky-650"
+                        >
+                          View Full Breakdown
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </Link>
+                      </div>
+
+                      <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                        {matchedChoice.intro}
+                      </p>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+                        <div className="bg-white border border-emerald-100 rounded-xl p-4 space-y-2.5 shadow-3xs">
+                          <h4 className="text-xs font-bold text-emerald-800 flex items-center gap-1.5 uppercase tracking-wide">
+                            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                            Why {matchedChoice.preferredTreatment.name}?
+                          </h4>
+                          <ul className="space-y-1.5">
+                            {matchedChoice.preferredTreatment.reasons.slice(0, 2).map((reason, rIdx) => (
+                              <li key={rIdx} className="flex items-start gap-2 text-xs text-slate-600 font-medium leading-relaxed">
+                                <span className="text-emerald-500 font-bold shrink-0 mt-0.5">✓</span>
+                                <span>{reason}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div className="bg-white border border-slate-200 rounded-xl p-4 space-y-2.5 shadow-3xs">
+                          <h4 className="text-xs font-bold text-slate-700 flex items-center gap-1.5 uppercase tracking-wide">
+                            <span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
+                            Why {matchedChoice.alternativeTreatment.name} Isn't Preferred
+                          </h4>
+                          <ul className="space-y-1.5">
+                            {matchedChoice.alternativeTreatment.reasonsNotPreferred.slice(0, 2).map((reason, rIdx) => (
+                              <li key={rIdx} className="flex items-start gap-2 text-xs text-slate-600 font-medium leading-relaxed">
+                                <span className="text-slate-400 font-bold shrink-0 mt-0.5">•</span>
+                                <span>{reason}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div className="text-[11px] bg-sky-100/40 text-sky-905 border border-sky-100/60 p-3 rounded-lg leading-relaxed font-semibold">
+                        <strong className="text-sky-955 font-extrabold uppercase text-[9px] tracking-wider block mb-0.5">High-Yield Pearl:</strong>
+                        {matchedChoice.boardPearl}
+                      </div>
+                    </div>
+                  );
+                })()}
 
                 {/* Clinical Pearls with high engagement board highlights */}
                 <div className="bg-indigo-950 text-indigo-100 rounded-2xl p-6 shadow-sm space-y-4" id="clinical-pearls">
@@ -1103,7 +1428,7 @@ export default function DiseasesSEO() {
                     </h3>
                   </div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-sans">
+                  <div className={`grid grid-cols-1 ${disease.relatedComparisons && disease.relatedComparisons.length > 0 ? 'md:grid-cols-4' : 'md:grid-cols-3'} gap-4 text-xs font-sans`}>
                     
                     {/* Organisms Links */}
                     <div className="p-4 bg-white border border-slate-200 rounded-xl space-y-2">
@@ -1112,7 +1437,7 @@ export default function DiseasesSEO() {
                         {disease.relatedOrganisms.map((ro, i) => (
                           <Link
                             key={i}
-                            to={`/organisms/${ro.slug}`}
+                            to={getOrganismLinkPath(ro.name)}
                             className="block font-bold text-indigo-650 hover:underline cursor-pointer italic"
                           >
                             {ro.name} →
@@ -1125,14 +1450,28 @@ export default function DiseasesSEO() {
                     <div className="p-4 bg-white border border-slate-200 rounded-xl space-y-2">
                       <span className="text-[9px] uppercase font-bold text-slate-400">Target Antibiotics</span>
                       <div className="space-y-1">
-                        {disease.relatedAntibiotics.map((ab, i) => (
-                          <span
-                            key={i}
-                            className="block font-medium text-slate-700 italic"
-                          >
-                            {ab.name} <span className="text-[10px] text-slate-400 font-sans font-normal">({ab.role})</span>
-                          </span>
-                        ))}
+                        {disease.relatedAntibiotics.map((ab, i) => {
+                          const drugLink = getDrugLinkPath(ab.name);
+                          if (drugLink) {
+                            return (
+                              <Link
+                                key={i}
+                                to={drugLink}
+                                className="block font-bold text-indigo-650 hover:underline cursor-pointer italic"
+                              >
+                                {ab.name} <span className="text-[10px] text-slate-400 font-sans font-normal">({ab.role}) →</span>
+                              </Link>
+                            );
+                          }
+                          return (
+                            <span
+                              key={i}
+                              className="block font-medium text-slate-700 italic"
+                            >
+                              {ab.name} <span className="text-[10px] text-slate-400 font-sans font-normal">({ab.role})</span>
+                            </span>
+                          );
+                        })}
                       </div>
                     </div>
 
@@ -1152,8 +1491,35 @@ export default function DiseasesSEO() {
                       </div>
                     </div>
 
+                    {/* Diagnostic Comparisons Links */}
+                    {disease.relatedComparisons && disease.relatedComparisons.length > 0 && (
+                      <div className="p-4 bg-indigo-50/40 border border-indigo-100 rounded-xl space-y-2">
+                        <span className="text-[9px] uppercase font-bold text-indigo-600">Diagnostic Comparisons</span>
+                        <div className="space-y-1">
+                          {disease.relatedComparisons.map((rc, i) => {
+                            const isMatched = COMPARISONS_DATA.some(c => c.slug === rc.slug);
+                            const path = isMatched ? `/${rc.slug}` : `/comparisons`;
+                            return (
+                              <Link
+                                key={i}
+                                to={path}
+                                className="block font-bold text-indigo-750 hover:underline cursor-pointer"
+                              >
+                                {rc.name} →
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+
                   </div>
                 </div>
+
+                {/* Graph-driven Intelligent Learning Experience widgets */}
+                <IntelligentLearningPath entityType="disease" idOrSlug={disease.id} />
+                <DynamicRelatedContent entityType="disease" idOrSlug={disease.id} />
+                <ContinueLearningHistory />
 
                 {/* Medical Evidence Portal: References, guidelines, review parameters */}
                 <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-2xs space-y-4 scroll-mt-24 font-sans" id="medical-evidence">

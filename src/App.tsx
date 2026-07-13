@@ -12,10 +12,13 @@ import MarketingLandingPage from "./components/MarketingLandingPage";
 import LegalPage from "./components/LegalPage";
 import OrganismsSEO from "./components/OrganismsSEO";
 import FungiSEO from "./components/FungiSEO";
+import VirusesSEO from "./components/VirusesSEO";
+import ParasitesSEO from "./components/ParasitesSEO";
 import DiseasesSEO from "./components/DiseasesSEO";
 import DrugsSEO from "./components/DrugsSEO";
 import ComparisonsSEO, { COMPARISONS_DATA } from "./components/ComparisonsSEO";
 import HowItWorksPage from "./components/HowItWorks";
+import ContentUnavailable from "./components/ContentUnavailable";
 import { isSupabaseConfigured, syncUserDataToCloud } from "./lib/supabase";
 import { Search, BrainCircuit, Activity, BookOpen, Layers, Award, Grid, Sparkles, ShieldCheck, CheckCircle, Database, Cloud, CloudOff, RefreshCw, X } from "lucide-react";
 import { analytics as analyticsUtil } from "./utils/analytics";
@@ -83,27 +86,6 @@ function InnerApp() {
     navigate(`/app/${tab}`);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
-  // Redirect invalid paths to root / or let SEO slugs load cleanly
-  useEffect(() => {
-    const path = location.pathname.toLowerCase().trim().replace(/\/$/, "");
-    const isComparison = path === "/comparisons" || COMPARISONS_DATA.some(c => path === "/" + c.slug);
-
-    if (
-      location.pathname !== "/" && 
-      !isComparison &&
-      location.pathname !== "/how-it-works" &&
-      location.pathname !== "/privacy" &&
-      location.pathname !== "/terms" &&
-      !location.pathname.startsWith("/app") && 
-      !location.pathname.startsWith("/organisms") && 
-      !location.pathname.startsWith("/fungi") && 
-      !location.pathname.startsWith("/diseases") && 
-      !location.pathname.startsWith("/drugs")
-    ) {
-      navigate("/", { replace: true });
-    }
-  }, [location.pathname, navigate]);
 
   // Technical SEO meta-robots management: block search indexes on study paths
   useEffect(() => {
@@ -564,12 +546,24 @@ function InnerApp() {
     return <FungiSEO />;
   }
 
+  if (location.pathname.startsWith("/viruses")) {
+    return <VirusesSEO />;
+  }
+
+  if (location.pathname.startsWith("/parasites")) {
+    return <ParasitesSEO />;
+  }
+
   if (location.pathname.startsWith("/diseases")) {
     return <DiseasesSEO />;
   }
 
   if (location.pathname.startsWith("/drugs")) {
     return <DrugsSEO />;
+  }
+
+  if (!location.pathname.startsWith("/app")) {
+    return <ContentUnavailable />;
   }
 
   return (
@@ -736,7 +730,7 @@ function InnerApp() {
             onClick={() => handleTabChange("grid")}
             className={`flex items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs font-semibold rounded-lg transition-all shrink-0 ${
               activeTab === "grid"
-                ? "bg-indigo-55 text-indigo-700 bg-indigo-55 font-bold"
+                ? "bg-indigo-50 text-indigo-700 font-bold"
                 : "text-slate-500 hover:text-slate-800 hover:bg-slate-50"
             }`}
           >

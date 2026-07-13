@@ -31,6 +31,7 @@ import {
   X
 } from "lucide-react";
 import ActiveRecallDrawer from "./ActiveRecallDrawer";
+import { DynamicRelatedContent, IntelligentLearningPath, ContinueLearningHistory } from "./GraphRecommendationEngine";
 
 // Helper to categorize drugs for filters
 const CLASS_FILTERS = [
@@ -479,23 +480,37 @@ export default function DrugsSEO() {
                     </div>
                   </div>
 
-                  {/* Section: Safety, Warnings & Adverse Effects */}
+                   {/* Section: Safety, Warnings & Adverse Effects */}
                   <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-2xs space-y-5 scroll-mt-24" id="safety-warnings">
                     
                     <div className="space-y-4">
                       <h2 className="text-xs font-black text-indigo-950 uppercase tracking-widest flex items-center gap-1.5 border-b border-rose-100 pb-2.5">
-                        <ShieldAlert className="h-4 w-4 text-rose-500" />
+                        <ShieldAlert className="h-4 w-4 text-rose-500 animate-pulse-subtle" />
                         Pathological Adverse Effects
                       </h2>
-                      <div className="grid grid-cols-1 gap-3">
-                        {drug.adverseEffects.map((ae, i) => (
-                          <div key={i} className="p-4 bg-rose-50/40 border border-rose-100 rounded-xl flex items-start gap-3">
-                            <AlertTriangle className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
-                            <div>
-                              <p className="text-xs text-slate-800 font-bold leading-relaxed">{ae}</p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {drug.adverseEffects.map((ae, i) => {
+                          const hasColon = ae.includes(":");
+                          const title = hasColon ? ae.substring(0, ae.indexOf(":")).trim() : ae;
+                          const desc = hasColon ? ae.substring(ae.indexOf(":") + 1).trim() : "";
+                          return (
+                            <div key={i} className="p-3 bg-rose-50/25 border border-rose-100/60 rounded-xl flex items-start gap-2.5 transition-all hover:bg-rose-50/50">
+                              <span className="flex items-center justify-center h-5 w-5 rounded-full bg-rose-100 text-rose-700 font-extrabold text-[10px] shrink-0 mt-0.5 shadow-3xs">
+                                !
+                              </span>
+                              <div className="space-y-0.5">
+                                <h4 className="text-xs font-extrabold text-rose-950">
+                                  {title}
+                                </h4>
+                                {desc && (
+                                  <p className="text-[11px] text-slate-600 leading-relaxed font-semibold">
+                                    {desc}
+                                  </p>
+                                )}
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     </div>
 
@@ -504,10 +519,13 @@ export default function DrugsSEO() {
                         <XCircle className="h-4 w-4 text-red-500" />
                         Major Contraindications & Precautions
                       </h3>
-                      <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
-                        <ul className="text-xs text-slate-700 space-y-2 pl-4 list-disc leading-relaxed font-semibold">
+                      <div className="bg-slate-50/60 rounded-xl p-4 border border-slate-150">
+                        <ul className="text-xs text-slate-700 space-y-2.5 pl-1.5 leading-relaxed font-semibold list-none">
                           {drug.contraindications.map((contra, i) => (
-                            <li key={i}>{contra}</li>
+                            <li key={i} className="flex items-start gap-2">
+                              <span className="text-red-500 font-black shrink-0 mt-0.5">✕</span>
+                              <span>{contra}</span>
+                            </li>
                           ))}
                         </ul>
                       </div>
@@ -518,7 +536,7 @@ export default function DrugsSEO() {
                   {/* Section: Monitoring Considerations */}
                   <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-2xs space-y-4 scroll-mt-24" id="monitoring">
                     <h2 className="text-xs font-black text-indigo-950 uppercase tracking-widest flex items-center gap-1.5 border-b border-rose-100 pb-2.5">
-                      <Heart className="h-4 w-4 text-amber-550" />
+                      <Heart className="h-4 w-4 text-amber-500" />
                       High-Priority Monitoring & Safeguards
                     </h2>
                     <p className="text-xs text-slate-550 leading-relaxed font-semibold font-sans">
@@ -553,6 +571,11 @@ export default function DrugsSEO() {
                       ))}
                     </div>
                   </div>
+
+                  {/* Graph-driven Intelligent Learning Experience widgets */}
+                  <IntelligentLearningPath entityType="drug" idOrSlug={drug.id} />
+                  <DynamicRelatedContent entityType="drug" idOrSlug={drug.id} />
+                  <ContinueLearningHistory />
 
                 </div>
 
@@ -916,7 +939,7 @@ export default function DrugsSEO() {
                           <Brain className="h-3.5 w-3.5 text-indigo-400 animate-pulse-subtle" />
                           Board Review Simulator
                         </span>
-                        <span className="bg-indigo-550 text-white text-[9px] font-bold px-2 py-0.5 rounded group-hover:bg-indigo-650 transition-all">Start</span>
+                        <span className="bg-indigo-600 text-white text-[9px] font-bold px-2 py-0.5 rounded group-hover:bg-indigo-650 transition-all">Start</span>
                       </button>
                     </div>
 

@@ -112,8 +112,8 @@ export default function Dashboard({
         
         <div className="relative z-10 flex flex-col gap-1.5">
           <div className="space-y-2">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white leading-tight">
-              Master Infectious Diseases through <span className="text-indigo-400 bg-linear-to-r from-indigo-300 to-violet-300 bg-clip-text text-transparent font-black inline-block">Adaptive Recall</span>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white leading-tight font-display">
+              Master Infectious Diseases through <span className="text-indigo-400 bg-linear-to-r from-indigo-300 to-violet-300 bg-clip-text text-transparent font-black inline-block font-display">Adaptive Recall</span>
             </h2>
             
             <p className="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed max-w-none">
@@ -174,8 +174,9 @@ export default function Dashboard({
                   className="space-y-3 bg-indigo-50/40 p-3 rounded-xl border border-indigo-100/50 my-2 text-xs overflow-hidden"
                 >
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">List Name</label>
+                    <label htmlFor="new-list-name" className="block font-semibold text-slate-700 mb-1">List Name</label>
                     <input
+                      id="new-list-name"
                       title="List name input"
                       type="text"
                       className="w-full bg-white border border-slate-200 rounded-md p-1.5 focus:outline-hidden focus:ring-1 focus:ring-indigo-500"
@@ -186,8 +187,9 @@ export default function Dashboard({
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">Description</label>
+                    <label htmlFor="new-list-desc" className="block font-semibold text-slate-700 mb-1">Description</label>
                     <textarea
+                      id="new-list-desc"
                       title="List description input"
                       className="w-full bg-white border border-slate-200 rounded-md p-1.5 focus:outline-hidden"
                       placeholder="High-yield microbes for block exam #1"
