@@ -23,6 +23,7 @@ import { isSupabaseConfigured, syncUserDataToCloud } from "./lib/supabase";
 import { Search, BrainCircuit, Activity, BookOpen, Layers, Award, Grid, Sparkles, ShieldCheck, CheckCircle, Database, Cloud, CloudOff, RefreshCw, X } from "lucide-react";
 import { analytics as analyticsUtil } from "./utils/analytics";
 import { BrowserRouter, useNavigate, useLocation } from "react-router-dom";
+import { initAnalytics, trackPageView } from "./lib/analytics";
 
 // Initial system list presets for healthcare students (InfectAtlas rev)
 const PRESET_LISTS: StudyList[] = [
@@ -60,6 +61,14 @@ export default function App() {
 function InnerApp() {
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    initAnalytics();
+  }, []);
+
+  useEffect(() => {
+    trackPageView(location.pathname);
+  }, [location]);
 
   const getActiveTab = () => {
     const path = location.pathname;
