@@ -150,7 +150,7 @@ export default function LegalPage({ initialTab }: LegalPageProps) {
                 <div>
                   <strong className="font-extrabold text-amber-900 block text-sm">IMPORTANT NOTICE</strong>
                   <p className="mt-1 text-slate-700 text-xs sm:text-sm">
-                    PLEASE READ THESE TERMS CAREFULLY. BY ACCESSING OR USING INFECTATLAS, INCLUDING THE WEBSITE, STUDY MATERIALS, QUIZZES, FLASHCARDS, REFERENCE CONTENT, OR RELATED SERVICES (COLLECTIVELY, THE "SERVICE"), YOU AGREE TO BE LEGALLY BOUND BY THESE TERMS.
+                    PLEASE READ THESE TERMS CAREFULLY. BY ACCESSING OR USING INFECTATLAS, INCLUDING THE WEBSITE, STUDY MATERIALS, QUIZZES, FLASHCARDS, REFERENCE CONTENT, KNOWLEDGE GRAPH FEATURES, OR RELATED SERVICES (COLLECTIVELY, THE "SERVICE"), YOU AGREE TO BE LEGALLY BOUND BY THESE TERMS.
                   </p>
                 </div>
               </div>
@@ -158,20 +158,49 @@ export default function LegalPage({ initialTab }: LegalPageProps) {
               <div>
                 <h2 className="text-slate-900 font-extrabold text-base mb-2">1. Educational Purposes Only</h2>
                 <p className="mb-2">
-                  InfectAtlas is an educational and informational platform intended solely for learning, academic study, examination preparation (USMLE, COMLEX, NCLEX, NAPLEX), and professional continuing education.
+                  InfectAtlas is an educational and informational platform designed for microbiology learning, academic study, examination preparation (including USMLE, COMLEX, NCLEX, and NAPLEX preparation), and professional development.
                 </p>
-                <p className="mb-2 font-bold text-slate-900">
-                  The Service does not provide medical, prescribing, or clinical treatment advice.
+                <p className="mb-2">
+                  The Service is provided solely for educational purposes and does not provide medical advice, diagnosis, prescribing guidance, clinical decision support, or treatment recommendations.
+                </p>
+                <p className="mb-2">
+                  InfectAtlas is not a medical device, healthcare service, telemedicine platform, pharmacy service, diagnostic system, or substitute for professional medical judgment.
                 </p>
                 <p>
-                  InfectAtlas is not a medical device, clinical decision support system, healthcare service, telemedicine platform, pharmacy service, diagnostic tool, or treatment recommendation engine.
+                  The relationships between organisms, diseases, medications, and clinical concepts presented within InfectAtlas are intended to support learning and understanding of infectious disease concepts. They should not be interpreted as instructions for patient care or individualized therapeutic decisions.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-slate-900 font-extrabold text-base mb-2">2. Liability Limitation</h2>
+                <h2 className="text-slate-900 font-extrabold text-base mb-2">2. No Healthcare Provider Relationship</h2>
                 <p>
-                  We strive for complete accuracy, but medical guidelines (IDSA, HHS, CDC) change. Content is provided "as is". InfectAtlas and its publishers are not liable for any direct or indirect healthcare or therapeutic decisions made based upon references found in the database.
+                  Use of InfectAtlas does not create a physician-patient, pharmacist-patient, healthcare provider-patient, or other professional relationship between the user and InfectAtlas or its publishers.
+                </p>
+                <p className="mt-2">
+                  Users should consult qualified healthcare professionals and current authoritative clinical resources before making any healthcare-related decisions.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-slate-900 font-extrabold text-base mb-2">3. Accuracy and Medical Information Disclaimer</h2>
+                <p className="mb-2">
+                  We make reasonable efforts to provide accurate, current, and educationally useful information. However, medical knowledge, treatment guidelines, resistance patterns, and clinical recommendations change over time.
+                </p>
+                <p className="mb-2">
+                  Content may become outdated despite our efforts to maintain accuracy. Users should verify information using current authoritative sources, including applicable clinical guidelines, institutional protocols, and professional references.
+                </p>
+                <p>
+                  The Service is provided on an "as is" and "as available" basis.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-slate-900 font-extrabold text-base mb-2">4. Limitation of Liability</h2>
+                <p className="mb-2">
+                  To the fullest extent permitted by law, InfectAtlas and its publishers are not responsible for any direct, indirect, incidental, consequential, or other damages arising from use of the Service or reliance on educational content provided through the platform.
+                </p>
+                <p>
+                  InfectAtlas is not responsible for healthcare decisions, clinical actions, medication choices, diagnostic decisions, or patient outcomes based on information accessed through the Service.
                 </p>
               </div>
             </div>
