@@ -1430,7 +1430,7 @@ export default function ComparisonsSEO() {
 
   const handleLaunchApp = (focusTask: string) => {
     localStorage.setItem("infectatlas_active_tab", focusTask);
-    navigate("/app");
+    navigate("/app/" + focusTask);
   };
 
   const isIndexView = location.pathname.toLowerCase().trim().replace(/\/$/, "") === "/comparisons";

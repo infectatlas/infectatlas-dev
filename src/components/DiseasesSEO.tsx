@@ -900,7 +900,7 @@ export default function DiseasesSEO() {
   const handleLaunchApp = (focusTask: string) => {
     // Return path to start app mode
     localStorage.setItem("study_focus_preference", focusTask);
-    navigate("/app");
+    navigate("/app/" + focusTask);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

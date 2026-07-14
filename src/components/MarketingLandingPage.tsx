@@ -50,7 +50,7 @@ export default function MarketingLandingPage() {
 
   const handleLaunchApp = (focusTask: string) => {
     localStorage.setItem("infectatlas_active_tab", focusTask);
-    navigate("/app");
+    navigate("/app/" + focusTask);
   };
 
   // Close search suggestion overlay on click outside

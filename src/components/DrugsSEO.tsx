@@ -139,7 +139,7 @@ export default function DrugsSEO() {
   // Launch interactive app console
   const handleLaunchApp = (focusTask: string) => {
     localStorage.setItem("study_focus_preference", focusTask);
-    navigate("/app");
+    navigate("/app/" + focusTask);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

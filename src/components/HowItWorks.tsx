@@ -29,7 +29,7 @@ export default function HowItWorks() {
 
   const handleLaunchApp = (focusTask: string) => {
     localStorage.setItem("infectatlas_active_tab", focusTask);
-    navigate("/app");
+    navigate("/app/" + focusTask);
     window.scrollTo({ top: 0, behavior: "instant" });
   };
 
