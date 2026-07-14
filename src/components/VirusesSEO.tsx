@@ -556,7 +556,7 @@ export default function VirusesSEO() {
                 </p>
 
                 <p className="text-xs sm:text-sm text-slate-500 leading-relaxed border-t border-slate-200 pt-3">
-                  <strong className="text-slate-700">Clinical Overview:</strong> {pathogen.description}
+                  <strong className="text-slate-700">Clinical Overview:</strong> {pathogen.family}; {pathogen.type} ({pathogen.polarity}); {pathogen.envelope}. {pathogen.characteristics.join("; ")}.
                 </p>
 
                 {/* Highly visible but user-friendly CTA block to try the interactive app sandbox */}
@@ -678,7 +678,7 @@ export default function VirusesSEO() {
                           {related.name}
                         </h4>
                         <p className="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
-                          {related.description}
+                          {related.family}; {related.type} ({related.polarity}); {related.envelope}. {related.characteristics.join("; ")}.
                         </p>
                       </div>
                     </Link>
@@ -952,7 +952,7 @@ export default function VirusesSEO() {
                                   {m.name}
                                 </h3>
                                 <p className="text-xs text-slate-500 leading-relaxed line-clamp-3">
-                                  {m.description}
+                                  {m.family}; {m.type} ({m.polarity}); {m.envelope}. {m.characteristics.join("; ")}.
                                 </p>
                               </div>
                             </div>
