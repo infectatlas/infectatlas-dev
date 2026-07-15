@@ -18,7 +18,8 @@ import {
   Check,
   Zap,
   BookmarkPlus,
-  X
+  X,
+  ShieldAlert
 } from "lucide-react";
 import ActiveRecallDrawer from "./ActiveRecallDrawer";
 import { DynamicRelatedContent, IntelligentLearningPath, ContinueLearningHistory } from "./GraphRecommendationEngine";
@@ -957,12 +958,13 @@ export default function VirusesSEO() {
                               </div>
                             </div>
 
-                            <div className="pt-4 mt-5 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
-                              <span className={`font-semibold ${mStyles.accentText} bg-slate-50/50 px-2 py-0.5 rounded border border-slate-100`}>
+                            <div className="pt-4 mt-5 border-t border-slate-100 flex items-center justify-between gap-2 text-[11px] text-slate-400 min-w-0">
+                              <span className={`font-semibold ${mStyles.accentText} bg-slate-50/50 px-2 py-0.5 rounded border border-slate-100 line-clamp-2 flex-1 min-w-0 block`} title={m.characteristics.slice(0, 2).join(", ")}>
                                 {m.characteristics.slice(0, 2).join(", ")}
                               </span>
-                              <span className="font-medium text-slate-400">
-                                {m.diseases.length} pathologies
+                              <span className="flex items-center gap-1 font-semibold text-amber-600 bg-amber-50/80 px-1.5 py-0.5 rounded border border-amber-100/70 shrink-0" title={`${m.diseases.length} associated pathologies`}>
+                                <span>{m.diseases.length}</span>
+                                <ShieldAlert className="w-3.5 h-3.5" />
                               </span>
                             </div>
                           </Link>
