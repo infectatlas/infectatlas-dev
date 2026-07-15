@@ -1940,71 +1940,123 @@ export default function ComparisonsSEO() {
                 );
               }
 
+              const categoriesList = [
+                { id: "clinical", name: "Clinical Diagnosis", bannerBg: "from-amber-500/5 via-amber-600/5 to-slate-50", lightBorder: "border-amber-200/50", accentText: "text-amber-700", pill: "bg-amber-50 text-amber-700 border-amber-200" },
+                { id: "morphology", name: "Microbial Morphology", bannerBg: "from-purple-500/5 via-purple-600/5 to-slate-50", lightBorder: "border-purple-200/50", accentText: "text-purple-700", pill: "bg-purple-50 text-purple-700 border-purple-200" },
+                { id: "pharmacology", name: "Antimicrobial Pharmacology", bannerBg: "from-emerald-500/5 via-emerald-600/5 to-slate-50", lightBorder: "border-emerald-200/50", accentText: "text-emerald-700", pill: "bg-emerald-50 text-emerald-700 border-emerald-200" },
+                { id: "resistance", name: "Microbial Resistance", bannerBg: "from-rose-500/5 via-rose-600/5 to-slate-50", lightBorder: "border-rose-200/50", accentText: "text-rose-700", pill: "bg-rose-50 text-rose-700 border-rose-200" },
+                { id: "treatment", name: "Treatment Choice", bannerBg: "from-sky-500/5 via-sky-600/5 to-slate-50", lightBorder: "border-sky-200/50", accentText: "text-sky-700", pill: "bg-sky-50 text-sky-700 border-sky-200" },
+                { id: "other", name: "Other Clinical Comparisons", bannerBg: "from-slate-500/5 via-slate-600/5 to-slate-50", lightBorder: "border-slate-200/50", accentText: "text-slate-700", pill: "bg-slate-50 text-slate-700 border-slate-200" }
+              ];
+
+              const grouped: Record<string, typeof sorted> = {};
+              categoriesList.forEach((cat) => {
+                grouped[cat.id] = [];
+              });
+
+              sorted.forEach((c) => {
+                const norm = normalizeCategory(c.category);
+                if (grouped[norm]) {
+                  grouped[norm].push(c);
+                } else {
+                  grouped["other"].push(c);
+                }
+              });
+
               return (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
-                  {sorted.map((c) => {
-                    const norm = normalizeCategory(c.category);
-                    const styleMap = {
-                      clinical: {
-                        border: "border-l-amber-500 hover:border-amber-300 hover:shadow-amber-50/40",
-                        badge: "bg-amber-50 text-amber-700 border-amber-100"
-                      },
-                      morphology: {
-                        border: "border-l-purple-500 hover:border-purple-300 hover:shadow-purple-50/40",
-                        badge: "bg-purple-50 text-purple-700 border-purple-100"
-                      },
-                      pharmacology: {
-                        border: "border-l-emerald-500 hover:border-emerald-300 hover:shadow-emerald-50/40",
-                        badge: "bg-emerald-50 text-emerald-700 border-emerald-100"
-                      },
-                      resistance: {
-                        border: "border-l-rose-500 hover:border-rose-300 hover:shadow-rose-50/40",
-                        badge: "bg-rose-50 text-rose-700 border-rose-100"
-                      },
-                      treatment: {
-                        border: "border-l-sky-500 hover:border-sky-300 hover:shadow-sky-50/40",
-                        badge: "bg-sky-50 text-sky-700 border-sky-100"
-                      },
-                      other: {
-                        border: "border-l-indigo-500 hover:border-indigo-300 hover:shadow-indigo-50/40",
-                        badge: "bg-indigo-50 text-indigo-700 border-indigo-100"
-                      }
-                    };
-                    const activeStyles = styleMap[norm as keyof typeof styleMap] || styleMap.other;
+                <div className="space-y-12 animate-fade-in">
+                  {categoriesList.map((cat) => {
+                    const items = grouped[cat.id] || [];
+                    if (items.length === 0) return null;
 
                     return (
-                      <Link
-                        key={c.slug}
-                        to={`/${c.slug}`}
-                        className={`bg-white rounded-2xl border border-slate-200/80 border-l-4 ${activeStyles.border} p-6 shadow-3xs hover:shadow-2xs transition-all duration-300 h-full flex flex-col justify-between group`}
-                      >
-                        <div className="space-y-3.5">
-                          <div className="flex items-center justify-between">
-                            <span className={`px-2.5 py-0.5 text-[9px] font-extrabold uppercase rounded-full border ${activeStyles.badge} tracking-wider`}>
-                              {c.category}
+                      <section key={cat.id} className="space-y-6 animate-fade-in">
+                        {/* Corridor Banner Header */}
+                        <div className={`p-5 rounded-2xl bg-gradient-to-r ${cat.bannerBg} border ${cat.lightBorder} flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-3xs`}>
+                          <div className="flex items-center gap-3.5">
+                            <div className={`p-2.5 bg-white rounded-xl shadow-2xs border ${cat.lightBorder} ${cat.accentText}`}>
+                              <Scale className="h-5 w-5" />
+                            </div>
+                            <div>
+                              <h2 className="text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-1.5">
+                                {cat.name} Corridor
+                              </h2>
+                              <p className="text-xs text-slate-500 font-semibold">
+                                High-yield comparative study modules for {cat.name.toLowerCase()}.
+                              </p>
+                            </div>
+                          </div>
+                          <div className="shrink-0 flex items-center">
+                            <span className={`${cat.pill} text-[10px] font-black uppercase px-2.5 py-1 rounded-full border shadow-3xs`}>
+                              {items.length} {items.length === 1 ? "Comparison" : "Comparisons"}
                             </span>
-                            <Scale className="h-4 w-4 text-slate-350 group-hover:text-indigo-500 transition-colors" />
                           </div>
-                          
-                          <div className="space-y-1.5">
-                            <h2 className="font-extrabold text-lg text-slate-900 tracking-tight group-hover:text-indigo-600 transition-colors italic font-sans animate-fade-in">
-                              {c.title}
-                            </h2>
-                            <p className="text-slate-500 text-xs font-semibold leading-relaxed line-clamp-2">
-                              {c.subtitle}
-                            </p>
-                          </div>
-                          
-                          <p className="text-slate-400 text-[11px] leading-relaxed line-clamp-3 pt-2.5 border-t border-slate-100 font-medium">
-                            {c.intro}
-                          </p>
                         </div>
-                        
-                        <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between text-indigo-650 font-extrabold text-xs">
-                          <span>Explore Differential Module</span>
-                          <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1.5 transition-transform text-indigo-600" />
+
+                        {/* Corridor Cards Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                          {items.map((c) => {
+                            const norm = normalizeCategory(c.category);
+                            const styleMap = {
+                              clinical: {
+                                border: "border-l-amber-500 hover:border-amber-300 hover:shadow-amber-50/40",
+                                badge: "bg-amber-50 text-amber-700 border-amber-100"
+                              },
+                              morphology: {
+                                border: "border-l-purple-500 hover:border-purple-300 hover:shadow-purple-50/40",
+                                badge: "bg-purple-50 text-purple-700 border-purple-100"
+                              },
+                              pharmacology: {
+                                border: "border-l-emerald-500 hover:border-emerald-300 hover:shadow-emerald-50/40",
+                                badge: "bg-emerald-50 text-emerald-700 border-emerald-100"
+                              },
+                              resistance: {
+                                border: "border-l-rose-500 hover:border-rose-300 hover:shadow-rose-50/40",
+                                badge: "bg-rose-50 text-rose-700 border-rose-100"
+                              },
+                              treatment: {
+                                border: "border-l-sky-500 hover:border-sky-300 hover:shadow-sky-50/40",
+                                badge: "bg-sky-50 text-sky-700 border-sky-100"
+                              },
+                              other: {
+                                border: "border-l-indigo-500 hover:border-indigo-300 hover:shadow-indigo-50/40",
+                                badge: "bg-indigo-50 text-indigo-700 border-indigo-100"
+                              }
+                            };
+                            const activeStyles = styleMap[norm as keyof typeof styleMap] || styleMap.other;
+
+                            return (
+                              <Link
+                                key={c.slug}
+                                to={`/${c.slug}`}
+                                className={`bg-white rounded-2xl border border-slate-200/80 border-l-4 ${activeStyles.border} p-6 shadow-3xs hover:shadow-2xs transition-all duration-300 h-full flex flex-col group`}
+                              >
+                                <div className="space-y-3.5">
+                                  <div className="flex items-center justify-between">
+                                    <span className={`px-2.5 py-0.5 text-[9px] font-extrabold uppercase rounded-full border ${activeStyles.badge} tracking-wider`}>
+                                      {c.category}
+                                    </span>
+                                    <Scale className="h-4 w-4 text-slate-350 group-hover:text-indigo-500 transition-colors" />
+                                  </div>
+                                  
+                                  <div className="space-y-1.5">
+                                    <h2 className="font-extrabold text-lg text-slate-900 tracking-tight group-hover:text-indigo-600 transition-colors italic font-sans animate-fade-in">
+                                      {c.title}
+                                    </h2>
+                                    <p className="text-slate-500 text-xs font-semibold leading-relaxed line-clamp-2">
+                                      {c.subtitle}
+                                    </p>
+                                  </div>
+                                  
+                                  <p className="text-slate-400 text-[11px] leading-relaxed line-clamp-3 pt-2.5 border-t border-slate-100 font-medium">
+                                    {c.intro}
+                                  </p>
+                                </div>
+                              </Link>
+                            );
+                          })}
                         </div>
-                      </Link>
+                      </section>
                     );
                   })}
                 </div>
