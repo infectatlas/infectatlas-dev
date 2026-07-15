@@ -47,6 +47,12 @@ interface ComparisonModule {
     correctIndex: number;
     explanation: string;
   };
+  linkedLeftPathogens?: string[];
+  linkedRightPathogens?: string[];
+  linkedLeftDrugs?: string[];
+  linkedRightDrugs?: string[];
+  linkedLeftDiseases?: string[];
+  linkedRightDiseases?: string[];
 }
 
 const BASE_COMPARISONS_DATA: ComparisonModule[] = [
@@ -1388,22 +1394,188 @@ const normalizeCategory = (category: string) => {
 };
 
 const getPathogenPath = (slug: string) => {
-  if (slug === "cryptococcus-neoformans") return `/fungi/${slug}`;
+  const fungiIds = [
+    "candida-albicans", "aspergillus-fumigatus", "cryptococcus-neoformans", "pneumocystis-jirovecii",
+    "histoplasma-capsulatum", "coccidioides-immitis", "blastomyces-dermatitidis", "rhizopus-spp",
+    "sporothrix-schenckii", "malassezia-furfur", "trichophyton-spp", "microsporum-spp",
+    "epidermophyton-spp", "fusarium-spp", "talaromyces-marneffei", "paracoccidioides-brasiliensis",
+    "scedosporium-spp"
+  ];
+  
+  const virusIds = [
+    "hsv-1", "hsv-2", "vzv", "ebv", "cmv", "hhv-6", "influenza-a", "rsv", "rhinovirus",
+    "adenovirus", "rotavirus", "norovirus", "hpv", "hepa", "hepb", "hepc", "hiv",
+    "sars-cov-2", "rabies", "measles", "mumps", "rubella", "parvovirus-b19"
+  ];
+  
+  const parasiteIds = [
+    "plasmodium-falciparum", "plasmodium-vivax", "giardia-lamblia", "entamoeba-histolytica",
+    "trichomonas-vaginalis", "toxoplasma-gondii", "cryptosporidium", "leishmania",
+    "enterobius-vermicularis", "ascaris-lumbricoides", "strongyloides-stercoralis", "hookworms",
+    "taenia-solium", "schistosoma", "sarcoptes-scabiei"
+  ];
+
+  if (fungiIds.includes(slug)) return `/fungi/${slug}`;
+  if (virusIds.includes(slug)) return `/viruses/${slug}`;
+  if (parasiteIds.includes(slug)) return `/parasites/${slug}`;
   return `/organisms/${slug}`;
 };
 
 const getSlugLabel = (slug: string) => {
+  const PATHOGEN_LABELS: Record<string, string> = {
+    "s-aureus": "S. aureus",
+    "s-epidermidis": "S. epidermidis",
+    "s-saprophyticus": "S. saprophyticus",
+    "s-pneumoniae": "S. pneumoniae",
+    "s-pyogenes": "S. pyogenes",
+    "s-agalactiae": "S. agalactiae",
+    "e-faecalis": "E. faecalis",
+    "e-faecium": "E. faecium",
+    "s-bovis": "S. bovis",
+    "s-mutans": "S. mutans",
+    "c-difficile": "C. difficile",
+    "c-tetani": "C. tetani",
+    "c-botulinum": "C. botulinum",
+    "c-perfringens": "C. perfringens",
+    "b-anthracis": "B. anthracis",
+    "b-cereus": "B. cereus",
+    "l-monocytogenes": "L. monocytogenes",
+    "c-diphtheriae": "C. diphtheriae",
+    "n-asteroides": "N. asteroides",
+    "a-israelii": "A. israelii",
+    "c-acnes": "C. acnes",
+    "n-meningitidis": "N. meningitidis",
+    "n-gonorrhoeae": "N. gonorrhoeae",
+    "e-coli": "E. coli",
+    "k-pneumoniae": "K. pneumoniae",
+    "k-oxytoca": "K. oxytoca",
+    "e-cloacae": "E. cloacae",
+    "s-marcescens": "S. marcescens",
+    "p-mirabilis": "P. mirabilis",
+    "p-vulgaris": "P. vulgaris",
+    "m-morganii": "M. morganii",
+    "c-freundii": "C. freundii",
+    "c-koseri": "C. koseri",
+    "s-typhi": "S. typhi",
+    "s-paratyphi": "S. paratyphi",
+    "s-nontyphoidal": "Non-typhoidal Salmonella",
+    "s-sonnei": "S. sonnei",
+    "s-flexneri": "S. flexneri",
+    "s-dysenteriae": "S. dysenteriae",
+    "p-aeruginosa": "P. aeruginosa",
+    "a-baumannii": "A. baumannii",
+    "c-jejuni": "C. jejuni",
+    "c-coli": "C. coli",
+    "v-cholerae": "V. cholerae",
+    "v-vulnificus": "V. vulnificus",
+    "v-parahaemolyticus": "V. parahaemolyticus",
+    "y-pestis": "Y. pestis",
+    "y-enterocolitica": "Y. enterocolitica",
+    "h-influenzae": "H. influenzae",
+    "b-pertussis": "B. pertussis",
+    "l-pneumophila": "L. pneumophila",
+    "h-pylori": "H. pylori",
+    "b-melitensis": "B. melitensis",
+    "b-abortus": "B. abortus",
+    "f-tularensis": "F. tularensis",
+    "t-pallidum": "T. pallidum",
+    "b-burgdorferi": "B. burgdorferi",
+    "l-interrogans": "L. interrogans",
+    "c-trachomatis": "C. trachomatis",
+    "c-pneumoniae": "C. pneumoniae",
+    "c-burnetii": "C. burnetii",
+    "r-rickettsii": "R. rickettsii",
+    "r-prowazekii": "R. prowazekii",
+    "e-chaffeensis": "E. chaffeensis",
+    "a-phagocytophilum": "A. phagocytophilum",
+    "b-henselae": "B. henselae",
+    "b-quintana": "B. quintana",
+    "p-multocida": "P. multocida",
+    "b-fragilis": "B. fragilis",
+    "p-melaninogenica": "P. melaninogenica",
+    "f-nucleatum": "F. nucleatum",
+    "p-anaerobius": "P. anaerobius",
+    "f-magna": "F. magna",
+    "v-parvula": "V. parvula",
+    "e-corrodens": "E. corrodens",
+    "a-actinomycete": "A. actinomycetemcomitans",
+    "p-gingivalis": "P. gingivalis",
+    "t-forsythia": "T. forsythia",
+    "a-hydrophila": "A. hydrophila",
+    "myco-pneumoniae": "M. pneumoniae",
+    "u-urealyticum": "U. urealyticum",
+    "m-tuberculosis": "M. tuberculosis",
+    "m-leprae": "M. leprae",
+    "m-avium": "M. avium",
+    "b-cepacia": "B. cepacia",
+    "s-maltophilia": "S. maltophilia",
+    "a-xylosoxidans": "A. xylosoxidans",
+    "g-vaginalis": "G. vaginalis",
+    "s-mitis": "S. mitis",
+    "s-viridans-gp": "S. viridans",
+    "candida-albicans": "C. albicans",
+    "aspergillus-fumigatus": "A. fumigatus",
+    "cryptococcus-neoformans": "C. neoformans",
+    "pneumocystis-jirovecii": "P. jirovecii",
+    "histoplasma-capsulatum": "H. capsulatum",
+    "coccidioides-immitis": "C. immitis",
+    "blastomyces-dermatitidis": "B. dermatitidis",
+    "rhizopus-spp": "Rhizopus spp.",
+    "sporothrix-schenckii": "S. schenckii",
+    "malassezia-furfur": "M. furfur",
+    "trichophyton-spp": "Trichophyton spp.",
+    "microsporum-spp": "Microsporum spp.",
+    "epidermophyton-spp": "Epidermophyton spp.",
+    "fusarium-spp": "Fusarium spp.",
+    "talaromyces-marneffei": "T. marneffei",
+    "paracoccidioides-brasiliensis": "P. brasiliensis",
+    "scedosporium-spp": "Scedosporium spp.",
+    "hsv-1": "HSV-1",
+    "hsv-2": "HSV-2",
+    "vzv": "VZV",
+    "ebv": "EBV",
+    "cmv": "CMV",
+    "hhv-6": "HHV-6",
+    "influenza-a": "Influenza A",
+    "rsv": "RSV",
+    "rhinovirus": "Rhinovirus",
+    "adenovirus": "Adenovirus",
+    "rotavirus": "Rotavirus",
+    "norovirus": "Norovirus",
+    "hpv": "HPV",
+    "hepa": "Hepatitis A",
+    "hepb": "Hepatitis B",
+    "hepc": "Hepatitis C",
+    "hiv": "HIV",
+    "sars-cov-2": "SARS-CoV-2",
+    "rabies": "Rabies",
+    "measles": "Measles",
+    "mumps": "Mumps",
+    "rubella": "Rubella",
+    "parvovirus-b19": "Parvovirus B19",
+    "plasmodium-falciparum": "P. falciparum",
+    "plasmodium-vivax": "P. vivax",
+    "giardia-lamblia": "Giardia lamblia",
+    "entamoeba-histolytica": "E. histolytica",
+    "trichomonas-vaginalis": "T. vaginalis",
+    "toxoplasma-gondii": "T. gondii",
+    "cryptosporidium": "Cryptosporidium",
+    "leishmania": "Leishmania",
+    "enterobius-vermicularis": "E. vermicularis",
+    "ascaris-lumbricoides": "A. lumbricoides",
+    "strongyloides-stercoralis": "S. stercoralis",
+    "hookworms": "Hookworms",
+    "taenia-solium": "T. solium",
+    "schistosoma": "Schistosoma",
+    "sarcoptes-scabiei": "S. scabiei"
+  };
+
+  if (PATHOGEN_LABELS[slug]) return PATHOGEN_LABELS[slug];
+
   if (slug === "catheter-associated-urinary-tract-infection") return "CA-UTI";
   if (slug === "community-acquired-pneumonia") return "CAP (Pneumonia)";
   if (slug === "cellulitis-and-skin-infections") return "SSTIs / Cellulitis";
   if (slug === "sepsis") return "Sepsis";
-  if (slug === "e-coli") return "E. coli";
-  if (slug === "s-saprophyticus") return "S. saprophyticus";
-  if (slug === "k-pneumoniae") return "K. pneumoniae";
-  if (slug === "streptococcus-pneumoniae") return "S. pneumoniae";
-  if (slug === "mycoplasma-pneumoniae") return "M. pneumoniae";
-  if (slug === "staphylococcus-aureus") return "S. aureus (MRSA)";
-  if (slug === "cryptococcus-neoformans") return "C. neoformans";
   
   return slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 };
@@ -1419,6 +1591,116 @@ const getDrugLink = (name: string) => {
   if (n.includes("amphotericin")) return "/drugs/amphotericin-b";
   if (n.includes("fluconazole")) return "/drugs/fluconazole";
   return null;
+};
+
+const COMPARISON_LINKS_MAP: Record<string, {
+  linkedLeftPathogens?: string[];
+  linkedRightPathogens?: string[];
+  linkedLeftDrugs?: string[];
+  linkedRightDrugs?: string[];
+  linkedLeftDiseases?: string[];
+  linkedRightDiseases?: string[];
+}> = {
+  "mrsa-vs-mssa": {
+    linkedLeftPathogens: ["s-aureus"],
+    linkedLeftDrugs: ["vancomycin", "linezolid"],
+    linkedRightPathogens: ["s-aureus"],
+    linkedRightDrugs: ["nafcillin"]
+  },
+  "vancomycin-vs-linezolid": {
+    linkedLeftDrugs: ["vancomycin"],
+    linkedRightDrugs: ["linezolid"]
+  },
+  "cellulitis-vs-erysipelas": {
+    linkedLeftPathogens: ["s-aureus", "s-pyogenes"],
+    linkedLeftDiseases: ["cellulitis-and-skin-infections"],
+    linkedRightPathogens: ["s-pyogenes"],
+    linkedRightDiseases: ["erysipelas"]
+  },
+  "gram-positive-vs-gram-negative": {
+    linkedLeftPathogens: ["s-aureus", "s-pneumoniae"],
+    linkedRightPathogens: ["p-aeruginosa", "e-coli"]
+  },
+  "bactericidal-vs-bacteriostatic": {
+    linkedLeftDrugs: ["amoxicillin", "vancomycin", "ciprofloxacin"],
+    linkedRightDrugs: ["linezolid", "azithromycin"]
+  },
+  "staph-aureus-vs-strep-pyogenes": {
+    linkedLeftPathogens: ["s-aureus"],
+    linkedRightPathogens: ["s-pyogenes"]
+  },
+  "strep-pneumo-vs-strep-pyogenes": {
+    linkedLeftPathogens: ["s-pneumoniae"],
+    linkedRightPathogens: ["s-pyogenes"]
+  },
+  "enterococcus-faecalis-vs-strep-bovis": {
+    linkedLeftPathogens: ["e-faecalis", "e-faecium"],
+    linkedRightPathogens: ["s-bovis"]
+  },
+  "listeria-vs-bacillus-anthracis": {
+    linkedLeftPathogens: ["l-monocytogenes"],
+    linkedRightPathogens: ["b-anthracis"]
+  },
+  "clostridium-tetani-vs-clostridium-botulinum": {
+    linkedLeftPathogens: ["c-tetani"],
+    linkedRightPathogens: ["c-botulinum"]
+  },
+  "clostridium-perfringens-vs-clostridioides-difficile": {
+    linkedLeftPathogens: ["c-perfringens"],
+    linkedRightPathogens: ["c-difficile"]
+  },
+  "e-coli-vs-klebsiella-vs-proteus": {
+    linkedLeftPathogens: ["e-coli"],
+    linkedRightPathogens: ["k-pneumoniae", "p-mirabilis"]
+  },
+  "pseudomonas-vs-enterobacteriaceae": {
+    linkedLeftPathogens: ["p-aeruginosa"],
+    linkedRightPathogens: ["e-coli", "k-pneumoniae"]
+  },
+  "salmonella-vs-shigella-vs-campylobacter": {
+    linkedLeftPathogens: ["s-typhi", "s-nontyphoidal", "s-sonnei"],
+    linkedRightPathogens: ["c-jejuni"]
+  },
+  "neisseria-meningitidis-vs-neisseria-gonorrhoeae": {
+    linkedLeftPathogens: ["n-meningitidis"],
+    linkedRightPathogens: ["n-gonorrhoeae"]
+  },
+  "strep-pneumo-vs-haemophilus-influenzae": {
+    linkedLeftPathogens: ["s-pneumoniae"],
+    linkedRightPathogens: ["h-influenzae"]
+  },
+  "legionella-vs-mycoplasma-pneumoniae": {
+    linkedLeftPathogens: ["l-pneumophila"],
+    linkedRightPathogens: ["myco-pneumoniae"]
+  },
+  "mycoplasma-vs-chlamydophila-vs-legionella": {
+    linkedLeftPathogens: ["myco-pneumoniae", "c-pneumoniae"],
+    linkedRightPathogens: ["l-pneumophila"]
+  },
+  "bacterial-meningitis-pathogens": {
+    linkedLeftPathogens: ["s-pneumoniae", "n-meningitidis"],
+    linkedRightPathogens: ["l-monocytogenes"]
+  },
+  "viral-vs-bacterial-meningitis": {
+    linkedLeftPathogens: ["s-pneumoniae", "n-meningitidis", "l-monocytogenes"],
+    linkedRightPathogens: ["hsv-2"]
+  },
+  "ehec-vs-etec-vs-eiec-vs-eaec": {
+    linkedLeftPathogens: ["e-coli"],
+    linkedRightPathogens: ["e-coli"]
+  },
+  "giardia-vs-entamoeba": {
+    linkedLeftPathogens: ["giardia-lamblia"],
+    linkedRightPathogens: ["entamoeba-histolytica"]
+  },
+  "bacteroides-vs-clostridium": {
+    linkedLeftPathogens: ["b-fragilis"],
+    linkedRightPathogens: ["c-perfringens", "c-difficile"]
+  },
+  "actinomyces-vs-nocardia": {
+    linkedLeftPathogens: ["a-israelii"],
+    linkedRightPathogens: ["n-asteroides"]
+  }
 };
 
 export default function ComparisonsSEO() {
@@ -2069,31 +2351,36 @@ export default function ComparisonsSEO() {
                     <div className="pt-4 mt-6 border-t border-slate-100/80">
                       <span className="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-widest">Linked Clinical Profiles:</span>
                       <div className="flex flex-wrap gap-2">
-                        {item.slug === "mrsa-vs-mssa" && (
-                          <Link to="/organisms/s-aureus" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                            S. aureus <ExternalLink className="h-2.5 w-2.5" />
-                          </Link>
-                        )}
-                        {item.slug === "vancomycin-vs-linezolid" && (
-                          <Link to="/drugs/vancomycin" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                            Vancomycin <ExternalLink className="h-2.5 w-2.5" />
-                          </Link>
-                        )}
-                        {item.slug === "cellulitis-vs-erysipelas" && (
-                          <Link to="/organisms/s-aureus" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                            S. aureus <ExternalLink className="h-2.5 w-2.5" />
-                          </Link>
-                        )}
-                        {item.slug === "gram-positive-vs-gram-negative" && (
-                          <Link to="/organisms/s-aureus" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                            S. aureus (G-Pos) <ExternalLink className="h-2.5 w-2.5" />
-                          </Link>
-                        )}
-                        {item.slug === "bactericidal-vs-bacteriostatic" && (
-                          <Link to="/drugs/vancomycin" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                            Beta-lactams (Cidal) <ExternalLink className="h-2.5 w-2.5" />
-                          </Link>
-                        )}
+                        {(() => {
+                          const links = COMPARISON_LINKS_MAP[item.slug];
+                          if (!links) return <span className="text-xs text-slate-400 italic">None linked</span>;
+                          
+                          const renderPathogen = (slug: string) => (
+                            <Link key={slug} to={getPathogenPath(slug)} className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                              {getSlugLabel(slug)} <ExternalLink className="h-2.5 w-2.5" />
+                            </Link>
+                          );
+
+                          const renderDrug = (slug: string) => (
+                            <Link key={slug} to={`/drugs/${slug}`} className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                              {slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")} <ExternalLink className="h-2.5 w-2.5" />
+                            </Link>
+                          );
+
+                          const renderDisease = (slug: string) => (
+                            <Link key={slug} to={`/diseases/${slug}`} className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                              {getSlugLabel(slug)} <ExternalLink className="h-2.5 w-2.5" />
+                            </Link>
+                          );
+
+                          return (
+                            <>
+                              {links.linkedLeftPathogens?.map(renderPathogen)}
+                              {links.linkedLeftDrugs?.map(renderDrug)}
+                              {links.linkedLeftDiseases?.map(renderDisease)}
+                            </>
+                          );
+                        })()}
                       </div>
                     </div>
                   </div>
@@ -2115,31 +2402,36 @@ export default function ComparisonsSEO() {
                     <div className="pt-4 mt-6 border-t border-slate-100/80">
                       <span className="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-widest">Linked Clinical Profiles:</span>
                       <div className="flex flex-wrap gap-2">
-                        {item.slug === "mrsa-vs-mssa" && (
-                          <Link to="/drugs/nafcillin" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                            Nafcillin <ExternalLink className="h-2.5 w-2.5" />
-                          </Link>
-                        )}
-                        {item.slug === "vancomycin-vs-linezolid" && (
-                          <Link to="/drugs/linezolid" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                            Linezolid <ExternalLink className="h-2.5 w-2.5" />
-                          </Link>
-                        )}
-                        {item.slug === "cellulitis-vs-erysipelas" && (
-                          <Link to="/organisms/s-pyogenes" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                            S. pyogenes <ExternalLink className="h-2.5 w-2.5" />
-                          </Link>
-                        )}
-                        {item.slug === "gram-positive-vs-gram-negative" && (
-                          <Link to="/organisms/p-aeruginosa" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                            Pseudomonas (G-Neg) <ExternalLink className="h-2.5 w-2.5" />
-                          </Link>
-                        )}
-                        {item.slug === "bactericidal-vs-bacteriostatic" && (
-                          <Link to="/drugs/linezolid" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
-                            Linezolid (Static) <ExternalLink className="h-2.5 w-2.5" />
-                          </Link>
-                        )}
+                        {(() => {
+                          const links = COMPARISON_LINKS_MAP[item.slug];
+                          if (!links) return <span className="text-xs text-slate-400 italic">None linked</span>;
+                          
+                          const renderPathogen = (slug: string) => (
+                            <Link key={slug} to={getPathogenPath(slug)} className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                              {getSlugLabel(slug)} <ExternalLink className="h-2.5 w-2.5" />
+                            </Link>
+                          );
+
+                          const renderDrug = (slug: string) => (
+                            <Link key={slug} to={`/drugs/${slug}`} className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                              {slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")} <ExternalLink className="h-2.5 w-2.5" />
+                            </Link>
+                          );
+
+                          const renderDisease = (slug: string) => (
+                            <Link key={slug} to={`/diseases/${slug}`} className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                              {getSlugLabel(slug)} <ExternalLink className="h-2.5 w-2.5" />
+                            </Link>
+                          );
+
+                          return (
+                            <>
+                              {links.linkedRightPathogens?.map(renderPathogen)}
+                              {links.linkedRightDrugs?.map(renderDrug)}
+                              {links.linkedRightDiseases?.map(renderDisease)}
+                            </>
+                          );
+                        })()}
                       </div>
                     </div>
                   </div>
