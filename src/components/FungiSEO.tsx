@@ -19,7 +19,7 @@ import {
   Zap,
   BookmarkPlus,
   X,
-  ShieldAlert
+  Stethoscope
 } from "lucide-react";
 import ActiveRecallDrawer from "./ActiveRecallDrawer";
 import { DynamicRelatedContent, IntelligentLearningPath, ContinueLearningHistory } from "./GraphRecommendationEngine";
@@ -1053,7 +1053,7 @@ export default function FungiSEO() {
                           <Link
                             key={m.id}
                             to={`/fungi/${getPathogenSlug(m.name)}`}
-                            className={`p-6 bg-white border border-slate-250 border-l-4 ${mStyles.accentLine} rounded-2xl ${mStyles.hover} transition-all flex flex-col justify-between group cursor-pointer shadow-3xs`}
+                            className={`p-6 bg-white border border-slate-250 border-l-4 ${mStyles.accentLine} rounded-2xl ${mStyles.hover} transition-all flex flex-col justify-between group cursor-pointer shadow-3xs h-full`}
                           >
                             <div className="space-y-4">
                               <div className="flex items-center justify-between">
@@ -1077,12 +1077,12 @@ export default function FungiSEO() {
                             </div>
 
                             <div className="pt-4 mt-5 border-t border-slate-100 flex items-center justify-between gap-2 text-[11px] text-slate-400 min-w-0">
-                              <span className={`font-semibold ${mStyles.accentText} bg-slate-50/50 px-2 py-0.5 rounded border border-slate-100 line-clamp-2 flex-1 min-w-0 block`} title={m.characteristics.slice(0, 2).join(", ")}>
+                              <span className={`font-semibold ${mStyles.accentText} bg-slate-50/50 px-2 py-0.5 rounded border border-slate-100 line-clamp-2 flex-1 min-w-0`} title={m.characteristics.slice(0, 2).join(", ")}>
                                 {m.characteristics.slice(0, 2).join(", ")}
                               </span>
                               <span className="flex items-center gap-1 font-semibold text-amber-600 bg-amber-50/80 px-1.5 py-0.5 rounded border border-amber-100/70 shrink-0" title={`${m.diseases.length} associated pathologies`}>
                                 <span>{m.diseases.length}</span>
-                                <ShieldAlert className="w-3.5 h-3.5" />
+                                <Stethoscope className="w-3.5 h-3.5" />
                               </span>
                             </div>
                           </Link>
