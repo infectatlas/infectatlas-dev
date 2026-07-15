@@ -2070,7 +2070,7 @@ export default function ComparisonsSEO() {
                       <span className="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-widest">Linked Clinical Profiles:</span>
                       <div className="flex flex-wrap gap-2">
                         {item.slug === "mrsa-vs-mssa" && (
-                          <Link to="/organisms/staphylococcus-aureus" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                          <Link to="/organisms/s-aureus" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
                             S. aureus <ExternalLink className="h-2.5 w-2.5" />
                           </Link>
                         )}
@@ -2080,12 +2080,12 @@ export default function ComparisonsSEO() {
                           </Link>
                         )}
                         {item.slug === "cellulitis-vs-erysipelas" && (
-                          <Link to="/organisms/staphylococcus-aureus" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                          <Link to="/organisms/s-aureus" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
                             S. aureus <ExternalLink className="h-2.5 w-2.5" />
                           </Link>
                         )}
                         {item.slug === "gram-positive-vs-gram-negative" && (
-                          <Link to="/organisms/staphylococcus-aureus" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                          <Link to="/organisms/s-aureus" className="text-xs font-bold text-indigo-650 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
                             S. aureus (G-Pos) <ExternalLink className="h-2.5 w-2.5" />
                           </Link>
                         )}
@@ -2116,7 +2116,7 @@ export default function ComparisonsSEO() {
                       <span className="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-widest">Linked Clinical Profiles:</span>
                       <div className="flex flex-wrap gap-2">
                         {item.slug === "mrsa-vs-mssa" && (
-                          <Link to="/drugs/vancomycin" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                          <Link to="/drugs/nafcillin" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
                             Nafcillin <ExternalLink className="h-2.5 w-2.5" />
                           </Link>
                         )}
@@ -2126,12 +2126,12 @@ export default function ComparisonsSEO() {
                           </Link>
                         )}
                         {item.slug === "cellulitis-vs-erysipelas" && (
-                          <Link to="/organisms/streptococcus-pyogenes" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                          <Link to="/organisms/s-pyogenes" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
                             S. pyogenes <ExternalLink className="h-2.5 w-2.5" />
                           </Link>
                         )}
                         {item.slug === "gram-positive-vs-gram-negative" && (
-                          <Link to="/organisms/pseudomonas-aeruginosa" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
+                          <Link to="/organisms/p-aeruginosa" className="text-xs font-bold text-emerald-700 hover:underline bg-slate-50 border border-slate-100 px-2 py-0.5 rounded flex items-center gap-0.5">
                             Pseudomonas (G-Neg) <ExternalLink className="h-2.5 w-2.5" />
                           </Link>
                         )}
