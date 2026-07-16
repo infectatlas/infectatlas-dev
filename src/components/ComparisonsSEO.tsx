@@ -2029,7 +2029,7 @@ export default function ComparisonsSEO() {
                               <Link
                                 key={c.slug}
                                 to={`/${c.slug}`}
-                                className={`bg-white rounded-2xl border border-slate-200/80 border-l-4 ${activeStyles.border} p-6 shadow-3xs hover:shadow-2xs transition-all duration-300 h-full flex flex-col group`}
+                                className={`bg-white rounded-2xl border border-slate-200/80 border-l-4 ${activeStyles.border} p-6 shadow-3xs hover:shadow-2xs transition-all duration-300 h-full flex flex-col justify-between group`}
                               >
                                 <div className="space-y-3.5">
                                   <div className="flex items-center justify-between">
@@ -2047,11 +2047,11 @@ export default function ComparisonsSEO() {
                                       {c.subtitle}
                                     </p>
                                   </div>
-                                  
-                                  <p className="text-slate-400 text-[11px] leading-relaxed line-clamp-3 pt-2.5 border-t border-slate-100 font-medium">
-                                    {c.intro}
-                                  </p>
                                 </div>
+                                
+                                <p className="text-slate-400 text-[11px] leading-relaxed line-clamp-3 pt-3 mt-4.5 border-t border-slate-100 font-medium">
+                                  {c.intro}
+                                </p>
                               </Link>
                             );
                           })}

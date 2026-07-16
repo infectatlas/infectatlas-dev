@@ -843,7 +843,7 @@ export default function DrugsSEO() {
                       <Link
                         key={d.id}
                         to={`/drugs/${d.slug}`}
-                        className={`bg-white border border-slate-250 border-l-4 ${itemStyles.accentLine} ${itemStyles.hover} rounded-2xl p-5 flex flex-col justify-between transition-all group cursor-pointer shadow-3xs`}
+                        className={`bg-white border border-slate-250 border-l-4 ${itemStyles.accentLine} ${itemStyles.hover} rounded-2xl p-5 flex flex-col justify-between transition-all group cursor-pointer shadow-3xs h-full`}
                       >
                         <div className="space-y-3">
                           <div className="flex items-start justify-between gap-2.5">

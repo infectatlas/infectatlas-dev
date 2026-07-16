@@ -1853,7 +1853,7 @@ export default function DiseasesSEO() {
                               <Link
                                 key={d.id}
                                 to={`/diseases/${d.slug}`}
-                                className={`p-6 bg-white border border-slate-250 border-l-4 ${itemStyles.accentLine} rounded-2xl ${itemStyles.hover} transition-all flex flex-col justify-between group cursor-pointer shadow-3xs`}
+                                className={`p-6 bg-white border border-slate-250 border-l-4 ${itemStyles.accentLine} rounded-2xl ${itemStyles.hover} transition-all flex flex-col justify-between group cursor-pointer shadow-3xs h-full`}
                               >
                                 <div className="space-y-4">
                                   <div className="flex items-center justify-between">
