@@ -305,9 +305,9 @@ export default function MarketingLandingPage() {
                 <CheckCircle className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="font-extrabold text-slate-900 text-sm">90+ High-Yield Pathogens</h3>
+                <h3 className="font-extrabold text-slate-900 text-sm">140+ High-Yield Pathogens</h3>
                 <p className="text-xs text-slate-550 mt-1 leading-relaxed">
-                  Every high-yield bacterial species systematized by Gram status.
+                  Every high-yield bacteria, virus, fungus, and parasite systematized for board exams.
                 </p>
               </div>
             </div>
