@@ -10,12 +10,6 @@ import { diseasesData } from "../data/diseases";
 import { drugsData } from "../data/drugs";
 import AdaptiveRecallConsole from "./AdaptiveRecallConsole";
 
-const getPathogenSlug = (name: string): string => {
-  return name.toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-");
-};
-
 interface DailyRecallDeskProps {
   spacedRepetitionItems: SpacedRepetitionItem[];
   studyLists: StudyList[];

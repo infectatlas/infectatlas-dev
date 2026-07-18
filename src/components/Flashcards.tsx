@@ -7,12 +7,6 @@ import { analytics } from "../utils/analytics";
 import { diseasesData } from "../data/diseases";
 import { drugsData } from "../data/drugs";
 
-const getPathogenSlug = (name: string): string => {
-  return name.toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-");
-};
-
 function shuffleArray<T>(array: T[]): T[] {
   if (!array || !Array.isArray(array)) return [];
   const shuffled = [...array];

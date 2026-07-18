@@ -5,12 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { analytics } from "../utils/analytics";
 import { diseasesData } from "../data/diseases";
 import { drugsData } from "../data/drugs";
-
-const getPathogenSlug = (name: string): string => {
-  return name.toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-");
-};
+import { getOrganismCanonicalUrl } from "../lib/organismUrlUtils";
 
 const getRelatedDiseases = (text: string) => {
   const lowercaseText = text.toLowerCase();
@@ -599,7 +594,7 @@ export default function QuizMode({
                   <div className="pt-2 border-t border-indigo-100/30 flex flex-wrap gap-2 text-[11px]">
                     {questions[activeQuestionIndex].referencePathogen && (
                       <a
-                        href={`/organisms/${getPathogenSlug(questions[activeQuestionIndex].referencePathogen.name)}`}
+                        href={getOrganismCanonicalUrl(questions[activeQuestionIndex].referencePathogen)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 px-2 py-1 bg-white hover:bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"
@@ -809,7 +804,7 @@ export default function QuizMode({
                     <div className="pt-2 border-t border-indigo-150/40 flex flex-wrap gap-2 text-[11px] mt-2">
                       {activeVignetteQuestion.referencePathogen && (
                         <a
-                          href={`/organisms/${getPathogenSlug(activeVignetteQuestion.referencePathogen.name)}`}
+                          href={getOrganismCanonicalUrl(activeVignetteQuestion.referencePathogen)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-1 px-2.5 py-1 bg-white hover:bg-indigo-100/50 border border-indigo-200 text-indigo-700 font-semibold rounded-lg shadow-3xs cursor-pointer transition-colors"

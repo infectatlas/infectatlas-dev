@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Microorganism, microorganismsData } from "../data/microorganisms";
 import { Search, Info, Award, ShieldAlert, Plus, Check, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { getOrganismCanonicalUrl } from "../lib/organismUrlUtils";
 
 interface SearchEngineProps {
   onAddPathogenToStudyList?: (pathogenId: string) => void;
@@ -122,7 +123,7 @@ function MicrobeDetails({
         {/* Open dedicated pathogen page link */}
         <div className="pt-2">
           <Link
-            to={`/organisms/${microbe.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`}
+            to={getOrganismCanonicalUrl(microbe)}
             className="w-full flex items-center justify-center gap-1.5 py-3 px-4 bg-indigo-600 hover:bg-indigo-550 text-white font-extrabold text-xs rounded-xl shadow-3xs transition-all active:scale-[0.99] cursor-pointer"
           >
             Open Full Pathogen Chapter <ExternalLink className="h-3.5 w-3.5" />

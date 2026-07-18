@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import ActiveRecallDrawer from "./ActiveRecallDrawer";
 import { DynamicRelatedContent, IntelligentLearningPath, ContinueLearningHistory } from "./GraphRecommendationEngine";
+import { getOrganismCanonicalUrl } from "../lib/organismUrlUtils";
 
 // Helper to convert microfungus name to a web-safe slug
 export const getPathogenSlug = (name: string): string => {
@@ -352,7 +353,7 @@ export default function FungiSEO() {
         canonicalTag.setAttribute('rel', 'canonical');
         document.head.appendChild(canonicalTag);
       }
-      canonicalTag.setAttribute('href', `https://infectatlas.com/fungi/${getPathogenSlug(pathogen.name)}`);
+      canonicalTag.setAttribute('href', `https://infectatlas.com${getOrganismCanonicalUrl(pathogen)}`);
       
       // 2. High-Yield "Frequently Asked Questions" (FAQ) Schema.org Microdata + MedicalWebPage Graph
       const mainDisease = pathogen.diseases[0];
@@ -391,8 +392,8 @@ export default function FungiSEO() {
         "@graph": [
           {
             "@type": "MedicalWebPage",
-            "@id": `https://infectatlas.com/fungi/${getPathogenSlug(pathogen.name)}#webpage`,
-            "url": `https://infectatlas.com/fungi/${getPathogenSlug(pathogen.name)}`,
+            "@id": `https://infectatlas.com${getOrganismCanonicalUrl(pathogen)}#webpage`,
+            "url": `https://infectatlas.com${getOrganismCanonicalUrl(pathogen)}`,
             "name": pageTitle,
             "description": metaDesc,
             "aspect": ["microbiology", "diagnosis", "antimicrobial treatment", "clinical guidelines"],
@@ -419,7 +420,7 @@ export default function FungiSEO() {
           },
           {
             "@type": "FAQPage",
-            "@id": `https://infectatlas.com/fungi/${getPathogenSlug(pathogen.name)}#faq`,
+            "@id": `https://infectatlas.com${getOrganismCanonicalUrl(pathogen)}#faq`,
             "mainEntity": qaList
           }
         ]
@@ -464,7 +465,7 @@ export default function FungiSEO() {
           "itemListElement": fungiData.map((m, index) => ({
             "@type": "ListItem",
             "position": index + 1,
-            "url": `https://infectatlas.com/fungi/${getPathogenSlug(m.name)}`,
+            "url": `https://infectatlas.com${getOrganismCanonicalUrl(m)}`,
             "name": m.name
           }))
         }
@@ -781,7 +782,7 @@ export default function FungiSEO() {
                   {getRelatedPathogens(pathogen).map((related) => (
                     <Link
                       key={related.id}
-                      to={`/fungi/${getPathogenSlug(related.name)}`}
+                      to={getOrganismCanonicalUrl(related)}
                       className="p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-300 transition-all shadow-3xs group flex flex-col justify-between cursor-pointer"
                     >
                       <div>
@@ -1052,7 +1053,7 @@ export default function FungiSEO() {
                         return (
                           <Link
                             key={m.id}
-                            to={`/fungi/${getPathogenSlug(m.name)}`}
+                            to={getOrganismCanonicalUrl(m)}
                             className={`p-6 bg-white border border-slate-250 border-l-4 ${mStyles.accentLine} rounded-2xl ${mStyles.hover} transition-all flex flex-col justify-between group cursor-pointer shadow-3xs h-full`}
                           >
                             <div className="space-y-4">

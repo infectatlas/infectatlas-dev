@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getOrganismCanonicalUrl, getOrganismBySlug, getOrganismById } from "../lib/organismUrlUtils";
 import PublicHeader from "./PublicHeader";
 import PublicFooter from "./PublicFooter";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -1394,30 +1395,10 @@ const normalizeCategory = (category: string) => {
 };
 
 const getPathogenPath = (slug: string) => {
-  const fungiIds = [
-    "candida-albicans", "aspergillus-fumigatus", "cryptococcus-neoformans", "pneumocystis-jirovecii",
-    "histoplasma-capsulatum", "coccidioides-immitis", "blastomyces-dermatitidis", "rhizopus-spp",
-    "sporothrix-schenckii", "malassezia-furfur", "trichophyton-spp", "microsporum-spp",
-    "epidermophyton-spp", "fusarium-spp", "talaromyces-marneffei", "paracoccidioides-brasiliensis",
-    "scedosporium-spp"
-  ];
-  
-  const virusIds = [
-    "hsv-1", "hsv-2", "vzv", "ebv", "cmv", "hhv-6", "influenza-a", "rsv", "rhinovirus",
-    "adenovirus", "rotavirus", "norovirus", "hpv", "hepa", "hepb", "hepc", "hiv",
-    "sars-cov-2", "rabies", "measles", "mumps", "rubella", "parvovirus-b19"
-  ];
-  
-  const parasiteIds = [
-    "plasmodium-falciparum", "plasmodium-vivax", "giardia-lamblia", "entamoeba-histolytica",
-    "trichomonas-vaginalis", "toxoplasma-gondii", "cryptosporidium", "leishmania",
-    "enterobius-vermicularis", "ascaris-lumbricoides", "strongyloides-stercoralis", "hookworms",
-    "taenia-solium", "schistosoma", "sarcoptes-scabiei"
-  ];
-
-  if (fungiIds.includes(slug)) return `/fungi/${slug}`;
-  if (virusIds.includes(slug)) return `/viruses/${slug}`;
-  if (parasiteIds.includes(slug)) return `/parasites/${slug}`;
+  const found = getOrganismBySlug(slug) || getOrganismById(slug);
+  if (found) {
+    return getOrganismCanonicalUrl(found);
+  }
   return `/organisms/${slug}`;
 };
 

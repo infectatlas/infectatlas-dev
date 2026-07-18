@@ -25,11 +25,7 @@ import { diseasesData } from "../data/diseases";
 import { drugsData } from "../data/drugs";
 import { COMPARISONS_DATA } from "./ComparisonsSEO";
 import InteractiveSandbox from "./InteractiveSandbox";
-
-// Helper to convert microorganism name to web-safe slug
-const getPathogenSlug = (name: string): string => {
-  return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-};
+import { getOrganismCanonicalUrl } from "../lib/organismUrlUtils";
 
 interface SearchResultItem {
   type: "organism" | "disease" | "drug" | "comparison";
@@ -88,7 +84,7 @@ export default function MarketingLandingPage() {
           type: "organism",
           title: org.name,
           subtitle: `${org.gramStatus} • ${org.shape}`,
-          url: `/organisms/${getPathogenSlug(org.name)}`,
+          url: getOrganismCanonicalUrl(org),
           badgeText: org.gramStatus,
           badgeStyle: org.gramStatus === "Gram-positive" 
             ? "bg-emerald-50 text-emerald-700 border-emerald-100" 

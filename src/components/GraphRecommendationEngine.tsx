@@ -6,6 +6,7 @@ import {
   getHistoryBasedRecommendations, 
   findUnifiedPathogen 
 } from "../utils/graph";
+import { getOrganismCanonicalUrl } from "../lib/organismUrlUtils";
 import { 
   ArrowRight, 
   BookOpen, 
@@ -35,10 +36,7 @@ export const getEntityLink = (type: string, id: string, slug: string) => {
   if (type === "pathogen") {
     const p = findUnifiedPathogen(id);
     if (p) {
-      if (p.type === "bacteria") return `/organisms/${p.slug}`;
-      if (p.type === "fungus") return `/fungi/${p.id}`;
-      if (p.type === "virus") return `/viruses/${p.id}`;
-      if (p.type === "parasite") return `/parasites/${p.id}`;
+      return getOrganismCanonicalUrl(p);
     }
     return `/organisms/${slug}`;
   }

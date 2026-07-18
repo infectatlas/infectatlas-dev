@@ -32,6 +32,7 @@ import {
 } from "lucide-react";
 import ActiveRecallDrawer from "./ActiveRecallDrawer";
 import { DynamicRelatedContent, IntelligentLearningPath, ContinueLearningHistory } from "./GraphRecommendationEngine";
+import { getOrganismCanonicalUrl } from "../lib/organismUrlUtils";
 
 // Helper to categorize drugs for filters
 const CLASS_FILTERS = [
@@ -628,7 +629,7 @@ export default function DrugsSEO() {
                           {drug.relatedPathogens.map((pathRelation, i) => (
                             <Link
                               key={i}
-                              to={`/organisms/${pathRelation.id}`}
+                              to={getOrganismCanonicalUrl(pathRelation)}
                               className="group p-2.5 bg-slate-50 hover:bg-indigo-50/50 border border-slate-150 hover:border-indigo-150 rounded-xl flex items-center justify-between text-xs transition-all"
                             >
                               <span className="font-bold text-slate-800 group-hover:text-indigo-950 transition-colors italic">

@@ -38,6 +38,7 @@ import {
 } from "lucide-react";
 import ActiveRecallDrawer from "./ActiveRecallDrawer";
 import { DynamicRelatedContent, IntelligentLearningPath, ContinueLearningHistory } from "./GraphRecommendationEngine";
+import { getOrganismCanonicalUrl } from "../lib/organismUrlUtils";
 
 // Helper to convert disease name to web-safe slug
 export const getDiseaseSlug = (name: string): string => {
@@ -51,29 +52,7 @@ export const getOrganismSlug = (name: string): string => {
 
 // Helper for dynamic organism path checking
 export const getOrganismLinkPath = (name: string): string => {
-  const normName = name.toLowerCase().trim();
-  const slug = getOrganismSlug(name);
-  
-  // Check Fungi
-  if (fungiData.some(f => f.name.toLowerCase().trim() === normName || f.id.toLowerCase() === slug)) {
-    const found = fungiData.find(f => f.name.toLowerCase().trim() === normName || f.id.toLowerCase() === slug);
-    return `/fungi/${found ? found.id : slug}`;
-  }
-  
-  // Check Viruses
-  if (virusesData.some(v => v.name.toLowerCase().trim() === normName || v.id.toLowerCase() === slug)) {
-    const found = virusesData.find(v => v.name.toLowerCase().trim() === normName || v.id.toLowerCase() === slug);
-    return `/viruses/${found ? found.id : slug}`;
-  }
-  
-  // Check Parasites
-  if (parasitesData.some(p => p.name.toLowerCase().trim() === normName || p.id.toLowerCase() === slug)) {
-    const found = parasitesData.find(p => p.name.toLowerCase().trim() === normName || p.id.toLowerCase() === slug);
-    return `/parasites/${found ? found.id : slug}`;
-  }
-  
-  // Fallback to bacteria / general organisms
-  return `/organisms/${slug}`;
+  return getOrganismCanonicalUrl({ name });
 };
 
 // Helper to resolve drug link if it exists
