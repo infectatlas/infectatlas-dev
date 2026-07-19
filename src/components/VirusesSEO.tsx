@@ -522,7 +522,7 @@ export default function VirusesSEO() {
                     {pathogen.type}
                   </span>
                   <span className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-medium border border-slate-200 bg-white text-slate-600 capitalize">
-                    
+                    {pathogen.family} • {pathogen.envelope}
                   </span>
                 </div>
 
