@@ -421,7 +421,7 @@ const BASE_COMPARISONS_DATA: ComparisonModule[] = [
       {
         attribute: "Chemical Susceptibility Test",
         leftValue: "Optochin Sensitive; Bile Soluble (lysed by bile salts)",
-        rightValue: "Bacitracin Sensitive; PYR Positive"
+        rightValue: "PYR Positive; Group A Streptococcus"
       },
       {
         attribute: "Major Virulence Shield",
@@ -429,8 +429,8 @@ const BASE_COMPARISONS_DATA: ComparisonModule[] = [
         rightValue: "M Protein (destabilizes complement activation, inhibits phagocytosis, triggers molecular mimicry)"
       },
       {
-        attribute: "Clinical Primary Target Sites",
-        leftValue: "Pneumonia, Meningitis, Otitis media, Sinusitis (The MOPS bugs)",
+        attribute: "Classic Diseases",
+        leftValue: "Pneumonia, Meningitis, Otitis media, Sinusitis",
         rightValue: "Pharyngitis, Cellulitis, Impetigo, Necrotizing fasciitis, Erysipelas"
       }
     ],
@@ -1584,9 +1584,9 @@ const COMPARISON_LINKS_MAP: Record<string, {
 }> = {
   "mrsa-vs-mssa": {
     linkedLeftPathogens: ["s-aureus"],
-    linkedLeftDrugs: ["vancomycin", "linezolid"],
+    linkedLeftDrugs: ["vancomycin", "linezolid", "daptomycin", "trimethoprim-sulfamethoxazole", "doxycycline", "clindamycin"],
     linkedRightPathogens: ["s-aureus"],
-    linkedRightDrugs: ["nafcillin"]
+    linkedRightDrugs: ["nafcillin", "cefazolin"]
   },
   "vancomycin-vs-linezolid": {
     linkedLeftDrugs: ["vancomycin"],
@@ -1612,7 +1612,9 @@ const COMPARISON_LINKS_MAP: Record<string, {
   },
   "strep-pneumo-vs-strep-pyogenes": {
     linkedLeftPathogens: ["s-pneumoniae"],
-    linkedRightPathogens: ["s-pyogenes"]
+    linkedLeftDiseases: ["community-acquired-pneumonia", "bacterial-meningitis", "acute-otitis-media"],
+    linkedRightPathogens: ["s-pyogenes"],
+    linkedRightDiseases: ["strep-throat", "cellulitis-and-skin-infections", "impetigo", "necrotizing-fasciitis", "erysipelas"]
   },
   "enterococcus-faecalis-vs-strep-bovis": {
     linkedLeftPathogens: ["e-faecalis", "e-faecium"],
@@ -1683,6 +1685,207 @@ const COMPARISON_LINKS_MAP: Record<string, {
     linkedRightPathogens: ["n-asteroides"]
   }
 };
+
+const DISEASE_LINK_MAP: Record<string, string> = {
+  "pneumonia": "/diseases/community-acquired-pneumonia",
+  "meningitis": "/diseases/bacterial-meningitis",
+  "otitis media": "/diseases/acute-otitis-media",
+  "pharyngitis": "/diseases/strep-throat",
+  "cellulitis": "/diseases/cellulitis-and-skin-infections",
+  "impetigo": "/diseases/impetigo",
+  "necrotizing fasciitis": "/diseases/necrotizing-fasciitis",
+  "erysipelas": "/diseases/erysipelas"
+};
+
+const DRUG_LINK_MAP: Record<string, string> = {
+  "vancomycin": "/drugs/vancomycin",
+  "linezolid": "/drugs/linezolid",
+  "daptomycin": "/drugs/daptomycin",
+  "nafcillin": "/drugs/nafcillin",
+  "cefazolin": "/drugs/cefazolin",
+  "tmp-smx": "/drugs/trimethoprim-sulfamethoxazole",
+  "bactrim": "/drugs/trimethoprim-sulfamethoxazole",
+  "doxycycline": "/drugs/doxycycline",
+  "clindamycin": "/drugs/clindamycin",
+  "ceftaroline": "/drugs/ceftaroline"
+};
+
+function renderComparisonCell(text: string, isDiseaseRow: boolean, isDrugRow: boolean = false, slug?: string) {
+  if (isDiseaseRow) {
+    const items = text.split(",").map(s => s.trim());
+    return (
+      <span>
+        {items.map((item, idx) => {
+          const lower = item.toLowerCase();
+          const url = DISEASE_LINK_MAP[lower];
+          return (
+            <span key={idx}>
+              {idx > 0 && ", "}
+              {url ? (
+                <a
+                  href={url}
+                  className="text-indigo-600 hover:text-indigo-800 underline underline-offset-2 font-semibold transition-colors"
+                >
+                  {item}
+                </a>
+              ) : (
+                item
+              )}
+            </span>
+          );
+        })}
+      </span>
+    );
+  }
+
+  if (isDrugRow) {
+    // Splits on commas and " or " while preserving punctuation
+    const tokens = text.split(/(,\s*|\s+or\s+)/);
+    return (
+      <span>
+        {tokens.map((token, idx) => {
+          const trimmed = token.trim();
+          if (trimmed === "," || trimmed === "or" || !trimmed) {
+            return <span key={idx}>{token}</span>;
+          }
+          // Check for exact drug match or paren match like TMP-SMX (Bactrim)
+          let matchUrl: string | undefined;
+          for (const [key, url] of Object.entries(DRUG_LINK_MAP)) {
+            if (trimmed.toLowerCase().includes(key)) {
+              matchUrl = url;
+              break;
+            }
+          }
+          if (matchUrl) {
+            return (
+              <a
+                key={idx}
+                href={matchUrl}
+                className="text-indigo-600 hover:text-indigo-800 underline underline-offset-2 font-semibold transition-colors"
+              >
+                {token}
+              </a>
+            );
+          }
+          return <span key={idx}>{token}</span>;
+        })}
+      </span>
+    );
+  }
+
+  return renderProseWithLinks(text, slug);
+}
+
+const GLOBAL_PROSE_LINK_RULES: { pattern: RegExp; url: string; label?: string }[] = [
+  // Drugs
+  { pattern: /\bNafcillin\b/g, url: "/drugs/nafcillin" },
+  { pattern: /\bCefazolin\b/g, url: "/drugs/cefazolin" },
+  { pattern: /\bCeftaroline\b/g, url: "/drugs/ceftaroline" },
+  { pattern: /\bDaptomycin\b/g, url: "/drugs/daptomycin" },
+  { pattern: /\bVancomycin\b/g, url: "/drugs/vancomycin" },
+  { pattern: /\bMetronidazole\b/g, url: "/drugs/metronidazole" },
+  { pattern: /\bClindamycin\b/g, url: "/drugs/clindamycin" },
+  { pattern: /\bPip-Tazo\b/g, url: "/drugs/piperacillin-tazobactam" },
+  { pattern: /\bCefepime\b/g, url: "/drugs/cefepime" },
+  { pattern: /\bMeropenem\b/g, url: "/drugs/meropenem" },
+  { pattern: /\bCeftriaxone\b/g, url: "/drugs/ceftriaxone" },
+  { pattern: /\bLevofloxacin\b/g, url: "/drugs/levofloxacin" },
+  { pattern: /\bAzithromycin\b/g, url: "/drugs/azithromycin" },
+  { pattern: /\bDoxycycline\b/g, url: "/drugs/doxycycline" },
+  // Organisms (ordered specific to general)
+  { pattern: /\bMycoplasma pneumoniae\b/g, url: "/organisms/mycoplasma-pneumoniae" },
+  { pattern: /\bMycoplasma\b/g, url: "/organisms/mycoplasma-pneumoniae" },
+  { pattern: /\bLegionella pneumophila\b/g, url: "/organisms/legionella-pneumophila" },
+  { pattern: /\bLegionella\b/g, url: "/organisms/legionella-pneumophila" },
+  { pattern: /\bPseudomonas aeruginosa\b/g, url: "/organisms/pseudomonas-aeruginosa" },
+  { pattern: /\bPseudomonas\b/g, url: "/organisms/pseudomonas-aeruginosa" },
+  { pattern: /\bClostridioides difficile\b/gi, url: "/diseases/pseudomembranous-colitis" },
+  { pattern: /\bC\. difficile\b/gi, url: "/diseases/pseudomembranous-colitis" },
+  { pattern: /\bC\. diff\b/gi, url: "/diseases/pseudomembranous-colitis" }
+];
+
+const SCOPED_PROSE_LINK_RULES: Record<string, { pattern: RegExp; url: string; label?: string }[]> = {
+  "legionella-vs-mycoplasma-pneumoniae": [
+    { pattern: /\batypical pneumonia\b/gi, url: "/diseases/atypical-walking-pneumonia" },
+    { pattern: /\bwalking pneumonia\b/gi, url: "/diseases/atypical-walking-pneumonia" }
+  ],
+  "pseudomonas-vs-enterobacteriaceae": [
+    { pattern: /\bPseudomonas bacteremia\b/gi, url: "/diseases/bacteremia" },
+    { pattern: /\bcommunity-acquired lobar pneumonias\b/gi, url: "/diseases/community-acquired-pneumonia" },
+    { pattern: /\babdominal sepsis\b/gi, url: "/diseases/sepsis" },
+    { pattern: /\bneonatal sepsis\b/gi, url: "/diseases/sepsis" },
+    { pattern: /\bosteomyelitis\b/gi, url: "/diseases/osteomyelitis" },
+    { pattern: /\bbacteremia\b/gi, url: "/diseases/bacteremia" }
+  ],
+  "cdiff-vancomycin-vs-fidaxomicin": [
+    { pattern: /\btoxic megacolon\b/gi, url: "/diseases/toxic-megacolon" }
+  ],
+  "mrsa-vs-mssa": [
+    { pattern: /\bcellulitis\b/gi, url: "/diseases/cellulitis-and-skin-infections" }
+  ]
+};
+
+function renderProseWithLinks(text: string, slug?: string) {
+  if (slug !== "mrsa-vs-mssa" && slug !== "cdiff-vancomycin-vs-fidaxomicin" && slug !== "pseudomonas-vs-enterobacteriaceae" && slug !== "legionella-vs-mycoplasma-pneumoniae") return text;
+
+  const rules = [
+    ...GLOBAL_PROSE_LINK_RULES,
+    ...(slug && SCOPED_PROSE_LINK_RULES[slug] ? SCOPED_PROSE_LINK_RULES[slug] : [])
+  ];
+
+  // Track matches: start, end, url, originalText
+  interface Match {
+    start: number;
+    end: number;
+    url: string;
+    text: string;
+  }
+  const matches: Match[] = [];
+
+  for (const rule of rules) {
+    rule.pattern.lastIndex = 0;
+    let match: RegExpExecArray | null;
+    while ((match = rule.pattern.exec(text)) !== null) {
+      const start = match.index;
+      const end = start + match[0].length;
+      // Ensure no overlap with existing matches
+      const overlaps = matches.some(m => Math.max(m.start, start) < Math.min(m.end, end));
+      if (!overlaps) {
+        matches.push({ start, end, url: rule.url, text: match[0] });
+      }
+    }
+  }
+
+  if (matches.length === 0) return text;
+
+  // Sort by start index
+  matches.sort((a, b) => a.start - b.start);
+
+  const parts: React.ReactNode[] = [];
+  let currentIndex = 0;
+
+  matches.forEach((m, idx) => {
+    if (m.start > currentIndex) {
+      parts.push(text.slice(currentIndex, m.start));
+    }
+    parts.push(
+      <a
+        key={idx}
+        href={m.url}
+        className="text-indigo-600 hover:text-indigo-800 underline underline-offset-2 font-semibold transition-colors"
+      >
+        {m.text}
+      </a>
+    );
+    currentIndex = m.end;
+  });
+
+  if (currentIndex < text.length) {
+    parts.push(text.slice(currentIndex));
+  }
+
+  return <span>{parts}</span>;
+}
 
 export default function ComparisonsSEO() {
   const navigate = useNavigate();
@@ -2105,7 +2308,7 @@ export default function ComparisonsSEO() {
                   {item.subtitle}
                 </p>
                 <p className="text-xs text-slate-500 leading-relaxed font-medium mt-2">
-                  {item.intro}
+                  {renderProseWithLinks(item.intro, item.slug)}
                 </p>
               </div>
             </div>
@@ -2218,7 +2421,7 @@ export default function ComparisonsSEO() {
                         {(item as any).preferredTreatment.reasons.map((reason: string, rIdx: number) => (
                           <li key={rIdx} className="flex items-start gap-3 text-xs sm:text-[13px] text-slate-700 font-medium leading-relaxed">
                             <span className="text-emerald-600 font-black text-base leading-none shrink-0 mt-0.5">✓</span>
-                            <span>{reason}</span>
+                            <span>{renderProseWithLinks(reason, item.slug)}</span>
                           </li>
                         ))}
                       </ul>
@@ -2236,7 +2439,7 @@ export default function ComparisonsSEO() {
                         {(item as any).alternativeTreatment.reasonsNotPreferred.map((reason: string, rIdx: number) => (
                           <li key={rIdx} className="flex items-start gap-3 text-xs sm:text-[13px] text-slate-700 font-medium leading-relaxed">
                             <span className="text-slate-400 font-extrabold text-base leading-none shrink-0 mt-0.5">•</span>
-                            <span>{reason}</span>
+                            <span>{renderProseWithLinks(reason, item.slug)}</span>
                           </li>
                         ))}
                       </ul>
@@ -2253,7 +2456,7 @@ export default function ComparisonsSEO() {
                       </h4>
                     </div>
                     <p className="text-xs sm:text-[13px] text-slate-750 leading-relaxed font-semibold">
-                      {(item as any).boardPearl}
+                      {renderProseWithLinks((item as any).boardPearl, item.slug)}
                     </p>
                   </div>
                 </div>
@@ -2383,13 +2586,17 @@ export default function ComparisonsSEO() {
                               </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-100">
-                              {item.comparisonPoints.map((pt, i) => (
-                                <tr key={i} className="hover:bg-slate-50/50 transition-colors">
-                                  <td className="p-4 font-black text-slate-800 font-sans tracking-tight bg-slate-50/40">{pt.attribute}</td>
-                                  <td className="p-4 text-slate-700 leading-relaxed font-semibold">{pt.leftValue}</td>
-                                  <td className="p-4 text-slate-700 leading-relaxed font-semibold">{pt.rightValue}</td>
-                                </tr>
-                              ))}
+                              {item.comparisonPoints.map((pt, i) => {
+                                const isDiseaseRow = pt.attribute === "Classic Diseases" || pt.attribute === "Clinical Primary Target Sites";
+                                const isDrugRow = pt.attribute === "Inpatient Gold Standard (IV)" || pt.attribute === "Outpatient Gold Standard (PO)";
+                                return (
+                                  <tr key={i} className="hover:bg-slate-50/50 transition-colors">
+                                    <td className="p-4 font-black text-slate-800 font-sans tracking-tight bg-slate-50/40">{pt.attribute}</td>
+                                    <td className="p-4 text-slate-700 leading-relaxed font-semibold">{renderComparisonCell(pt.leftValue, isDiseaseRow, isDrugRow, item.slug)}</td>
+                                    <td className="p-4 text-slate-700 leading-relaxed font-semibold">{renderComparisonCell(pt.rightValue, isDiseaseRow, isDrugRow, item.slug)}</td>
+                                  </tr>
+                                );
+                              })}
                             </tbody>
                           </table>
                         </div>
@@ -2526,13 +2733,17 @@ export default function ComparisonsSEO() {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-100">
-                        {item.comparisonPoints.map((pt, i) => (
-                          <tr key={i} className="hover:bg-slate-50/50 transition-colors">
-                            <td className="p-4 font-black text-slate-800 font-sans tracking-tight bg-slate-50/40">{pt.attribute}</td>
-                            <td className="p-4 text-slate-700 leading-relaxed font-semibold">{pt.leftValue}</td>
-                            <td className="p-4 text-slate-700 leading-relaxed font-semibold">{pt.rightValue}</td>
-                          </tr>
-                        ))}
+                        {item.comparisonPoints.map((pt, i) => {
+                          const isDiseaseRow = pt.attribute === "Classic Diseases" || pt.attribute === "Clinical Primary Target Sites";
+                          const isDrugRow = pt.attribute === "Inpatient Gold Standard (IV)" || pt.attribute === "Outpatient Gold Standard (PO)";
+                          return (
+                            <tr key={i} className="hover:bg-slate-50/50 transition-colors">
+                              <td className="p-4 font-black text-slate-800 font-sans tracking-tight bg-slate-50/40">{pt.attribute}</td>
+                              <td className="p-4 text-slate-700 leading-relaxed font-semibold">{renderComparisonCell(pt.leftValue, isDiseaseRow, isDrugRow, item.slug)}</td>
+                              <td className="p-4 text-slate-700 leading-relaxed font-semibold">{renderComparisonCell(pt.rightValue, isDiseaseRow, isDrugRow, item.slug)}</td>
+                            </tr>
+                          );
+                        })}
                       </tbody>
                     </table>
                   </div>
@@ -2557,7 +2768,7 @@ export default function ComparisonsSEO() {
                   {item.clinicalPearls.map((prl, i) => (
                     <div key={i} className="flex gap-2.5 items-start text-xs sm:text-[13px] text-slate-760 leading-relaxed font-semibold">
                       <span className="text-emerald-500 font-extrabold block text-sm select-none leading-none shrink-0">•</span>
-                      <p>{prl}</p>
+                      <p>{renderProseWithLinks(prl, item.slug)}</p>
                     </div>
                   ))}
                 </div>
@@ -2577,7 +2788,7 @@ export default function ComparisonsSEO() {
                   {item.examTraps.map((trp, i) => (
                     <div key={i} className="flex gap-2.5 items-start text-xs sm:text-[13px] text-slate-760 leading-relaxed font-semibold">
                       <span className="text-rose-500 font-extrabold block text-sm select-none leading-none shrink-0">⚠</span>
-                      <p>{trp}</p>
+                      <p>{renderProseWithLinks(trp, item.slug)}</p>
                     </div>
                   ))}
                 </div>
