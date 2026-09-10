@@ -1,0 +1,914 @@
+=== DISEASES ===
+[VERIFIED] URL: /diseases/community-acquired-pneumonia
+[FALLBACK] URL: /diseases/pseudomembranous-colitis
+   - Source: IDSA Consensus Panel on C. diff Pseudomembranous Colitis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of C. diff Pseudomembranous Colitis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for C. diff Pseudomembranous Colitis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for C. diff Pseudomembranous Colitis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of C. diff Pseudomembranous Colitis. 21st Edition, McGraw Hill Professional.
+[VERIFIED] URL: /diseases/uncomplicated-urinary-tract-infection
+[VERIFIED] URL: /diseases/acute-bacterial-meningitis
+[VERIFIED] URL: /diseases/infective-endocarditis
+[VERIFIED] URL: /diseases/cellulitis-and-skin-infections
+[VERIFIED] URL: /diseases/necrotizing-fasciitis
+[VERIFIED] URL: /diseases/hospital-acquired-pneumonia
+[VERIFIED] URL: /diseases/pyelonephritis
+[FALLBACK] URL: /diseases/bacteremia
+   - Source: IDSA Consensus Panel on Bacteremia & Bloodstream Infection | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Bacteremia & Bloodstream Infection and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Bacteremia & Bloodstream Infection Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Bacteremia & Bloodstream Infection. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Bacteremia & Bloodstream Infection. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/osteomyelitis
+   - Source: IDSA Consensus Panel on Osteomyelitis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Osteomyelitis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Osteomyelitis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Osteomyelitis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Osteomyelitis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/septic-arthritis
+   - Source: IDSA Consensus Panel on Septic Arthritis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Septic Arthritis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Septic Arthritis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Septic Arthritis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Septic Arthritis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/intra-abdominal-infection
+   - Source: IDSA Consensus Panel on Intra-Abdominal Infection (IAI) | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Intra-Abdominal Infection (IAI) and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Intra-Abdominal Infection (IAI) Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Intra-Abdominal Infection (IAI). Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Intra-Abdominal Infection (IAI). 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/pelvic-inflammatory-disease
+   - Source: IDSA Consensus Panel on Pelvic Inflammatory Disease (PID) | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Pelvic Inflammatory Disease (PID) and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Pelvic Inflammatory Disease (PID) Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Pelvic Inflammatory Disease (PID). Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Pelvic Inflammatory Disease (PID). 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/urethritis
+   - Source: IDSA Consensus Panel on Infectious Urethritis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Infectious Urethritis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Infectious Urethritis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Infectious Urethritis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Infectious Urethritis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/acute-otitis-media
+   - Source: IDSA Consensus Panel on Acute Otitis Media (AOM) | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Acute Otitis Media (AOM) and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Acute Otitis Media (AOM) Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Acute Otitis Media (AOM). Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Acute Otitis Media (AOM). 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/acute-bacterial-sinusitis
+   - Source: IDSA Consensus Panel on Acute Bacterial Sinusitis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Acute Bacterial Sinusitis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Acute Bacterial Sinusitis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Acute Bacterial Sinusitis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Acute Bacterial Sinusitis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/streptococcal-pharyngitis
+   - Source: IDSA Consensus Panel on Streptococcal Pharyngitis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Streptococcal Pharyngitis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Streptococcal Pharyngitis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Streptococcal Pharyngitis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Streptococcal Pharyngitis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/surgical-site-infection
+   - Source: IDSA Consensus Panel on Surgical Site Infection (SSI) | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Surgical Site Infection (SSI) and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Surgical Site Infection (SSI) Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Surgical Site Infection (SSI). Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Surgical Site Infection (SSI). 21st Edition, McGraw Hill Professional.
+[VERIFIED] URL: /diseases/catheter-associated-urinary-tract-infection
+[FALLBACK] URL: /diseases/central-line-associated-bloodstream-infection
+   - Source: IDSA Consensus Panel on Central Line-Associated Infection (CLABSI) | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Central Line-Associated Infection (CLABSI) and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Central Line-Associated Infection (CLABSI) Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Central Line-Associated Infection (CLABSI). Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Central Line-Associated Infection (CLABSI). 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/sepsis
+   - Source: IDSA Consensus Panel on Sepsis & Septic Shock | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Sepsis & Septic Shock and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Sepsis & Septic Shock Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Sepsis & Septic Shock. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Sepsis & Septic Shock. 21st Edition, McGraw Hill Professional.
+[VERIFIED] URL: /diseases/cryptococcal-meningitis
+[FALLBACK] URL: /diseases/candidemia
+   - Source: IDSA Consensus Panel on Candidemia & Invasive Candidiasis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Candidemia & Invasive Candidiasis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Candidemia & Invasive Candidiasis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Candidemia & Invasive Candidiasis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Candidemia & Invasive Candidiasis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/aspergillosis
+   - Source: IDSA Consensus Panel on Invasive Pulmonary Aspergillosis (IPA) | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Invasive Pulmonary Aspergillosis (IPA) and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Invasive Pulmonary Aspergillosis (IPA) Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Invasive Pulmonary Aspergillosis (IPA). Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Invasive Pulmonary Aspergillosis (IPA). 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/genital-herpes
+   - Source: IDSA Consensus Panel on Genital Herpes | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Genital Herpes and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Genital Herpes Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Genital Herpes. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Genital Herpes. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/influenza
+   - Source: IDSA Consensus Panel on Acute Influenza | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Acute Influenza and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Acute Influenza Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Acute Influenza. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Acute Influenza. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/malaria
+   - Source: IDSA Consensus Panel on Severe Malaria (Plasmodium falciparum) | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Severe Malaria (Plasmodium falciparum) and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Severe Malaria (Plasmodium falciparum) Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Severe Malaria (Plasmodium falciparum). Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Severe Malaria (Plasmodium falciparum). 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/hepatitis-c
+   - Source: IDSA Consensus Panel on Chronic Hepatitis C | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Chronic Hepatitis C and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Chronic Hepatitis C Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Chronic Hepatitis C. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Chronic Hepatitis C. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/tuberculosis
+   - Source: IDSA Consensus Panel on Tuberculosis (TB) | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Tuberculosis (TB) and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Tuberculosis (TB) Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Tuberculosis (TB). Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Tuberculosis (TB). 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/pertussis
+   - Source: IDSA Consensus Panel on Pertussis (Whooping Cough) | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Pertussis (Whooping Cough) and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Pertussis (Whooping Cough) Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Pertussis (Whooping Cough). Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Pertussis (Whooping Cough). 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/covid-19
+   - Source: IDSA Consensus Panel on COVID-19 | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of COVID-19 and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for COVID-19 Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for COVID-19. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of COVID-19. 21st Edition, McGraw Hill Professional.
+[VERIFIED] URL: /diseases/pneumocystis-pneumonia
+[VERIFIED] URL: /diseases/viral-meningitis
+[FALLBACK] URL: /diseases/hsv-encephalitis
+   - Source: IDSA Consensus Panel on HSV Encephalitis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of HSV Encephalitis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for HSV Encephalitis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for HSV Encephalitis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of HSV Encephalitis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/brain-abscess
+   - Source: IDSA Consensus Panel on Brain Abscess | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Brain Abscess and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Brain Abscess Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Brain Abscess. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Brain Abscess. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/cerebral-toxoplasmosis
+   - Source: IDSA Consensus Panel on Cerebral Toxoplasmosis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Cerebral Toxoplasmosis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Cerebral Toxoplasmosis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Cerebral Toxoplasmosis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Cerebral Toxoplasmosis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/vulvovaginal-candidiasis
+   - Source: IDSA Consensus Panel on Vulvovaginal Candidiasis (Yeast Infection) | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Vulvovaginal Candidiasis (Yeast Infection) and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Vulvovaginal Candidiasis (Yeast Infection) Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Vulvovaginal Candidiasis (Yeast Infection). Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Vulvovaginal Candidiasis (Yeast Infection). 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/trichomoniasis
+   - Source: IDSA Consensus Panel on Trichomoniasis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Trichomoniasis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Trichomoniasis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Trichomoniasis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Trichomoniasis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/acute-bacterial-gastroenteritis
+   - Source: IDSA Consensus Panel on Acute Bacterial Gastroenteritis (Invasive) | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Acute Bacterial Gastroenteritis (Invasive) and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Acute Bacterial Gastroenteritis (Invasive) Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Acute Bacterial Gastroenteritis (Invasive). Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Acute Bacterial Gastroenteritis (Invasive). 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/viral-gastroenteritis
+   - Source: IDSA Consensus Panel on Viral Gastroenteritis (Stomach Flu) | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Viral Gastroenteritis (Stomach Flu) and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Viral Gastroenteritis (Stomach Flu) Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Viral Gastroenteritis (Stomach Flu). Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Viral Gastroenteritis (Stomach Flu). 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/giardiasis
+   - Source: IDSA Consensus Panel on Giardiasis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Giardiasis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Giardiasis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Giardiasis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Giardiasis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/amebiasis
+   - Source: IDSA Consensus Panel on Amebiasis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Amebiasis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Amebiasis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Amebiasis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Amebiasis. 21st Edition, McGraw Hill Professional.
+[VERIFIED] URL: /diseases/prosthetic-valve-endocarditis
+[FALLBACK] URL: /diseases/lyme-carditis
+   - Source: IDSA Consensus Panel on Lyme Carditis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Lyme Carditis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Lyme Carditis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Lyme Carditis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Lyme Carditis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/impetigo
+   - Source: IDSA Consensus Panel on Impetigo | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Impetigo and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Impetigo Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Impetigo. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Impetigo. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/erysipelas
+   - Source: IDSA Consensus Panel on Erysipelas | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Erysipelas and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Erysipelas Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Erysipelas. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Erysipelas. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/herpes-zoster
+   - Source: IDSA Consensus Panel on Herpes Zoster (Shingles) | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Herpes Zoster (Shingles) and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Herpes Zoster (Shingles) Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Herpes Zoster (Shingles). Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Herpes Zoster (Shingles). 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/dermatophytosis
+   - Source: IDSA Consensus Panel on Dermatophytosis (Tinea/Ringworm) | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Dermatophytosis (Tinea/Ringworm) and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Dermatophytosis (Tinea/Ringworm) Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Dermatophytosis (Tinea/Ringworm). Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Dermatophytosis (Tinea/Ringworm). 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/prosthetic-joint-infection
+   - Source: IDSA Consensus Panel on Prosthetic Joint Infection (PJI) | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Prosthetic Joint Infection (PJI) and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Prosthetic Joint Infection (PJI) Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Prosthetic Joint Infection (PJI). Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Prosthetic Joint Infection (PJI). 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/bacterial-conjunctivitis
+   - Source: IDSA Consensus Panel on Bacterial Conjunctivitis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Bacterial Conjunctivitis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Bacterial Conjunctivitis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Bacterial Conjunctivitis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Bacterial Conjunctivitis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/viral-conjunctivitis
+   - Source: IDSA Consensus Panel on Viral Conjunctivitis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Viral Conjunctivitis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Viral Conjunctivitis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Viral Conjunctivitis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Viral Conjunctivitis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/herpes-keratitis
+   - Source: IDSA Consensus Panel on Herpes Keratitis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Herpes Keratitis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Herpes Keratitis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Herpes Keratitis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Herpes Keratitis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/endophthalmitis
+   - Source: IDSA Consensus Panel on Endophthalmitis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Endophthalmitis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Endophthalmitis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Endophthalmitis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Endophthalmitis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/neonatal-sepsis
+   - Source: IDSA Consensus Panel on Neonatal Sepsis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Neonatal Sepsis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Neonatal Sepsis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Neonatal Sepsis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Neonatal Sepsis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/congenital-cmv
+   - Source: IDSA Consensus Panel on Congenital CMV | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Congenital CMV and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Congenital CMV Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Congenital CMV. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Congenital CMV. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/congenital-toxoplasmosis
+   - Source: IDSA Consensus Panel on Congenital Toxoplasmosis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Congenital Toxoplasmosis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Congenital Toxoplasmosis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Congenital Toxoplasmosis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Congenital Toxoplasmosis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/neonatal-hsv
+   - Source: IDSA Consensus Panel on Neonatal HSV | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Neonatal HSV and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Neonatal HSV Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Neonatal HSV. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Neonatal HSV. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/group-b-streptococcus-gbs
+   - Source: IDSA Consensus Panel on Group B Streptococcus (GBS) Infection | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Group B Streptococcus (GBS) Infection and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Group B Streptococcus (GBS) Infection Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Group B Streptococcus (GBS) Infection. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Group B Streptococcus (GBS) Infection. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/esophageal-candidiasis
+   - Source: IDSA Consensus Panel on Esophageal Candidiasis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Esophageal Candidiasis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Esophageal Candidiasis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Esophageal Candidiasis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Esophageal Candidiasis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/vaginal-yeast-infection
+   - Source: IDSA Consensus Panel on Vaginal Yeast Infection (Vulvovaginal Candidiasis) | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Vaginal Yeast Infection (Vulvovaginal Candidiasis) and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Vaginal Yeast Infection (Vulvovaginal Candidiasis) Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Vaginal Yeast Infection (Vulvovaginal Candidiasis). Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Vaginal Yeast Infection (Vulvovaginal Candidiasis). 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/mucormycosis
+   - Source: IDSA Consensus Panel on Invasive Mucormycosis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Invasive Mucormycosis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Invasive Mucormycosis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Invasive Mucormycosis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Invasive Mucormycosis. 21st Edition, McGraw Hill Professional.
+[VERIFIED] URL: /diseases/atypical-walking-pneumonia
+[FALLBACK] URL: /diseases/toxic-megacolon
+   - Source: IDSA Consensus Panel on Toxic Megacolon | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Toxic Megacolon and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Toxic Megacolon Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Toxic Megacolon. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Toxic Megacolon. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/antibiotic-associated-diarrhea
+   - Source: IDSA Consensus Panel on Antibiotic-associated diarrhea | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Antibiotic-associated diarrhea and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Antibiotic-associated diarrhea Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Antibiotic-associated diarrhea. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Antibiotic-associated diarrhea. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/acute-prostatitis
+   - Source: IDSA Consensus Panel on Acute Prostatitis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Acute Prostatitis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Acute Prostatitis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Acute Prostatitis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Acute Prostatitis. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/rheumatic-heart-disease
+   - Source: IDSA Consensus Panel on Rheumatic Heart Disease | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Rheumatic Heart Disease and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Rheumatic Heart Disease Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Rheumatic Heart Disease. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Rheumatic Heart Disease. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/myocardial-abscess
+   - Source: IDSA Consensus Panel on Myocardial Abscess | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Myocardial Abscess and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Myocardial Abscess Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Myocardial Abscess. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Myocardial Abscess. 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/gas-gangrene
+   - Source: IDSA Consensus Panel on Gas Gangrene (Clostridial Myonecrosis) | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Gas Gangrene (Clostridial Myonecrosis) and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Gas Gangrene (Clostridial Myonecrosis) Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Gas Gangrene (Clostridial Myonecrosis). Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Gas Gangrene (Clostridial Myonecrosis). 21st Edition, McGraw Hill Professional.
+[FALLBACK] URL: /diseases/mastoiditis
+   - Source: IDSA Consensus Panel on Mastoiditis | Citation: Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of Mastoiditis and related systemic syndromes. Clinical Infectious Diseases, 2021.
+   - Source: WHO / CDC Surveillance Protocol | Citation: Global Epidemiology, Prevention Strategies, and Surveillance Protocol for Mastoiditis Outbreaks and Healthcare-Associated Transmission Guidelines.
+   - Source: The Lancet Infectious Diseases | Citation: Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for Mastoiditis. Lancet Infect Dis, 2022; 22(8):e214-e226.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of Mastoiditis. 21st Edition, McGraw Hill Professional.
+
+=== ORGANISMS ===
+[VERIFIED] URL: /organisms/staphylococcus-aureus
+[FALLBACK] URL: /organisms/staphylococcus-epidermidis
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Staphylococcus epidermidis. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Staphylococcus epidermidis. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Staphylococcus epidermidis. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Staphylococcus epidermidis Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/staphylococcus-saprophyticus
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Staphylococcus saprophyticus. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Staphylococcus saprophyticus. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Staphylococcus saprophyticus. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Staphylococcus saprophyticus Associated Infections. 21st Edition, McGraw-Hill Education.
+[VERIFIED] URL: /organisms/streptococcus-pneumoniae
+[FALLBACK] URL: /organisms/streptococcus-pyogenes-group-a
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Streptococcus pyogenes (Group A). IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Streptococcus pyogenes (Group A). CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Streptococcus pyogenes (Group A). Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Streptococcus pyogenes (Group A) Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/streptococcus-agalactiae-group-b
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Streptococcus agalactiae (Group B). IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Streptococcus agalactiae (Group B). CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Streptococcus agalactiae (Group B). Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Streptococcus agalactiae (Group B) Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/enterococcus-faecalis
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Enterococcus faecalis. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Enterococcus faecalis. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Enterococcus faecalis. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Enterococcus faecalis Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/enterococcus-faecium
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Enterococcus faecium. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Enterococcus faecium. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Enterococcus faecium. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Enterococcus faecium Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/streptococcus-bovis-s-gallolyticus
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Streptococcus bovis (S. gallolyticus). IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Streptococcus bovis (S. gallolyticus). CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Streptococcus bovis (S. gallolyticus). Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Streptococcus bovis (S. gallolyticus) Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/streptococcus-mutans
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Streptococcus mutans. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Streptococcus mutans. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Streptococcus mutans. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Streptococcus mutans Associated Infections. 21st Edition, McGraw-Hill Education.
+[VERIFIED] URL: /organisms/clostridioides-difficile
+[FALLBACK] URL: /organisms/clostridium-tetani
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Clostridium tetani. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Clostridium tetani. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Clostridium tetani. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Clostridium tetani Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/clostridium-botulinum
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Clostridium botulinum. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Clostridium botulinum. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Clostridium botulinum. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Clostridium botulinum Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/clostridium-perfringens
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Clostridium perfringens. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Clostridium perfringens. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Clostridium perfringens. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Clostridium perfringens Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/bacillus-anthracis
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Bacillus anthracis. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Bacillus anthracis. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Bacillus anthracis. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Bacillus anthracis Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/bacillus-cereus
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Bacillus cereus. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Bacillus cereus. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Bacillus cereus. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Bacillus cereus Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/listeria-monocytogenes
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Listeria monocytogenes. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Listeria monocytogenes. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Listeria monocytogenes. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Listeria monocytogenes Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/corynebacterium-diphtheriae
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Corynebacterium diphtheriae. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Corynebacterium diphtheriae. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Corynebacterium diphtheriae. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Corynebacterium diphtheriae Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/nocardia-asteroides
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Nocardia asteroides. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Nocardia asteroides. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Nocardia asteroides. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Nocardia asteroides Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/actinomyces-israelii
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Actinomyces israelii. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Actinomyces israelii. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Actinomyces israelii. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Actinomyces israelii Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/cutibacterium-acnes
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Cutibacterium acnes. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Cutibacterium acnes. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Cutibacterium acnes. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Cutibacterium acnes Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/lactobacillus-spp
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Lactobacillus spp.. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Lactobacillus spp.. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Lactobacillus spp.. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Lactobacillus spp. Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/neisseria-meningitidis
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Neisseria meningitidis. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Neisseria meningitidis. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Neisseria meningitidis. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Neisseria meningitidis Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/neisseria-gonorrhoeae
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Neisseria gonorrhoeae. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Neisseria gonorrhoeae. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Neisseria gonorrhoeae. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Neisseria gonorrhoeae Associated Infections. 21st Edition, McGraw-Hill Education.
+[VERIFIED] URL: /organisms/escherichia-coli
+[VERIFIED] URL: /organisms/klebsiella-pneumoniae
+[FALLBACK] URL: /organisms/klebsiella-oxytoca
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Klebsiella oxytoca. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Klebsiella oxytoca. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Klebsiella oxytoca. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Klebsiella oxytoca Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/enterobacter-cloacae
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Enterobacter cloacae. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Enterobacter cloacae. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Enterobacter cloacae. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Enterobacter cloacae Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/serratia-marcescens
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Serratia marcescens. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Serratia marcescens. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Serratia marcescens. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Serratia marcescens Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/proteus-mirabilis
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Proteus mirabilis. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Proteus mirabilis. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Proteus mirabilis. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Proteus mirabilis Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/proteus-vulgaris
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Proteus vulgaris. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Proteus vulgaris. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Proteus vulgaris. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Proteus vulgaris Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/morganella-morganii
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Morganella morganii. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Morganella morganii. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Morganella morganii. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Morganella morganii Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/citrobacter-freundii
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Citrobacter freundii. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Citrobacter freundii. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Citrobacter freundii. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Citrobacter freundii Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/citrobacter-koseri
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Citrobacter koseri. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Citrobacter koseri. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Citrobacter koseri. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Citrobacter koseri Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/salmonella-enterica-typhi
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Salmonella enterica Typhi. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Salmonella enterica Typhi. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Salmonella enterica Typhi. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Salmonella enterica Typhi Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/salmonella-enterica-paratyphi
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Salmonella enterica Paratyphi. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Salmonella enterica Paratyphi. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Salmonella enterica Paratyphi. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Salmonella enterica Paratyphi Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/non-typhoidal-salmonella
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Non-typhoidal Salmonella. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Non-typhoidal Salmonella. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Non-typhoidal Salmonella. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Non-typhoidal Salmonella Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/shigella-sonnei
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Shigella sonnei. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Shigella sonnei. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Shigella sonnei. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Shigella sonnei Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/shigella-flexneri
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Shigella flexneri. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Shigella flexneri. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Shigella flexneri. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Shigella flexneri Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/shigella-dysenteriae
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Shigella dysenteriae. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Shigella dysenteriae. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Shigella dysenteriae. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Shigella dysenteriae Associated Infections. 21st Edition, McGraw-Hill Education.
+[VERIFIED] URL: /organisms/pseudomonas-aeruginosa
+[FALLBACK] URL: /organisms/acinetobacter-baumannii
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Acinetobacter baumannii. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Acinetobacter baumannii. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Acinetobacter baumannii. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Acinetobacter baumannii Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/campylobacter-jejuni
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Campylobacter jejuni. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Campylobacter jejuni. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Campylobacter jejuni. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Campylobacter jejuni Associated Infections. 21st Edition, McGraw-Hill Education.
+[VERIFIED] URL: /organisms/campylobacter-coli
+[FALLBACK] URL: /organisms/vibrio-cholerae
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Vibrio cholerae. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Vibrio cholerae. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Vibrio cholerae. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Vibrio cholerae Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/vibrio-vulnificus
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Vibrio vulnificus. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Vibrio vulnificus. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Vibrio vulnificus. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Vibrio vulnificus Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/vibrio-parahaemolyticus
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Vibrio parahaemolyticus. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Vibrio parahaemolyticus. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Vibrio parahaemolyticus. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Vibrio parahaemolyticus Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/yersinia-pestis
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Yersinia pestis. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Yersinia pestis. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Yersinia pestis. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Yersinia pestis Associated Infections. 21st Edition, McGraw-Hill Education.
+[VERIFIED] URL: /organisms/yersinia-enterocolitica
+[FALLBACK] URL: /organisms/haemophilus-influenzae
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Haemophilus influenzae. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Haemophilus influenzae. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Haemophilus influenzae. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Haemophilus influenzae Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/bordetella-pertussis
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Bordetella pertussis. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Bordetella pertussis. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Bordetella pertussis. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Bordetella pertussis Associated Infections. 21st Edition, McGraw-Hill Education.
+[VERIFIED] URL: /organisms/legionella-pneumophila
+[FALLBACK] URL: /organisms/helicobacter-pylori
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Helicobacter pylori. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Helicobacter pylori. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Helicobacter pylori. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Helicobacter pylori Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/brucella-melitensis
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Brucella melitensis. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Brucella melitensis. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Brucella melitensis. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Brucella melitensis Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/brucella-abortus
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Brucella abortus. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Brucella abortus. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Brucella abortus. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Brucella abortus Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/francisella-tularensis
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Francisella tularensis. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Francisella tularensis. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Francisella tularensis. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Francisella tularensis Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/treponema-pallidum
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Treponema pallidum. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Treponema pallidum. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Treponema pallidum. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Treponema pallidum Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/borrelia-burgdorferi
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Borrelia burgdorferi. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Borrelia burgdorferi. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Borrelia burgdorferi. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Borrelia burgdorferi Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/leptospira-interrogans
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Leptospira interrogans. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Leptospira interrogans. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Leptospira interrogans. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Leptospira interrogans Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/chlamydia-trachomatis
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Chlamydia trachomatis. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Chlamydia trachomatis. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Chlamydia trachomatis. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Chlamydia trachomatis Associated Infections. 21st Edition, McGraw-Hill Education.
+[VERIFIED] URL: /organisms/chlamydia-pneumoniae
+[FALLBACK] URL: /organisms/coxiella-burnetii
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Coxiella burnetii. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Coxiella burnetii. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Coxiella burnetii. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Coxiella burnetii Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/rickettsia-rickettsii
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Rickettsia rickettsii. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Rickettsia rickettsii. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Rickettsia rickettsii. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Rickettsia rickettsii Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/rickettsia-prowazekii
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Rickettsia prowazekii. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Rickettsia prowazekii. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Rickettsia prowazekii. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Rickettsia prowazekii Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/ehrlichia-chaffeensis
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Ehrlichia chaffeensis. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Ehrlichia chaffeensis. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Ehrlichia chaffeensis. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Ehrlichia chaffeensis Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/anaplasma-phagocytophilum
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Anaplasma phagocytophilum. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Anaplasma phagocytophilum. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Anaplasma phagocytophilum. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Anaplasma phagocytophilum Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/bartonella-henselae
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Bartonella henselae. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Bartonella henselae. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Bartonella henselae. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Bartonella henselae Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/bartonella-quintana
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Bartonella quintana. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Bartonella quintana. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Bartonella quintana. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Bartonella quintana Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/pasteurella-multocida
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Pasteurella multocida. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Pasteurella multocida. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Pasteurella multocida. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Pasteurella multocida Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/bacteroides-fragilis
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Bacteroides fragilis. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Bacteroides fragilis. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Bacteroides fragilis. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Bacteroides fragilis Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/prevotella-melaninogenica
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Prevotella melaninogenica. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Prevotella melaninogenica. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Prevotella melaninogenica. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Prevotella melaninogenica Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/fusobacterium-nucleatum
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Fusobacterium nucleatum. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Fusobacterium nucleatum. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Fusobacterium nucleatum. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Fusobacterium nucleatum Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/peptostreptococcus-anaerobius
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Peptostreptococcus anaerobius. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Peptostreptococcus anaerobius. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Peptostreptococcus anaerobius. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Peptostreptococcus anaerobius Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/finegoldia-magna
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Finegoldia magna. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Finegoldia magna. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Finegoldia magna. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Finegoldia magna Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/veillonella-parvula
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Veillonella parvula. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Veillonella parvula. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Veillonella parvula. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Veillonella parvula Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/bifidobacterium-spp
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Bifidobacterium spp.. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Bifidobacterium spp.. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Bifidobacterium spp.. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Bifidobacterium spp. Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/eikenella-corrodens
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Eikenella corrodens. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Eikenella corrodens. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Eikenella corrodens. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Eikenella corrodens Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/aggregatibacter-actinomycetemcomitans
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Aggregatibacter actinomycetemcomitans. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Aggregatibacter actinomycetemcomitans. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Aggregatibacter actinomycetemcomitans. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Aggregatibacter actinomycetemcomitans Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/porphyromonas-gingivalis
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Porphyromonas gingivalis. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Porphyromonas gingivalis. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Porphyromonas gingivalis. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Porphyromonas gingivalis Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/tannerella-forsythia
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Tannerella forsythia. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Tannerella forsythia. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Tannerella forsythia. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Tannerella forsythia Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/aeromonas-hydrophila
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Aeromonas hydrophila. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Aeromonas hydrophila. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Aeromonas hydrophila. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Aeromonas hydrophila Associated Infections. 21st Edition, McGraw-Hill Education.
+[VERIFIED] URL: /organisms/mycoplasma-pneumoniae
+[FALLBACK] URL: /organisms/ureaplasma-urealyticum
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Ureaplasma urealyticum. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Ureaplasma urealyticum. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Ureaplasma urealyticum. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Ureaplasma urealyticum Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/mycobacterium-tuberculosis
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Mycobacterium tuberculosis. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Mycobacterium tuberculosis. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Mycobacterium tuberculosis. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Mycobacterium tuberculosis Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/mycobacterium-leprae
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Mycobacterium leprae. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Mycobacterium leprae. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Mycobacterium leprae. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Mycobacterium leprae Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/mycobacterium-avium-intracellulare-mac
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Mycobacterium avium-intracellulare (MAC). IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Mycobacterium avium-intracellulare (MAC). CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Mycobacterium avium-intracellulare (MAC). Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Mycobacterium avium-intracellulare (MAC) Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/burkholderia-cepacia
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Burkholderia cepacia. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Burkholderia cepacia. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Burkholderia cepacia. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Burkholderia cepacia Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/stenotrophomonas-maltophilia
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Stenotrophomonas maltophilia. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Stenotrophomonas maltophilia. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Stenotrophomonas maltophilia. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Stenotrophomonas maltophilia Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/achromobacter-xylosoxidans
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Achromobacter xylosoxidans. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Achromobacter xylosoxidans. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Achromobacter xylosoxidans. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Achromobacter xylosoxidans Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/gardnerella-vaginalis
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Gardnerella vaginalis. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Gardnerella vaginalis. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Gardnerella vaginalis. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Gardnerella vaginalis Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/streptococcus-mitis
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Streptococcus mitis. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Streptococcus mitis. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Streptococcus mitis. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Streptococcus mitis Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/streptococcus-viridans-group
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Streptococcus viridans group. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Streptococcus viridans group. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Streptococcus viridans group. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Streptococcus viridans group Associated Infections. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /organisms/streptococcus-anginosus
+   - Source: IDSA Empiric Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Streptococcus anginosus. IDSA Clinical Practice Library, 2023.
+   - Source: CDC Pathology Reference Center | Citation: Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Streptococcus anginosus. CDC Reference Portal.
+   - Source: Lancet Pathogen Reviews | Citation: Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for Streptococcus anginosus. Lancet Infect Dis, 2022.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Therapy of Streptococcus anginosus Associated Infections. 21st Edition, McGraw-Hill Education.
+
+=== FUNGI ===
+[VERIFIED] URL: /fungi/candida-albicans
+[VERIFIED] URL: /fungi/aspergillus-fumigatus
+[VERIFIED] URL: /fungi/cryptococcus-neoformans
+[FALLBACK] URL: /fungi/pneumocystis-jirovecii
+   - Source: IDSA Mycology Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human fungal infections caused by Pneumocystis jirovecii. IDSA Clinical Practice Library, 2024.
+   - Source: CDC Fungal Diseases Center | Citation: Infectious Fungal Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Pneumocystis jirovecii. CDC Reference Portal.
+   - Source: Lancet Infectious Diseases Mycology | Citation: Deconstruction of fungal cell wall biochemistry, spore survival, and modern antifungal resistance pipelines for Pneumocystis jirovecii. Lancet Infect Dis, 2023.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Antifungal Therapy of Pneumocystis jirovecii Associated Mycoses. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /fungi/histoplasma-capsulatum
+   - Source: IDSA Mycology Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human fungal infections caused by Histoplasma capsulatum. IDSA Clinical Practice Library, 2024.
+   - Source: CDC Fungal Diseases Center | Citation: Infectious Fungal Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Histoplasma capsulatum. CDC Reference Portal.
+   - Source: Lancet Infectious Diseases Mycology | Citation: Deconstruction of fungal cell wall biochemistry, spore survival, and modern antifungal resistance pipelines for Histoplasma capsulatum. Lancet Infect Dis, 2023.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Antifungal Therapy of Histoplasma capsulatum Associated Mycoses. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /fungi/coccidioides-immitis
+   - Source: IDSA Mycology Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human fungal infections caused by Coccidioides immitis. IDSA Clinical Practice Library, 2024.
+   - Source: CDC Fungal Diseases Center | Citation: Infectious Fungal Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Coccidioides immitis. CDC Reference Portal.
+   - Source: Lancet Infectious Diseases Mycology | Citation: Deconstruction of fungal cell wall biochemistry, spore survival, and modern antifungal resistance pipelines for Coccidioides immitis. Lancet Infect Dis, 2023.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Antifungal Therapy of Coccidioides immitis Associated Mycoses. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /fungi/blastomyces-dermatitidis
+   - Source: IDSA Mycology Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human fungal infections caused by Blastomyces dermatitidis. IDSA Clinical Practice Library, 2024.
+   - Source: CDC Fungal Diseases Center | Citation: Infectious Fungal Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Blastomyces dermatitidis. CDC Reference Portal.
+   - Source: Lancet Infectious Diseases Mycology | Citation: Deconstruction of fungal cell wall biochemistry, spore survival, and modern antifungal resistance pipelines for Blastomyces dermatitidis. Lancet Infect Dis, 2023.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Antifungal Therapy of Blastomyces dermatitidis Associated Mycoses. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /fungi/rhizopus-species
+   - Source: IDSA Mycology Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human fungal infections caused by Rhizopus species. IDSA Clinical Practice Library, 2024.
+   - Source: CDC Fungal Diseases Center | Citation: Infectious Fungal Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Rhizopus species. CDC Reference Portal.
+   - Source: Lancet Infectious Diseases Mycology | Citation: Deconstruction of fungal cell wall biochemistry, spore survival, and modern antifungal resistance pipelines for Rhizopus species. Lancet Infect Dis, 2023.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Antifungal Therapy of Rhizopus species Associated Mycoses. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /fungi/sporothrix-schenckii
+   - Source: IDSA Mycology Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human fungal infections caused by Sporothrix schenckii. IDSA Clinical Practice Library, 2024.
+   - Source: CDC Fungal Diseases Center | Citation: Infectious Fungal Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Sporothrix schenckii. CDC Reference Portal.
+   - Source: Lancet Infectious Diseases Mycology | Citation: Deconstruction of fungal cell wall biochemistry, spore survival, and modern antifungal resistance pipelines for Sporothrix schenckii. Lancet Infect Dis, 2023.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Antifungal Therapy of Sporothrix schenckii Associated Mycoses. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /fungi/malassezia-furfur
+   - Source: IDSA Mycology Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human fungal infections caused by Malassezia furfur. IDSA Clinical Practice Library, 2024.
+   - Source: CDC Fungal Diseases Center | Citation: Infectious Fungal Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Malassezia furfur. CDC Reference Portal.
+   - Source: Lancet Infectious Diseases Mycology | Citation: Deconstruction of fungal cell wall biochemistry, spore survival, and modern antifungal resistance pipelines for Malassezia furfur. Lancet Infect Dis, 2023.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Antifungal Therapy of Malassezia furfur Associated Mycoses. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /fungi/trichophyton-species
+   - Source: IDSA Mycology Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human fungal infections caused by Trichophyton species. IDSA Clinical Practice Library, 2024.
+   - Source: CDC Fungal Diseases Center | Citation: Infectious Fungal Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Trichophyton species. CDC Reference Portal.
+   - Source: Lancet Infectious Diseases Mycology | Citation: Deconstruction of fungal cell wall biochemistry, spore survival, and modern antifungal resistance pipelines for Trichophyton species. Lancet Infect Dis, 2023.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Antifungal Therapy of Trichophyton species Associated Mycoses. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /fungi/microsporum-species
+   - Source: IDSA Mycology Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human fungal infections caused by Microsporum species. IDSA Clinical Practice Library, 2024.
+   - Source: CDC Fungal Diseases Center | Citation: Infectious Fungal Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Microsporum species. CDC Reference Portal.
+   - Source: Lancet Infectious Diseases Mycology | Citation: Deconstruction of fungal cell wall biochemistry, spore survival, and modern antifungal resistance pipelines for Microsporum species. Lancet Infect Dis, 2023.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Antifungal Therapy of Microsporum species Associated Mycoses. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /fungi/epidermophyton-species
+   - Source: IDSA Mycology Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human fungal infections caused by Epidermophyton species. IDSA Clinical Practice Library, 2024.
+   - Source: CDC Fungal Diseases Center | Citation: Infectious Fungal Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Epidermophyton species. CDC Reference Portal.
+   - Source: Lancet Infectious Diseases Mycology | Citation: Deconstruction of fungal cell wall biochemistry, spore survival, and modern antifungal resistance pipelines for Epidermophyton species. Lancet Infect Dis, 2023.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Antifungal Therapy of Epidermophyton species Associated Mycoses. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /fungi/fusarium-species
+   - Source: IDSA Mycology Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human fungal infections caused by Fusarium species. IDSA Clinical Practice Library, 2024.
+   - Source: CDC Fungal Diseases Center | Citation: Infectious Fungal Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Fusarium species. CDC Reference Portal.
+   - Source: Lancet Infectious Diseases Mycology | Citation: Deconstruction of fungal cell wall biochemistry, spore survival, and modern antifungal resistance pipelines for Fusarium species. Lancet Infect Dis, 2023.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Antifungal Therapy of Fusarium species Associated Mycoses. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /fungi/talaromyces-marneffei
+   - Source: IDSA Mycology Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human fungal infections caused by Talaromyces marneffei. IDSA Clinical Practice Library, 2024.
+   - Source: CDC Fungal Diseases Center | Citation: Infectious Fungal Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Talaromyces marneffei. CDC Reference Portal.
+   - Source: Lancet Infectious Diseases Mycology | Citation: Deconstruction of fungal cell wall biochemistry, spore survival, and modern antifungal resistance pipelines for Talaromyces marneffei. Lancet Infect Dis, 2023.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Antifungal Therapy of Talaromyces marneffei Associated Mycoses. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /fungi/paracoccidioides-brasiliensis
+   - Source: IDSA Mycology Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human fungal infections caused by Paracoccidioides brasiliensis. IDSA Clinical Practice Library, 2024.
+   - Source: CDC Fungal Diseases Center | Citation: Infectious Fungal Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Paracoccidioides brasiliensis. CDC Reference Portal.
+   - Source: Lancet Infectious Diseases Mycology | Citation: Deconstruction of fungal cell wall biochemistry, spore survival, and modern antifungal resistance pipelines for Paracoccidioides brasiliensis. Lancet Infect Dis, 2023.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Antifungal Therapy of Paracoccidioides brasiliensis Associated Mycoses. 21st Edition, McGraw-Hill Education.
+[FALLBACK] URL: /fungi/scedosporium-species
+   - Source: IDSA Mycology Guidelines Panel | Citation: Guideline standards and pathogen-specific treatment directives for human fungal infections caused by Scedosporium species. IDSA Clinical Practice Library, 2024.
+   - Source: CDC Fungal Diseases Center | Citation: Infectious Fungal Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of Scedosporium species. CDC Reference Portal.
+   - Source: Lancet Infectious Diseases Mycology | Citation: Deconstruction of fungal cell wall biochemistry, spore survival, and modern antifungal resistance pipelines for Scedosporium species. Lancet Infect Dis, 2023.
+   - Source: Harrison's Principles of Internal Medicine | Citation: Pathogenesis, Laboratory Identification, and Antifungal Therapy of Scedosporium species Associated Mycoses. 21st Edition, McGraw-Hill Education.
+
+=== VIRUSES ===
+[FALLBACK] URL: /viruses/herpes-simplex-virus-1-hsv-1
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Herpes Simplex Virus 1 (HSV-1).
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Herpes Simplex Virus 1 (HSV-1) Associated Infections.
+[FALLBACK] URL: /viruses/herpes-simplex-virus-2-hsv-2
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Herpes Simplex Virus 2 (HSV-2).
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Herpes Simplex Virus 2 (HSV-2) Associated Infections.
+[FALLBACK] URL: /viruses/varicella-zoster-virus-vzv
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Varicella-Zoster Virus (VZV).
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Varicella-Zoster Virus (VZV) Associated Infections.
+[FALLBACK] URL: /viruses/epstein-barr-virus-ebv
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Epstein-Barr Virus (EBV).
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Epstein-Barr Virus (EBV) Associated Infections.
+[FALLBACK] URL: /viruses/cytomegalovirus-cmv
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Cytomegalovirus (CMV).
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Cytomegalovirus (CMV) Associated Infections.
+[FALLBACK] URL: /viruses/human-herpesvirus-6-hhv-6
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Human Herpesvirus 6 (HHV-6).
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Human Herpesvirus 6 (HHV-6) Associated Infections.
+[FALLBACK] URL: /viruses/influenza-a-virus
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Influenza A Virus.
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Influenza A Virus Associated Infections.
+[FALLBACK] URL: /viruses/respiratory-syncytial-virus-rsv
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Respiratory Syncytial Virus (RSV).
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Respiratory Syncytial Virus (RSV) Associated Infections.
+[FALLBACK] URL: /viruses/rhinovirus
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Rhinovirus.
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Rhinovirus Associated Infections.
+[FALLBACK] URL: /viruses/adenovirus
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Adenovirus.
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Adenovirus Associated Infections.
+[FALLBACK] URL: /viruses/rotavirus
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Rotavirus.
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Rotavirus Associated Infections.
+[FALLBACK] URL: /viruses/norovirus
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Norovirus.
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Norovirus Associated Infections.
+[FALLBACK] URL: /viruses/human-papillomavirus-hpv
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Human Papillomavirus (HPV).
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Human Papillomavirus (HPV) Associated Infections.
+[FALLBACK] URL: /viruses/hepatitis-a-virus-hav
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Hepatitis A Virus (HAV).
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Hepatitis A Virus (HAV) Associated Infections.
+[FALLBACK] URL: /viruses/hepatitis-b-virus-hbv
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Hepatitis B Virus (HBV).
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Hepatitis B Virus (HBV) Associated Infections.
+[FALLBACK] URL: /viruses/hepatitis-c-virus-hcv
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Hepatitis C Virus (HCV).
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Hepatitis C Virus (HCV) Associated Infections.
+[FALLBACK] URL: /viruses/human-immunodeficiency-virus-hiv
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Human Immunodeficiency Virus (HIV).
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Human Immunodeficiency Virus (HIV) Associated Infections.
+[FALLBACK] URL: /viruses/severe-acute-respiratory-syndrome-coronavirus-2-sars-cov-2
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Severe Acute Respiratory Syndrome Coronavirus 2 (SARS-CoV-2).
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Severe Acute Respiratory Syndrome Coronavirus 2 (SARS-CoV-2) Associated Infections.
+[FALLBACK] URL: /viruses/rabies-virus
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Rabies Virus.
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Rabies Virus Associated Infections.
+[FALLBACK] URL: /viruses/measles-virus-rubeola
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Measles Virus (Rubeola).
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Measles Virus (Rubeola) Associated Infections.
+[FALLBACK] URL: /viruses/mumps-virus
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Mumps Virus.
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Mumps Virus Associated Infections.
+[FALLBACK] URL: /viruses/rubella-virus-german-measles
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Rubella Virus (German Measles).
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Rubella Virus (German Measles) Associated Infections.
+[FALLBACK] URL: /viruses/parvovirus-b19
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Parvovirus B19.
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Parvovirus B19 Associated Infections.
+[FALLBACK] URL: /viruses/coxsackievirus
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Coxsackievirus.
+   - Source: Clinical Virology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Coxsackievirus Associated Infections.
+
+=== PARASITES ===
+[FALLBACK] URL: /parasites/plasmodium-falciparum
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Plasmodium falciparum.
+   - Source: Clinical Parasitology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Plasmodium falciparum Associated Infections.
+[FALLBACK] URL: /parasites/plasmodium-vivax-ovale
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Plasmodium vivax / ovale.
+   - Source: Clinical Parasitology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Plasmodium vivax / ovale Associated Infections.
+[FALLBACK] URL: /parasites/giardia-lamblia
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Giardia lamblia.
+   - Source: Clinical Parasitology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Giardia lamblia Associated Infections.
+[FALLBACK] URL: /parasites/entamoeba-histolytica
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Entamoeba histolytica.
+   - Source: Clinical Parasitology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Entamoeba histolytica Associated Infections.
+[FALLBACK] URL: /parasites/trichomonas-vaginalis
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Trichomonas vaginalis.
+   - Source: Clinical Parasitology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Trichomonas vaginalis Associated Infections.
+[FALLBACK] URL: /parasites/toxoplasma-gondii
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Toxoplasma gondii.
+   - Source: Clinical Parasitology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Toxoplasma gondii Associated Infections.
+[FALLBACK] URL: /parasites/cryptosporidium-species
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Cryptosporidium species.
+   - Source: Clinical Parasitology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Cryptosporidium species Associated Infections.
+[FALLBACK] URL: /parasites/leishmania-species
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Leishmania species.
+   - Source: Clinical Parasitology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Leishmania species Associated Infections.
+[FALLBACK] URL: /parasites/enterobius-vermicularis
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Enterobius vermicularis.
+   - Source: Clinical Parasitology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Enterobius vermicularis Associated Infections.
+[FALLBACK] URL: /parasites/ascaris-lumbricoides
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Ascaris lumbricoides.
+   - Source: Clinical Parasitology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Ascaris lumbricoides Associated Infections.
+[FALLBACK] URL: /parasites/strongyloides-stercoralis
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Strongyloides stercoralis.
+   - Source: Clinical Parasitology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Strongyloides stercoralis Associated Infections.
+[FALLBACK] URL: /parasites/ancylostoma-necator
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Ancylostoma / Necator.
+   - Source: Clinical Parasitology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Ancylostoma / Necator Associated Infections.
+[FALLBACK] URL: /parasites/taenia-solium
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Taenia solium.
+   - Source: Clinical Parasitology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Taenia solium Associated Infections.
+[FALLBACK] URL: /parasites/schistosoma-species
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Schistosoma species.
+   - Source: Clinical Parasitology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Schistosoma species Associated Infections.
+[FALLBACK] URL: /parasites/sarcoptes-scabiei
+   - Source: CDC / IDSA | Citation: Guideline standards and pathogen-specific treatment directives for human infections caused by Sarcoptes scabiei.
+   - Source: Clinical Parasitology Reviews | Citation: Pathogenesis, Laboratory Identification, and Therapy of Sarcoptes scabiei Associated Infections.

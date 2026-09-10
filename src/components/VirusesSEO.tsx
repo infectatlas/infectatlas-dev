@@ -89,19 +89,7 @@ export interface PathogenReference {
 }
 
 export const getPathogenReferences = (pathogenId: string, name: string): PathogenReference[] => {
-  return [
-    {
-      type: "Clinical Guideline",
-      source: "CDC / IDSA",
-      citation: `Guideline standards and pathogen-specific treatment directives for human infections caused by ${name}.`,
-      url: "https://www.cdc.gov"
-    },
-    {
-      type: "Landmark Review Article",
-      source: "Clinical Virology Reviews",
-      citation: `Pathogenesis, Laboratory Identification, and Therapy of ${name} Associated Infections.`,
-    }
-  ];
+  return [];
 };
 
 export const getPathogenStyles = (type: string) => {
@@ -463,6 +451,8 @@ export default function VirusesSEO() {
 
   const groupedPathogens = groupPathogensByCategory();
 
+  const pathogenRefs = pathogen ? getPathogenReferences(pathogen.id, pathogen.name) : [];
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans animate-fade-in" id="seo-root">
       {/* Pristine Clinical Reference Header */}
@@ -689,6 +679,7 @@ export default function VirusesSEO() {
               </div>
 
               {/* Medical Evidence Portal: References, guidelines, review parameters */}
+              {pathogenRefs.length > 0 && (
               <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-2xs space-y-4 scroll-mt-24 font-sans" id="medical-evidence">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200/60 pb-3">
                   <div className="flex items-center gap-2">
@@ -710,7 +701,7 @@ export default function VirusesSEO() {
                 </p>
 
                 <div className="grid grid-cols-1 gap-3.5">
-                  {getPathogenReferences(pathogen.id, pathogen.name).map((ref, i) => (
+                  {pathogenRefs.map((ref, i) => (
                     <div key={i} className="p-4 bg-slate-50/70 border border-slate-200/60 rounded-xl space-y-2 hover:bg-slate-50/100 hover:border-slate-250 transition-all">
                       <div className="flex items-center justify-between gap-2 flex-wrap">
                         <span className={`text-[9.5px] font-black uppercase px-2 py-0.5 rounded-md tracking-wider border shadow-3xs ${
@@ -752,6 +743,7 @@ export default function VirusesSEO() {
                   </Link>
                 </div>
               </div>
+              )}
 
               {/* Graph-driven Intelligent Learning Experience widgets */}
               <IntelligentLearningPath entityType="pathogen" idOrSlug={pathogen.id} />

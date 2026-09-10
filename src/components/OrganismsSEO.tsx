@@ -266,31 +266,7 @@ export const getPathogenReferences = (pathogenId: string, name: string): Pathoge
   }
 
   // Fallback high-yield academic references
-  return [
-    {
-      type: "Clinical Guideline",
-      source: "IDSA Empiric Guidelines Panel",
-      citation: `Guideline standards and pathogen-specific treatment directives for human infections caused by ${name}. IDSA Clinical Practice Library, 2023.`,
-      url: "https://www.idsociety.org"
-    },
-    {
-      type: "Public Health Consensus",
-      source: "CDC Pathology Reference Center",
-      citation: `Infectious Agent Profiles, Diagnostic Assays, and Safety Guidelines for containment of ${name}. CDC Reference Portal.`,
-      url: "https://www.cdc.gov"
-    },
-    {
-      type: "Landmark Review Article",
-      source: "Lancet Pathogen Reviews",
-      citation: `Deconstruction of virulent host-pathogen interactions, capsule biochemistry, and modern antimicrobial resistance pipelines for ${name}. Lancet Infect Dis, 2022.`,
-      url: "https://www.thelancet.com/journals/laninf/home"
-    },
-    {
-      type: "Standard Textbook",
-      source: "Harrison's Principles of Internal Medicine",
-      citation: `Pathogenesis, Laboratory Identification, and Therapy of ${name} Associated Infections. 21st Edition, McGraw-Hill Education.`,
-    }
-  ];
+  return [];
 };
 
 export const getPathogenStyles = (gramStatus: string) => {
@@ -667,6 +643,8 @@ export default function OrganismsSEO() {
 
   const groupedPathogens = groupPathogensByGram();
 
+  const pathogenRefs = pathogen ? getPathogenReferences(pathogen.id, pathogen.name) : [];
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans animate-fade-in" id="seo-root">
       {/* Pristine Clinical Reference Header */}
@@ -953,6 +931,7 @@ export default function OrganismsSEO() {
               </div>
 
               {/* Medical Evidence Portal: References, guidelines, review parameters */}
+              {pathogenRefs.length > 0 && (
               <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-2xs space-y-4 scroll-mt-24 font-sans" id="medical-evidence">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200/60 pb-3">
                   <div className="flex items-center gap-2">
@@ -974,7 +953,7 @@ export default function OrganismsSEO() {
                 </p>
 
                 <div className="grid grid-cols-1 gap-3.5">
-                  {getPathogenReferences(pathogen.id, pathogen.name).map((ref, i) => (
+                  {pathogenRefs.map((ref, i) => (
                     <div key={i} className="p-4 bg-slate-50/70 border border-slate-200/60 rounded-xl space-y-2 hover:bg-slate-50/100 hover:border-slate-250 transition-all">
                       <div className="flex items-center justify-between gap-2 flex-wrap">
                         <span className={`text-[9.5px] font-black uppercase px-2 py-0.5 rounded-md tracking-wider border shadow-3xs ${
@@ -1016,6 +995,7 @@ export default function OrganismsSEO() {
                   </Link>
                 </div>
               </div>
+              )}
 
               {/* Graph-driven Intelligent Learning Experience widgets */}
               <IntelligentLearningPath entityType="pathogen" idOrSlug={pathogen.id} />

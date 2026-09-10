@@ -221,31 +221,7 @@ export const getDiseaseReferences = (diseaseId: string, name: string): MedicalRe
   }
 
   // Fallback dynamic high-fidelity references generator
-  return [
-    {
-      type: "Clinical Guideline",
-      source: `IDSA Consensus Panel on ${name}`,
-      citation: `Practice Guidelines for the Clinical Evaluation and Antimicrobial Management of ${name} and related systemic syndromes. Clinical Infectious Diseases, 2021.`,
-      url: "https://www.idsociety.org/practice-guidelines/"
-    },
-    {
-      type: "Public Health Consensus",
-      source: "WHO / CDC Surveillance Protocol",
-      citation: `Global Epidemiology, Prevention Strategies, and Surveillance Protocol for ${name} Outbreaks and Healthcare-Associated Transmission Guidelines.`,
-      url: "https://www.cdc.gov"
-    },
-    {
-      type: "Landmark Review Article",
-      source: "The Lancet Infectious Diseases",
-      citation: `Clinical review of pathobiology, current diagnostic modalities, and novel empirical therapeutic pipelines for ${name}. Lancet Infect Dis, 2022; 22(8):e214-e226.`,
-      url: "https://www.thelancet.com/journals/laninf/home"
-    },
-    {
-      type: "Standard Textbook",
-      source: "Harrison's Principles of Internal Medicine",
-      citation: `Pathophysiology of Host-Pathogen Interactions and Clinical Presentation of ${name}. 21st Edition, McGraw Hill Professional.`,
-    }
-  ];
+  return [];
 };
 
 export interface SystemInfo {
@@ -890,6 +866,8 @@ export default function DiseasesSEO() {
     setDrawerOpen(true);
   };
 
+  const diseaseRefs = disease ? getDiseaseReferences(disease.id, disease.name) : [];
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans" id="disease-seo-root">
       
@@ -1501,6 +1479,7 @@ export default function DiseasesSEO() {
                 <ContinueLearningHistory />
 
                 {/* Medical Evidence Portal: References, guidelines, review parameters */}
+                {diseaseRefs.length > 0 && (
                 <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-2xs space-y-4 scroll-mt-24 font-sans" id="medical-evidence">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200/60 pb-3">
                     <div className="flex items-center gap-2">
@@ -1522,7 +1501,7 @@ export default function DiseasesSEO() {
                   </p>
 
                   <div className="grid grid-cols-1 gap-3.5">
-                    {getDiseaseReferences(disease.id, disease.name).map((ref, i) => (
+                    {diseaseRefs.map((ref, i) => (
                       <div key={i} className="p-4 bg-slate-50/70 border border-slate-200/60 rounded-xl space-y-2 hover:bg-slate-50/100 hover:border-slate-250 transition-all">
                         <div className="flex items-center justify-between gap-2 flex-wrap">
                           <span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-md tracking-wider border shadow-3xs ${
@@ -1564,6 +1543,7 @@ export default function DiseasesSEO() {
                     </Link>
                   </div>
                 </div>
+                )}
 
                 {/* Trust / Compliance disclaimer footer */}
                 <div className="bg-slate-100 text-[11px] text-slate-400 p-4 rounded-xl border border-slate-200 leading-relaxed font-normal">
