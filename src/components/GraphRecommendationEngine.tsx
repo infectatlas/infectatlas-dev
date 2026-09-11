@@ -162,7 +162,7 @@ export const IntelligentLearningPath: React.FC<GraphRecProps> = ({ entityType, i
         {pathSteps.map((step, idx) => (
           <div key={step.id} className="relative flex flex-col justify-between p-4 bg-white border border-slate-200/60 rounded-xl hover:border-indigo-250 transition-all shadow-3xs">
             <div className="space-y-2">
-              <span className="text-[9px] font-black text-indigo-600 bg-indigo-50/70 border border-indigo-100 px-2.5 py-1 rounded-full uppercase tracking-wider block w-max">
+              <span className="text-[9px] font-black text-indigo-600 bg-indigo-50/70 border border-indigo-100 px-2.5 py-1 rounded-full uppercase tracking-wider inline-flex shrink-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
                 {step.relationshipType}
               </span>
 

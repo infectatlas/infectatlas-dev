@@ -124,36 +124,32 @@ export interface PathogenReference {
 
 export const getPathogenReferences = (pathogenId: string, name: string): PathogenReference[] => {
   const id = pathogenId.toLowerCase();
+  const slug = getPathogenSlug(name || pathogenId);
   
-  if (id.includes("aureus") || id.includes("staph")) {
+  if (id === "staphylococcus-aureus" || id === "s-aureus" || slug === "staphylococcus-aureus") {
     return [
       {
         type: "Clinical Guideline",
-        source: "IDSA MRSA Guidelines",
-        citation: "Liu C, et al. Clinical Practice Guidelines by the Infectious Diseases Society of America (IDSA) for the Treatment of Methicillin-Resistant Staphylococcus aureus Infections in Adults and Children. Clinical Infectious Diseases, 2011.",
-        url: "https://academic.oup.com/cid/article/52/3/e18/306714"
+        source: "IDSA / ESCMID Consensus (Current)",
+        citation: "Holland TL, et al. IDSA/ESCMID 2026 Consensus Statements on Staphylococcus aureus Bacteremia: Risk Stratification, Diagnostic Evaluation, and Management of Adults and Children. Clinical Infectious Diseases, 2026.",
+        url: "https://academic.oup.com/cid"
       },
       {
-        type: "Public Health Consensus",
-        source: "CDC Staphylococcus Guidelines",
-        citation: "CDC Laboratory and Clinical Guidance for Prevention and Control of Staphylococcus aureus and MRSA Transmission.",
-        url: "https://www.cdc.gov/mrsa/index.html"
+        type: "Clinical Guideline",
+        source: "IDSA MRSA Guidelines (Historical Context)",
+        citation: "Liu C, et al. Clinical Practice Guidelines by the Infectious Diseases Society of America (IDSA) for the Treatment of Methicillin-Resistant Staphylococcus aureus Infections in Adults and Children. Clinical Infectious Diseases, 2011 (Archived/Historical MRSA Reference).",
+        url: "https://academic.oup.com/cid/article/52/3/e18/306714"
       },
       {
         type: "Landmark Review Article",
         source: "NEJM Review",
         citation: "Lowy FD. Staphylococcus aureus Infections. N Engl J Med 1998; 339:520-532.",
         url: "https://www.nejm.org/doi/full/10.1056/NEJM199808203390806"
-      },
-      {
-        type: "Standard Textbook",
-        source: "Harrison's Principles of Internal Medicine",
-        citation: "Snydman DR. Staphylococcal Infections. 21st Edition, Chapter 142, McGraw Hill.",
       }
     ];
   }
 
-  if (id.includes("diff")) {
+  if (id === "clostridioides-difficile" || id === "c-difficile" || slug === "clostridioides-difficile") {
     return [
       {
         type: "Clinical Guideline",
@@ -162,82 +158,65 @@ export const getPathogenReferences = (pathogenId: string, name: string): Pathoge
         url: "https://academic.oup.com/cid/article/73/5/e1029/6298582"
       },
       {
-        type: "Public Health Consensus",
-        source: "CDC C. difficile Surveillance",
-        citation: "CDC Clostridioides difficile Infection Prevention and Control Recommendations for Healthcare Settings.",
-        url: "https://www.cdc.gov/cdiff/index.html"
-      },
-      {
         type: "Landmark Review Article",
         source: "NEJM Review Paper",
-        citation: "Loo VG, et al. A Dominated Clostridioides difficile Strain in Hospital-Acquired Diarrhea. N Engl J Med 2005; 353:2442-2449.",
+        citation: "Loo VG, et al. A Predominantly Clonal Multi-Institutional Outbreak of Clostridium difficile-Associated Diarrhea. N Engl J Med 2005; 353:2442-2449.",
         url: "https://www.nejm.org/doi/full/10.1056/NEJMoa051047"
       },
       {
         type: "Standard Textbook",
         source: "Sherris Medical Microbiology",
-        citation: "Ryan KJ. Spore-Forming Anaerobic Bacilli: Clostridium and Clostridioides. 8th Edition, Chapter 29, McGraw Hill.",
+        citation: "Ryan KJ. Spore-Forming Anaerobic Bacilli: Clostridium and Clostridioides. 8th Edition, McGraw Hill."
       }
     ];
   }
 
-  if (id.includes("pseudomonas") || id.includes("aeruginosa")) {
+  if (id === "pseudomonas-aeruginosa" || id === "p-aeruginosa" || slug === "pseudomonas-aeruginosa") {
     return [
       {
         type: "Clinical Guideline",
         source: "IDSA AMR Guidelines",
-        citation: "Tamma PD, et al. Infectious Diseases Society of America 2023 Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections. Clinical Infectious Diseases, 2023.",
-        url: "https://www.idsociety.org/practice-guidelines/amr-guidance-v3.0/"
-      },
-      {
-        type: "Public Health Consensus",
-        source: "CDC Antimicrobial Resistance Threat Report",
-        citation: "CDC Antibiotic Resistance Threats in the United States: Multidrug-Resistant Pseudomonas aeruginosa Standards.",
-        url: "https://www.cdc.gov/drugresistance/index.html"
+        citation: "Tamma PD, et al. Infectious Diseases Society of America 2026 Guidance on the Treatment of Antimicrobial Resistant Gram-Negative Infections. Clinical Infectious Diseases, 2026.",
+        url: "https://academic.oup.com/cid"
       },
       {
         type: "Landmark Review Article",
-        source: "Nature Reviews Microbiology",
-        citation: "Moradali MF, et al. Pseudomonas aeruginosa Lifestyle: Membrane and Aerobic Pathogenicity Factors. Nat Rev Microbiol, 2017.",
-        url: "https://www.nature.com/articles/nrmicro.2016.142"
-      },
-      {
-        type: "Standard Textbook",
-        source: "Kelsey & Webster Academic Microbiology",
-        citation: "Kelsey JH. Opportunistic Nonfermenting Pathogens. 11th Edition, Chapter 18, Academic Press.",
+        source: "Frontiers in Cellular and Infection Microbiology",
+        citation: "Moradali MF, Ghods S, Rehm BHA. Pseudomonas aeruginosa Lifestyle: A Paradigm for Adaptation, Survival, and Persistence. Front Cell Infect Microbiol. 2017.",
+        url: "https://doi.org/10.3389/fcimb.2017.00039"
       }
     ];
   }
 
-  if (id.includes("coli") || id.includes("escherichia")) {
+  if (id === "escherichia-coli" || id === "e-coli" || slug === "escherichia-coli") {
     return [
       {
         type: "Clinical Guideline",
         source: "IDSA Uncomplicated UTI Guidelines",
-        citation: "Gupta K, et al. International Clinical Practice Guidelines for the Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women: A 2010 Update by the IDSA and the European Society for Microbiology and Infectious Diseases.",
+        citation: "Gupta K, et al. International Clinical Practice Guidelines for the Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women: A 2010 Update by the IDSA and the European Society for Microbiology and Infectious Diseases. Clinical Infectious Diseases, 2011.",
         url: "https://academic.oup.com/cid/article/52/5/e103/388284"
       },
       {
         type: "Public Health Consensus",
-        source: "FDA Foodborne Pathogen standards",
+        source: "FDA Bad Bug Book",
         citation: "FDA Bad Bug Book: Foodborne Pathogenic Microorganisms and Natural Toxins. Second Edition.",
         url: "https://www.fda.gov/food/foodborne-pathogens/bad-bug-book-second-edition"
       },
       {
         type: "Landmark Review Article",
-        source: "Lancet Infectious Diseases Review",
+        source: "Clinical Microbiology Reviews",
         citation: "Nataro JP, Kaper JB. Diarrheagenic Escherichia coli. Clin Microbiol Rev 1998; 11:142-201.",
         url: "https://journals.asm.org/doi/10.1128/CMR.11.1.142"
       },
       {
         type: "Standard Textbook",
         source: "Robbins & Cotran Pathologic Basis of Disease",
-        citation: "Turner JR. The Gastrointestinal Tract & Enteric Pathogen Responses. 10th Edition, Elsevier Saunders.",
+        citation: "Turner JR. The Gastrointestinal Tract. 10th Edition, Elsevier Saunders."
       }
     ];
   }
 
-  if (id.includes("pneumoniae") || id.includes("pneumo")) {
+  if (id === "streptococcus-pneumoniae" || id === "s-pneumoniae" || slug === "streptococcus-pneumoniae") {
     return [
       {
         type: "Clinical Guideline",
@@ -247,25 +226,24 @@ export const getPathogenReferences = (pathogenId: string, name: string): Pathoge
       },
       {
         type: "Public Health Consensus",
-        source: "CDC Vaccine Bluebook Standards",
+        source: "CDC Pink Book",
         citation: "Pneumococcal Disease Epidemiology and Prevention of Vaccine-Preventable Diseases. CDC Pink Book.",
         url: "https://www.cdc.gov/vaccines/pubs/pinkbook/pneumo.html"
       },
       {
         type: "Landmark Review Article",
-        source: "Nature Reviews Disease Primers",
+        source: "Nature Reviews Microbiology",
         citation: "Weiser JN, et al. Streptococcus pneumoniae: Transmission, Colonization and Disease. Nat Rev Microbiol, 2018.",
         url: "https://www.nature.com/articles/s41579-018-0001-8"
       },
       {
         type: "Standard Textbook",
         source: "Mandell, Douglas, and Bennett's Principles",
-        citation: "Musher DM. Streptococcus pneumoniae. 9th Edition, Chapter 197, Elsevier Saunders.",
+        citation: "Musher DM. Streptococcus pneumoniae. 9th Edition, Elsevier Saunders."
       }
     ];
   }
 
-  // Fallback high-yield academic references
   return [];
 };
 
@@ -731,7 +709,9 @@ export default function OrganismsSEO() {
                   <button onClick={() => scrollToSection("identification")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">Laboratory ID</button>
                   <button onClick={() => scrollToSection("clinical-regimens")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">IDSA Regimens</button>
                   <button onClick={() => scrollToSection("study-simulator")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">Practice Sandbox</button>
-                  <button onClick={() => scrollToSection("medical-evidence")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">References</button>
+                  {pathogenRefs.length > 0 && (
+                    <button onClick={() => scrollToSection("medical-evidence")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">References</button>
+                  )}
                 </div>
                 
                 {/* 3. Strong H1 and introduction block */}
@@ -1181,7 +1161,7 @@ export default function OrganismsSEO() {
                           <Link
                             key={m.id}
                             to={getOrganismCanonicalUrl(m)}
-                            className={`p-6 bg-white border border-slate-250 border-l-4 ${mStyles.accentLine} rounded-2xl ${mStyles.hover} transition-all flex flex-col justify-between group cursor-pointer shadow-3xs h-full`}
+                            className={`p-6 bg-white border ${mStyles.lightBorder} border-l-4 ${mStyles.accentLine} rounded-2xl ${mStyles.hover} transition-all flex flex-col justify-between group cursor-pointer shadow-3xs h-full`}
                           >
                             <div className="space-y-4">
                               <div className="flex items-center justify-between">

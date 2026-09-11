@@ -335,6 +335,100 @@ const BASE_DISEASES: Disease[] = [
     ]
   },
   {
+    id: "complicated-urinary-tract-infection",
+    name: "Complicated Urinary Tract Infection (cUTI)",
+    slug: "complicated-urinary-tract-infection",
+    alternateSlugs: ["complicated-uti", "cuti"],
+    metaDescription: "Master Complicated Urinary Tract Infection (cUTI) guidelines, structural vs functional risk factors, multidrug-resistant uropathogens, and IV antimicrobial regimens.",
+    overview: "Complicated Urinary Tract Infection (cUTI) is an infection occurring in the presence of structural, functional, or host metabolic abnormalities that increase the risk of therapy failure or serious clinical outcomes. In contrast to uncomplicated cystitis in healthy women, cUTIs occur in men, pregnant individuals, patients with urinary tract obstruction (urolithiasis, BPH), neurogenic bladders, indwelling catheters, renal failure, or systemic immunocompromise. Treatment necessitates systemic antimicrobial therapy with broader-spectrum empirical coverage.",
+    quickFacts: {
+      commonPathogens: ["Escherichia coli (including ESBL strains)", "Klebsiella pneumoniae", "Proteus mirabilis", "Pseudomonas aeruginosa", "Enterococcus faecalis"],
+      riskFactors: ["Male sex", "Urinary tract obstruction or nephrolithiasis", "Benign Prostatic Hyperplasia (BPH)", "Indwelling bladder catheters or stents", "Diabetes mellitus or immunosuppression", "Pregnancy", "Renal transplant or baseline renal insufficiency"],
+      hallmarkSymptoms: ["Dysuria, urinary frequency, or urgency accompanied by systemic signs", "Fever, rigors, or altered mental status in elderly patients", "Costovertebral angle (CVA) flank or pelvic tenderness", "Urinary retention or acute obstruction"],
+      diagnosticApproach: ["Urine dipstick and microscopic urinalysis (pyuria, hematuria)", "Urine culture and antimicrobial susceptibility testing (mandatory for all cUTIs)", "Blood cultures (for hospitalized or septic presentations)", "Renal ultrasound or non-contrast CT abdomen/pelvis to rule out obstruction or abscess"]
+    },
+    clinicalPresentation: "Patients with complicated UTIs present along a wide clinical spectrum ranging from acute cystitis symptoms in an individual with host complicating factors to severe urosepsis. Common complaints include dysuria, frequency, pelvic or suprapubic pain, alongside systemic manifestations such as high fevers, rigors, nausea, vomiting, or acute confusion in elderly hosts. Physical examination may reveal costovertebral angle tenderness, a palpable distended bladder, or prostatic tenderness.",
+    causativePathogens: [
+      {
+        name: "Escherichia coli",
+        slug: "e-coli",
+        role: "The predominant uropathogen; higher rates of antimicrobial resistance (including ESBL-producing strains) are observed in complicated settings."
+      },
+      {
+        name: "Pseudomonas aeruginosa",
+        slug: "p-aeruginosa",
+        role: "Key nosocomial and catheter-associated uropathogen, requiring targeted antipseudomonal beta-lactams or fluoroquinolones."
+      },
+      {
+        name: "Klebsiella pneumoniae",
+        slug: "k-pneumoniae",
+        role: "Frequent cause of hospital-acquired or instrumentation-associated complicated urinary infections."
+      },
+      {
+        name: "Enterococcus faecalis",
+        slug: "e-faecalis",
+        role: "Gram-positive enterococcus commonly encountered in elderly males with urinary instrumentation, catheterization, or BPH."
+      }
+    ],
+    diagnosticApproach: "Unlike simple cystitis, a urine culture with antimicrobial susceptibility testing is mandatory for all suspected complicated UTIs. Urinalysis reveals pyuria (>= 10 WBC/hpf) and bacteriuria. Blood cultures should be drawn if systemic features (fever, hemodynamic instability) are present. Renal ultrasonography or non-contrast helical CT of the abdomen and pelvis is indicated if patients fail to improve within 48-72 hours or if urinary tract obstruction or perinephric abscess is suspected.",
+    treatmentPrinciples: "Empiric antimicrobial selection must cover resistant Gram-negative bacilli and take local antibiograms into account. Outpatient management of mild-to-moderate cases may use oral Fluoroquinolones (Ciprofloxacin or Levofloxacin) if local resistance is <10%. Hospitalized or severely ill patients require intravenous therapy such as Ceftriaxone, Piperacillin-tazobactam, Cefepime, or a Carbapenem (Ertapenem, Meropenem) if ESBL organisms are suspected. Total treatment duration typically spans 7 to 14 days, tailored to clinical response and culture results. Relief of any anatomical urinary obstruction is essential.",
+    clinicalPearls: [
+      "Any UTI occurring in a male patient is considered complicated by definition and warrants urine culture, longer antimicrobial treatment, and investigation for structural obstruction.",
+      "Nitrofurantoin and Fosfomycin are generally not recommended for complicated UTIs or upper tract disease due to inadequate renal tissue and systemic blood concentrations.",
+      "Always investigate for urinary tract obstruction (e.g., obstructing stone or prostatic enlargement) when a patient with a complicated UTI remains febrile despite appropriate antibiotic coverage for 48-72 hours."
+    ],
+    relatedAntibiotics: [
+      {
+        name: "Ceftriaxone",
+        slug: "ceftriaxone",
+        role: "Standard first-line IV third-generation cephalosporin for hospitalized patients with complicated UTI without risk of Pseudomonas."
+      },
+      {
+        name: "Ciprofloxacin",
+        slug: "ciprofloxacin",
+        role: "Oral and IV fluoroquinolone with high urinary tract penetration; used when local fluoroquinolone resistance is low."
+      },
+      {
+        name: "Piperacillin-Tazobactam",
+        slug: "piperacillin-tazobactam",
+        role: "Broad-spectrum antipseudomonal penicillin combination indicated for severe nosocomial cUTI or urosepsis."
+      }
+    ],
+    differentialDiagnoses: [
+      "Uncomplicated Cystitis (isolated mucosal bladder infection in healthy non-pregnant females lacking structural abnormalities)",
+      "Acute Pyelonephritis (parenchymal kidney infection with prominent flank pain and WBC casts)",
+      "Acute Bacterial Prostatitis (severe prostate infection in males with exquisite rectal examination tenderness)",
+      "Renal or Perinephric Abscess (persistent fever and localized collection requiring drainage)"
+    ],
+    faqs: [
+      {
+        question: "What defines a urinary tract infection as 'complicated'?",
+        answer: "A UTI is categorized as complicated whenever it occurs in the setting of factors predisposing to therapy failure or persistent infection. These include male gender, pregnancy, urinary tract anatomical or functional obstruction (stones, strictures, BPH, neurogenic bladder), indwelling catheters or stents, renal failure, or systemic immunocompromise."
+      },
+      {
+        question: "Why should nitrofurantoin be avoided in complicated UTIs?",
+        answer: "Nitrofurantoin achieves high concentrations only within the lower bladder lumen and does not achieve therapeutic tissue levels in the renal parenchyma, prostate, or systemic circulation. Because complicated UTIs frequently involve tissue invasion or upper tract involvement, nitrofurantoin is ineffective and risks clinical failure."
+      }
+    ],
+    relatedDiseases: [
+      {
+        name: "Uncomplicated Urinary Tract Infection",
+        slug: "uncomplicated-urinary-tract-infection",
+        description: "Mucosal bladder infection occurring in healthy non-pregnant women."
+      },
+      {
+        name: "Acute Pyelonephritis",
+        slug: "pyelonephritis",
+        description: "Invasive infection of the renal pelvis and kidney parenchyma."
+      }
+    ],
+    relatedOrganisms: [
+      { name: "Escherichia coli", slug: "escherichia-coli" },
+      { name: "Pseudomonas aeruginosa", slug: "pseudomonas-aeruginosa" },
+      { name: "Proteus mirabilis", slug: "p-mirabilis" }
+    ]
+  },
+  {
     id: "acute-bacterial-meningitis",
     name: "Acute Bacterial Meningitis",
     slug: "acute-bacterial-meningitis",

@@ -2213,7 +2213,7 @@ export default function ComparisonsSEO() {
                               <Link
                                 key={c.slug}
                                 to={`/${c.slug}`}
-                                className={`bg-white rounded-2xl border border-slate-200/80 border-l-4 ${activeStyles.border} p-6 shadow-3xs hover:shadow-2xs transition-all duration-300 h-full flex flex-col justify-between group`}
+                                className={`bg-white rounded-2xl border ${activeStyles.badge.split(' ').find(c => c.startsWith('border-')) || 'border-slate-200'} border-l-4 ${activeStyles.border} p-6 shadow-3xs hover:shadow-2xs transition-all duration-300 h-full flex flex-col justify-between group`}
                               >
                                 <div className="space-y-3.5">
                                   <div className="flex items-center justify-between">

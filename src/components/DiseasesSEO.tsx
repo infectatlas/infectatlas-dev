@@ -80,7 +80,7 @@ export interface MedicalReference {
 export const getDiseaseReferences = (diseaseId: string, name: string): MedicalReference[] => {
   const id = diseaseId.toLowerCase();
   
-  if (id.includes("pneumonia") || id.includes("cap")) {
+  if (id === "community-acquired-pneumonia") {
     return [
       {
         type: "Clinical Guideline",
@@ -89,31 +89,37 @@ export const getDiseaseReferences = (diseaseId: string, name: string): MedicalRe
         url: "https://www.atsjournals.org/doi/full/10.1164/rccm.201908-1581ST"
       },
       {
-        type: "Public Health Consensus",
-        source: "CDC Pneumonia Standards",
-        citation: "CDC Pneumonia Prevention and Control Standards; Pneumococcal Conjugate Vaccine Guidelines.",
-        url: "https://www.cdc.gov/pneumonia/index.html"
-      },
-      {
         type: "Landmark Review Article",
         source: "NEJM Review",
         citation: "Wunderink RG, Waterer GW. Community-Acquired Pneumonia. N Engl J Med 2014; 371:1619-1628.",
         url: "https://www.nejm.org/doi/full/10.1056/NEJMcp1214869"
+      }
+    ];
+  }
+
+  if (id === "hospital-acquired-pneumonia") {
+    return [
+      {
+        type: "Clinical Guideline",
+        source: "IDSA / ATS HAP/VAP Guidelines",
+        citation: "Kalil AC, et al. Management of Adults With Hospital-acquired and Ventilator-associated Pneumonia: 2016 Clinical Practice Guidelines by the Infectious Diseases Society of America and the American Thoracic Society. Clinical Infectious Diseases, 2016; 63(5):e61–e111.",
+        url: "https://academic.oup.com/cid/article/63/5/e61/2237650"
       },
       {
-        type: "Standard Textbook",
-        source: "Harrison's Internal Medicine Principles",
-        citation: "Loomis L. Pneumonia and Pulmonary Abscess. 21st Edition, Chapter 121, McGraw Hill.",
+        type: "Landmark Review Article",
+        source: "Lancet Seminar",
+        citation: "Torres A, et al. Hospital-acquired pneumonia. Lancet 2021; 398(10318):2266-2282.",
+        url: "https://doi.org/10.1016/S0140-6736(21)01789-2"
       }
     ];
   }
   
-  if (id.includes("meningitis")) {
+  if (id === "acute-bacterial-meningitis") {
     return [
       {
         type: "Clinical Guideline",
-        source: "IDSA Meningitis Guidelines",
-        citation: "Tunkel AR, et al. Practice Guidelines for the Management of Bacterial Meningitis. Clinical Infectious Diseases, 2004.",
+        source: "Archived IDSA Guideline (Historical Reference)",
+        citation: "Tunkel AR, et al. Practice Guidelines for the Management of Bacterial Meningitis. Clinical Infectious Diseases, 2004; 39(9):1267–1284 (Archived by IDSA; foundational historical reference).",
         url: "https://academic.oup.com/cid/article/39/9/1267/345224"
       },
       {
@@ -131,12 +137,12 @@ export const getDiseaseReferences = (diseaseId: string, name: string): MedicalRe
       {
         type: "Standard Textbook",
         source: "Mandell, Douglas, and Bennett's Practice Principles",
-        citation: "Tunkel AR. Acute Meningitis. 9th Edition, Chapter 86, Elsevier Science.",
+        citation: "Tunkel AR. Acute Meningitis. 9th Edition, Elsevier Science."
       }
     ];
   }
   
-  if (id.includes("cellulitis") || id.includes("skin") || id.includes("necrotizing")) {
+  if (id === "cellulitis" || id === "cellulitis-and-skin-infections") {
     return [
       {
         type: "Clinical Guideline",
@@ -147,7 +153,30 @@ export const getDiseaseReferences = (diseaseId: string, name: string): MedicalRe
       {
         type: "Public Health Consensus",
         source: "CDC Strep / MRSA Standards",
-        citation: "CDC Guidance for MRSA and Streptococcal Skin Infections Management in Clinical Settings.",
+        citation: "CDC Guidance for Group A Streptococcal (GAS) Cellulitis and Skin Infection Management in Clinical Settings.",
+        url: "https://www.cdc.gov/groupastrep/diseases-public/cellulitis.html"
+      },
+      {
+        type: "Landmark Review Article",
+        source: "JAMA Clinical Review",
+        citation: "Raff AB, Kroshinsky D. Cellulitis: A Review. JAMA. 2016;316(3):325-337.",
+        url: "https://jamanetwork.com/journals/jama/article-abstract/2533507"
+      }
+    ];
+  }
+
+  if (id === "necrotizing-fasciitis") {
+    return [
+      {
+        type: "Clinical Guideline",
+        source: "IDSA Skin & Soft Tissue Guidelines",
+        citation: "Stevens DL, et al. Practice Guidelines for the Diagnosis and Management of Skin and Soft Tissue Infections. Clinical Infectious Diseases, 2014.",
+        url: "https://academic.oup.com/cid/article/59/2/e10/328220"
+      },
+      {
+        type: "Public Health Consensus",
+        source: "CDC Strep / MRSA Standards",
+        citation: "CDC Guidance for Necrotizing Fasciitis: Information for Clinicians and Public Health Management.",
         url: "https://www.cdc.gov/groupastrep/diseases-public/necrotizing-fasciitis.html"
       },
       {
@@ -155,48 +184,38 @@ export const getDiseaseReferences = (diseaseId: string, name: string): MedicalRe
         source: "JAMA Clinical Review",
         citation: "Raff AB, Kroshinsky D. Cellulitis: A Review. JAMA. 2016;316(3):325-337.",
         url: "https://jamanetwork.com/journals/jama/article-abstract/2533507"
-      },
-      {
-        type: "Standard Textbook",
-        source: "Fitzpatrick's Dermatology Textbook",
-        citation: "Pasternack MS, Swartz MN. Cellulitis, Pyomyositis, and Necrotizing Fasciitis. 9th Edition, Chapter 151, McGraw Hill.",
       }
     ];
   }
 
-  if (id.includes("endocarditis")) {
+  if (id === "infective-endocarditis") {
     return [
       {
         type: "Clinical Guideline",
-        source: "AHA / IDSA Guidelines",
-        citation: "Baddour LM, et al. Infective Endocarditis in Adults: Diagnosis, Antimicrobial Therapy, and Management of Complications. Circulation, 2015.",
-        url: "https://www.ahajournals.org/doi/full/10.1161/CIR.0000000000000296"
+        source: "AHA Scientific Statement (Current)",
+        citation: "DeSimone DC, et al. Infective Endocarditis: Diagnosis, Antibiotic Therapy, and Management: A Scientific Statement From the American Heart Association. Circulation. Published online September 8, 2026. doi:10.1161/CIR.0000000000001466.",
+        url: "https://doi.org/10.1161/CIR.0000000000001466"
       },
       {
         type: "Clinical Guideline",
-        source: "ESC Clinical Practice Panel",
-        citation: "Delgado V, et al. 2023 ESC Guidelines for the management of endocarditis. Eur Heart J. 2023.",
+        source: "ESC Clinical Practice Panel (Current European Standard)",
+        citation: "Delgado V, et al. 2023 ESC Guidelines for the management of endocarditis. Eur Heart J. 2023; 44(39):3948-4042.",
         url: "https://academic.oup.com/eurheartj/article/44/39/3948/7255106"
       },
       {
-        type: "Landmark Review Article",
-        source: "Lancet Comprehensive Review",
-        citation: "Werdan K, et al. Infective Endocarditis: Landmark Trials and Changing Diagnostic Standards. Lancet Infect Dis 2016.",
-        url: "https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(15)00344-9/fulltext"
-      },
-      {
-        type: "Standard Textbook",
-        source: "Braunwald's Heart Disease Standards",
-        citation: "Bayer AS, Scheld WM. Infective Endocarditis. 12th Edition, Chapter 78, Elsevier.",
+        type: "Clinical Guideline",
+        source: "AHA Guidelines (Historical Predecessor)",
+        citation: "Baddour LM, et al. Infective Endocarditis in Adults: Diagnosis, Antimicrobial Therapy, and Management of Complications. Circulation, 2015; 132(15):1435-1486 (Foundational historical reference).",
+        url: "https://www.ahajournals.org/doi/full/10.1161/CIR.0000000000000296"
       }
     ];
   }
 
-  if (id.includes("urinary") || id.includes("uti") || id.includes("cystitis") || id.includes("pyelonephritis")) {
+  if (id === "uncomplicated-urinary-tract-infection") {
     return [
       {
         type: "Clinical Guideline",
-        source: "IDSA / EAU Consensus on UTIs",
+        source: "IDSA / EAU Consensus on Uncomplicated Cystitis",
         citation: "Gupta K, et al. International Clinical Practice Guidelines for the Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women. Clinical Infectious Diseases, 2011.",
         url: "https://academic.oup.com/cid/article/52/5/e103/388284"
       },
@@ -208,19 +227,65 @@ export const getDiseaseReferences = (diseaseId: string, name: string): MedicalRe
       },
       {
         type: "Landmark Review Article",
-        source: "JAMA Clinical Review",
-        citation: "Bader MS, et al. Treatment of Urinary Tract Infections in the Era of Antimicrobial Resistance. Postgrad Med, 2017.",
-        url: "https://jamanetwork.com/journals/jama/fullarticle/2727196"
-      },
-      {
-        type: "Standard Textbook",
-        source: "Campbell-Walsh Urology Reference",
-        citation: "Sobel JD, Kaye D. Urinary Tract Infections. 12th Edition, Chapter 15, Saunders Elsevier.",
+        source: "Postgraduate Medicine",
+        citation: "Bader MS, et al. Treatment of Urinary Tract Infections in the Era of Antimicrobial Resistance and New Antimicrobial Agents. Postgrad Med, 2020.",
+        url: "https://www.tandfonline.com/doi/full/10.1080/00325481.2019.1680052"
       }
     ];
   }
 
-  // Fallback dynamic high-fidelity references generator
+  if (id === "complicated-urinary-tract-infection") {
+    return [
+      {
+        type: "Clinical Guideline",
+        source: "IDSA cUTI Guidelines",
+        citation: "Trautner BW, et al. Infectious Diseases Society of America 2025 Clinical Practice Guideline for the Management of Complicated Urinary Tract Infections. Clinical Infectious Diseases, 2025.",
+        url: "https://academic.oup.com/cid"
+      },
+      {
+        type: "Public Health Consensus",
+        source: "European Association of Urology",
+        citation: "EAU Guidelines on Urological Infections. EAU Guidelines Office, Arnhem, The Netherlands, 2023.",
+        url: "https://uroweb.org/guidelines/urological-infections"
+      },
+      {
+        type: "Landmark Review Article",
+        source: "Postgraduate Medicine",
+        citation: "Bader MS, et al. Treatment of Urinary Tract Infections in the Era of Antimicrobial Resistance and New Antimicrobial Agents. Postgrad Med, 2020.",
+        url: "https://www.tandfonline.com/doi/full/10.1080/00325481.2019.1680052"
+      }
+    ];
+  }
+
+  if (id === "acute-pyelonephritis" || id === "pyelonephritis") {
+    return [
+      {
+        type: "Clinical Guideline",
+        source: "IDSA / EAU Guideline on Acute Pyelonephritis",
+        citation: "Gupta K, et al. International Clinical Practice Guidelines for the Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women. Clinical Infectious Diseases, 2011.",
+        url: "https://academic.oup.com/cid/article/52/5/e103/388284"
+      },
+      {
+        type: "Clinical Guideline",
+        source: "IDSA cUTI Guidelines (Complicated Pyelonephritis)",
+        citation: "Trautner BW, et al. Infectious Diseases Society of America 2025 Clinical Practice Guideline for the Management of Complicated Urinary Tract Infections. Clinical Infectious Diseases, 2025.",
+        url: "https://academic.oup.com/cid"
+      },
+      {
+        type: "Public Health Consensus",
+        source: "European Association of Urology",
+        citation: "EAU Guidelines on Urological Infections. EAU Guidelines Office, Arnhem, The Netherlands, 2023.",
+        url: "https://uroweb.org/guidelines/urological-infections"
+      },
+      {
+        type: "Landmark Review Article",
+        source: "Postgraduate Medicine",
+        citation: "Bader MS, et al. Treatment of Urinary Tract Infections in the Era of Antimicrobial Resistance and New Antimicrobial Agents. Postgrad Med, 2020.",
+        url: "https://www.tandfonline.com/doi/full/10.1080/00325481.2019.1680052"
+      }
+    ];
+  }
+
   return [];
 };
 
@@ -264,7 +329,9 @@ export const getDiseaseSystem = (diseaseId: string): SystemInfo => {
     "tuberculosis",
     "pertussis",
     "covid-19",
-    "pneumocystis-pneumonia"
+    "pneumocystis-pneumonia",
+    "atypical-walking-pneumonia",
+    "mastoiditis"
   ];
   const gastrointestinalIds = [
     "pseudomembranous-colitis",
@@ -273,17 +340,23 @@ export const getDiseaseSystem = (diseaseId: string): SystemInfo => {
     "acute-bacterial-gastroenteritis",
     "viral-gastroenteritis",
     "giardiasis",
-    "amebiasis"
+    "amebiasis",
+    "toxic-megacolon",
+    "antibiotic-associated-diarrhea",
+    "esophageal-candidiasis"
   ];
   const genitourinaryIds = [
     "uncomplicated-urinary-tract-infection",
+    "complicated-urinary-tract-infection",
     "pyelonephritis",
     "urethritis",
     "catheter-associated-urinary-tract-infection",
     "pelvic-inflammatory-disease",
     "genital-herpes",
     "vulvovaginal-candidiasis",
-    "trichomoniasis"
+    "trichomoniasis",
+    "vaginal-yeast-infection",
+    "acute-prostatitis"
   ];
   const neurologicIds = [
     "acute-bacterial-meningitis",
@@ -301,7 +374,9 @@ export const getDiseaseSystem = (diseaseId: string): SystemInfo => {
     "candidemia",
     "malaria",
     "prosthetic-valve-endocarditis",
-    "lyme-carditis"
+    "lyme-carditis",
+    "rheumatic-heart-disease",
+    "myocardial-abscess"
   ];
   const skinIds = [
     "cellulitis-and-skin-infections",
@@ -310,7 +385,9 @@ export const getDiseaseSystem = (diseaseId: string): SystemInfo => {
     "impetigo",
     "erysipelas",
     "herpes-zoster",
-    "dermatophytosis"
+    "dermatophytosis",
+    "gas-gangrene",
+    "mucormycosis"
   ];
   const boneJointIds = [
     "osteomyelitis",
@@ -467,19 +544,36 @@ export const getDiseaseSystem = (diseaseId: string): SystemInfo => {
     };
   }
 
+  if (boneJointIds.includes(diseaseId)) {
+    return {
+      id: "bone-joint",
+      name: "Bone & Joint Diseases",
+      slug: "bone-joint",
+      iconName: "layers",
+      colorClass: "orange",
+      bannerClass: "from-orange-500/10 to-indigo-50/20 border-orange-100/50",
+      badgeClass: "bg-orange-50 text-orange-700 border-orange-100",
+      borderClass: "border-orange-200",
+      accentBorder: "border-l-4 border-l-orange-500",
+      hoverClass: "hover:border-orange-300 hover:shadow-orange-500/10",
+      textClass: "text-orange-700",
+      tagLabel: "Musculoskeletal"
+    };
+  }
+
   return {
-    id: "bone-joint",
-    name: "Bone & Joint Diseases",
-    slug: "bone-joint",
-    iconName: "layers",
-    colorClass: "orange",
-    bannerClass: "from-orange-500/10 to-indigo-50/20 border-orange-100/50",
-    badgeClass: "bg-orange-50 text-orange-700 border-orange-100",
-    borderClass: "border-orange-200",
-    accentBorder: "border-l-4 border-l-orange-500",
-    hoverClass: "hover:border-orange-300 hover:shadow-orange-500/10",
-    textClass: "text-orange-700",
-    tagLabel: "Musculoskeletal"
+    id: "unclassified",
+    name: "General & Unclassified Diseases",
+    slug: "unclassified",
+    iconName: "book",
+    colorClass: "slate",
+    bannerClass: "from-slate-500/10 to-indigo-50/20 border-slate-100/50",
+    badgeClass: "bg-slate-50 text-slate-700 border-slate-200",
+    borderClass: "border-slate-200",
+    accentBorder: "border-l-4 border-l-slate-400",
+    hoverClass: "hover:border-slate-300 hover:shadow-slate-500/10",
+    textClass: "text-slate-700",
+    tagLabel: "Clinical Entity"
   };
 };
 
@@ -598,7 +692,7 @@ export const getSystemStyle = (colorClass: string) => {
         accentLine: "border-l-pink-500",
         accentText: "text-pink-600"
       };
-    default:
+    case "orange":
       return {
         bg: "bg-orange-50/40",
         border: "border-orange-500",
@@ -608,6 +702,18 @@ export const getSystemStyle = (colorClass: string) => {
         hover: "hover:border-orange-300 hover:shadow-orange-100/40",
         accentLine: "border-l-orange-500",
         accentText: "text-orange-600"
+      };
+    case "slate":
+    default:
+      return {
+        bg: "bg-slate-50/40",
+        border: "border-slate-400",
+        text: "text-slate-800",
+        pill: "bg-slate-100 text-slate-700 border-slate-200",
+        lightBorder: "border-slate-200",
+        hover: "hover:border-slate-300 hover:shadow-slate-100/40",
+        accentLine: "border-l-slate-400",
+        accentText: "text-slate-600"
       };
   }
 };
@@ -946,7 +1052,9 @@ export default function DiseasesSEO() {
                     <button onClick={() => scrollToSection("diagnostics")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">Diagnostic Path</button>
                     <button onClick={() => scrollToSection("treatment")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">Treatment</button>
                     <button onClick={() => scrollToSection("faqs")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">FAQs</button>
-                    <button onClick={() => scrollToSection("medical-evidence")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">References</button>
+                    {diseaseRefs.length > 0 && (
+                      <button onClick={() => scrollToSection("medical-evidence")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">References</button>
+                    )}
                   </div>
 
                   {/* Dynamic H1 intro block */}
@@ -1812,7 +1920,7 @@ export default function DiseasesSEO() {
                               <Link
                                 key={d.id}
                                 to={`/diseases/${d.slug}`}
-                                className={`p-6 bg-white border border-slate-250 border-l-4 ${itemStyles.accentLine} rounded-2xl ${itemStyles.hover} transition-all flex flex-col justify-between group cursor-pointer shadow-3xs h-full`}
+                                className={`p-6 bg-white border ${itemStyles.lightBorder} border-l-4 ${itemStyles.accentLine} rounded-2xl ${itemStyles.hover} transition-all flex flex-col justify-between group cursor-pointer shadow-3xs h-full`}
                               >
                                 <div className="space-y-4">
                                   <div className="flex items-center justify-between">

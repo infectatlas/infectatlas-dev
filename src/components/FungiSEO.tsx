@@ -131,8 +131,9 @@ export interface PathogenReference {
   source: string;
 }export const getPathogenReferences = (pathogenId: string, name: string): PathogenReference[] => {
   const id = pathogenId.toLowerCase();
+  const slug = getPathogenSlug(name || pathogenId);
   
-  if (id.includes("candida") || id.includes("albicans")) {
+  if (id === "candida-albicans" || slug === "candida-albicans") {
     return [
       {
         type: "Clinical Guideline",
@@ -149,7 +150,7 @@ export interface PathogenReference {
     ];
   }
 
-  if (id.includes("aspergillus") || id.includes("fumigatus")) {
+  if (id === "aspergillus-fumigatus" || slug === "aspergillus-fumigatus") {
     return [
       {
         type: "Clinical Guideline",
@@ -166,7 +167,7 @@ export interface PathogenReference {
     ];
   }
 
-  if (id.includes("cryptococcus") || id.includes("neoformans")) {
+  if (id === "cryptococcus-neoformans" || slug === "cryptococcus-neoformans") {
     return [
       {
         type: "Clinical Guideline",
@@ -177,13 +178,12 @@ export interface PathogenReference {
       {
         type: "Landmark Review Article",
         source: "Nature Reviews Disease Primers",
-        citation: "Perfect JR, et al. Cryptococcosis. Nat Rev Dis Primers. 2021.",
-        url: "https://www.nature.com/articles/s41572-021-00272-1"
+        citation: "Tugume L, et al. Cryptococcal meningitis. Nat Rev Dis Primers. 2023.",
+        url: "https://www.nature.com/articles/s41572-023-00472-z"
       }
     ];
   }
 
-  // Fallback high-yield academic references for Fungi
   return [];
 };
 
@@ -645,7 +645,9 @@ export default function FungiSEO() {
                   <button onClick={() => scrollToSection("identification")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">Laboratory ID</button>
                   <button onClick={() => scrollToSection("clinical-regimens")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">IDSA Regimens</button>
                   <button onClick={() => scrollToSection("study-simulator")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">Practice Sandbox</button>
-                  <button onClick={() => scrollToSection("medical-evidence")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">References</button>
+                  {pathogenRefs.length > 0 && (
+                    <button onClick={() => scrollToSection("medical-evidence")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">References</button>
+                  )}
                 </div>
                 
                 {/* 3. Strong H1 and introduction block */}
@@ -1034,7 +1036,7 @@ export default function FungiSEO() {
                           <Link
                             key={m.id}
                             to={getOrganismCanonicalUrl(m)}
-                            className={`p-6 bg-white border border-slate-250 border-l-4 ${mStyles.accentLine} rounded-2xl ${mStyles.hover} transition-all flex flex-col justify-between group cursor-pointer shadow-3xs h-full`}
+                            className={`p-6 bg-white border ${mStyles.lightBorder} border-l-4 ${mStyles.accentLine} rounded-2xl ${mStyles.hover} transition-all flex flex-col justify-between group cursor-pointer shadow-3xs h-full`}
                           >
                             <div className="space-y-4">
                               <div className="flex items-center justify-between">

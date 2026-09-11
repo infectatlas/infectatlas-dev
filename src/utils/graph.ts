@@ -407,7 +407,7 @@ export const getIntelligentLearningPath = (
           type: "disease",
           slug: disNode.slug,
           description: disNode.overview,
-          relationshipType: "Step 1: Clinical Pathology Manifestation",
+          relationshipType: "Step 1: Pathology",
           score: 100
         });
 
@@ -421,7 +421,7 @@ export const getIntelligentLearningPath = (
               type: "drug",
               slug: drugNode.slug,
               description: drugNode.mechanismOfAction,
-              relationshipType: "Step 2: Empirical Target Pharmacotherapy",
+              relationshipType: "Step 2: Empirical Therapy",
               score: 90
             });
           }
@@ -438,7 +438,7 @@ export const getIntelligentLearningPath = (
         type: "pathogen",
         slug: classMates[0].slug,
         description: classMates[0].description,
-        relationshipType: "Step 3: Comparative Diagnostic Differential",
+        relationshipType: "Step 3: Differential",
         score: 80
       });
     }
@@ -456,7 +456,7 @@ export const getIntelligentLearningPath = (
           type: "pathogen",
           slug: pathNode.slug,
           description: pathNode.description,
-          relationshipType: "Step 1: Etiological Pathogen Microbiology",
+          relationshipType: "Step 1: Pathogen",
           score: 100
         });
       }
@@ -472,7 +472,7 @@ export const getIntelligentLearningPath = (
           type: "drug",
           slug: drugNode.slug,
           description: drugNode.mechanismOfAction,
-          relationshipType: "Step 2: Guideline-Aligned Pharmacotherapy",
+          relationshipType: "Step 2: Guideline Therapy",
           score: 90
         });
       }
@@ -489,7 +489,7 @@ export const getIntelligentLearningPath = (
           type: "disease",
           slug: compNode.slug,
           description: compNode.overview,
-          relationshipType: "Step 3: Differential Diagnosis Comparison",
+          relationshipType: "Step 3: Differential",
           score: 80
         });
       }
@@ -508,7 +508,7 @@ export const getIntelligentLearningPath = (
           type: "pathogen",
           slug: pathNode.slug,
           description: pathNode.description,
-          relationshipType: "Step 1: Primary Microbiological Spectrum",
+          relationshipType: "Step 1: Target Spectrum",
           score: 100
         });
 
@@ -521,7 +521,7 @@ export const getIntelligentLearningPath = (
               type: "disease",
               slug: disNode.slug,
               description: disNode.overview,
-              relationshipType: "Step 2: Targeted Disease Pathology",
+              relationshipType: "Step 2: Targeted Disease",
               score: 90
             });
           }
@@ -538,7 +538,7 @@ export const getIntelligentLearningPath = (
         type: "drug",
         slug: classAlternatives[0].slug,
         description: classAlternatives[0].mechanismOfAction,
-        relationshipType: "Step 3: Pharmacological Alternative",
+        relationshipType: "Step 3: Alternative Drug",
         score: 80
       });
     }
