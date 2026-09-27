@@ -24,6 +24,7 @@ import {
   Stethoscope
 } from "lucide-react";
 import ActiveRecallDrawer from "./ActiveRecallDrawer";
+import PathogenLifecycleSection from "./PathogenLifecycleSection";
 import { DynamicRelatedContent, IntelligentLearningPath, ContinueLearningHistory } from "./GraphRecommendationEngine";
 import { getOrganismCanonicalUrl } from "../lib/organismUrlUtils";
 
@@ -508,6 +509,7 @@ export default function ParasitesSEO() {
                   <span className="text-[10px] uppercase font-bold text-slate-400 px-2 select-none shrink-0">Jump To:</span>
                   <button onClick={() => scrollToSection("overview")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">Overview</button>
                   <button onClick={() => scrollToSection("identification")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">Laboratory ID</button>
+                  <button onClick={() => scrollToSection("lifecycle")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">Lifecycle</button>
                   <button onClick={() => scrollToSection("clinical-regimens")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">IDSA Regimens</button>
                   <button onClick={() => scrollToSection("study-simulator")} className="px-2.5 py-1 hover:text-indigo-600 bg-white hover:bg-slate-50 shadow-3xs rounded-md text-slate-600 shrink-0 cursor-pointer border border-slate-200/50">Practice Sandbox</button>
                   {pathogenRefs.length > 0 && (
@@ -562,6 +564,9 @@ export default function ParasitesSEO() {
                   ))}
                 </div>
               </div>
+
+              {/* Pathogen Lifecycle & Transmission Section */}
+              <PathogenLifecycleSection data={pathogen.lifecycleSection} />
 
               {/* Diseases and Treatments Segment */}
               <div className="space-y-5" id="clinical-regimens">

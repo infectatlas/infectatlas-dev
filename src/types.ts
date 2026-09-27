@@ -1,5 +1,32 @@
 import { Microorganism } from "./data/microorganisms";
 
+export interface LifecycleReference {
+  sourceName: string;
+  title: string;
+  url?: string;
+}
+
+export interface LifecycleRow {
+  step: number | string;
+  event: string;
+  location: string;
+  significance: string;
+  phase?: string;
+}
+
+export interface LifecyclePathway {
+  pathwayId?: string;
+  pathwayTitle?: string;
+  pathwayDescription?: string;
+  rows: LifecycleRow[];
+}
+
+export interface PathogenLifecycleSection {
+  title?: string;
+  pathways: LifecyclePathway[];
+  references: LifecycleReference[];
+}
+
 export interface StudyList {
   id: string;
   name: string;
