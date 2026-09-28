@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
 import { parasitesData, Parasite } from "../data/parasites";
 import { diseasesData } from "../data/diseases";
 import { drugsData } from "../data/drugs";
+import { COMPARISONS_DATA } from "./ComparisonsSEO";
 import { 
   ArrowLeft, 
   BrainCircuit, 
@@ -21,7 +22,8 @@ import {
   Zap,
   BookmarkPlus,
   X,
-  Stethoscope
+  Stethoscope,
+  Scale
 } from "lucide-react";
 import ActiveRecallDrawer from "./ActiveRecallDrawer";
 import PathogenLifecycleSection from "./PathogenLifecycleSection";
@@ -40,6 +42,173 @@ export const getSEOIntroduction = (m: Parasite): string => {
 
 export const getPathogenSynonyms = (m: Parasite): string[] => {
   return [m.name];
+};
+
+// Curated metadata record for parasite detail pages
+export interface CuratedParasiteMetadata {
+  title: string;
+  description: string;
+}
+
+export const curatedParasiteMetadataMap: Record<string, CuratedParasiteMetadata> = {
+  "plasmodium-falciparum": {
+    title: "Plasmodium falciparum: Malaria Life Cycle, Smear Diagnosis & Artemisinins | InfectAtlas",
+    description: "Clinical reference for Plasmodium falciparum, covering blood smear identification of ring forms and banana gametocytes, microvascular cerebral malaria, and artemisinin-based regimens."
+  },
+  "plasmodium-vivax": {
+    title: "Plasmodium vivax / ovale: Hypnozoites, Relapsing Malaria & Primaquine | InfectAtlas",
+    description: "Guide to Plasmodium vivax and P. ovale tertian malaria, detailing dormant liver hypnozoites, delayed relapses, Schüffner dots, and G6PD-guided primaquine radical cure."
+  },
+  "giardia-lamblia": {
+    title: "Giardia lamblia: Waterborne Transmission, Trophozoites & Metronidazole | InfectAtlas",
+    description: "Reference for Giardia lamblia infection, featuring flagellated teardrop trophozoites, waterborne transmission, malabsorptive steatorrhea, and metronidazole therapy."
+  },
+  "trichomonas-vaginalis": {
+    title: "Trichomonas vaginalis: Wet Mount Diagnosis, Vaginitis & Partner Treatment | InfectAtlas",
+    description: "Clinical overview of Trichomonas vaginalis, covering motile trophozoites on wet mount, strawberry cervix findings, sexually transmitted vaginitis, and oral metronidazole with partner therapy."
+  },
+  "enterobius-vermicularis": {
+    title: "Enterobius vermicularis: Pinworm Tape Test, Pruritus & Pyrantel | InfectAtlas",
+    description: "Guide to Enterobius vermicularis (pinworm), reviewing nocturnal perianal pruritus, microscopic tape test diagnosis, asymmetric ova, and household pyrantel pamoate therapy."
+  },
+  "ascaris-lumbricoides": {
+    title: "Ascaris lumbricoides: Giant Roundworm, Lung Migration & Bowel Obstruction | InfectAtlas",
+    description: "Reference for Ascaris lumbricoides, detailing giant roundworm morphology, pulmonary-tracheal larval migration, mechanical intestinal obstruction, and albendazole therapy."
+  },
+  "hookworms": {
+    title: "Hookworms: Percutaneous Entry, Iron Deficiency Anemia & Albendazole | InfectAtlas",
+    description: "Clinical guide to Ancylostoma duodenale and Necator americanus hookworm infection, covering percutaneous entry, intestinal blood-feeding, microcytic anemia, and albendazole regimens."
+  },
+  "schistosoma": {
+    title: "Schistosoma spp.: Snail Host, Cercarial Penetration & Praziquantel | InfectAtlas",
+    description: "Clinical overview of Schistosoma species, reviewing freshwater snail intermediate hosts, cercarial skin penetration, spined egg morphology, organ pathology, and praziquantel therapy."
+  },
+  "sarcoptes-scabiei": {
+    title: "Sarcoptes scabiei: Scabies Burrows, Pruritus & Topical Permethrin | InfectAtlas",
+    description: "Reference for Sarcoptes scabiei ectoparasitic infestation, detailing epidermal burrow identification, intense nocturnal pruritus, contact transmission, and topical permethrin scabicide therapy."
+  },
+  "entamoeba-histolytica": {
+    title: "Entamoeba histolytica: Amebic Dysentery, Liver Abscess & Dual Therapy | InfectAtlas",
+    description: "Clinical guide to Entamoeba histolytica, covering trophozoites with ingested red blood cells, flask-shaped colonic ulcers, amebic liver abscess, and combined tissue plus luminal regimens."
+  },
+  "leishmania": {
+    title: "Leishmania spp.: Sandfly Vector, Macrophage Amastigotes & Kala-Azar | InfectAtlas",
+    description: "Overview of Leishmania species, detailing phlebotomine sandfly transmission, intracellular amastigotes in macrophages, visceral kala-azar, cutaneous ulcers, and amphotericin B."
+  },
+  "strongyloides-stercoralis": {
+    title: "Strongyloides stercoralis: Autoinfection, Hyperinfection Risk & Ivermectin | InfectAtlas",
+    description: "Clinical reference for Strongyloides stercoralis, covering internal autoinfection, steroid-induced fatal hyperinfection syndrome, diagnostic rhabditiform stool larvae, and ivermectin therapy."
+  },
+  "taenia-solium": {
+    title: "Taenia solium: Taeniasis, Cysticercosis & Neurocysticercosis | InfectAtlas",
+    description: "Clinical reference for Taenia solium, distinguishing intestinal taeniasis after cysticercus ingestion from cysticercosis after egg ingestion, including neurocysticercosis and its management."
+  },
+  "toxoplasma-gondii": {
+    title: "Toxoplasma gondii: Feline Transmission, CNS Lesions & Pyrimethamine | InfectAtlas",
+    description: "Reference for Toxoplasma gondii, detailing feline oocyst transmission, ring-enhancing brain lesions in immunocompromised hosts, congenital anomalies, and pyrimethamine-sulfadiazine therapy."
+  },
+  "cryptosporidium": {
+    title: "Cryptosporidium spp.: Acid-Fast Oocysts, Waterborne Diarrhea & HIV | InfectAtlas",
+    description: "Clinical overview of Cryptosporidium species, reviewing modified acid-fast oocyst staining, chlorine-resistant waterborne outbreaks, chronic diarrhea in advanced HIV, and management."
+  }
+};
+
+// Helper function to resolve curated or clean generic fallback metadata for a parasite
+export const getParasitePageMetadata = (pathogen: Parasite): CuratedParasiteMetadata => {
+  const byId = curatedParasiteMetadataMap[pathogen.id.toLowerCase()];
+  if (byId) return byId;
+
+  const slug = getPathogenSlug(pathogen.name);
+  const bySlug = curatedParasiteMetadataMap[slug];
+  if (bySlug) return bySlug;
+
+  // Clean fallback for future unconfigured parasite records (no name duplication, no exam jargon)
+  return {
+    title: `${pathogen.name}: Identification, Life Cycle & Clinical Management | InfectAtlas`,
+    description: `Clinical reference for ${pathogen.name}, detailing morphology, diagnostic features, developmental stages, and antimicrobial therapy.`
+  };
+};
+
+// Explicit verified mapping from parasite clinical condition label to disease slug in diseasesData
+const PARASITE_DISEASE_SLUG_MAP: Record<string, string> = {
+  "malaria (severe)": "malaria",
+  "malaria (tertian)": "malaria",
+  "giardiasis": "giardiasis",
+  "amebic dysentery / amebiasis": "amebiasis",
+  "trichomoniasis": "trichomoniasis",
+  "toxoplasmosis (encephalitis)": "cerebral-toxoplasmosis",
+  "congenital toxoplasmosis": "congenital-toxoplasmosis"
+};
+
+// Explicit verified mapping from known drug tokens to drug slugs in drugsData
+const PARASITE_DRUG_SLUG_MAP: Record<string, string> = {
+  "artemether-lumefantrine": "artemether-lumefantrine",
+  "metronidazole": "metronidazole",
+  "liposomal amphotericin b": "amphotericin-b",
+  "amphotericin b": "amphotericin-b"
+};
+
+const KNOWN_PARASITE_DRUG_NAMES = [
+  "Liposomal Amphotericin B",
+  "Artemether-lumefantrine",
+  "Amphotericin B",
+  "Metronidazole"
+];
+
+// Helper to normalize condition and drug labels safely without substring hazards
+const normalizeClinicalLabel = (val: string): string => {
+  return val.toLowerCase().trim().replace(/\s+/g, " ");
+};
+
+// Resolver for verified disease links
+export const resolveParasiteDiseaseLink = (diseaseName: string): { name: string; slug: string } | null => {
+  const normalized = normalizeClinicalLabel(diseaseName);
+  const targetSlug = PARASITE_DISEASE_SLUG_MAP[normalized];
+  if (!targetSlug) return null;
+  const verified = diseasesData.find((d) => d.slug === targetSlug);
+  return verified ? { name: diseaseName, slug: verified.slug } : null;
+};
+
+// Tokenizer for treatment strings: links only exact recognized drug names, keeping punctuation and qualifiers plain text
+export const tokenizeParasiteTreatment = (
+  treatmentStr: string
+): Array<{ text: string; slug?: string }> => {
+  const escaped = KNOWN_PARASITE_DRUG_NAMES.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const regex = new RegExp(`(${escaped.join("|")})`, "gi");
+
+  const tokens: Array<{ text: string; slug?: string }> = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = regex.exec(treatmentStr)) !== null) {
+    if (match.index > lastIndex) {
+      tokens.push({ text: treatmentStr.substring(lastIndex, match.index) });
+    }
+    const matchedText = match[0];
+    const targetSlug = PARASITE_DRUG_SLUG_MAP[normalizeClinicalLabel(matchedText)];
+    const verified = targetSlug ? drugsData.find((dr) => dr.slug === targetSlug) : null;
+    tokens.push({ text: matchedText, slug: verified?.slug });
+    lastIndex = regex.lastIndex;
+  }
+
+  if (lastIndex < treatmentStr.length) {
+    tokens.push({ text: treatmentStr.substring(lastIndex) });
+  }
+
+  return tokens;
+};
+
+// Resolver for relevant comparisons matching the parasite
+export const getParasiteComparisons = (parasiteId: string) => {
+  return COMPARISONS_DATA.filter((comp) => {
+    const item = comp as { linkedPathogens?: string[]; slug: string };
+    if (item.linkedPathogens && item.linkedPathogens.includes(parasiteId)) {
+      return true;
+    }
+    if (parasiteId === "giardia-lamblia" && comp.slug === "giardia-vs-entamoeba") return true;
+    if (parasiteId === "entamoeba-histolytica" && comp.slug === "giardia-vs-entamoeba") return true;
+    return false;
+  });
 };
 
 export interface PathogenReference {
@@ -151,32 +320,9 @@ export default function ParasitesSEO() {
   // Dynamic Browser SEO Page Meta update
   useEffect(() => {
     if (isDetailView && pathogen) {
-      // 1. Dynamic Search-Intent Title (Aim for 50-70 characters)
-      let pageTitle = `${pathogen.name}: Life Cycle, Host Transmission & Antiparasitic Treatment | InfectAtlas`;
-      const nameLower = pathogen.name.toLowerCase();
-      if (nameLower.includes("plasmodium falciparum") || nameLower.includes("malaria")) {
-        pageTitle = "Plasmodium falciparum: Malaria Life Cycle, Symptoms, Artemisinins | InfectAtlas";
-      } else if (nameLower.includes("toxoplasma gondii")) {
-        pageTitle = "Toxoplasma gondii: Tachyzoites, Transmission, Pyrimethamine | InfectAtlas";
-      } else if (nameLower.includes("giardia lamblia")) {
-        pageTitle = "Giardia lamblia: Trophozoites, Diarrhea, Metronidazole | InfectAtlas";
-      } else if (nameLower.includes("trypanosoma cruzi")) {
-        pageTitle = "Trypanosoma cruzi: Chagas Disease, Vectors, Nifurtimox | InfectAtlas";
-      } else if (nameLower.includes("enterobius vermicularis")) {
-        pageTitle = "Enterobius vermicularis: Pinworm Tape Test, Pyrantel Pamoate | InfectAtlas";
-      }
+      // Resolve curated or clean generic metadata
+      const { title: pageTitle, description: metaDesc } = getParasitePageMetadata(pathogen);
       document.title = pageTitle;
-
-      // 2. High-Yield Meta Description under 160 characters with synonyms included
-      const synonyms = getPathogenSynonyms(pathogen).slice(0, 2).join(", ");
-      let metaDesc = `Learn ${pathogen.name} (${synonyms}) classification, life cycle stages, intermediate hosts, and antiparasitic regimens for board exams.`;
-      if (nameLower.includes("plasmodium falciparum") || nameLower.includes("malaria")) {
-        metaDesc = "Master Plasmodium falciparum malaria lifecycle (merozoites, trophozoites), erythrocyte smear diagnosis, chloroquine resistance, and treatment.";
-      } else if (nameLower.includes("toxoplasma gondii")) {
-        metaDesc = "Study Toxoplasma gondii feline host transmission, brain ring-enhancing lesions in HIV, sulfadiazine plus pyrimethamine, and clinical pearls.";
-      } else if (nameLower.includes("giardia lamblia")) {
-        metaDesc = "Learn Giardia lamblia teardrop trophozoites, waterborne transmission, steatorrhea manifestations, metronidazole therapy, and USMLE yield.";
-      }
 
       // Update or create meta tag for description
       let metaDescriptionTag = document.querySelector('meta[name="description"]');
@@ -586,9 +732,9 @@ export default function ParasitesSEO() {
                       {/* Disease Header Banner */}
                       <div className="bg-slate-50 border-b border-slate-200 px-4 py-3 sm:px-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                         {(() => {
-                          const d = diseasesData.find(dx => dx.name.toLowerCase() === disease.name.toLowerCase() || (dx.alternateSlugs && dx.alternateSlugs.some(slug => disease.name.toLowerCase().includes(slug.replace(/-/g, ' ')))));
-                          return d ? (
-                            <Link to={`/diseases/${d.slug}`} className="font-extrabold text-sm sm:text-base text-indigo-650 hover:underline inline-flex items-center gap-1.5">
+                          const resolvedDisease = resolveParasiteDiseaseLink(disease.name);
+                          return resolvedDisease ? (
+                            <Link to={`/diseases/${resolvedDisease.slug}`} className="font-extrabold text-sm sm:text-base text-indigo-650 hover:underline inline-flex items-center gap-1.5">
                               {disease.name} <ExternalLink className="h-3.5 w-3.5 text-indigo-400" />
                             </Link>
                           ) : (
@@ -607,22 +753,17 @@ export default function ParasitesSEO() {
                             Standard Empirical & Targeted Choice:
                           </span>
                           <div className="text-slate-800 font-bold bg-indigo-50/30 p-2.5 rounded-lg border border-indigo-50 inline-block leading-snug">
-                            {disease.treatment.split(/[,+]/).map((part, i, arr) => {
-                              const tName = part.trim();
-                              const drg = drugsData.find(dr => dr.name.toLowerCase().includes(tName.toLowerCase()) || tName.toLowerCase().includes(dr.name.toLowerCase()));
-                              return (
-                                <span key={i}>
-                                  {drg ? (
-                                    <Link to={`/drugs/${drg.slug}`} className="text-indigo-600 hover:underline">
-                                      {tName}
-                                    </Link>
-                                  ) : (
-                                    <span>{tName}</span>
-                                  )}
-                                  {i < arr.length - 1 ? (disease.treatment.includes('+') ? ' + ' : ', ') : ''}
-                                </span>
-                              );
-                            })}
+                            {tokenizeParasiteTreatment(disease.treatment).map((token, i) => (
+                              <span key={i}>
+                                {token.slug ? (
+                                  <Link to={`/drugs/${token.slug}`} className="text-indigo-600 hover:underline">
+                                    {token.text}
+                                  </Link>
+                                ) : (
+                                  <span>{token.text}</span>
+                                )}
+                              </span>
+                            ))}
                           </div>
                         </div>
 
@@ -641,6 +782,53 @@ export default function ParasitesSEO() {
                   ))}
                 </div>
               </div>
+
+              {/* Dedicated Comparison Callout Section (When structured comparison exists) */}
+              {(() => {
+                const relevantComparisons = getParasiteComparisons(pathogen.id);
+                if (relevantComparisons.length === 0) return null;
+                return (
+                  <div className="space-y-3 pt-6 border-t border-slate-200">
+                    <div className="flex items-center gap-1.5">
+                      <Scale className="h-4.5 w-4.5 text-indigo-500" />
+                      <h3 className="text-sm font-bold text-slate-950 uppercase tracking-tight">
+                        Clinical & Diagnostic Head-to-Head Comparison
+                      </h3>
+                    </div>
+                    <div className="grid grid-cols-1 gap-3">
+                      {relevantComparisons.map((comp) => (
+                        <Link
+                          key={comp.slug}
+                          to={`/${comp.slug}`}
+                          className="p-4 bg-gradient-to-r from-indigo-50/50 via-white to-sky-50/30 border border-indigo-100 hover:border-indigo-300 rounded-xl transition-all shadow-3xs group flex flex-col sm:flex-row sm:items-center justify-between gap-3 cursor-pointer"
+                        >
+                          <div className="space-y-1">
+                            <div className="flex items-center gap-2">
+                              <span className="px-2 py-0.5 bg-indigo-100/70 text-indigo-700 rounded text-[10px] font-bold uppercase tracking-wider">
+                                {comp.category || "Comparative Analysis"}
+                              </span>
+                              <span className="text-xs text-slate-400 font-medium">Interactive Guide</span>
+                            </div>
+                            <h4 className="font-extrabold text-sm sm:text-base text-slate-900 group-hover:text-indigo-650 transition-colors">
+                              Compare: {comp.title}
+                            </h4>
+                            {comp.subtitle && (
+                              <p className="text-xs text-slate-500 line-clamp-1">
+                                {comp.subtitle}
+                              </p>
+                            )}
+                          </div>
+                          <div className="shrink-0 self-start sm:self-center">
+                            <span className="inline-flex items-center gap-1 text-xs font-bold text-indigo-600 group-hover:text-indigo-700 group-hover:translate-x-0.5 transition-all">
+                              View Comparison <ExternalLink className="h-3.5 w-3.5" />
+                            </span>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })()}
 
               {/* Related human pathogens section for internal linking SEO flow */}
               <div className="space-y-4 pt-6 border-t border-slate-200">
